@@ -13,5 +13,7 @@ class AppColorBorder {
   Color primary = Color(0xFF008473);
   Color danger = Colors.red;
   Color lightDanger = Color(0xFFFEE5E5);
+  Color gray = Color(0xFF989898);
   Color lightGray = Color(0xFFDADADA);
+  Color focus = Color(0xFF2979EA);
 }

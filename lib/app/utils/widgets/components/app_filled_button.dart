@@ -9,6 +9,7 @@ class AppFilledButton extends StatelessWidget {
     this.onClick,
     this.height,
     this.width,
+    this.fontSize,
     required this.label,
     this.danger = false,
   });
@@ -16,13 +17,14 @@ class AppFilledButton extends StatelessWidget {
   final VoidCallback? onClick;
   final double? width;
   final double? height;
+  final double? fontSize;
   final String label;
   final bool danger;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 40.sp,
+      height: height ?? 48.sp,
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -34,7 +36,11 @@ class AppFilledButton extends StatelessWidget {
         onPressed: onClick,
         child: Text(
           label,
-          style: GoogleFonts.inter(color: Colors.white, fontSize: 14.sp),
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: fontSize ?? 14.sp,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

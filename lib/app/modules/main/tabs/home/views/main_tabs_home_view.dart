@@ -38,14 +38,14 @@ class MainTabsHomeView extends GetView<MainTabsHomeController> {
                           children: [
                             Text(
                               "Selamat Datang",
-                              style: GoogleFonts.inter(
+                              style: GoogleFonts.poppins(
                                 color: Colors.black,
                                 fontSize: 14.sp,
                               ),
                             ),
                             Text(
                               "Raka",
-                              style: GoogleFonts.inter(
+                              style: GoogleFonts.poppins(
                                 color: Colors.black,
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,

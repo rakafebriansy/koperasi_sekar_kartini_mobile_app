@@ -9,6 +9,7 @@ class AppOutlinedButton extends StatelessWidget {
     this.onClick,
     this.height,
     this.width,
+    this.fontSize,
     required this.label,
     this.danger = false,
   });
@@ -16,13 +17,14 @@ class AppOutlinedButton extends StatelessWidget {
   final VoidCallback? onClick;
   final double? width;
   final double? height;
+  final double? fontSize;
   final String label;
   final bool danger;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 40.sp,
+      height: height ?? 48.sp,
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -33,14 +35,17 @@ class AppOutlinedButton extends StatelessWidget {
             ),
             borderRadius: BorderRadiusGeometry.circular(999.sp),
           ),
-          backgroundColor: danger ? AppColor.lightDanger : AppColor.lightPrimary,
+          backgroundColor: danger
+              ? AppColor.lightDanger
+              : AppColor.lightPrimary,
         ),
         onPressed: onClick,
         child: Text(
           label,
-          style: GoogleFonts.inter(
+          style: GoogleFonts.poppins(
             color: danger ? AppColor.danger : AppColor.primary,
-            fontSize: 14.sp,
+            fontSize: fontSize ?? 14.sp,
+            fontWeight: FontWeight.w600
           ),
         ),
       ),

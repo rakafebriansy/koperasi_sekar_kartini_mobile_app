@@ -1,9 +1,15 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  TextEditingController phoneCtrl = TextEditingController(
+    text: !kReleaseMode ? '08123456789' : ''
+  );
+  TextEditingController passwordCtrl = TextEditingController(
+    text: !kReleaseMode ? 'password' : ''
+  );
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +24,4 @@ class LoginController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

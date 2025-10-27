@@ -20,7 +20,7 @@ class EventDetailView extends GetView<EventDetailController> {
     return AppDefaultWrapper(
       title: Text(
         'Detail Pertemuan',
-        style: GoogleFonts.inter(fontWeight: FontWeight.w600),
+        style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
       ),
       child: Obx(
         () => controller.eventAttendanceModel.value != null
@@ -44,7 +44,7 @@ class EventDetailView extends GetView<EventDetailController> {
                   SizedBox(height: 8.sp),
                   Text(
                     controller.eventAttendanceModel.value!.event.name,
-                    style: GoogleFonts.inter(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.sp,
                     ),
@@ -64,7 +64,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 TableCellVerticalAlignment.middle,
                             child: Text(
                               'Tempat',
-                              style: GoogleFonts.inter(
+                              style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -94,7 +94,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                           .value!
                                           .event
                                           .location,
-                                      style: GoogleFonts.inter(
+                                      style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                       ),
                                       softWrap: true,
@@ -113,7 +113,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 TableCellVerticalAlignment.middle,
                             child: Text(
                               'Tanggal',
-                              style: GoogleFonts.inter(
+                              style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -144,7 +144,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                         .event
                                         .dateTime
                                         .toIdDate(),
-                                    style: GoogleFonts.inter(
+                                    style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -162,7 +162,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 TableCellVerticalAlignment.middle,
                             child: Text(
                               'Pukul',
-                              style: GoogleFonts.inter(
+                              style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -194,7 +194,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                         .event
                                         .dateTime
                                         .toIdHour(),
-                                    style: GoogleFonts.inter(
+                                    style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -211,7 +211,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 TableCellVerticalAlignment.middle,
                             child: Text(
                               'Status Kehadiran',
-                              style: GoogleFonts.inter(
+                              style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -240,7 +240,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                           .value!
                                           .attendance
                                           .displayName,
-                                      style: GoogleFonts.inter(
+                                      style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         color: Color(0xFF008473),
                                       ),
@@ -257,7 +257,7 @@ class EventDetailView extends GetView<EventDetailController> {
                   SizedBox(height: 10.sp),
                   Text(
                     'Deskripsi',
-                    style: GoogleFonts.inter(fontWeight: FontWeight.bold),
+                    style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4.sp),
                   Container(
