@@ -9,6 +9,7 @@ abstract class Routes {
   static const MAIN_TABS_GROUP = _Paths.MAIN_TABS_GROUP;
   static const LOGIN = _Paths.LOGIN;
   static const MEETING_DETAIL = _Paths.MEETING_DETAIL;
+  static const REGISTER = _Paths.REGISTER;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const MAIN_TABS_GROUP = '/group';
   static const LOGIN = '/login';
   static const MEETING_DETAIL = '/event-detail';
+  static const REGISTER = '/register';
 }

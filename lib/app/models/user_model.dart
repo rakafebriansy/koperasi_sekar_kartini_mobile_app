@@ -1,11 +1,11 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/role_enum.dart';
 
 class UserModel {
-  String id;
+  String? id;
   String namaLengkap;
   RoleEnum role;
 
-  UserModel({required this.id, required this.namaLengkap, required this.role});
+  UserModel({this.id, required this.namaLengkap, required this.role});
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],

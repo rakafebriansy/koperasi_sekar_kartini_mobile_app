@@ -22,70 +22,74 @@ class LoginView extends GetView<LoginController> {
         'Login',
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Selamat',
-            style: GoogleFonts.poppins(
-              fontSize: 36.sp,
-              fontWeight: FontWeight.bold,
-              color: AppColor.primary,
+      child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        controller: controller.scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Selamat',
+              style: GoogleFonts.poppins(
+                fontSize: 36.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColor.primary,
+              ),
             ),
-          ),
-          Text(
-            'Datang!',
-            style: GoogleFonts.poppins(
-              fontSize: 36.sp,
-              fontWeight: FontWeight.bold,
-              color: AppColor.primary,
+            Text(
+              'Datang!',
+              style: GoogleFonts.poppins(
+                fontSize: 36.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColor.primary,
+              ),
             ),
-          ),
-          SizedBox(height: 12.sp),
-          Text(
-            'Silakan Login untuk akses lebih lengkap',
-            style: GoogleFonts.poppins(
-              fontSize: 14.sp,
-              color: AppColor.primary,
+            SizedBox(height: 12.sp),
+            Text(
+              'Silakan Login untuk akses lebih lengkap',
+              style: GoogleFonts.poppins(
+                fontSize: 14.sp,
+                color: AppColor.primary,
+              ),
             ),
-          ),
-          SizedBox(height: 16.sp),
-          AppTextFormGroup(
-            controller: controller.phoneCtrl,
-            label: 'Nomor Telepon',
-          ),
-          SizedBox(height: 8.sp),
-          AppTextFormGroup(
-            controller: controller.passwordCtrl,
-            label: 'Kata Sandi',
-            obscureText: true,
-          ),
-          SizedBox(height: 18.sp),
-          AppFilledButton(
-            label: 'Login',
-            onClick: () {},
-            width: double.infinity,
-          ),
-          SizedBox(height: 12.sp),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Belum punya akun?',
-                style: GoogleFonts.poppins(
+            SizedBox(height: 16.sp),
+            AppTextFormGroup(
+              controller: controller.phoneCtrl,
+              label: 'Nomor Telepon',
+            ),
+            SizedBox(height: 8.sp),
+            AppTextFormGroup(
+              controller: controller.passwordCtrl,
+              label: 'Kata Sandi',
+              obscureText: true,
+            ),
+            SizedBox(height: 18.sp),
+            AppFilledButton(
+              label: 'Login',
+              onClick: () {},
+              width: double.infinity,
+            ),
+            SizedBox(height: 12.sp),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Belum punya akun?',
+                  style: GoogleFonts.poppins(
+                    fontSize: 12.sp,
+                  ),
+                ),
+                SizedBox(width: 6.sp,),
+                AppLinkButton(
+                  link: Routes.REGISTER,
+                  label: 'Register',
+                  isPath: true,
                   fontSize: 12.sp,
                 ),
-              ),
-              SizedBox(width: 6.sp,),
-              AppLinkButton(
-                link: Routes.LOGIN,
-                label: 'Register',
-                isPath: true,
-                fontSize: 12.sp,
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

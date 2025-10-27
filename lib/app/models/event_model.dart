@@ -1,7 +1,7 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 
 class EventModel {
-  final String id;
+  String? id;
   final String name;
   final String description;
   final DateTime dateTime;
@@ -9,7 +9,7 @@ class EventModel {
   final UserModel user;
 
   EventModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.description,
     required this.dateTime,

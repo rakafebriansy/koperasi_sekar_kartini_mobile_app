@@ -58,16 +58,4 @@ class EventDetailController extends GetxController {
     );
     descriptionController?.readOnly = true;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

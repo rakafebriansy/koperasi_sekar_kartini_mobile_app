@@ -10,18 +10,5 @@ class LoginController extends GetxController {
     text: !kReleaseMode ? 'password' : ''
   );
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  ScrollController scrollController = ScrollController();
 }

@@ -19,47 +19,50 @@ class AppDefaultWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        leadingWidth: 64.sp,
-        surfaceTintColor: Colors.white,
-        leading: ableToBack ? Center(
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(999),
-              onTap: () {
-                Get.back();
-              },
-              child: Padding(
-                padding: EdgeInsets.only(left: 8.sp),
-                child: Container(
-                  height: 36.sp,
-                  width: 36.sp,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColor.border.lightGray,
-                      width: 1.sp,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+          leadingWidth: 64.sp,
+          surfaceTintColor: Colors.white,
+          leading: ableToBack ? Center(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(999),
+                onTap: () {
+                  Get.back();
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8.sp),
+                  child: Container(
+                    height: 36.sp,
+                    width: 36.sp,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColor.border.lightGray,
+                        width: 1.sp,
+                      ),
+                      borderRadius: BorderRadius.circular(999),
                     ),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
+                    child: Center(
+                      child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ) : null,
-        title: title,
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
-        child: child,
+          ) : null,
+          title: title,
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+          child: child,
+        ),
       ),
     );
   }

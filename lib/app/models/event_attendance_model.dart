@@ -3,13 +3,13 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/attendance_status_enum.dart';
 
 class EventAttendanceModel {
-  final String id;
+  String? id;
   final UserModel user;
   final EventModel event;
   final AttendanceStatusEnum attendance;
 
   EventAttendanceModel({
-    required this.id,
+    this.id,
     required this.event,
     required this.user,
     required this.attendance,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 
 class AppTextFormField extends StatefulWidget {
   const AppTextFormField({
@@ -11,7 +11,7 @@ class AppTextFormField extends StatefulWidget {
     required this.hintText,
     this.iconPath,
     this.obscureText = false,
-    this.maxLength,
+    this.maxLines,
     this.counterText,
   });
 
@@ -19,7 +19,7 @@ class AppTextFormField extends StatefulWidget {
   final bool obscureText;
   final String hintText;
   final String? iconPath;
-  final int? maxLength;
+  final int? maxLines;
   final String? counterText;
 
   @override
@@ -39,46 +39,16 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
     return Stack(
       children: [
         TextFormField(
+          style: GoogleFonts.poppins(fontSize: 14.sp),
           key: widget.key,
           obscureText: isHidden,
           controller: widget.controller,
-          decoration: InputDecoration(
-              counterText: widget.counterText,
-              prefixIcon: widget.iconPath != null ? Padding(
-                padding: EdgeInsets.fromLTRB(14.sp, 14.sp, 8.sp, 14.sp),
-                child: SizedBox(
-                  width: 20.sp,
-                  child: SvgPicture.asset(
-                    widget.iconPath!,
-                    height: 20.sp,
-                  ),
-                ),
-              ) : null,
-              prefixIconConstraints: BoxConstraints(
-                minWidth: 20.sp,
-                minHeight: 20.sp,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: AppColor.border.lightGray, width: 1.5),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: AppColor.border.focus, width: 2),
-              ),
-              hint: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.hintText,
-                    style: GoogleFonts.inter(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.border.gray),
-                  )
-                ],
-              )),
-          maxLength: widget.maxLength,
+          decoration: buildAppTextInputDecoration(
+            hintText: widget.hintText,
+            iconPath: widget.iconPath,
+            counterText: widget.counterText,
+          ),
+          maxLines: widget.obscureText ? 1 : widget.maxLines,
         ),
         if (widget.obscureText)
           Positioned(
@@ -99,8 +69,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                     },
                     borderRadius: BorderRadius.circular(12),
                     splashColor: AppColor.lightPrimary.withOpacity(0.3),
-                    highlightColor:
-                        AppColor.lightPrimary.withOpacity(0.1),
+                    highlightColor: AppColor.lightPrimary.withOpacity(0.1),
                     child: Icon(
                       isHidden ? Icons.visibility_off : Icons.visibility,
                       color: Color(0xFFD9D9D9),

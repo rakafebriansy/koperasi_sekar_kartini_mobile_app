@@ -10,12 +10,14 @@ class AppTextFormGroup extends StatelessWidget {
     required this.label,
     this.placeholder,
     this.obscureText = false,
+    this.maxLines,
   });
 
   final TextEditingController controller;
   final String label;
   final String? placeholder;
   final bool obscureText;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,18 @@ class AppTextFormGroup extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w600)),
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         AppTextFormField(
           controller: controller,
           hintText: placeholder ?? label,
           obscureText: obscureText,
+          maxLines: maxLines,
         ),
       ],
     );
