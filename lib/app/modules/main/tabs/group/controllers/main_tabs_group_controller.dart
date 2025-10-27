@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+class MainTabsGroupController extends GetxController {
+  //TODO: Implement MainTabsGroupController
 
   final count = 0.obs;
   @override

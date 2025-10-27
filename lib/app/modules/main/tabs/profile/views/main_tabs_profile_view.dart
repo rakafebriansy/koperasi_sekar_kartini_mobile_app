@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/home_controller.dart';
+import '../controllers/main_tabs_profile_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class MainTabsProfileView extends GetView<MainTabsProfileController> {
+  const MainTabsProfileView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
+        title: const Text('MainTabsProfileView'),
         centerTitle: true,
       ),
       body: const Center(
         child: Text(
-          'HomeView is working',
+          'MainTabsProfileView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),
