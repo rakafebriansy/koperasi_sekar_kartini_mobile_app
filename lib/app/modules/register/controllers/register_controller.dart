@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/region_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/static/register_caption.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constants.dart';
 
 class RegisterController extends GetxController {
@@ -38,6 +39,12 @@ class RegisterController extends GetxController {
   ScrollController scrollController = ScrollController();
 
   List<RegionModel> regionModelData = [];
+  late RegisterCaption caption;
+
+  String get getCurrentTitle => caption.title[selectedScreen.value];
+  String get getCurrentSubtitle => caption.subtitle[selectedScreen.value];
+
+  RegisterController({required this.caption});
 
   @override
   void onInit() {
