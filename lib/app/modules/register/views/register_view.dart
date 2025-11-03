@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/app_register_first_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/app_register_second_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/app_register_third_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
@@ -17,6 +19,20 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
+      actions: [
+        SizedBox(
+          width: 60.sp,
+          child: Obx(
+            () => LinearProgressIndicator(
+              borderRadius: BorderRadius.circular(40.sp),
+              value: controller.progress,
+              color: Colors.green,
+              backgroundColor: Colors.grey[300],
+              minHeight: 8,
+            ),
+          ),
+        ),
+      ],
       ableToBack: false,
       title: Text(
         'Register',
@@ -45,34 +61,15 @@ class RegisterView extends GetView<RegisterController> {
               ),
             ),
             SizedBox(height: 16.sp),
-            IndexedStack(
-              index: controller.selectedScreen.value,
-              children: [
-                AppRegisterFirstForm(controller: controller)
+            Obx(
+              () => IndexedStack(
+                index: controller.selectedScreen.value,
+                children: [
+                  AppRegisterFirstForm(controller: controller),
+                  AppRegisterSecondForm(controller: controller),
+                  AppRegisterThirdForm(controller: controller),
                 ],
-            ),
-            SizedBox(height: 18.sp),
-            AppFilledButton(
-              label: 'Lanjut',
-              onClick: () {},
-              width: double.infinity,
-            ),
-            SizedBox(height: 12.sp),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Sudah punya akun?',
-                  style: GoogleFonts.poppins(fontSize: 12.sp),
-                ),
-                SizedBox(width: 6.sp),
-                AppLinkButton(
-                  link: Routes.LOGIN,
-                  label: 'Login',
-                  isPath: true,
-                  fontSize: 12.sp,
-                ),
-              ],
+              ),
             ),
           ],
         ),

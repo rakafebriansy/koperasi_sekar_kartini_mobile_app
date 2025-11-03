@@ -11,9 +11,9 @@ InputDecoration buildAppTextInputDecoration({
 }) {
   return InputDecoration(
     counterText: counterText,
-    prefixIcon: iconPath != null
+    suffixIcon: iconPath != null
         ? Padding(
-            padding: EdgeInsets.fromLTRB(14.sp, 14.sp, 8.sp, 14.sp),
+            padding: EdgeInsets.fromLTRB(8.sp, 14.sp, 14.sp, 14.sp),
             child: SizedBox(
               width: 20.sp,
               child: SvgPicture.asset(

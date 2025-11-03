@@ -13,6 +13,9 @@ class AppTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.maxLines,
     this.counterText,
+    this.readOnly = false,
+    this.onTap,
+    this.keyboardType
   });
 
   final TextEditingController controller;
@@ -21,6 +24,9 @@ class AppTextFormField extends StatefulWidget {
   final String? iconPath;
   final int? maxLines;
   final String? counterText;
+  final bool readOnly;
+  final VoidCallback? onTap;
+  final TextInputType? keyboardType;
 
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
@@ -49,6 +55,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             counterText: widget.counterText,
           ),
           maxLines: widget.obscureText ? 1 : widget.maxLines,
+          readOnly: widget.readOnly,
+          onTap: widget.onTap,
+          keyboardType: widget.keyboardType,
         ),
         if (widget.obscureText)
           Positioned(

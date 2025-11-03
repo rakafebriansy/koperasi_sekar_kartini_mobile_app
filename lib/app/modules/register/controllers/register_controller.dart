@@ -18,7 +18,9 @@ class RegisterController extends GetxController {
   TextEditingController addressCtrl = TextEditingController(
     text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
   );
-  DateTime? birthDate = !kReleaseMode ? DateTime(2004, 2, 29) : null;
+  TextEditingController datetimeCtrl = TextEditingController(
+    text: !kReleaseMode ? '29/02/2004' : '',
+  );
   TextEditingController jobCtrl = TextEditingController(
     text: !kReleaseMode ? 'Programmer' : '',
   );
@@ -35,7 +37,10 @@ class RegisterController extends GetxController {
     text: !kReleaseMode ? 'password' : '',
   );
 
-  Rx<int> selectedScreen = 0.obs;
+  Rx<int> selectedScreen = 1.obs;
+  final int totalStep = 5;
+  double get progress => selectedScreen.value / totalStep;
+
   ScrollController scrollController = ScrollController();
 
   List<RegionModel> regionModelData = [];

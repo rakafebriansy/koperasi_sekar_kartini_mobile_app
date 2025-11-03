@@ -11,6 +11,7 @@ class AppTextFormGroup extends StatelessWidget {
     this.placeholder,
     this.obscureText = false,
     this.maxLines,
+    this.keyboardType,
   });
 
   final TextEditingController controller;
@@ -18,6 +19,7 @@ class AppTextFormGroup extends StatelessWidget {
   final String? placeholder;
   final bool obscureText;
   final int? maxLines;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class AppTextFormGroup extends StatelessWidget {
           hintText: placeholder ?? label,
           obscureText: obscureText,
           maxLines: maxLines,
+          keyboardType: keyboardType,
         ),
       ],
     );

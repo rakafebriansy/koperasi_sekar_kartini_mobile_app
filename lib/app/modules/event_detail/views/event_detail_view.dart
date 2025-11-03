@@ -291,13 +291,13 @@ class EventDetailView extends GetView<EventDetailController> {
                       Expanded(
                         child: AppOutlinedButton(
                           label: 'Tidak Hadir',
-                          onClick: () {},
+                          onTap: () {},
                           danger: true,
                         ),
                       ),
                       SizedBox(width: 12.sp),
                       Expanded(
-                        child: AppFilledButton(label: 'Hadir', onClick: () {}),
+                        child: AppFilledButton(label: 'Hadir', onTap: () {}),
                       ),
                     ],
                   ),

@@ -7,6 +7,7 @@ class AppColor {
   static Color danger = Colors.red;
   static Color lightDanger = Color(0xFFFEE5E5);
   static Color lightPrimary = Color(0xFFE0F0EE);
+  static Color gray = Color(0xFFDADADA);
 }
 
 class AppColorBorder {

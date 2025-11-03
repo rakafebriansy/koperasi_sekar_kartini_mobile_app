@@ -66,7 +66,7 @@ class LoginView extends GetView<LoginController> {
             SizedBox(height: 18.sp),
             AppFilledButton(
               label: 'Login',
-              onClick: () {},
+              onTap: () {},
               width: double.infinity,
             ),
             SizedBox(height: 12.sp),
@@ -75,11 +75,9 @@ class LoginView extends GetView<LoginController> {
               children: [
                 Text(
                   'Belum punya akun?',
-                  style: GoogleFonts.poppins(
-                    fontSize: 12.sp,
-                  ),
+                  style: GoogleFonts.poppins(fontSize: 12.sp),
                 ),
-                SizedBox(width: 6.sp,),
+                SizedBox(width: 6.sp),
                 AppLinkButton(
                   link: Routes.REGISTER,
                   label: 'Register',

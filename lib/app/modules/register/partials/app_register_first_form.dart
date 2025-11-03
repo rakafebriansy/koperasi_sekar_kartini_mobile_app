@@ -4,9 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/controllers/register_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constants.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/region_model/list_region_model_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_link_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 
 class AppRegisterFirstForm extends StatelessWidget {
@@ -63,6 +66,31 @@ class AppRegisterFirstForm extends StatelessWidget {
           controller: controller.nameCtrl,
           label: 'Alamat Lengkap',
           maxLines: 3,
+        ),
+        SizedBox(height: 18.sp),
+        AppFilledButton(
+          label: 'Lanjut',
+          onTap: () {
+            controller.selectedScreen.value++;
+          },
+          width: double.infinity,
+        ),
+        SizedBox(height: 12.sp),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Sudah punya akun?',
+              style: GoogleFonts.poppins(fontSize: 12.sp),
+            ),
+            SizedBox(width: 6.sp),
+            AppLinkButton(
+              link: Routes.LOGIN,
+              label: 'Login',
+              isPath: true,
+              fontSize: 12.sp,
+            ),
+          ],
         ),
       ],
     );

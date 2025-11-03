@@ -11,11 +11,13 @@ class AppDefaultWrapper extends StatelessWidget {
     required this.child,
     required this.title,
     this.ableToBack = true,
+    this.actions
   });
 
   final Widget child;
   final Widget title;
   final bool ableToBack;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,8 @@ class AppDefaultWrapper extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         appBar: AppBar(
+          actionsPadding: EdgeInsets.all(12.sp),
+          actions: actions,
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,

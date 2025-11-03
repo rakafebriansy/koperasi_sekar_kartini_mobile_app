@@ -6,7 +6,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 class AppFilledButton extends StatelessWidget {
   AppFilledButton({
     super.key,
-    this.onClick,
+    this.onTap,
     this.height,
     this.width,
     this.fontSize,
@@ -14,7 +14,7 @@ class AppFilledButton extends StatelessWidget {
     this.danger = false,
   });
 
-  final VoidCallback? onClick;
+  final VoidCallback? onTap;
   final double? width;
   final double? height;
   final double? fontSize;
@@ -33,7 +33,7 @@ class AppFilledButton extends StatelessWidget {
             borderRadius: BorderRadiusGeometry.circular(999.sp),
           ),
         ),
-        onPressed: onClick,
+        onPressed: onTap,
         child: Text(
           label,
           style: GoogleFonts.poppins(

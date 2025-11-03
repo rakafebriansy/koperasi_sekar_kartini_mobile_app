@@ -6,7 +6,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 class AppOutlinedButton extends StatelessWidget {
   AppOutlinedButton({
     super.key,
-    this.onClick,
+    this.onTap,
     this.height,
     this.width,
     this.fontSize,
@@ -14,7 +14,7 @@ class AppOutlinedButton extends StatelessWidget {
     this.danger = false,
   });
 
-  final VoidCallback? onClick;
+  final VoidCallback? onTap;
   final double? width;
   final double? height;
   final double? fontSize;
@@ -39,13 +39,13 @@ class AppOutlinedButton extends StatelessWidget {
               ? AppColor.lightDanger
               : AppColor.lightPrimary,
         ),
-        onPressed: onClick,
+        onPressed: onTap,
         child: Text(
           label,
           style: GoogleFonts.poppins(
             color: danger ? AppColor.danger : AppColor.primary,
             fontSize: fontSize ?? 14.sp,
-            fontWeight: FontWeight.w600
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
