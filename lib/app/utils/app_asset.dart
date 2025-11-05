@@ -11,9 +11,11 @@ class _AppAssetSvg {
   String arrowLeftWhite = '${_svgsPath}arrow_head_left_white${_ext}';
   String calendarDarkGray = '${_svgsPath}calendar_dark_gray${_ext}';
   String clockDarkGray = '${_svgsPath}clock_dark_gray${_ext}';
-  String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
   String calendarSharpBlack = '${_svgsPath}calendar_sharp_black${_ext}';
   String calendarSharpGray = '${_svgsPath}calendar_sharp_gray${_ext}';
+  String cameraIcon = '${_svgsPath}camera_icon${_ext}';
+  String imageIcon = '${_svgsPath}image_icon${_ext}';
+  String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
 }
 
 class _AppAssetImages {

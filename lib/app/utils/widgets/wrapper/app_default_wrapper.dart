@@ -10,12 +10,14 @@ class AppDefaultWrapper extends StatelessWidget {
     super.key,
     required this.child,
     required this.title,
-    this.ableToBack = true,
-    this.actions
+    this.leading,
+    this.ableToBack = false,
+    this.actions,
   });
 
   final Widget child;
   final Widget title;
+  final Widget? leading;
   final bool ableToBack;
   final List<Widget>? actions;
 
@@ -33,34 +35,40 @@ class AppDefaultWrapper extends StatelessWidget {
           centerTitle: true,
           leadingWidth: 64.sp,
           surfaceTintColor: Colors.white,
-          leading: ableToBack ? Center(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(999),
-                onTap: () {
-                  Get.back();
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(left: 8.sp),
-                  child: Container(
-                    height: 36.sp,
-                    width: 36.sp,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColor.border.lightGray,
-                        width: 1.sp,
-                      ),
+          leading: leading != null
+              ? leading
+              : ableToBack
+              ? Center(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
                       borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 8.sp),
+                        child: Container(
+                          height: 36.sp,
+                          width: 36.sp,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColor.border.lightGray,
+                              width: 1.sp,
+                            ),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              AppAsset.svgs.arrowLeftBlack,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          ) : null,
+                )
+              : null,
           title: title,
         ),
         body: Padding(
