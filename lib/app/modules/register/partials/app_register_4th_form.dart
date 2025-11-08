@@ -27,8 +27,7 @@ class AppRegister4thForm extends StatelessWidget {
                 width: double.infinity,
                 label: 'Lanjut',
                 onTap: () {
-              controller.nextScreen();
-
+                  controller.nextScreen();
                 },
               ),
             ),

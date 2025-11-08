@@ -16,6 +16,7 @@ class _AppAssetSvg {
   String cameraIcon = '${_svgsPath}camera_icon${_ext}';
   String imageIcon = '${_svgsPath}image_icon${_ext}';
   String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
+  String notification = '${_svgsPath}notification${_ext}';
 }
 
 class _AppAssetImages {

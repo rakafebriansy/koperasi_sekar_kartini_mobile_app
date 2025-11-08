@@ -16,25 +16,24 @@ class MainView extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: PersistentTabView(
-          tabs: [
-            PersistentTabConfig(
-              screen: MainTabsHomeView(),
-              item: ItemConfig(icon: Icon(Icons.home), title: "Home"),
-            ),
-            PersistentTabConfig(
-              screen: MainTabsGroupView(),
-              item: ItemConfig(icon: Icon(Icons.group), title: "Group"),
-            ),
-            PersistentTabConfig(
-              screen: MainTabsProfileView(),
-              item: ItemConfig(icon: Icon(Icons.person), title: "Profile"),
-            ),
-          ],
-          navBarBuilder: (navBarConfig) =>
-              Style1BottomNavBar(navBarConfig: navBarConfig),
-        ),
+      child: PersistentTabView(
+        resizeToAvoidBottomInset: true,
+        tabs: [
+          PersistentTabConfig(
+            screen: MainTabsHomeView(),
+            item: ItemConfig(icon: Icon(Icons.home), title: "Beranda"),
+          ),
+          PersistentTabConfig(
+            screen: MainTabsGroupView(),
+            item: ItemConfig(icon: Icon(Icons.view_module), title: "Kelompok"),
+          ),
+          PersistentTabConfig(
+            screen: MainTabsProfileView(),
+            item: ItemConfig(icon: Icon(Icons.person), title: "Profil"),
+          ),
+        ],
+        navBarBuilder: (navBarConfig) =>
+            Style9BottomNavBar(navBarConfig: navBarConfig),
       ),
     );
   }
