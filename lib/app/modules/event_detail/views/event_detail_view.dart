@@ -43,7 +43,7 @@ class EventDetailView extends GetView<EventDetailController> {
                   ),
                   SizedBox(height: 8.sp),
                   Text(
-                    controller.eventAttendanceModel.value!.event.name,
+                    controller.eventAttendanceModel.value!.event.title,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.sp,
@@ -193,7 +193,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                         .value!
                                         .event
                                         .dateTime
-                                        .toIdHour(),
+                                        .toDotSeparatedHour(),
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
                                     ),

@@ -6,8 +6,17 @@ extension DateTimeExtension on DateTime {
     return formatter.format(this);
   }
 
-  String toIdHour() {
+  String toDotSeparatedHour() {
     final formatter = DateFormat('HH.mm', 'id_ID');
     return formatter.format(this);
+  }
+
+  String toIdDay() {
+    final formatter = DateFormat('EEEE', 'id_ID');
+    return formatter.format(this);
+  }
+
+  String toIdFull() {
+    return '${toIdDay()}, ${toIdDate()} • ${toDotSeparatedHour()}';
   }
 }

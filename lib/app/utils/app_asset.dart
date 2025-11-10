@@ -11,16 +11,19 @@ class _AppAssetSvg {
   String arrowLeftWhite = '${_svgsPath}arrow_head_left_white${_ext}';
   String calendarDarkGray = '${_svgsPath}calendar_dark_gray${_ext}';
   String clockDarkGray = '${_svgsPath}clock_dark_gray${_ext}';
+  String clockPrimary = '${_svgsPath}clock_primary${_ext}';
+  String cautionWhite = '${_svgsPath}caution_white${_ext}';
   String calendarSharpBlack = '${_svgsPath}calendar_sharp_black${_ext}';
   String calendarSharpGray = '${_svgsPath}calendar_sharp_gray${_ext}';
+  String calendarPrimary = '${_svgsPath}calendar_primary${_ext}';
   String cameraIcon = '${_svgsPath}camera_icon${_ext}';
   String imageIcon = '${_svgsPath}image_icon${_ext}';
+  String infoWhite = '${_svgsPath}info_white${_ext}';
   String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
   String moneyWhite = '${_svgsPath}money_white${_ext}';
   String notificationBlack = '${_svgsPath}notification_black${_ext}';
-  String cautionWhite = '${_svgsPath}caution_white${_ext}';
+  String pinLocationPrimary = '${_svgsPath}pin_location_primary${_ext}';
   String tickWhite = '${_svgsPath}tick_white${_ext}';
-  String infoWhite = '${_svgsPath}info_white${_ext}';
 }
 
 class _AppAssetImages {
@@ -28,7 +31,9 @@ class _AppAssetImages {
   static String _ext1 = '.png';
   // static String _ext2 = '.jpg';
 
-  String logoLamaKoperasi = '${imagesPath}logo_lama_koperasi${_ext1}';
   String bgCity = '${imagesPath}bg_city${_ext1}';
+  String brokenImageIcon = '${imagesPath}broken_image_icon${_ext1}';
+  String event = '${imagesPath}event${_ext1}';
   String growMoneyIllustration = '${imagesPath}grow_money_illustration${_ext1}';
+  String logoLamaKoperasi = '${imagesPath}logo_lama_koperasi${_ext1}';
 }

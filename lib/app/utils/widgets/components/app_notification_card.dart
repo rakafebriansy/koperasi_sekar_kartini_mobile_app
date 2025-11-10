@@ -12,11 +12,13 @@ class AppNotificationCard extends StatelessWidget {
     this.type = NotificationBarType.info,
     required this.message,
     required this.dateTime,
+    this.onTap,
   });
 
   final NotificationBarType type;
   final String message;
   final DateTime dateTime;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,38 +33,45 @@ class AppNotificationCard extends StatelessWidget {
         ? Colors.lightGreen
         : Colors.lightBlue;
 
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(12.sp),
-      decoration: BoxDecoration(
-        border: Border.all(width: 1.sp, color: color),
+    return Material(
+      borderRadius: BorderRadius.circular(12.sp),
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(12.sp),
-      ),
-      child: Row(
-        spacing: 12.sp,
-        children: [
-          CircleAvatar(
-            radius: 20.sp,
-            backgroundColor: color,
-            child: SvgPicture.asset(iconPath, width: 16.sp, height: 16.sp),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(12.sp),
+          decoration: BoxDecoration(
+            border: Border.all(width: 1.sp, color: color),
+            borderRadius: BorderRadius.circular(12.sp),
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 4.sp,
-              children: [
-                Text(
-                  '${dateTime.toIdHour()} (${dateTime.toIdDate()})',
-                  style: GoogleFonts.poppins(
-                    fontSize: 10.sp,
-                    color: Colors.grey,
-                  ),
+          child: Row(
+            spacing: 12.sp,
+            children: [
+              CircleAvatar(
+                radius: 20.sp,
+                backgroundColor: color,
+                child: SvgPicture.asset(iconPath, width: 16.sp, height: 16.sp),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 4.sp,
+                  children: [
+                    Text(
+                      '${dateTime.toIdFull()})',
+                      style: GoogleFonts.poppins(
+                        fontSize: 10.sp,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(message),
+                  ],
                 ),
-                Text(message),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
