@@ -35,7 +35,7 @@ class AppHomeWrapper extends StatelessWidget {
                     borderRadius: BorderRadius.circular(99),
                     color: Color(0xFFCECECE).withOpacity(0.4),
                   ),
-                  child: SvgPicture.asset(AppAsset.svgs.notification),
+                  child: SvgPicture.asset(AppAsset.svgs.notificationBlack),
                 ),
               ),
             ),

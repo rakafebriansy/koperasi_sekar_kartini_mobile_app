@@ -11,6 +11,7 @@ class AppFilledButton extends StatelessWidget {
     this.height,
     this.width,
     this.fontSize,
+    this.fontWeight,
     required this.label,
     this.danger = false,
     this.svgPath,
@@ -25,6 +26,7 @@ class AppFilledButton extends StatelessWidget {
   final Color? textColor;
   final Color? backgroundColor;
   final double? fontSize;
+  final FontWeight? fontWeight;
   final String label;
   final bool danger;
   final String? svgPath;
@@ -58,7 +60,7 @@ class AppFilledButton extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       color: textColor ?? Colors.white,
                       fontSize: fontSize ?? 14.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: fontWeight ?? FontWeight.w600,
                     ),
                   ),
                 ],
@@ -68,7 +70,7 @@ class AppFilledButton extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: fontSize ?? 14.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: fontWeight ?? FontWeight.w600,
                 ),
               ),
       ),

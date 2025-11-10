@@ -16,7 +16,11 @@ class _AppAssetSvg {
   String cameraIcon = '${_svgsPath}camera_icon${_ext}';
   String imageIcon = '${_svgsPath}image_icon${_ext}';
   String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
-  String notification = '${_svgsPath}notification${_ext}';
+  String moneyWhite = '${_svgsPath}money_white${_ext}';
+  String notificationBlack = '${_svgsPath}notification_black${_ext}';
+  String cautionWhite = '${_svgsPath}caution_white${_ext}';
+  String tickWhite = '${_svgsPath}tick_white${_ext}';
+  String infoWhite = '${_svgsPath}info_white${_ext}';
 }
 
 class _AppAssetImages {
