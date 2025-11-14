@@ -81,16 +81,15 @@ class MainTabsHomeView extends GetView<MainTabsHomeController> {
                 children: [
                   ElevatedButton.icon(
                     style: buildInkWellButtonStyle(
-                      foregroundColor: AppColor.primary,
-                      backgroundColor: AppColor.lightPrimary,
-                      overlayColor: AppColor.transparentPrimary.withOpacity(
-                        0.2,
-                      ),
+                      foregroundColor: AppColor.instance.primary,
+                      backgroundColor: AppColor.instance.lightPrimary,
+                      overlayColor: AppColor.instance.transparentPrimary
+                          .withOpacity(0.2),
                       borderRadiusCircularSize: 12.sp,
                     ),
                     onPressed: () {},
-                    label: poppins('Tambah', color: AppColor.primary),
-                    icon: Icon(Icons.add, color: AppColor.primary),
+                    label: poppins('Tambah', color: AppColor.instance.primary),
+                    icon: Icon(Icons.add, color: AppColor.instance.primary),
                   ),
                   Material(
                     borderRadius: BorderRadius.circular(99.sp),
@@ -101,12 +100,12 @@ class MainTabsHomeView extends GetView<MainTabsHomeController> {
                         height: 36.sp,
                         width: 36.sp,
                         decoration: BoxDecoration(
-                          color: AppColor.lightPrimary,
+                          color: AppColor.instance.lightPrimary,
                           borderRadius: BorderRadius.circular(99.sp),
                         ),
                         child: Icon(
                           Icons.arrow_forward_rounded,
-                          color: AppColor.primary,
+                          color: AppColor.instance.primary,
                         ),
                       ),
                     ),
@@ -154,7 +153,7 @@ class _InfoCard extends StatelessWidget {
       padding: EdgeInsets.all(14.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.sp),
-        color: AppColor.transparentPrimary,
+        color: AppColor.instance.transparentPrimary,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +166,7 @@ class _InfoCard extends StatelessWidget {
                 padding: EdgeInsets.all(6.sp),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.sp),
-                  color: AppColor.primary,
+                  color: AppColor.instance.primary,
                 ),
                 child: SvgPicture.asset(AppAsset.svgs.moneyWhite),
               ),
@@ -177,9 +176,9 @@ class _InfoCard extends StatelessWidget {
           ),
           poppins(
             amount.toIdr(),
-              fontWeight: FontWeight.bold,
-              color: AppColor.primary,
-              fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: AppColor.instance.primary,
+            fontSize: 14.sp,
           ),
           AppFilledButton(
             label: 'Lihat Detail',

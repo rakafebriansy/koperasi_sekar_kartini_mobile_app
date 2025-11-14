@@ -30,19 +30,19 @@ class LoginView extends GetView<LoginController> {
               'Selamat',
               fontSize: 36.sp,
               fontWeight: FontWeight.bold,
-              color: AppColor.primary,
+              color: AppColor.instance.primary,
             ),
             poppins(
               'Datang!',
               fontSize: 36.sp,
               fontWeight: FontWeight.bold,
-              color: AppColor.primary,
+              color: AppColor.instance.primary,
             ),
             SizedBox(height: 12.sp),
             poppins(
               'Silakan Login untuk akses lebih lengkap',
               fontSize: 14.sp,
-              color: AppColor.primary,
+              color: AppColor.instance.primary,
             ),
             SizedBox(height: 16.sp),
             AppTextFormGroup(
@@ -65,9 +65,7 @@ class LoginView extends GetView<LoginController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                poppins(
-                  'Belum punya akun?',
-                    fontSize: 12.sp),
+                poppins('Belum punya akun?', fontSize: 12.sp),
                 SizedBox(width: 6.sp),
                 AppLinkButton(
                   link: Routes.REGISTER,

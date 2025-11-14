@@ -24,10 +24,13 @@ class MainView extends GetView<MainController> {
           PersistentTabConfig(
             screen: MainTabsHomeView(),
             item: ItemConfig(
-              icon: Icon(Icons.home, color: AppColor.primary.withOpacity(0.7)),
-              textStyle: GoogleFonts.poppins(color: AppColor.primary),
+              icon: Icon(
+                Icons.home,
+                color: AppColor.instance.primary.withOpacity(0.7),
+              ),
+              textStyle: GoogleFonts.poppins(color: AppColor.instance.primary),
               title: "Beranda",
-              activeForegroundColor: AppColor.primary 
+              activeForegroundColor: AppColor.instance.primary,
             ),
           ),
           PersistentTabConfig(
@@ -35,11 +38,11 @@ class MainView extends GetView<MainController> {
             item: ItemConfig(
               icon: Icon(
                 Icons.view_module,
-                color: AppColor.primary.withOpacity(0.7),
+                color: AppColor.instance.primary.withOpacity(0.7),
               ),
-              textStyle: GoogleFonts.poppins(color: AppColor.primary),
+              textStyle: GoogleFonts.poppins(color: AppColor.instance.primary),
               title: "Kelompok",
-              activeForegroundColor: AppColor.primary 
+              activeForegroundColor: AppColor.instance.primary,
             ),
           ),
           PersistentTabConfig(
@@ -47,12 +50,11 @@ class MainView extends GetView<MainController> {
             item: ItemConfig(
               icon: Icon(
                 Icons.person,
-                color: AppColor.primary.withOpacity(0.7),
+                color: AppColor.instance.primary.withOpacity(0.7),
               ),
-              textStyle: GoogleFonts.poppins(color: AppColor.primary),
+              textStyle: GoogleFonts.poppins(color: AppColor.instance.primary),
               title: "Profil",
-              activeForegroundColor: AppColor.primary 
-
+              activeForegroundColor: AppColor.instance.primary,
             ),
           ),
         ],

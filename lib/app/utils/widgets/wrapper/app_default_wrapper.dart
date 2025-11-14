@@ -53,7 +53,7 @@ class AppDefaultWrapper extends StatelessWidget {
                           width: 36.sp,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: AppColor.border.lightGray,
+                              color: AppColor.instance.border.lightGray,
                               width: 1.sp,
                             ),
                             borderRadius: BorderRadius.circular(999),

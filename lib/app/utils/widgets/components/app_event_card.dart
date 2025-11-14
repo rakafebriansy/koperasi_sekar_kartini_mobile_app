@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
@@ -40,8 +39,8 @@ class AppEventCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.sp),
                   child: !kReleaseMode
                       ? Image.asset(AppAsset.images.event)
-                      : (model.imageUrl != null
-                            ? Image.network(model.imageUrl!)
+                      : (model.image != null
+                            ? Image.network(model.image!)
                             : Image.asset(AppAsset.images.brokenImageIcon)),
                 ),
               ),
@@ -69,7 +68,7 @@ class AppEventCard extends StatelessWidget {
                         model.location,
 
                         fontSize: 10.sp,
-                        color: AppColor.primary,
+                        color: AppColor.instance.primary,
                       ),
                     ],
                   ),
@@ -86,7 +85,7 @@ class AppEventCard extends StatelessWidget {
                       poppins(
                         model.dateTime.toIdDate(),
                         fontSize: 10.sp,
-                        color: AppColor.primary,
+                        color: AppColor.instance.primary,
                       ),
                     ],
                   ),
@@ -104,7 +103,7 @@ class AppEventCard extends StatelessWidget {
                         model.dateTime.toDotSeparatedHour(),
 
                         fontSize: 10.sp,
-                        color: AppColor.primary,
+                        color: AppColor.instance.primary,
                       ),
                     ],
                   ),

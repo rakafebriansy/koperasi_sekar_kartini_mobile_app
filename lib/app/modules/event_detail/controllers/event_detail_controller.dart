@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_attendance_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/attendance_status_enum.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/role_enum.dart';
@@ -30,8 +29,12 @@ class EventDetailController extends GetxController {
         id: 'ID-USER-2',
         name: 'Yusrina Hirzi',
         role: RoleEnum.employee,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
       ),
       attendance: AttendanceStatusEnum.attend,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     );
 
     final doc = quill.Document.fromJson(jsonDecode(event.description));

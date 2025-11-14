@@ -6,37 +6,46 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 
 InputDecoration buildAppTextInputDecoration({
   String? counterText,
-  String? iconPath,
+  // Icon prefixIcon,
+  SvgPicture? prefixIcon,
+  // Icon suffixIcon,
+  SvgPicture? suffixIcon,
   required String hintText,
 }) {
   return InputDecoration(
     counterText: counterText,
-    suffixIcon: iconPath != null
+    prefixIcon: prefixIcon != null
+        ? Padding(
+            padding: EdgeInsets.fromLTRB(14.sp, 14.sp, 6.sp, 14.sp),
+            child: SizedBox(width: 20.sp, child: prefixIcon),
+          )
+        : null,
+    suffixIcon: suffixIcon != null
         ? Padding(
             padding: EdgeInsets.fromLTRB(8.sp, 14.sp, 14.sp, 14.sp),
-            child: SizedBox(
-              width: 20.sp,
-              child: SvgPicture.asset(iconPath, height: 20.sp),
-            ),
+            child: SizedBox(width: 20.sp, child: suffixIcon),
           )
         : null,
     prefixIconConstraints: BoxConstraints(minWidth: 20.sp, minHeight: 20.sp),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12.sp),
-      borderSide: BorderSide(color: AppColor.border.lightGray, width: 1.5),
+      borderSide: BorderSide(
+        color: AppColor.instance.border.lightGray,
+        width: 1.5,
+      ),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12.sp),
-      borderSide: BorderSide(color: AppColor.border.focus, width: 2),
+      borderSide: BorderSide(color: AppColor.instance.border.focus, width: 2),
     ),
     hint: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         poppins(
           hintText,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-            color: AppColor.border.gray,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+          color: AppColor.instance.border.gray,
         ),
       ],
     ),
@@ -75,11 +84,13 @@ Text poppins(
   double? fontSize,
   FontWeight? fontWeight,
   TextStyle? textStyle,
-  bool? softWrap
+  bool? softWrap,
+  TextAlign? textAlign,
 }) {
   return Text(
     text,
     softWrap: softWrap,
+    textAlign: textAlign,
     style: GoogleFonts.poppins(
       fontSize: fontSize,
       fontWeight: fontWeight,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
@@ -9,19 +10,23 @@ class AppTextFormField extends StatefulWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    this.iconPath,
+    this.prefixIcon,
+    this.suffixIcon,
     this.obscureText = false,
     this.maxLines,
     this.counterText,
     this.readOnly = false,
     this.onTap,
-    this.keyboardType
+    this.keyboardType,
   });
 
   final TextEditingController controller;
   final bool obscureText;
   final String hintText;
-  final String? iconPath;
+  final SvgPicture? prefixIcon;
+  // final Icon? prefixIcon;
+  final SvgPicture? suffixIcon;
+  // final Icon? suffixIcon;
   final int? maxLines;
   final String? counterText;
   final bool readOnly;
@@ -51,7 +56,8 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           controller: widget.controller,
           decoration: buildAppTextInputDecoration(
             hintText: widget.hintText,
-            iconPath: widget.iconPath,
+            prefixIcon: widget.prefixIcon,
+            suffixIcon: widget.suffixIcon,
             counterText: widget.counterText,
           ),
           maxLines: widget.obscureText ? 1 : widget.maxLines,
@@ -77,8 +83,12 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                       });
                     },
                     borderRadius: BorderRadius.circular(12),
-                    splashColor: AppColor.lightPrimary.withOpacity(0.3),
-                    highlightColor: AppColor.lightPrimary.withOpacity(0.1),
+                    splashColor: AppColor.instance.lightPrimary.withOpacity(
+                      0.3,
+                    ),
+                    highlightColor: AppColor.instance.lightPrimary.withOpacity(
+                      0.1,
+                    ),
                     child: Icon(
                       isHidden ? Icons.visibility_off : Icons.visibility,
                       color: Color(0xFFD9D9D9),

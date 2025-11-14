@@ -6,8 +6,10 @@ class EventModel {
   final String description;
   final DateTime dateTime;
   final String location;
-  final String? imageUrl;
+  final String? image;
   final UserModel user;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   EventModel({
     this.id,
@@ -15,8 +17,10 @@ class EventModel {
     required this.description,
     required this.dateTime,
     required this.location,
-    this.imageUrl,
+    this.image,
     required this.user,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
@@ -26,8 +30,10 @@ class EventModel {
       description: json['description'],
       dateTime: DateTime.parse(json['date_time']),
       location: json['location'],
-      imageUrl: json['image'],
+      image: json['image'],
       user: UserModel.fromJson(json['user']),
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
     );
   }
 
@@ -38,8 +44,10 @@ class EventModel {
       'description': description,
       'date_time': dateTime.toIso8601String(),
       'location': location,
-      'image': imageUrl,
+      'image': image,
       'user': user.toJson(),
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
     };
   }
 }

@@ -24,7 +24,10 @@ class UploadImageField extends StatelessWidget {
           imageFile != null
               ? Container(
                   decoration: BoxDecoration(
-                    border: Border.all(width: 3.sp, color: AppColor.gray),
+                    border: Border.all(
+                      width: 3.sp,
+                      color: AppColor.instance.gray,
+                    ),
                     borderRadius: BorderRadius.circular(16.sp),
                   ),
                   height: 220.sp,
@@ -36,11 +39,14 @@ class UploadImageField extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(16.sp),
                     onTap: () => func(ImageSource.gallery),
-                    splashColor: AppColor.primary.withOpacity(0.1),
-                    highlightColor: AppColor.primary.withOpacity(0.1),
+                    splashColor: AppColor.instance.primary.withOpacity(0.1),
+                    highlightColor: AppColor.instance.primary.withOpacity(0.1),
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(width: 3.sp, color: AppColor.gray),
+                        border: Border.all(
+                          width: 3.sp,
+                          color: AppColor.instance.gray,
+                        ),
                         borderRadius: BorderRadius.circular(16.sp),
                       ),
                       width: MediaQuery.of(context).size.width * 0.9,
@@ -54,9 +60,7 @@ class UploadImageField extends StatelessWidget {
                               height: 54.sp,
                             ),
                             SizedBox(height: 14.sp),
-                            poppins(
-                              'Pilih file atau gambar',
-                                fontSize: 14.sp),
+                            poppins('Pilih file atau gambar', fontSize: 14.sp),
                           ],
                         ),
                       ),
@@ -72,11 +76,7 @@ class UploadImageField extends StatelessWidget {
                   child: Divider(height: 1.sp, color: Color(0xFF686868)),
                 ),
               ),
-              poppins(
-                'atau',
-                  fontSize: 14.sp,
-                  color: Color(0xFF686868),
-              ),
+              poppins('atau', fontSize: 14.sp, color: Color(0xFF686868)),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 14.sp),
@@ -89,8 +89,8 @@ class UploadImageField extends StatelessWidget {
           AppFilledButton(
             label: 'Ambil Gambar Dari Kamera',
             svgPath: AppAsset.svgs.cameraIcon,
-            textColor: AppColor.primary,
-            backgroundColor: AppColor.lightPrimary,
+            textColor: AppColor.instance.primary,
+            backgroundColor: AppColor.instance.lightPrimary,
             onTap: () => func(ImageSource.camera),
           ),
         ],

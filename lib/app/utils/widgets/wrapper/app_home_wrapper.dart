@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 
@@ -10,10 +9,12 @@ class AppHomeWrapper extends StatelessWidget {
     super.key,
     required this.child,
     this.ableToBack = false,
+    this.withPadding = true,
   });
 
   final Widget child;
   final bool ableToBack;
+  final bool withPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -60,24 +61,29 @@ class AppHomeWrapper extends StatelessWidget {
                 children: [
                   poppins(
                     "Selamat Datang",
-                      color: Colors.black,
-                      fontSize: 14.sp,
+                    color: Colors.black,
+                    fontSize: 14.sp,
                   ),
                   poppins(
                     "Raka",
-                      color: Colors.black,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
                   ),
                 ],
               ),
             ],
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
-          child: child,
-        ),
+        body: withPadding
+            ? Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.sp,
+                  vertical: 8.sp,
+                ),
+                child: child,
+              )
+            : child,
       ),
     );
   }

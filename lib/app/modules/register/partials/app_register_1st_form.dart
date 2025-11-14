@@ -6,7 +6,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constants.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/region_model/list_region_model_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_link_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';

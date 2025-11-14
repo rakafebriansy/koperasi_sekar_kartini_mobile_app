@@ -7,12 +7,16 @@ class EventAttendanceModel {
   final UserModel user;
   final EventModel event;
   final AttendanceStatusEnum attendance;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   EventAttendanceModel({
     this.id,
     required this.event,
     required this.user,
     required this.attendance,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory EventAttendanceModel.fromJson(Map<String, dynamic> json) {
@@ -21,6 +25,8 @@ class EventAttendanceModel {
       event: EventModel.fromJson(json['event']),
       user: UserModel.fromJson(json['user']),
       attendance: AttendanceStatusEnum.fromString(json['is_attend']),
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
     );
   }
 
@@ -30,6 +36,8 @@ class EventAttendanceModel {
       'user': user.toJson(),
       'event': event.toJson(),
       'is_attend': attendance.value,
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
     };
   }
 }

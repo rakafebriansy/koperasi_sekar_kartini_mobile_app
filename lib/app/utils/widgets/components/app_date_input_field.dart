@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
@@ -37,7 +39,10 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
       hintText: 'Tanggal Lahir',
       readOnly: true,
       onTap: () => _selectDate(context),
-      iconPath: AppAsset.svgs.calendarSharpGray,
+      suffixIcon: SvgPicture.asset(
+        AppAsset.svgs.calendarSharpGray,
+        height: 20.sp,
+      ),
     );
   }
 }

@@ -1,11 +1,57 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/role_enum.dart';
 
 class DummyHelper {
+  static final List<UserModel> dummyUsers = [
+    UserModel(
+      id: 'USER-001',
+      name: 'Raka Febrian',
+      role: RoleEnum.admin,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    UserModel(
+      id: 'USER-002',
+      name: 'Siti Rahma',
+      role: RoleEnum.groupMember,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    UserModel(
+      id: 'USER-003',
+      name: 'Taufik Hidayat',
+      role: RoleEnum.admin,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    UserModel(
+      id: 'USER-004',
+      name: 'Dewi Kartika',
+      role: RoleEnum.groupMember,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    UserModel(
+      id: 'USER-005',
+      name: 'Bagas Saputra',
+      role: RoleEnum.admin,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    UserModel(
+      id: 'USER-006',
+      name: 'Siti Aminah',
+      role: RoleEnum.employee,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
+
   static final List<EventModel> dummyEvents = [
     EventModel(
-      id: '1',
+      id: 'EVENT-01',
       title: 'Rapat Anggota Tahunan',
       description: '''
     [
@@ -19,11 +65,13 @@ class DummyHelper {
     ''',
       dateTime: DateTime(2025, 12, 5, 9, 0),
       location: 'Aula Koperasi Sekar Kartini',
-      imageUrl: 'https://example.com/images/event_rapat_tahunan.jpg',
-      user: UserModel(id: 'u1', name: 'Siti Aminah', role: RoleEnum.employee),
+      image: 'https://example.com/images/event_rapat_tahunan.jpg',
+      user: dummyUsers[1],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: '2',
+      id: 'EVENT-02',
       title: 'Pelatihan Keuangan Pribadi',
       description: '''
     [
@@ -35,11 +83,13 @@ class DummyHelper {
     ''',
       dateTime: DateTime(2025, 11, 20, 13, 30),
       location: 'Ruang Serbaguna Lt. 2',
-      imageUrl: 'https://example.com/images/event_pelatihan_keuangan.jpg',
-      user: UserModel(id: 'u2', name: 'Raka Febrian', role: RoleEnum.employee),
+      image: 'https://example.com/images/event_pelatihan_keuangan.jpg',
+      user: dummyUsers[2],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: '3',
+      id: 'EVENT-03',
       title: 'Bakti Sosial Akhir Tahun',
       description: '''
     [
@@ -53,11 +103,13 @@ class DummyHelper {
     ''',
       dateTime: DateTime(2025, 12, 28, 8, 0),
       location: 'Kantor Desa Karanganyar',
-      imageUrl: 'https://example.com/images/event_baksos.jpg',
-      user: UserModel(id: 'u3', name: 'Indah Permata', role: RoleEnum.employee),
+      image: 'https://example.com/images/event_baksos.jpg',
+      user: dummyUsers[3],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: '4',
+      id: 'EVENT-04',
       title: 'Workshop Digital Marketing',
       description: '''
     [
@@ -69,11 +121,13 @@ class DummyHelper {
     ''',
       dateTime: DateTime(2026, 1, 10, 10, 0),
       location: 'Balai Pertemuan Kota',
-      imageUrl: 'https://example.com/images/event_workshop_digital.jpg',
-      user: UserModel(id: 'u4', name: 'Agus Santoso', role: RoleEnum.employee),
+      image: 'https://example.com/images/event_workshop_digital.jpg',
+      user: dummyUsers[4],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: '5',
+      id: 'EVENT-05',
       title: 'Family Gathering Koperasi',
       description: '''
     [
@@ -87,11 +141,19 @@ class DummyHelper {
     ''',
       dateTime: DateTime(2026, 2, 14, 7, 30),
       location: 'Taman Wisata Alam Sumber Ria',
-      imageUrl: 'https://example.com/images/event_family_gathering.jpg',
-      user: UserModel(id: 'u5', name: 'Dewi Kartika', role: RoleEnum.employee),
+      image: 'https://example.com/images/event_family_gathering.jpg',
+      user: UserModel(
+        id: 'u5',
+        name: 'Dewi Kartika',
+        role: RoleEnum.employee,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: 'ID-KEGIATAN-1',
+      id: 'EVENT-06',
       title: 'Syukuran Rumah Baru Bu Nurul',
       description: '''
       [
@@ -104,11 +166,56 @@ class DummyHelper {
     ''',
       dateTime: DateTime(2025, 11, 8, 20, 0, 0),
       location: 'Jl. Melati no.05, Kec. Patrang, Kab. Jember',
-      user: UserModel(
-        id: 'ID-USER-1',
-        name: 'Raka Febrian',
-        role: RoleEnum.admin,
-      ),
-    )
+      user: dummyUsers[5],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
+
+  static final dummyGroupMembers = <GroupMemberModel>[
+    GroupMemberModel(
+      id: 'GROUP-MEMBER-01',
+      nomorAnggota: 'AGT-001',
+      statusAktif: true,
+      fileKartuTandaAnggota: 'files/kta_agt_001.png',
+      catatan: 'Anggota aktif dengan kontribusi rutin.',
+      user: dummyUsers[0],
+      idKelompok: 'b91c27fe-1234-4f56-98ab-77889900ccdd',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    GroupMemberModel(
+      id: 'GROUP-MEMBER-02',
+      nomorAnggota: 'AGT-002',
+      statusAktif: false,
+      fileKartuTandaAnggota: null,
+      catatan: 'Status nonaktif karena tidak hadir 3 bulan.',
+      user: dummyUsers[1],
+      idKelompok: 'b91c27fe-1234-4f56-98ab-77889900ccdd',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    GroupMemberModel(
+      id: 'GROUP-MEMBER-03',
+      nomorAnggota: 'AGT-003',
+      statusAktif: true,
+      fileKartuTandaAnggota: 'files/kta_agt_003.jpg',
+      catatan: 'Ketua kelompok.',
+      user: dummyUsers[2],
+      idKelompok: 'e98f11aa-2233-44bb-8899-0022446688ff',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    GroupMemberModel(
+      id: 'GROUP-MEMBER-04',
+      nomorAnggota: 'AGT-003',
+      statusAktif: true,
+      fileKartuTandaAnggota: 'files/kta_agt_004.jpg',
+      catatan: 'Anggota aktif dengan kontribusi rutin.',
+      user: dummyUsers[2],
+      idKelompok: 'e98f11aa-2233-44bb-8899-0022446688ff',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
   ];
 }

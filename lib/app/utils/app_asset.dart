@@ -17,14 +17,17 @@ class _AppAssetSvg {
   String calendarSharpGray = '${_svgsPath}calendar_sharp_gray${_ext}';
   String calendarPrimary = '${_svgsPath}calendar_primary${_ext}';
   String cameraIcon = '${_svgsPath}camera_icon${_ext}';
+  String deleteDanger = '${_svgsPath}delete_danger${_ext}';
   String exclamationMarkPrimary = '${_svgsPath}exclamation_mark_primary${_ext}';
   String editPrimary = '${_svgsPath}edit_primary${_ext}';
+  String editInfo = '${_svgsPath}edit_info${_ext}';
   String imageIcon = '${_svgsPath}image_icon${_ext}';
   String infoWhite = '${_svgsPath}info_white${_ext}';
   String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
   String moneyWhite = '${_svgsPath}money_white${_ext}';
   String notificationBlack = '${_svgsPath}notification_black${_ext}';
   String pinLocationPrimary = '${_svgsPath}pin_location_primary${_ext}';
+  String searchGray = '${_svgsPath}search_gray${_ext}';
   String tickWhite = '${_svgsPath}tick_white${_ext}';
 }
 

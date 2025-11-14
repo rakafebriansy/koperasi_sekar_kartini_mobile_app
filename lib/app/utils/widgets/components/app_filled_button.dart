@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 
@@ -41,10 +40,10 @@ class AppFilledButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: danger
-              ? AppColor.danger
+              ? AppColor.instance.danger
               : backgroundColor != null
               ? backgroundColor
-              : AppColor.primary,
+              : AppColor.instance.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(999.sp),
           ),
@@ -58,17 +57,17 @@ class AppFilledButton extends StatelessWidget {
                   SizedBox(width: 8.sp),
                   poppins(
                     label,
-                      color: textColor ?? Colors.white,
-                      fontSize: fontSize ?? 14.sp,
-                      fontWeight: fontWeight ?? FontWeight.w600,
+                    color: textColor ?? Colors.white,
+                    fontSize: fontSize ?? 14.sp,
+                    fontWeight: fontWeight ?? FontWeight.w600,
                   ),
                 ],
               )
             : poppins(
                 label,
-                  color: Colors.white,
-                  fontSize: fontSize ?? 14.sp,
-                  fontWeight: fontWeight ?? FontWeight.w600,
+                color: Colors.white,
+                fontSize: fontSize ?? 14.sp,
+                fontWeight: fontWeight ?? FontWeight.w600,
               ),
       ),
     );

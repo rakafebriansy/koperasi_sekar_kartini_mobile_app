@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/app_register_1st_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/app_register_2nd_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/app_register_3rd_Form.dart';
@@ -50,7 +49,7 @@ class RegisterView extends GetView<RegisterController> {
                         width: 36.sp,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: AppColor.border.lightGray,
+                            color: AppColor.instance.border.lightGray,
                             width: 1.sp,
                           ),
                           borderRadius: BorderRadius.circular(999),
@@ -64,9 +63,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
               )
             : null,
-        title: poppins(
-          'Register',
-            fontWeight: FontWeight.w600),
+        title: poppins('Register', fontWeight: FontWeight.w600),
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           controller: controller.scrollController,
@@ -75,16 +72,16 @@ class RegisterView extends GetView<RegisterController> {
             children: [
               poppins(
                 controller.getCurrentTitle,
-                  fontSize: 36.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.primary,
+                fontSize: 36.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColor.instance.primary,
               ),
               SizedBox(height: 12.sp),
               poppins(
                 controller.getCurrentSubtitle,
-                  fontSize: 14.sp,
-                  color: AppColor.primary,
-                ),
+                fontSize: 14.sp,
+                color: AppColor.instance.primary,
+              ),
               SizedBox(height: 16.sp),
               IndexedStack(
                 index: controller.selectedScreen,

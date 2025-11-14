@@ -72,7 +72,8 @@ class EventDetailView extends GetView<EventDetailController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: AppColor.lightPrimary,
+                                    backgroundColor:
+                                        AppColor.instance.lightPrimary,
                                     radius: 16.sp,
                                     child: SvgPicture.asset(
                                       AppAsset.svgs.locationPinDarkGray,
@@ -118,7 +119,8 @@ class EventDetailView extends GetView<EventDetailController> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: AppColor.lightPrimary,
+                                    backgroundColor:
+                                        AppColor.instance.lightPrimary,
                                     radius: 16.sp,
                                     child: SvgPicture.asset(
                                       AppAsset.svgs.calendarDarkGray,
@@ -163,7 +165,8 @@ class EventDetailView extends GetView<EventDetailController> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: AppColor.lightPrimary,
+                                    backgroundColor:
+                                        AppColor.instance.lightPrimary,
                                     radius: 16.sp,
                                     child: SvgPicture.asset(
                                       AppAsset.svgs.clockDarkGray,
@@ -180,7 +183,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                         .event
                                         .dateTime
                                         .toDotSeparatedHour(),
-                                      fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ],
                               ),
@@ -195,7 +198,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 TableCellVerticalAlignment.middle,
                             child: poppins(
                               'Status Kehadiran',
-                                fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           TableCell(
@@ -222,8 +225,8 @@ class EventDetailView extends GetView<EventDetailController> {
                                           .value!
                                           .attendance
                                           .displayName,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xFF008473),
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF008473),
                                     ),
                                   ),
                                 ],
@@ -235,9 +238,7 @@ class EventDetailView extends GetView<EventDetailController> {
                     ],
                   ),
                   SizedBox(height: 10.sp),
-                  poppins(
-                    'Deskripsi',
-                      fontWeight: FontWeight.bold),
+                  poppins('Deskripsi', fontWeight: FontWeight.bold),
                   SizedBox(height: 4.sp),
                   Container(
                     decoration: BoxDecoration(

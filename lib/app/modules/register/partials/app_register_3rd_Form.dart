@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/controllers/register_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
@@ -33,13 +32,13 @@ class AppRegister3rdForm extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(Icons.check, size: 10.sp),
                     radius: 8.sp,
-                    backgroundColor: AppColor.gray,
+                    backgroundColor: AppColor.instance.gray,
                   ),
                   SizedBox(width: 8.sp),
                   poppins(
                     'Minimal 8 karakter',
-                      color: AppColor.primary,
-                      fontSize: 12.sp,
+                    color: AppColor.instance.primary,
+                    fontSize: 12.sp,
                   ),
                 ],
               ),
@@ -49,13 +48,13 @@ class AppRegister3rdForm extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(Icons.check, size: 10.sp),
                     radius: 8.sp,
-                    backgroundColor: AppColor.gray,
+                    backgroundColor: AppColor.instance.gray,
                   ),
                   SizedBox(width: 8.sp),
                   poppins(
                     'Mengandung angka',
-                      color: AppColor.primary,
-                      fontSize: 12.sp,
+                    color: AppColor.instance.primary,
+                    fontSize: 12.sp,
                   ),
                 ],
               ),
@@ -65,13 +64,13 @@ class AppRegister3rdForm extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(Icons.check, size: 10.sp),
                     radius: 8.sp,
-                    backgroundColor: AppColor.gray,
+                    backgroundColor: AppColor.instance.gray,
                   ),
                   SizedBox(width: 8.sp),
                   poppins(
                     'Mengandung karakter unik dan huruf besar',
-                      color: AppColor.primary,
-                      fontSize: 12.sp,
+                    color: AppColor.instance.primary,
+                    fontSize: 12.sp,
                   ),
                 ],
               ),
