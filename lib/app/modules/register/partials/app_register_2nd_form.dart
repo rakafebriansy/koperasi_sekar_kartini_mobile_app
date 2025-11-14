@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/controllers/register_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
@@ -18,13 +19,11 @@ class AppRegister2ndForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          poppins(
             'Tanggal Lahir',
-            style: GoogleFonts.poppins(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
             ),
-          ),
           AppDateInputField(controller: controller.datetimeCtrl),
           SizedBox(height: 8.sp),
           AppTextFormGroup(controller: controller.jobCtrl, label: 'Pekerjaan'),

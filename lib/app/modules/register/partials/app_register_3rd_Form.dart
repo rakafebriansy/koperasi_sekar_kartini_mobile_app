@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/controllers/register_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 
@@ -35,12 +36,10 @@ class AppRegister3rdForm extends StatelessWidget {
                     backgroundColor: AppColor.gray,
                   ),
                   SizedBox(width: 8.sp),
-                  Text(
+                  poppins(
                     'Minimal 8 karakter',
-                    style: GoogleFonts.poppins(
                       color: AppColor.primary,
                       fontSize: 12.sp,
-                    ),
                   ),
                 ],
               ),
@@ -53,12 +52,10 @@ class AppRegister3rdForm extends StatelessWidget {
                     backgroundColor: AppColor.gray,
                   ),
                   SizedBox(width: 8.sp),
-                  Text(
+                  poppins(
                     'Mengandung angka',
-                    style: GoogleFonts.poppins(
                       color: AppColor.primary,
                       fontSize: 12.sp,
-                    ),
                   ),
                 ],
               ),
@@ -71,12 +68,10 @@ class AppRegister3rdForm extends StatelessWidget {
                     backgroundColor: AppColor.gray,
                   ),
                   SizedBox(width: 8.sp),
-                  Text(
+                  poppins(
                     'Mengandung karakter unik dan huruf besar',
-                    style: GoogleFonts.poppins(
                       color: AppColor.primary,
                       fontSize: 12.sp,
-                    ),
                   ),
                 ],
               ),

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 
 class UploadImageField extends StatelessWidget {
@@ -54,10 +54,9 @@ class UploadImageField extends StatelessWidget {
                               height: 54.sp,
                             ),
                             SizedBox(height: 14.sp),
-                            Text(
+                            poppins(
                               'Pilih file atau gambar',
-                              style: GoogleFonts.poppins(fontSize: 14.sp),
-                            ),
+                                fontSize: 14.sp),
                           ],
                         ),
                       ),
@@ -73,12 +72,10 @@ class UploadImageField extends StatelessWidget {
                   child: Divider(height: 1.sp, color: Color(0xFF686868)),
                 ),
               ),
-              Text(
+              poppins(
                 'atau',
-                style: GoogleFonts.poppins(
                   fontSize: 14.sp,
                   color: Color(0xFF686868),
-                ),
               ),
               Expanded(
                 child: Padding(

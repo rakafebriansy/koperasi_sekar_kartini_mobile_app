@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_link_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
@@ -18,39 +19,30 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
       ableToBack: false,
-      title: Text(
-        'Login',
-        style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-      ),
+      title: poppins('Login', fontWeight: FontWeight.w600),
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         controller: controller.scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            poppins(
               'Selamat',
-              style: GoogleFonts.poppins(
-                fontSize: 36.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColor.primary,
-              ),
+              fontSize: 36.sp,
+              fontWeight: FontWeight.bold,
+              color: AppColor.primary,
             ),
-            Text(
+            poppins(
               'Datang!',
-              style: GoogleFonts.poppins(
-                fontSize: 36.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColor.primary,
-              ),
+              fontSize: 36.sp,
+              fontWeight: FontWeight.bold,
+              color: AppColor.primary,
             ),
             SizedBox(height: 12.sp),
-            Text(
+            poppins(
               'Silakan Login untuk akses lebih lengkap',
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                color: AppColor.primary,
-              ),
+              fontSize: 14.sp,
+              color: AppColor.primary,
             ),
             SizedBox(height: 16.sp),
             AppTextFormGroup(
@@ -73,10 +65,9 @@ class LoginView extends GetView<LoginController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                poppins(
                   'Belum punya akun?',
-                  style: GoogleFonts.poppins(fontSize: 12.sp),
-                ),
+                    fontSize: 12.sp),
                 SizedBox(width: 6.sp),
                 AppLinkButton(
                   link: Routes.REGISTER,

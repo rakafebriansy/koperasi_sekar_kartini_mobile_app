@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 
 class AppFilledButton extends StatelessWidget {
   AppFilledButton({
@@ -55,23 +56,19 @@ class AppFilledButton extends StatelessWidget {
                 children: [
                   SvgPicture.asset(svgPath!, width: svgSize, height: svgSize),
                   SizedBox(width: 8.sp),
-                  Text(
+                  poppins(
                     label,
-                    style: GoogleFonts.poppins(
                       color: textColor ?? Colors.white,
                       fontSize: fontSize ?? 14.sp,
                       fontWeight: fontWeight ?? FontWeight.w600,
-                    ),
                   ),
                 ],
               )
-            : Text(
+            : poppins(
                 label,
-                style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: fontSize ?? 14.sp,
                   fontWeight: fontWeight ?? FontWeight.w600,
-                ),
               ),
       ),
     );

@@ -10,6 +10,8 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const MEETING_DETAIL = _Paths.MEETING_DETAIL;
   static const REGISTER = _Paths.REGISTER;
+  static const SAVINGS_LIST = _Paths.SAVINGS_LIST;
+  static const LOAN_LIST = _Paths.LOAN_LIST;
 }
 
 abstract class _Paths {
@@ -21,4 +23,6 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const MEETING_DETAIL = '/event-detail';
   static const REGISTER = '/register';
+  static const SAVINGS_LIST = '/savings-list';
+  static const LOAN_LIST = '/loan-list';
 }

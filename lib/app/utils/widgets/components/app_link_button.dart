@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppLinkButton extends StatelessWidget {
@@ -33,10 +33,7 @@ class AppLinkButton extends StatelessWidget {
                 throw Exception('Failed to open link');
               }
             },
-      child: Text(
-        label,
-        style: GoogleFonts.poppins(color: color, fontSize: fontSize ?? 14.sp),
-      ),
+      child: poppins(label, color: color, fontSize: fontSize ?? 14.sp),
     );
   }
 }

@@ -4,10 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
 
-class AppNotificationCard extends StatelessWidget {
-  const AppNotificationCard({
+class AppNotificationBar extends StatelessWidget {
+  const AppNotificationBar({
     super.key,
     this.type = NotificationBarType.info,
     required this.message,
@@ -58,14 +59,12 @@ class AppNotificationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 4.sp,
                   children: [
-                    Text(
+                    poppins(
                       '${dateTime.toIdFull()})',
-                      style: GoogleFonts.poppins(
                         fontSize: 10.sp,
                         color: Colors.grey,
-                      ),
                     ),
-                    Text(message),
+                    poppins(message),
                   ],
                 ),
               ),

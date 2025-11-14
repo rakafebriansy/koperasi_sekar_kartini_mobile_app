@@ -32,13 +32,11 @@ InputDecoration buildAppTextInputDecoration({
     hint: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
+        poppins(
           hintText,
-          style: GoogleFonts.poppins(
             fontSize: 14.sp,
             fontWeight: FontWeight.w500,
             color: AppColor.border.gray,
-          ),
         ),
       ],
     ),
@@ -71,4 +69,22 @@ ButtonStyle buildInkWellButtonStyle({
   );
 }
 
-
+Text poppins(
+  String text, {
+  Color? color,
+  double? fontSize,
+  FontWeight? fontWeight,
+  TextStyle? textStyle,
+  bool? softWrap
+}) {
+  return Text(
+    text,
+    softWrap: softWrap,
+    style: GoogleFonts.poppins(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+      textStyle: textStyle,
+    ),
+  );
+}

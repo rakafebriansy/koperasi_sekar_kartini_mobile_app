@@ -11,6 +11,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/register/partials/app_register_5th_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 
 import '../controllers/register_controller.dart';
@@ -63,32 +64,27 @@ class RegisterView extends GetView<RegisterController> {
                 ),
               )
             : null,
-        title: Text(
+        title: poppins(
           'Register',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-        ),
+            fontWeight: FontWeight.w600),
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           controller: controller.scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              poppins(
                 controller.getCurrentTitle,
-                style: GoogleFonts.poppins(
                   fontSize: 36.sp,
                   fontWeight: FontWeight.bold,
                   color: AppColor.primary,
-                ),
               ),
               SizedBox(height: 12.sp),
-              Text(
+              poppins(
                 controller.getCurrentSubtitle,
-                style: GoogleFonts.poppins(
                   fontSize: 14.sp,
                   color: AppColor.primary,
                 ),
-              ),
               SizedBox(height: 16.sp),
               IndexedStack(
                 index: controller.selectedScreen,

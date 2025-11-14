@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
 
 class AppEventCard extends StatelessWidget {
@@ -49,12 +50,10 @@ class AppEventCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 spacing: 2.sp,
                 children: [
-                  Text(
+                  poppins(
                     model.title,
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.sp,
-                    ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.sp,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,12 +65,11 @@ class AppEventCard extends StatelessWidget {
                         width: 12.sp,
                         height: 12.sp,
                       ),
-                      Text(
+                      poppins(
                         model.location,
-                        style: GoogleFonts.poppins(
-                          fontSize: 10.sp,
-                          color: AppColor.primary,
-                        ),
+
+                        fontSize: 10.sp,
+                        color: AppColor.primary,
                       ),
                     ],
                   ),
@@ -85,12 +83,10 @@ class AppEventCard extends StatelessWidget {
                         width: 10.sp,
                         height: 10.sp,
                       ),
-                      Text(
+                      poppins(
                         model.dateTime.toIdDate(),
-                        style: GoogleFonts.poppins(
-                          fontSize: 10.sp,
-                          color: AppColor.primary,
-                        ),
+                        fontSize: 10.sp,
+                        color: AppColor.primary,
                       ),
                     ],
                   ),
@@ -104,12 +100,11 @@ class AppEventCard extends StatelessWidget {
                         width: 10.sp,
                         height: 10.sp,
                       ),
-                      Text(
+                      poppins(
                         model.dateTime.toDotSeparatedHour(),
-                        style: GoogleFonts.poppins(
-                          fontSize: 10.sp,
-                          color: AppColor.primary,
-                        ),
+
+                        fontSize: 10.sp,
+                        color: AppColor.primary,
                       ),
                     ],
                   ),

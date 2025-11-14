@@ -28,13 +28,7 @@ class AppRegister1stForm extends StatelessWidget {
           label: 'Nama Lengkap',
         ),
         SizedBox(height: 8.sp),
-        Text(
-          'Wilayah Kerja',
-          style: GoogleFonts.poppins(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        poppins('Wilayah Kerja', fontSize: 14.sp, fontWeight: FontWeight.w600),
         DropdownSearch<String>(
           enabled: controller.regionModelData.isNotEmpty,
           key: AppConstants.appFormKey.register_dropdownSearch,
@@ -55,7 +49,7 @@ class AppRegister1stForm extends StatelessWidget {
                   horizontal: 12.sp,
                   vertical: 12.sp,
                 ),
-                child: Text(item, style: GoogleFonts.poppins(fontSize: 14.sp)),
+                child: poppins(item, fontSize: 14.sp),
               ),
             ),
           ),
@@ -78,9 +72,9 @@ class AppRegister1stForm extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            poppins(
               'Sudah punya akun?',
-              style: GoogleFonts.poppins(fontSize: 12.sp),
+                fontSize: 12.sp
             ),
             SizedBox(width: 6.sp),
             AppLinkButton(

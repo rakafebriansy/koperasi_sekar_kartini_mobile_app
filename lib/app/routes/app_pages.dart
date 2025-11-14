@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/event_detail/bindings/event_detail_binding.dart';
 import '../modules/event_detail/views/event_detail_view.dart';
+import '../modules/loan_list/bindings/loan_list_binding.dart';
+import '../modules/loan_list/views/loan_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
@@ -14,6 +16,8 @@ import '../modules/main/tabs/profile/views/main_tabs_profile_view.dart';
 import '../modules/main/views/main_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/savings_list/bindings/savings_list_binding.dart';
+import '../modules/savings_list/views/savings_list_view.dart';
 
 part 'app_routes.dart';
 
@@ -59,6 +63,16 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.SAVINGS_LIST,
+      page: () => const SavingsListView(),
+      binding: SavingsListBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOAN_LIST,
+      page: () => const LoanListView(),
+      binding: LoanListBinding(),
     ),
   ];
 }
