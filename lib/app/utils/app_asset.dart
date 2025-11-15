@@ -9,6 +9,7 @@ class _AppAssetSvg {
 
   String arrowLeftBlack = '${_svgsPath}arrow_head_left_black${_ext}';
   String arrowLeftWhite = '${_svgsPath}arrow_head_left_white${_ext}';
+  String bellLightGray = '${_svgsPath}bell_light_gray${_ext}';
   String calendarDarkGray = '${_svgsPath}calendar_dark_gray${_ext}';
   String clockDarkGray = '${_svgsPath}clock_dark_gray${_ext}';
   String clockPrimary = '${_svgsPath}clock_primary${_ext}';
@@ -18,17 +19,23 @@ class _AppAssetSvg {
   String calendarPrimary = '${_svgsPath}calendar_primary${_ext}';
   String cameraIcon = '${_svgsPath}camera_icon${_ext}';
   String deleteDanger = '${_svgsPath}delete_danger${_ext}';
+  String dollarCoinLightGray = '${_svgsPath}dollar_coin_light_gray${_ext}';
   String exclamationMarkPrimary = '${_svgsPath}exclamation_mark_primary${_ext}';
   String editPrimary = '${_svgsPath}edit_primary${_ext}';
   String editInfo = '${_svgsPath}edit_info${_ext}';
   String imageIcon = '${_svgsPath}image_icon${_ext}';
   String infoWhite = '${_svgsPath}info_white${_ext}';
   String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
+  String lockLightGray = '${_svgsPath}lock_light_gray${_ext}';
+  String logoutWhite = '${_svgsPath}logout_white${_ext}';
   String moneyWhite = '${_svgsPath}money_white${_ext}';
+  String morePrimary = '${_svgsPath}more_primary${_ext}';
   String notificationBlack = '${_svgsPath}notification_black${_ext}';
   String pinLocationPrimary = '${_svgsPath}pin_location_primary${_ext}';
   String searchGray = '${_svgsPath}search_gray${_ext}';
+  String suitcasePrimary = '${_svgsPath}suitcase_primary${_ext}';
   String tickWhite = '${_svgsPath}tick_white${_ext}';
+  String userPrimary = '${_svgsPath}user_primary${_ext}';
 }
 
 class _AppAssetImages {

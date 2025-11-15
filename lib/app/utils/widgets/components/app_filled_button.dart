@@ -18,6 +18,7 @@ class AppFilledButton extends StatelessWidget {
     this.svgSize,
     this.backgroundColor,
     this.textColor,
+    this.borderRadiusSize,
   });
 
   final VoidCallback? onTap;
@@ -31,6 +32,7 @@ class AppFilledButton extends StatelessWidget {
   final bool danger;
   final String? svgPath;
   final double? svgSize;
+  final double? borderRadiusSize;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class AppFilledButton extends StatelessWidget {
               ? backgroundColor
               : AppColor.instance.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(999.sp),
+            borderRadius: BorderRadius.circular(borderRadiusSize ?? 999.sp),
           ),
         ),
         onPressed: onTap,

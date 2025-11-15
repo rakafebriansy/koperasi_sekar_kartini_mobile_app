@@ -115,14 +115,15 @@ class MainTabsGroupView extends GetView<MainTabsGroupController> {
               padding: EdgeInsets.symmetric(horizontal: 16.sp),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                spacing: 12.sp,
+                spacing: 10.sp,
                 children: [
                   Expanded(
                     child: AppFilledButton(
                       height: 28.sp,
                       label: 'Cek Rapor',
-                      fontSize: 10.sp,
+                      fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
+                      borderRadiusSize: 6.sp,
                       onTap: () {},
                     ),
                   ),
@@ -130,8 +131,9 @@ class MainTabsGroupView extends GetView<MainTabsGroupController> {
                     child: AppFilledButton(
                       height: 28.sp,
                       label: 'Pertemuan',
-                      fontSize: 10.sp,
+                      fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
+                      borderRadiusSize: 6.sp,
                       onTap: () {},
                     ),
                   ),
@@ -139,8 +141,9 @@ class MainTabsGroupView extends GetView<MainTabsGroupController> {
                     child: AppFilledButton(
                       height: 28.sp,
                       label: 'Struktur',
-                      fontSize: 10.sp,
+                      fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
+                      borderRadiusSize: 6.sp,
                       onTap: () {},
                     ),
                   ),

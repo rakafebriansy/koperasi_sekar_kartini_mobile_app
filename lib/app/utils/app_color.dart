@@ -6,6 +6,7 @@ class AppColor {
 
   static final AppColor instance = AppColor._();
   AppColorBorder border = AppColorBorder();
+  AppColorText text = AppColorText();
   final Color primary = Color(0xFF008473);
   final Color transparentPrimary = Color(0xFF008473).withOpacity(0.12);
   final Color danger = Color(0xFFEA2929);
@@ -14,6 +15,10 @@ class AppColor {
   final Color gray = Color(0xFFDADADA);
   final Color lightGray = Color(0xFFF6F6F6);
   final Color info = Color(0xFF4A79CF);
+}
+
+class AppColorText {
+  final Color gray = Color(0xFF686868);
 }
 
 class AppColorBorder {
