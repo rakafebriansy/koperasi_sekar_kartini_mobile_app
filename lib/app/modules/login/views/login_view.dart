@@ -68,7 +68,7 @@ class LoginView extends GetView<LoginController> {
                 poppins('Belum punya akun?', fontSize: 12.sp),
                 SizedBox(width: 6.sp),
                 AppLinkButton(
-                  link: Routes.REGISTER,
+                  link: Routes.GROUP_MEMBER_REGISTER,
                   label: 'Register',
                   isPath: true,
                   fontSize: 12.sp,
