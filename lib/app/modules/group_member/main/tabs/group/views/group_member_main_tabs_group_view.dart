@@ -326,12 +326,12 @@ class _GroupedMemberListView extends StatelessWidget {
                             Text(m.user.name),
                             Icon(
                               Icons.circle,
-                              color: m.statusAktif ? Colors.green : Colors.red,
+                              color: m.isActive ? Colors.green : Colors.red,
                               size: 8.sp,
                             ),
                           ],
                         ),
-                        subtitle: Text(m.nomorAnggota),
+                        subtitle: Text(m.user.nomorAnggota),
                         trailing: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.sp),
                           child: Row(

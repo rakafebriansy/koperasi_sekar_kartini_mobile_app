@@ -2,23 +2,19 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 
 class GroupMemberModel {
   final String id;
-  final String nomorAnggota;
-  final bool statusAktif;
-  final String? fileKartuTandaAnggota;
-  final String catatan;
+  final bool isActive;
+  final String note;
   final UserModel user;
-  final String idKelompok;
+  final String group;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   GroupMemberModel({
     required this.id,
-    required this.nomorAnggota,
-    required this.statusAktif,
-    this.fileKartuTandaAnggota,
-    required this.catatan,
+    required this.isActive,
+    required this.note,
     required this.user,
-    required this.idKelompok,
+    required this.group,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -26,12 +22,10 @@ class GroupMemberModel {
   factory GroupMemberModel.fromJson(Map<String, dynamic> json) {
     return GroupMemberModel(
       id: json['id'],
-      nomorAnggota: json['nomor_anggota'],
-      statusAktif: json['status_aktif'] == 1 || json['status_aktif'] == true,
-      fileKartuTandaAnggota: json['file_kartu_tanda_anggota'],
-      catatan: json['catatan'],
+      isActive: json['is_active'],
+      note: json['note'],
       user: UserModel.fromJson(json['user']),
-      idKelompok: json['id_kelompok'],
+      group: json['group'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
     );
@@ -40,12 +34,10 @@ class GroupMemberModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'nomor_anggota': nomorAnggota,
-      'status_aktif': statusAktif,
-      'file_kartu_tanda_anggota': fileKartuTandaAnggota,
-      'catatan': catatan,
+      'is_active': isActive,
+      'note': note,
       'user': user.toJson(),
-      'id_kelompok': idKelompok,
+      'group': group,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
     };

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_attendance_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/attendance_status_enum.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/role_enum.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'dart:convert';
 
@@ -25,13 +23,7 @@ class EventDetailController extends GetxController {
     EventAttendanceModel(
       id: 'ID-KEHADIRAN-KEGIATAN-1',
       event: event,
-      user: UserModel(
-        id: 'ID-USER-2',
-        name: 'Yusrina Hirzi',
-        role: RoleEnum.employee,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-      ),
+      user: DummyHelper.dummyUsers[0],
       attendance: AttendanceStatusEnum.attend,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
