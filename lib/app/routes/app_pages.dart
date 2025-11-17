@@ -36,7 +36,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.EMPLOYEE_EMPLOYEE_DETAIL;
+  static const INITIAL = Routes.GROUP_MEMBER_MAIN;
 
   static final routes = [
     GetPage(

@@ -27,17 +27,17 @@ abstract class _Paths {
   _Paths._();
   static const LOGIN = '/login';
   static const MEETING_DETAIL = '/event-detail';
-  static const GROUP_MEMBER_REGISTER = '/register';
   static const SAVINGS_LIST = '/savings-list';
   static const LOAN_LIST = '/loan-list';
-  static const GROUP_MEMBER_MAIN = '/main';
-  static const GROUP_MEMBER_MAIN_TABS_HOME = '/home';
-  static const GROUP_MEMBER_MAIN_TABS_PROFILE = '/profile';
-  static const GROUP_MEMBER_MAIN_TABS_GROUP = '/group';
-  static const EMPLOYEE_MAIN = '/main';
-  static const EMPLOYEE_MAIN_TABS_HOME = '/home';
-  static const EMPLOYEE_MAIN_TABS_GROUP = '/group';
-  static const EMPLOYEE_MAIN_TABS_EMPLOYEE = '/employee';
-  static const EMPLOYEE_MAIN_TABS_PROFILE = '/profile';
-  static const EMPLOYEE_EMPLOYEE_DETAIL = '/employee-detail';
+  static const GROUP_MEMBER_MAIN = '/group-member-main-main';
+  static const GROUP_MEMBER_MAIN_TABS_HOME = '/group-member-main-home';
+  static const GROUP_MEMBER_MAIN_TABS_PROFILE = '/group-member-main-profile';
+  static const GROUP_MEMBER_MAIN_TABS_GROUP = '/group-member-main-group';
+  static const GROUP_MEMBER_REGISTER = '/group-member-register';
+  static const EMPLOYEE_MAIN = '/employee-main';
+  static const EMPLOYEE_MAIN_TABS_HOME = '/employee-main-home';
+  static const EMPLOYEE_MAIN_TABS_GROUP = '/employee-main-group';
+  static const EMPLOYEE_MAIN_TABS_EMPLOYEE = '/employee-main-employee';
+  static const EMPLOYEE_MAIN_TABS_PROFILE = '/employee-main-profile';
+  static const EMPLOYEE_EMPLOYEE_DETAIL = '/employee-employee-detail';
 }

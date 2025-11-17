@@ -332,53 +332,53 @@ class _GroupedMemberListView extends StatelessWidget {
                           ],
                         ),
                         subtitle: Text(m.user.nomorAnggota),
-                        trailing: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 2.sp),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            spacing: 8.sp,
-                            children: [
-                              Material(
-                                child: InkWell(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.sp),
-                                      border: Border.all(
-                                        width: 2.sp,
-                                        color: AppColor.instance.info,
-                                      ),
-                                    ),
-                                    padding: EdgeInsets.all(6.sp),
-                                    child: SvgPicture.asset(
-                                      AppAsset.svgs.editInfo,
-                                      width: 18.sp,
-                                      height: 18.sp,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Material(
-                                child: InkWell(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.sp),
-                                      border: Border.all(
-                                        width: 2.sp,
-                                        color: AppColor.instance.danger,
-                                      ),
-                                    ),
-                                    padding: EdgeInsets.all(6.sp),
-                                    child: SvgPicture.asset(
-                                      AppAsset.svgs.deleteDanger,
-                                      width: 18.sp,
-                                      height: 18.sp,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        // trailing: Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 2.sp),
+                        //   child: Row(
+                        //     mainAxisSize: MainAxisSize.min,
+                        //     spacing: 8.sp,
+                        //     children: [
+                        //       Material(
+                        //         child: InkWell(
+                        //           child: Container(
+                        //             decoration: BoxDecoration(
+                        //               borderRadius: BorderRadius.circular(8.sp),
+                        //               border: Border.all(
+                        //                 width: 2.sp,
+                        //                 color: AppColor.instance.info,
+                        //               ),
+                        //             ),
+                        //             padding: EdgeInsets.all(6.sp),
+                        //             child: SvgPicture.asset(
+                        //               AppAsset.svgs.editInfo,
+                        //               width: 18.sp,
+                        //               height: 18.sp,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       Material(
+                        //         child: InkWell(
+                        //           child: Container(
+                        //             decoration: BoxDecoration(
+                        //               borderRadius: BorderRadius.circular(8.sp),
+                        //               border: Border.all(
+                        //                 width: 2.sp,
+                        //                 color: AppColor.instance.danger,
+                        //               ),
+                        //             ),
+                        //             padding: EdgeInsets.all(6.sp),
+                        //             child: SvgPicture.asset(
+                        //               AppAsset.svgs.deleteDanger,
+                        //               width: 18.sp,
+                        //               height: 18.sp,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ),
                     );
                   }),
