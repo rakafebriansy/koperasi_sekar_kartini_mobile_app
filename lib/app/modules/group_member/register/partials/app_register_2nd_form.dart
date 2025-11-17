@@ -25,14 +25,22 @@ class AppRegister2ndForm extends StatelessWidget {
             ),
           AppDateInputField(controller: controller.datetimeCtrl),
           SizedBox(height: 8.sp),
-          AppTextFormGroup(controller: controller.jobCtrl, label: 'Pekerjaan'),
+          AppTextFormGroup(controller: controller.jobCtrl, label: 'Pekerjaan',
+          maxLines: 1,
+          
+          ),
           SizedBox(height: 8.sp),
-          AppTextFormGroup(controller: controller.emailCtrl, label: 'Email'),
+          AppTextFormGroup(controller: controller.emailCtrl, label: 'Email',
+          maxLines: 1,
+          
+          ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
             controller: controller.phoneCtrl,
             label: 'Nomor Telepon',
             keyboardType: TextInputType.number,
+          maxLines: 1,
+
           ),
           SizedBox(height: 18.sp),
           AppFilledButton(

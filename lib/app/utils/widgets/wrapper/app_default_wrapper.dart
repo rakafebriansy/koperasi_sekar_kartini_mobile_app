@@ -28,7 +28,8 @@ class AppDefaultWrapper extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          actionsPadding: EdgeInsets.all(12.sp),
+          toolbarHeight: 64.sp,
+          actionsPadding: EdgeInsets.only(right: 12.sp),
           actions: actions,
           backgroundColor: Colors.white,
           elevation: 0,
@@ -46,23 +47,18 @@ class AppDefaultWrapper extends StatelessWidget {
                       onTap: () {
                         Get.back();
                       },
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 8.sp),
-                        child: Container(
-                          height: 36.sp,
-                          width: 36.sp,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColor.instance.border.lightGray,
-                              width: 1.sp,
-                            ),
-                            borderRadius: BorderRadius.circular(999),
+                      child: Container(
+                        height: 36.sp,
+                        width: 36.sp,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColor.instance.border.lightGray,
+                            width: 1.sp,
                           ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              AppAsset.svgs.arrowLeftBlack,
-                            ),
-                          ),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
                         ),
                       ),
                     ),
@@ -72,7 +68,7 @@ class AppDefaultWrapper extends StatelessWidget {
           title: title,
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+          padding: EdgeInsets.symmetric(horizontal: 16.sp),
           child: child,
         ),
       ),

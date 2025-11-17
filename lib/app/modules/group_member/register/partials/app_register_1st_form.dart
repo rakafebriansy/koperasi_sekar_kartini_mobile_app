@@ -21,11 +21,14 @@ class AppRegister1stForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        AppTextFormGroup(controller: controller.regNumberCtrl, label: 'NIK'),
+        AppTextFormGroup(controller: controller.regNumberCtrl, label: 'NIK',
+          maxLines: 1,
+        ),
         SizedBox(height: 8.sp),
         AppTextFormGroup(
           controller: controller.nameCtrl,
           label: 'Nama Lengkap',
+          maxLines: 1,
         ),
         SizedBox(height: 8.sp),
         poppins('Wilayah Kerja', fontSize: 14.sp, fontWeight: FontWeight.w600),
@@ -56,9 +59,9 @@ class AppRegister1stForm extends StatelessWidget {
         ),
         SizedBox(height: 8.sp),
         AppTextFormGroup(
-          controller: controller.nameCtrl,
+          controller: controller.addressCtrl,
           label: 'Alamat Lengkap',
-          maxLines: 3,
+          maxLines: 2,
         ),
         SizedBox(height: 18.sp),
         AppFilledButton(

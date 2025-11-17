@@ -48,4 +48,5 @@ class _AppAssetImages {
   String event = '${imagesPath}event${_ext1}';
   String growMoneyIllustration = '${imagesPath}grow_money_illustration${_ext1}';
   String logoLamaKoperasi = '${imagesPath}logo_lama_koperasi${_ext1}';
+  String subtract1 = '${imagesPath}subtract_1${_ext1}';
 }

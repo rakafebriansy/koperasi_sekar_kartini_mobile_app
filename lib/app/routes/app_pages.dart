@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/employee/employee_detail/bindings/employee_employee_detail_binding.dart';
+import '../modules/employee/employee_detail/views/employee_employee_detail_view.dart';
 import '../modules/employee/main/bindings/employee_main_binding.dart';
 import '../modules/employee/main/tabs/employee/bindings/employee_main_tabs_employee_binding.dart';
 import '../modules/employee/main/tabs/employee/views/employee_main_tabs_employee_view.dart';
@@ -34,7 +36,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.EMPLOYEE_MAIN;
+  static const INITIAL = Routes.EMPLOYEE_EMPLOYEE_DETAIL;
 
   static final routes = [
     GetPage(
@@ -110,6 +112,11 @@ class AppPages {
       name: _Paths.LOAN_LIST,
       page: () => const LoanListView(),
       binding: LoanListBinding(),
+    ),
+    GetPage(
+      name: _Paths.EMPLOYEE_EMPLOYEE_DETAIL,
+      page: () => const EmployeeEmployeeDetailView(),
+      binding: EmployeeEmployeeDetailBinding(),
     ),
   ];
 }

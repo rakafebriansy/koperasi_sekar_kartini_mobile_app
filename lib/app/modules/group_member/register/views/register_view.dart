@@ -34,66 +34,64 @@ class RegisterView extends GetView<RegisterController> {
           ),
         ],
         leading: controller.selectedScreen > 0
-            ? Padding(
-                padding: EdgeInsets.only(top: 8.sp),
-                child: Center(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(999),
-                      onTap: () {
-                        controller.prevScreen();
-                      },
-                      child: Container(
-                        height: 36.sp,
-                        width: 36.sp,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColor.instance.border.lightGray,
-                            width: 1.sp,
-                          ),
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
-                        ),
+            ? Center(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(999),
+                  onTap: () {
+                    controller.prevScreen();
+                  },
+                  child: Container(
+                    height: 36.sp,
+                    width: 36.sp,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColor.instance.border.lightGray,
+                        width: 1.sp,
                       ),
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
                     ),
                   ),
                 ),
-              )
+              ),
+            )
             : null,
         title: poppins('Register', fontWeight: FontWeight.w600),
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           controller: controller.scrollController,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              poppins(
-                controller.getCurrentTitle,
-                fontSize: 36.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColor.instance.primary,
-              ),
-              SizedBox(height: 12.sp),
-              poppins(
-                controller.getCurrentSubtitle,
-                fontSize: 14.sp,
-                color: AppColor.instance.primary,
-              ),
-              SizedBox(height: 16.sp),
-              IndexedStack(
-                index: controller.selectedScreen,
-                children: [
-                  AppRegister1stForm(controller: controller),
-                  AppRegister2ndForm(controller: controller),
-                  AppRegister3rdForm(controller: controller),
-                  AppRegister4thForm(controller: controller),
-                  AppRegister5thForm(controller: controller),
-                ],
-              ),
-            ],
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                poppins(
+                  controller.getCurrentTitle,
+                  fontSize: 36.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.instance.primary,
+                ),
+                poppins(
+                  controller.getCurrentSubtitle,
+                  fontSize: 14.sp,
+                  color: AppColor.instance.primary,
+                ),
+                SizedBox(height: 16.sp),
+                IndexedStack(
+                  index: controller.selectedScreen,
+                  children: [
+                    AppRegister1stForm(controller: controller),
+                    AppRegister2ndForm(controller: controller),
+                    AppRegister3rdForm(controller: controller),
+                    AppRegister4thForm(controller: controller),
+                    AppRegister5thForm(controller: controller),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

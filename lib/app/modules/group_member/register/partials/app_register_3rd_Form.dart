@@ -21,6 +21,7 @@ class AppRegister3rdForm extends StatelessWidget {
           AppTextFormGroup(
             controller: controller.passwordCtrl,
             label: 'Kata Sandi',
+          maxLines: 1,
           ),
           SizedBox(height: 8.sp),
           Column(
@@ -80,6 +81,7 @@ class AppRegister3rdForm extends StatelessWidget {
           AppTextFormGroup(
             controller: controller.confirmPasswordCtrl,
             label: 'Konfirmasi Kata Sandi',
+            maxLines: 1,
           ),
           SizedBox(height: 18.sp),
           AppFilledButton(
