@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -13,11 +12,12 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_
 
 import '../controllers/group_member_main_tabs_profile_controller.dart';
 
-class GroupMemberMainTabsProfileView extends GetView<GroupMemberMainTabsProfileController> {
+class GroupMemberMainTabsProfileView
+    extends GetView<GroupMemberMainTabsProfileController> {
   const GroupMemberMainTabsProfileView({super.key});
   @override
   Widget build(BuildContext context) {
-    var user = DummyHelper.dummyUsers[0];
+    var user = DummyHelper.dummyUsers[1];
     return AppHomeWrapper(
       child: SingleChildScrollView(
         child: Column(
@@ -108,7 +108,7 @@ class GroupMemberMainTabsProfileView extends GetView<GroupMemberMainTabsProfileC
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Keanggotaan', style: GoogleFonts.inter(fontSize: 16.sp)),
+                poppins('Kepengurusan', fontSize: 16.sp),
                 SizedBox(height: 8.sp),
                 Container(
                   width: double.infinity,
@@ -125,8 +125,12 @@ class GroupMemberMainTabsProfileView extends GetView<GroupMemberMainTabsProfileC
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         _AppSettingMenuItem(
-                          label: 'Pengaturan Bahasa',
+                          label: 'Sisa Hasil Usaha',
                           iconPath: AppAsset.svgs.dollarCoinLightGray,
+                        ),
+                        _AppSettingMenuItem(
+                          label: 'Ubah Profil',
+                          iconPath: AppAsset.svgs.userPrimary,
                         ),
                       ],
                     ),
@@ -138,7 +142,7 @@ class GroupMemberMainTabsProfileView extends GetView<GroupMemberMainTabsProfileC
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Setelan', style: GoogleFonts.inter(fontSize: 16.sp)),
+                poppins('Setelan', fontSize: 16.sp),
                 SizedBox(height: 8.sp),
                 Container(
                   width: double.infinity,
@@ -260,10 +264,7 @@ class _AppSettingMenuItem extends StatelessWidget {
               ),
               SizedBox(width: 10.sp),
               Expanded(
-                child: Text(
-                  label,
-                  style: GoogleFonts.inter(fontSize: 14.sp, color: textColor),
-                ),
+                child: poppins(label, fontSize: 14.sp, color: textColor),
               ),
             ],
           ),

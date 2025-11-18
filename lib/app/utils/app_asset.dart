@@ -32,7 +32,10 @@ class _AppAssetSvg {
   String morePrimary = '${_svgsPath}more_primary${_ext}';
   String notificationBlack = '${_svgsPath}notification_black${_ext}';
   String pinLocationPrimary = '${_svgsPath}pin_location_primary${_ext}';
+  String pinLocationGray = '${_svgsPath}pin_location_gray${_ext}';
+  String profileGray = '${_svgsPath}profile_gray${_ext}';
   String searchGray = '${_svgsPath}search_gray${_ext}';
+  String reportGray = '${_svgsPath}report_gray${_ext}';
   String suitcasePrimary = '${_svgsPath}suitcase_primary${_ext}';
   String tickWhite = '${_svgsPath}tick_white${_ext}';
   String userPrimary = '${_svgsPath}user_primary${_ext}';
