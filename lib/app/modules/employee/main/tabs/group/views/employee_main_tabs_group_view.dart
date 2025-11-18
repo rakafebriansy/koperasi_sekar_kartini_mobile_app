@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/group/partials/app_candidate_group_member_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/group/partials/app_group_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/group/partials/app_group_member_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
 
 import '../controllers/employee_main_tabs_group_controller.dart';
 
@@ -9,16 +18,27 @@ class EmployeeMainTabsGroupView
   const EmployeeMainTabsGroupView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('EmployeeMainTabsGroupView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'EmployeeMainTabsGroupView is working',
-          style: TextStyle(fontSize: 20),
+    return AppHomeWrapper(
+      withPadding: false,
+      ableToBack: false,
+      child: AppDefaultTabbar(
+        header: Padding(
+          padding: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 0),
+          child: AppTextFormField(
+            controller: controller.searchCtrl,
+            hintText: 'Cari',
+            prefixIcon: SvgPicture.asset(
+              AppAsset.svgs.searchGray,
+              height: 16.sp,
+            ),
+          ),
         ),
+        views: [
+          AppGroupList(controller: controller.mainController),
+          AppGroupMemberList(controller: controller.mainController),
+          AppCandidateGroupMemberList(controller: controller.mainController),
+        ],
+        tabLabels: ['Kelompok', 'Anggota', 'Calon'],
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/main/tabs/group/views/group_member_main_tabs_group_view.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/main/tabs/home/views/main_tabs_home_view.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/main/tabs/home/views/group_member_main_tabs_home_view.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/main/tabs/profile/views/group_member_main_tabs_profile_view.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';

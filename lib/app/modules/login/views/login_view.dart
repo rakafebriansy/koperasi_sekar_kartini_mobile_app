@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_link_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';

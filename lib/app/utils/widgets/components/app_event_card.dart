@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
 
 class AppEventCard extends StatelessWidget {
@@ -18,6 +18,7 @@ class AppEventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.white,
       borderRadius: BorderRadius.circular(12.sp),
       child: InkWell(
         onTap: onTap,

@@ -10,7 +10,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/regis
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/partials/app_register_5th_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 
 import '../controllers/register_controller.dart';

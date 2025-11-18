@@ -1,0 +1,163 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/controllers/employee_main_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/data/wrapper/args_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
+
+class AppGroupMemberList extends StatelessWidget {
+  const AppGroupMemberList({super.key, required this.controller});
+
+  final EmployeeMainController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                poppins(
+                  'Daftar Anggota',
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                ElevatedButton.icon(
+                  style: buildInkWellButtonStyle(
+                    foregroundColor: AppColor.instance.primary,
+                    backgroundColor: AppColor.instance.lightPrimary,
+                    overlayColor: AppColor.instance.transparentPrimary
+                        .withOpacity(0.2),
+                    borderRadiusCircularSize: 12.sp,
+                  ),
+                  onPressed: () {
+                    Get.toNamed(
+                      Routes.EMPLOYEE_EMPLOYEE_DETAIL,
+                      arguments: ArgsWrapper(
+                        action: ActionType.create,
+                        data: null,
+                      ),
+                    );
+                  },
+                  label: poppins('Tambah', color: AppColor.instance.primary),
+                  icon: Icon(Icons.add, color: AppColor.instance.primary),
+                ),
+              ],
+            ),
+          ),
+          _GroupedGroupMemberListView(
+            groupedMembers: DummyHelper.dummyGroupMembers.groupedByFirstLetter,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GroupedGroupMemberListView extends StatelessWidget {
+  final Map<String, List<GroupMemberModel>> groupedMembers;
+
+  const _GroupedGroupMemberListView({super.key, required this.groupedMembers});
+
+  @override
+  Widget build(BuildContext context) {
+    final letters = groupedMembers.keys.toList()..sort();
+
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: List.generate(letters.length, (index) {
+          final letter = letters[index];
+          final members = groupedMembers[letter]!;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(color: AppColor.instance.lightGray),
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 18.sp,
+                  vertical: 4.sp,
+                ),
+                child: poppins(
+                  letter,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.instance.text.gray,
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.sp,
+                  vertical: 8.sp,
+                ),
+                child: Column(
+                  children: List.generate(members.length, (idx) {
+                    final m = members[idx];
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 4.sp),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(14.sp),
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(14.sp),
+                          onTap: () {},
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 8.sp,
+                              vertical: 1.sp,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14.sp),
+                              side: BorderSide(
+                                width: 1.sp,
+                                color: AppColor.instance.gray,
+                              ),
+                            ),
+                            leading: CircleAvatar(child: Text(m.user.name[0])),
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: 8.sp,
+                              children: [
+                                Text(m.user.name),
+                                Icon(
+                                  Icons.circle,
+                                  color: m.isActive ? Colors.green : Colors.red,
+                                  size: 8.sp,
+                                ),
+                              ],
+                            ),
+                            subtitle: Text('#${m.user.id}'),
+                            trailing: Container(
+                              padding: EdgeInsets.all(3.sp),
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: AppColor.instance.border.gray,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
+          );
+        }),
+      ),
+    );
+  }
+}

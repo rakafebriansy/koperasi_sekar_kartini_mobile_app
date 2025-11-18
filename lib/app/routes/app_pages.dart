@@ -18,7 +18,7 @@ import '../modules/group_member/main/bindings/group_member_main_binding.dart';
 import '../modules/group_member/main/tabs/group/bindings/group_member_main_tabs_group_binding.dart';
 import '../modules/group_member/main/tabs/group/views/group_member_main_tabs_group_view.dart';
 import '../modules/group_member/main/tabs/home/bindings/main_tabs_home_binding.dart';
-import '../modules/group_member/main/tabs/home/views/main_tabs_home_view.dart';
+import '../modules/group_member/main/tabs/home/views/group_member_main_tabs_home_view.dart';
 import '../modules/group_member/main/tabs/profile/bindings/group_member_main_tabs_profile_binding.dart';
 import '../modules/group_member/main/tabs/profile/views/group_member_main_tabs_profile_view.dart';
 import '../modules/group_member/main/views/group_member_main_view.dart';
@@ -36,7 +36,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.GROUP_MEMBER_MAIN;
+  static const INITIAL = Routes.EMPLOYEE_MAIN;
 
   static final routes = [
     GetPage(

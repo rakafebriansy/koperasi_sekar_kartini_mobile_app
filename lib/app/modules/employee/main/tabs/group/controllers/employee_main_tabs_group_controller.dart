@@ -1,23 +1,9 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/controllers/employee_main_controller.dart';
 
 class EmployeeMainTabsGroupController extends GetxController {
-  //TODO: Implement EmployeeMainTabsGroupController
+  TextEditingController searchCtrl = TextEditingController();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  EmployeeMainController mainController = Get.find<EmployeeMainController>();
 }

@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 
 class UploadImageField extends StatelessWidget {

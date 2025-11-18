@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/region_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 
@@ -64,4 +66,45 @@ extension UserListExtension on List<UserModel> {
   List<UserModel> get sortedByAsc => this.sortByName();
   List<UserModel> get sortedByDesc => this.sortByName(desc: true);
   Map<String, List<UserModel>> get groupedByFirstLetter => this.groupByFirstLetter();
+}
+
+
+extension GroupListExtension on List<GroupModel> {
+  List<GroupModel> sortByDistrictName({bool desc = false}) {
+    final copy = [...this];
+
+    copy.sort((a, b) {
+      final aDistrict = a.workArea.districtName.toLowerCase();
+      final bDistrict = b.workArea.districtName.toLowerCase();
+
+      return desc
+          ? bDistrict.compareTo(aDistrict)
+          : aDistrict.compareTo(bDistrict);
+    });
+
+    return copy;
+  }
+
+  Map<String, List<GroupModel>> groupByDistrict() {
+    final Map<String, List<GroupModel>> grouped = {};
+
+    for (final group in sortedByDistrictAsc) {
+      final district =
+          group.workArea.districtName.capitalize;
+
+      grouped.putIfAbsent(district!, () => []);
+      grouped[district]!.add(group);
+    }
+
+    return grouped;
+  }
+
+  List<GroupModel> get sortedByDistrictAsc =>
+      sortByDistrictName(desc: false);
+
+  List<GroupModel> get sortedByDistrictDesc =>
+      sortByDistrictName(desc: true);
+
+  Map<String, List<GroupModel>> get groupedByDistrict =>
+      groupByDistrict();
 }

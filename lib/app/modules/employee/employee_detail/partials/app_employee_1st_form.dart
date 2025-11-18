@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/employee_detail/controllers/employee_employee_detail_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
@@ -18,7 +18,7 @@ class AppEmployee1stForm extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         AppTextFormGroup(
-          controller: controller.regNumberCtrl,
+          controller: controller.nationalIdCtrl,
           label: 'NIK',
           maxLines: 1,
         ),
@@ -30,7 +30,7 @@ class AppEmployee1stForm extends StatelessWidget {
         ),
         SizedBox(height: 8.sp),
         poppins('Tanggal Lahir', fontSize: 14.sp, fontWeight: FontWeight.w600),
-        AppDateInputField(controller: controller.datetimeCtrl),
+        AppDateInputField(controller: controller.birthDateCtrl),
         SizedBox(height: 8.sp),
         AppTextFormGroup(
           controller: controller.addressCtrl,

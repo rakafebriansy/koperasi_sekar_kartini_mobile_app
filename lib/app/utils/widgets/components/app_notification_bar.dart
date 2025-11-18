@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
 
 class AppNotificationBar extends StatelessWidget {
@@ -34,6 +34,7 @@ class AppNotificationBar extends StatelessWidget {
         : Colors.lightBlue;
 
     return Material(
+      color: Color(0xFFF9F9F9),
       borderRadius: BorderRadius.circular(12.sp),
       child: InkWell(
         onTap: onTap,

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_event_card.dart';
@@ -14,7 +14,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/a
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_notification_bar.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
 
-import '../controllers/main_tabs_home_controller.dart';
+import '../controllers/group_member_main_tabs_home_controller.dart';
 
 class GroupMemberMainTabsHomeView extends GetView<GroupMemberMainTabsHomeController> {
   const GroupMemberMainTabsHomeView({super.key});

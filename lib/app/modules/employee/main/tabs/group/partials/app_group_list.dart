@@ -1,104 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/controllers/employee_main_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/data/wrapper/args_wrapper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
-import '../controllers/employee_main_tabs_employee_controller.dart';
+class AppGroupList extends StatelessWidget {
+  const AppGroupList({super.key, required this.controller});
 
-class EmployeeMainTabsEmployeeView
-    extends GetView<EmployeeMainTabsEmployeeController> {
-  const EmployeeMainTabsEmployeeView({super.key});
+  final EmployeeMainController controller;
+
   @override
   Widget build(BuildContext context) {
-    return AppHomeWrapper(
-      withPadding: false,
-      ableToBack: false,
-      child: SingleChildScrollView(
-        child: Column(
-          spacing: 16.sp,
-          children: [
-            SizedBox(height: 8.sp),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: AppTextFormField(
-                controller: controller.searchCtrl,
-                hintText: 'Cari',
-                prefixIcon: SvgPicture.asset(
-                  AppAsset.svgs.searchGray,
-                  height: 16.sp,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                poppins(
+                  'Daftar Kelompok',
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  poppins(
-                    'Karyawan',
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
+                ElevatedButton.icon(
+                  style: buildInkWellButtonStyle(
+                    foregroundColor: AppColor.instance.primary,
+                    backgroundColor: AppColor.instance.lightPrimary,
+                    overlayColor: AppColor.instance.transparentPrimary
+                        .withOpacity(0.2),
+                    borderRadiusCircularSize: 12.sp,
                   ),
-                  ElevatedButton.icon(
-                    style: buildInkWellButtonStyle(
-                      foregroundColor: AppColor.instance.primary,
-                      backgroundColor: AppColor.instance.lightPrimary,
-                      overlayColor: AppColor.instance.transparentPrimary
-                          .withOpacity(0.2),
-                      borderRadiusCircularSize: 12.sp,
-                    ),
-                    onPressed: () {
-                      Get.toNamed(
-                        Routes.EMPLOYEE_EMPLOYEE_DETAIL,
-                        arguments: ArgsWrapper(
-                          action: ActionType.create,
-                          data: null,
-                        ),
-                      );
-                    },
-                    label: poppins('Tambah', color: AppColor.instance.primary),
-                    icon: Icon(Icons.add, color: AppColor.instance.primary),
-                  ),
-                ],
-              ),
+                  onPressed: () {
+                    Get.toNamed(
+                      Routes.EMPLOYEE_EMPLOYEE_DETAIL,
+                      arguments: ArgsWrapper(
+                        action: ActionType.create,
+                        data: null,
+                      ),
+                    );
+                  },
+                  label: poppins('Tambah', color: AppColor.instance.primary),
+                  icon: Icon(Icons.add, color: AppColor.instance.primary),
+                ),
+              ],
             ),
-            _GroupedEmployeeListView(
-              groupedEmployee: DummyHelper.dummyUsers.groupedByFirstLetter,
-            ),
-          ],
-        ),
+          ),
+          _GroupedGroupListView(
+            groupedGroup: DummyHelper.dummyGroups.groupedByDistrict,
+          ),
+        ],
       ),
     );
   }
 }
 
-class _GroupedEmployeeListView extends StatelessWidget {
-  final Map<String, List<UserModel>> groupedEmployee;
+class _GroupedGroupListView extends StatelessWidget {
+  final Map<String, List<GroupModel>> groupedGroup;
 
-  const _GroupedEmployeeListView({super.key, required this.groupedEmployee});
+  const _GroupedGroupListView({super.key, required this.groupedGroup});
 
   @override
   Widget build(BuildContext context) {
-    final letters = groupedEmployee.keys.toList()..sort();
+    final letters = groupedGroup.keys.toList()..sort();
 
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(letters.length, (index) {
           final letter = letters[index];
-          final users = groupedEmployee[letter]!;
+          final groups = groupedGroup[letter]!;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +94,7 @@ class _GroupedEmployeeListView extends StatelessWidget {
                   letter,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColor.instance.text.gray
+                  color: AppColor.instance.text.gray,
                 ),
               ),
 
@@ -124,8 +104,8 @@ class _GroupedEmployeeListView extends StatelessWidget {
                   vertical: 8.sp,
                 ),
                 child: Column(
-                  children: List.generate(users.length, (idx) {
-                    final u = users[idx];
+                  children: List.generate(groups.length, (idx) {
+                    final g = groups[idx];
                     return Padding(
                       padding: EdgeInsets.symmetric(vertical: 4.sp),
                       child: Material(
@@ -138,7 +118,7 @@ class _GroupedEmployeeListView extends StatelessWidget {
                               Routes.EMPLOYEE_EMPLOYEE_DETAIL,
                               arguments: ArgsWrapper(
                                 action: ActionType.update,
-                                data: u,
+                                data: g,
                               ),
                             );
                           },
@@ -154,9 +134,9 @@ class _GroupedEmployeeListView extends StatelessWidget {
                                 color: AppColor.instance.gray,
                               ),
                             ),
-                            leading: CircleAvatar(child: Text(u.name[0])),
-                            title: Text(u.name),
-                            subtitle: Text('#${u.id}'),
+                            leading: CircleAvatar(child: poppins(g.number)),
+                            title: poppins('Kelompok ${g.number}'),
+                            subtitle: poppins('#${g.id}'),
                             trailing: Container(
                               padding: EdgeInsets.all(3.sp),
                               child: Icon(

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/builders/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
@@ -16,7 +16,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_
 
 import '../controllers/group_member_main_tabs_group_controller.dart';
 
-class GroupMemberMainTabsGroupView extends GetView<GroupMemberMainTabsGroupController> {
+class GroupMemberMainTabsGroupView
+    extends GetView<GroupMemberMainTabsGroupController> {
   const GroupMemberMainTabsGroupView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -157,7 +158,7 @@ class GroupMemberMainTabsGroupView extends GetView<GroupMemberMainTabsGroupContr
                 children: [
                   poppins(
                     'Anggota',
-                    fontSize: 20.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),
                   ElevatedButton(
@@ -286,13 +287,14 @@ class _GroupedMemberListView extends StatelessWidget {
                 decoration: BoxDecoration(color: AppColor.instance.lightGray),
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(
-                  horizontal: 16.sp,
+                  horizontal: 18.sp,
                   vertical: 4.sp,
                 ),
                 child: poppins(
                   letter,
-                  fontSize: 18.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
+                  color: AppColor.instance.text.gray
                 ),
               ),
 
@@ -305,80 +307,48 @@ class _GroupedMemberListView extends StatelessWidget {
                   children: List.generate(members.length, (idx) {
                     final m = members[idx];
                     return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.sp),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 8.sp,
-                          vertical: 1.sp,
-                        ),
-                        shape: RoundedRectangleBorder(
+                      padding: EdgeInsets.symmetric(vertical: 4.sp),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(14.sp),
+                        color: Colors.transparent,
+                        child: InkWell(
                           borderRadius: BorderRadius.circular(14.sp),
-                          side: BorderSide(
-                            width: 1.sp,
-                            color: AppColor.instance.gray,
+                          onTap: () {},
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 8.sp,
+                              vertical: 1.sp,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14.sp),
+                              side: BorderSide(
+                                width: 1.sp,
+                                color: AppColor.instance.gray,
+                              ),
+                            ),
+                            leading: CircleAvatar(child: Text(m.user.name[0])),
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: 8.sp,
+                              children: [
+                                Text(m.user.name),
+                                Icon(
+                                  Icons.circle,
+                                  color: m.isActive ? Colors.green : Colors.red,
+                                  size: 8.sp,
+                                ),
+                              ],
+                            ),
+                            subtitle: Text('#${m.user.id}'),
+                            trailing: Container(
+                              padding: EdgeInsets.all(3.sp),
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: AppColor.instance.border.gray,
+                              ),
+                            ),
                           ),
                         ),
-                        leading: CircleAvatar(child: Text(m.user.name[0])),
-                        title: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          spacing: 8.sp,
-                          children: [
-                            Text(m.user.name),
-                            Icon(
-                              Icons.circle,
-                              color: m.isActive ? Colors.green : Colors.red,
-                              size: 8.sp,
-                            ),
-                          ],
-                        ),
-                        subtitle: Text(m.user.nomorAnggota),
-                        // trailing: Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 2.sp),
-                        //   child: Row(
-                        //     mainAxisSize: MainAxisSize.min,
-                        //     spacing: 8.sp,
-                        //     children: [
-                        //       Material(
-                        //         child: InkWell(
-                        //           child: Container(
-                        //             decoration: BoxDecoration(
-                        //               borderRadius: BorderRadius.circular(8.sp),
-                        //               border: Border.all(
-                        //                 width: 2.sp,
-                        //                 color: AppColor.instance.info,
-                        //               ),
-                        //             ),
-                        //             padding: EdgeInsets.all(6.sp),
-                        //             child: SvgPicture.asset(
-                        //               AppAsset.svgs.editInfo,
-                        //               width: 18.sp,
-                        //               height: 18.sp,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       Material(
-                        //         child: InkWell(
-                        //           child: Container(
-                        //             decoration: BoxDecoration(
-                        //               borderRadius: BorderRadius.circular(8.sp),
-                        //               border: Border.all(
-                        //                 width: 2.sp,
-                        //                 color: AppColor.instance.danger,
-                        //               ),
-                        //             ),
-                        //             padding: EdgeInsets.all(6.sp),
-                        //             child: SvgPicture.asset(
-                        //               AppAsset.svgs.deleteDanger,
-                        //               width: 18.sp,
-                        //               height: 18.sp,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                       ),
                     );
                   }),

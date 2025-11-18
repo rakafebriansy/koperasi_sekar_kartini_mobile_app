@@ -1,3 +1,4 @@
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 
 class GroupMemberModel {
@@ -5,7 +6,7 @@ class GroupMemberModel {
   final bool isActive;
   final String note;
   final UserModel user;
-  final String group;
+  final GroupModel group;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -25,7 +26,7 @@ class GroupMemberModel {
       isActive: json['is_active'],
       note: json['note'],
       user: UserModel.fromJson(json['user']),
-      group: json['group'],
+      group: GroupModel.fromJson(json['group']),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
     );
@@ -37,7 +38,7 @@ class GroupMemberModel {
       'is_active': isActive,
       'note': note,
       'user': user.toJson(),
-      'group': group,
+      'group': group.toJson(),
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
     };
