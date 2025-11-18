@@ -6,7 +6,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const MEETING_DETAIL = _Paths.MEETING_DETAIL;
   static const SAVINGS_LIST = _Paths.SAVINGS_LIST;
-  static const LOAN_LIST = _Paths.LOAN_LIST;
+  static const GROUP_MEMBER_LOAN_LIST = _Paths.GROUP_MEMBER_LOAN_LIST;
   static const GROUP_MEMBER_REGISTER = _Paths.GROUP_MEMBER_REGISTER;
   static const GROUP_MEMBER_MAIN = _Paths.GROUP_MEMBER_MAIN;
   static const GROUP_MEMBER_MAIN_TABS_HOME = _Paths.GROUP_MEMBER_MAIN_TABS_HOME;
@@ -28,7 +28,7 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const MEETING_DETAIL = '/event-detail';
   static const SAVINGS_LIST = '/savings-list';
-  static const LOAN_LIST = '/loan-list';
+  static const GROUP_MEMBER_LOAN_LIST = '/group-member-loan-list';
   static const GROUP_MEMBER_MAIN = '/group-member-main-main';
   static const GROUP_MEMBER_MAIN_TABS_HOME = '/group-member-main-home';
   static const GROUP_MEMBER_MAIN_TABS_PROFILE = '/group-member-main-profile';

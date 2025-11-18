@@ -20,6 +20,7 @@ class AppColor {
 
 class AppColorText {
   final Color gray = Color(0xFF686868);
+  final Color disabled = Color(0xFFA3ABBD);
 }
 
 class AppColorBorder {

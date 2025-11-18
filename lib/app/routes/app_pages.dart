@@ -24,8 +24,8 @@ import '../modules/group_member/main/tabs/profile/views/group_member_main_tabs_p
 import '../modules/group_member/main/views/group_member_main_view.dart';
 import '../modules/group_member/register/bindings/register_binding.dart';
 import '../modules/group_member/register/views/register_view.dart';
-import '../modules/loan_list/bindings/loan_list_binding.dart';
-import '../modules/loan_list/views/loan_list_view.dart';
+import '../modules/group_member_loan_list/bindings/group_member_loan_list_binding.dart';
+import '../modules/group_member_loan_list/views/group_member_loan_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/savings_list/bindings/savings_list_binding.dart';
@@ -36,7 +36,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.EMPLOYEE_MAIN;
+  static const INITIAL = Routes.GROUP_MEMBER_LOAN_LIST;
 
   static final routes = [
     GetPage(
@@ -109,9 +109,9 @@ class AppPages {
       binding: SavingsListBinding(),
     ),
     GetPage(
-      name: _Paths.LOAN_LIST,
-      page: () => const LoanListView(),
-      binding: LoanListBinding(),
+      name: _Paths.GROUP_MEMBER_LOAN_LIST,
+      page: () => const GroupMemberLoanListView(),
+      binding: GroupMemberLoanListBinding(),
     ),
     GetPage(
       name: _Paths.EMPLOYEE_EMPLOYEE_DETAIL,

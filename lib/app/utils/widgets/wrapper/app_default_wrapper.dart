@@ -12,6 +12,7 @@ class AppDefaultWrapper extends StatelessWidget {
     required this.title,
     this.leading,
     this.ableToBack = false,
+    this.withPadding = true,
     this.actions,
   });
 
@@ -19,6 +20,7 @@ class AppDefaultWrapper extends StatelessWidget {
   final Widget title;
   final Widget? leading;
   final bool ableToBack;
+  final bool withPadding;
   final List<Widget>? actions;
 
   @override
@@ -67,10 +69,11 @@ class AppDefaultWrapper extends StatelessWidget {
               : null,
           title: title,
         ),
-        body: Padding(
+        body: withPadding ? Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.sp),
           child: child,
-        ),
+        ) :
+           child,
       ),
     );
   }

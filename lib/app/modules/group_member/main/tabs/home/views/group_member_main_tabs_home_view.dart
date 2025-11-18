@@ -39,7 +39,7 @@ class GroupMemberMainTabsHomeView extends GetView<GroupMemberMainTabsHomeControl
                 child: _InfoCard(
                   title: 'Pinjaman',
                   amount: 724_500,
-                  route: Routes.LOAN_LIST,
+                  route: Routes.GROUP_MEMBER_LOAN_LIST,
                 ),
               ),
             ],
