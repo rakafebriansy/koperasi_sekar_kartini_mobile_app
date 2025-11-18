@@ -32,7 +32,7 @@ class GroupMemberMainTabsHomeView extends GetView<GroupMemberMainTabsHomeControl
                 child: _InfoCard(
                   title: 'Simpanan',
                   amount: 1_124_500,
-                  route: Routes.SAVINGS_LIST,
+                  route: Routes.GROUP_MEMBER_SAVINGS_LIST,
                 ),
               ),
               Expanded(

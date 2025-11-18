@@ -114,7 +114,7 @@ class _LoanCard extends StatelessWidget {
                 icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
                 field: 'Total Pinjaman',
                 value: poppins(
-                  300000.toIdr(),
+                  300000.toIdr(decimalDigits: 2),
                   fontWeight: FontWeight.bold,
                   color: AppColor.instance.primary,
                 ),
