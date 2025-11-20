@@ -23,7 +23,7 @@ class AppRegister2ndForm extends StatelessWidget {
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
             ),
-          AppDateInputField(controller: controller.datetimeCtrl),
+          AppDateInputField(controller: controller.datetimeCtrl, hintText: 'Tanggal Lahir',),
           SizedBox(height: 8.sp),
           AppTextFormGroup(controller: controller.jobCtrl, label: 'Pekerjaan',
           maxLines: 1,

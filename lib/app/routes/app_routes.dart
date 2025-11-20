@@ -20,8 +20,8 @@ abstract class Routes {
   static const EMPLOYEE_MAIN_TABS_GROUP = _Paths.EMPLOYEE_MAIN_TABS_GROUP;
   static const EMPLOYEE_MAIN_TABS_EMPLOYEE = _Paths.EMPLOYEE_MAIN_TABS_EMPLOYEE;
   static const EMPLOYEE_MAIN_TABS_PROFILE = _Paths.EMPLOYEE_MAIN_TABS_PROFILE;
-  static const EMPLOYEE_EMPLOYEE_DETAIL =
-      _Paths.EMPLOYEE_EMPLOYEE_DETAIL;
+  static const EMPLOYEE_EMPLOYEE_DETAIL = _Paths.EMPLOYEE_EMPLOYEE_DETAIL;
+  static const MANAGE_EVENT = _Paths.MANAGE_EVENT;
 }
 
 abstract class _Paths {
@@ -42,4 +42,5 @@ abstract class _Paths {
   static const EMPLOYEE_MAIN_TABS_EMPLOYEE = '/employee-main-employee';
   static const EMPLOYEE_MAIN_TABS_PROFILE = '/employee-main-profile';
   static const EMPLOYEE_EMPLOYEE_DETAIL = '/employee-employee-detail';
+  static const MANAGE_EVENT = '/manage-event';
 }

@@ -1,13 +1,7 @@
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/bindings/employee_employee_detail_binding.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/views/employee_employee_detail_view.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/event_list/bindings/event_list_binding.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/event_list/views/event_list_view.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/loan_list/bindings/group_member_loan_list_binding.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/loan_list/views/group_member_loan_list_view.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/savings_list/bindings/group_member_savings_list_binding.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/savings_list/views/group_member_savings_list_view.dart';
 
+import '../modules/employee/detail/bindings/employee_employee_detail_binding.dart';
+import '../modules/employee/detail/views/employee_employee_detail_view.dart';
 import '../modules/employee/main/bindings/employee_main_binding.dart';
 import '../modules/employee/main/tabs/employee/bindings/employee_main_tabs_employee_binding.dart';
 import '../modules/employee/main/tabs/employee/views/employee_main_tabs_employee_view.dart';
@@ -20,6 +14,10 @@ import '../modules/employee/main/tabs/profile/views/employee_main_tabs_profile_v
 import '../modules/employee/main/views/employee_main_view.dart';
 import '../modules/event_detail/bindings/event_detail_binding.dart';
 import '../modules/event_detail/views/event_detail_view.dart';
+import '../modules/event_list/bindings/event_list_binding.dart';
+import '../modules/event_list/views/event_list_view.dart';
+import '../modules/group_member/loan_list/bindings/group_member_loan_list_binding.dart';
+import '../modules/group_member/loan_list/views/group_member_loan_list_view.dart';
 import '../modules/group_member/main/bindings/group_member_main_binding.dart';
 import '../modules/group_member/main/tabs/group/bindings/group_member_main_tabs_group_binding.dart';
 import '../modules/group_member/main/tabs/group/views/group_member_main_tabs_group_view.dart';
@@ -30,15 +28,19 @@ import '../modules/group_member/main/tabs/profile/views/group_member_main_tabs_p
 import '../modules/group_member/main/views/group_member_main_view.dart';
 import '../modules/group_member/register/bindings/register_binding.dart';
 import '../modules/group_member/register/views/register_view.dart';
+import '../modules/group_member/savings_list/bindings/group_member_savings_list_binding.dart';
+import '../modules/group_member/savings_list/views/group_member_savings_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/manage_event/bindings/manage_event_binding.dart';
+import '../modules/manage_event/views/manage_event_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.GROUP_MEMBER_LOAN_LIST;
+  static const INITIAL = Routes.EVENT_LIST;
 
   static final routes = [
     GetPage(
@@ -124,6 +126,11 @@ class AppPages {
       name: _Paths.EMPLOYEE_EMPLOYEE_DETAIL,
       page: () => const EmployeeEmployeeDetailView(),
       binding: EmployeeEmployeeDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_EVENT,
+      page: () => const ManageEventView(),
+      binding: ManageEventBinding(),
     ),
   ];
 }

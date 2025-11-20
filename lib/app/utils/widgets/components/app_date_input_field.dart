@@ -7,8 +7,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/a
 
 class AppDateInputField extends StatefulWidget {
   @override
-  AppDateInputField({required this.controller});
+  AppDateInputField({required this.controller, required this.hintText});
   final TextEditingController controller;
+  final String hintText;
 
   _AppDateInputFieldState createState() => _AppDateInputFieldState();
 }
@@ -36,7 +37,7 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
   Widget build(BuildContext context) {
     return AppTextFormField(
       controller: widget.controller,
-      hintText: 'Tanggal Lahir',
+      hintText: widget.hintText,
       readOnly: true,
       onTap: () => _selectDate(context),
       suffixIcon: SvgPicture.asset(

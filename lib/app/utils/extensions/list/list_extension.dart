@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/region_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 
 extension RegionListExtension on List<RegionModel> {
   List<String> get names => map((region) => region.name).toList();
@@ -107,4 +109,9 @@ extension GroupListExtension on List<GroupModel> {
 
   Map<String, List<GroupModel>> get groupedByDistrict =>
       groupByDistrict();
+}
+
+
+extension EventTypeListExtension on List<EventType> {
+  List<String> get names => map((event) => event.displayName).toList();
 }

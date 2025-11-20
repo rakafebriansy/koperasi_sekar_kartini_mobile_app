@@ -30,7 +30,7 @@ class AppEmployee1stForm extends StatelessWidget {
         ),
         SizedBox(height: 8.sp),
         poppins('Tanggal Lahir', fontSize: 14.sp, fontWeight: FontWeight.w600),
-        AppDateInputField(controller: controller.birthDateCtrl),
+        AppDateInputField(controller: controller.birthDateCtrl, hintText: 'Tanggal Lahir',),
         SizedBox(height: 8.sp),
         AppTextFormGroup(
           controller: controller.addressCtrl,

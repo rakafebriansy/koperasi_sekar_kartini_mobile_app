@@ -3,8 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/data/wrapper/args_wrapper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_event_card.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
@@ -75,7 +78,13 @@ class EventListView extends GetView<EventListController> {
                   children: [
                     ...DummyHelper.dummyEvents
                         .map(
-                          (event) => AppEventCard(model: event, onTap: () {}),
+                          (event) => AppEventCard(
+                            model: event,
+                            onTap: () {
+                              Get.toNamed(Routes.MANAGE_EVENT, arguments: 
+                              ArgsWrapper(action: ActionType.create, data: event));
+                            },
+                          ),
                         )
                         .toList(),
                     SizedBox(height: 10.sp),

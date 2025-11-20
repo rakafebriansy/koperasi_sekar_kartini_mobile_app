@@ -4,6 +4,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/role_enum.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 
 class DummyHelper {
   static final List<WorkAreaModel> dummyWorkAreas = [
@@ -174,6 +175,7 @@ class DummyHelper {
     EventModel(
       id: 'EVENT-001',
       title: 'Rapat Anggota Tahunan',
+      type: EventType.groupEvent,
       description: '''
     [
       {"insert": "Agenda Rapat:\\n", "attributes": {"bold": true}},
@@ -188,12 +190,14 @@ class DummyHelper {
       location: 'Aula Koperasi Sekar Kartini',
       image: 'https://example.com/images/event_rapat_tahunan.jpg',
       user: dummyUsers[0],
+      group: dummyGroups[0],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     EventModel(
       id: 'EVENT-002',
       title: 'Pelatihan Keuangan Pribadi',
+      type: EventType.coopEvent,
       description: '''
     [
       {"insert": "Materi Pelatihan:\\n", "attributes": {"bold": true}},
@@ -206,12 +210,14 @@ class DummyHelper {
       location: 'Ruang Serbaguna Lt. 2',
       image: 'https://example.com/images/event_pelatihan_keuangan.jpg',
       user: dummyUsers[1],
+      group: dummyGroups[1],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     EventModel(
       id: 'EVENT-003',
       title: 'Bakti Sosial Akhir Tahun',
+      type: EventType.coopEvent,
       description: '''
     [
       {"insert": "Kegiatan Bakti Sosial:\\n", "attributes": {"bold": true}},
@@ -226,12 +232,14 @@ class DummyHelper {
       location: 'Kantor Desa Karanganyar',
       image: 'https://example.com/images/event_baksos.jpg',
       user: dummyUsers[2],
+      group: dummyGroups[2],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     EventModel(
       id: 'EVENT-004',
       title: 'Workshop Digital Marketing',
+      type: EventType.coopEvent,
       description: '''
     [
       {"insert": "Rundown Workshop:\\n", "attributes": {"bold": true}},
@@ -244,12 +252,14 @@ class DummyHelper {
       location: 'Balai Pertemuan Kota',
       image: 'https://example.com/images/event_workshop_digital.jpg',
       user: dummyUsers[3],
+      group: dummyGroups[3],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     EventModel(
       id: 'EVENT-005',
       title: 'Family Gathering Koperasi',
+      type: EventType.coopEvent,
       description: '''
     [
       {"insert": "Susunan Acara:\\n", "attributes": {"bold": true}},
@@ -264,12 +274,14 @@ class DummyHelper {
       location: 'Taman Wisata Alam Sumber Ria',
       image: 'https://example.com/images/event_family_gathering.jpg',
       user: dummyUsers[4],
+      group: dummyGroups[4],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     EventModel(
       id: 'EVENT-006',
       title: 'Syukuran Rumah Baru Bu Nurul',
+      type: EventType.groupEvent,
       description: '''
       [
         { "insert": "Rundown:\\n", "attributes": { "bold": true } },
@@ -282,6 +294,7 @@ class DummyHelper {
       dateTime: DateTime(2025, 11, 8, 20, 0, 0),
       location: 'Jl. Melati no.05, Kec. Patrang, Kab. Jember',
       user: dummyUsers[5],
+      group: dummyGroups[5],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
