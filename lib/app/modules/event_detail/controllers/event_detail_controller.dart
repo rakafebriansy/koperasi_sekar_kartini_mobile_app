@@ -8,9 +8,8 @@ import 'dart:convert';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 
 class EventDetailController extends GetxController {
-  Rx<EventAttendanceModel?> eventAttendanceModel = Rx<EventAttendanceModel?>(
-    null,
-  );
+  Rx<EventAttendanceModel?> _eventAttendanceModel = Rxn();
+  EventAttendanceModel? get eventAttendanceModel => _eventAttendanceModel.value;
   quill.QuillController? descriptionController = null;
   final descriptionFocusNode = FocusNode();
   final descriptionScrollController = ScrollController();
@@ -19,8 +18,8 @@ class EventDetailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    var event = DummyHelper.dummyEvents[6];
-    EventAttendanceModel(
+    var event = DummyHelper.dummyEvents[5];
+    _eventAttendanceModel.value = EventAttendanceModel(
       id: 'ID-KEHADIRAN-KEGIATAN-1',
       event: event,
       user: DummyHelper.dummyUsers[0],

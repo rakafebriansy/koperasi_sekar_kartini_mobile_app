@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/bindings/employee_employee_detail_binding.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/views/employee_employee_detail_view.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/event_list/bindings/event_list_binding.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/event_list/views/event_list_view.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/loan_list/bindings/group_member_loan_list_binding.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/loan_list/views/group_member_loan_list_view.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/savings_list/bindings/group_member_savings_list_binding.dart';
@@ -36,7 +38,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.GROUP_MEMBER_SAVINGS_LIST;
+  static const INITIAL = Routes.GROUP_MEMBER_LOAN_LIST;
 
   static final routes = [
     GetPage(
@@ -94,9 +96,14 @@ class AppPages {
       binding: LoginBinding(),
     ),
     GetPage(
-      name: _Paths.MEETING_DETAIL,
+      name: _Paths.EVENT_DETAIL,
       page: () => EventDetailView(),
       binding: EventDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.EVENT_LIST,
+      page: () => EventListView(),
+      binding: EventListBinding(),
     ),
     GetPage(
       name: _Paths.GROUP_MEMBER_REGISTER,

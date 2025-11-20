@@ -20,7 +20,7 @@ class EventDetailView extends GetView<EventDetailController> {
     return AppDefaultWrapper(
       title: poppins('Detail Pertemuan', fontWeight: FontWeight.w600),
       child: Obx(
-        () => controller.eventAttendanceModel.value != null
+        () => controller.eventAttendanceModel != null
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -41,7 +41,7 @@ class EventDetailView extends GetView<EventDetailController> {
                   SizedBox(height: 8.sp),
 
                   poppins(
-                    controller.eventAttendanceModel.value!.event.title,
+                    controller.eventAttendanceModel!.event.title,
                     fontWeight: FontWeight.bold,
                     fontSize: 16.sp,
                   ),
@@ -86,7 +86,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                     child: poppins(
                                       controller
                                           .eventAttendanceModel
-                                          .value!
+                                          !
                                           .event
                                           .location,
                                       fontWeight: FontWeight.w500,
@@ -132,7 +132,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                   poppins(
                                     controller
                                         .eventAttendanceModel
-                                        .value!
+                                        !
                                         .event
                                         .dateTime
                                         .toIdDate(),
@@ -179,7 +179,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                   poppins(
                                     controller
                                         .eventAttendanceModel
-                                        .value!
+                                        !
                                         .event
                                         .dateTime
                                         .toDotSeparatedHour(),
@@ -222,7 +222,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                     child: poppins(
                                       controller
                                           .eventAttendanceModel
-                                          .value!
+                                          !
                                           .attendance
                                           .displayName,
                                       fontWeight: FontWeight.w500,

@@ -27,15 +27,47 @@ class GroupMemberSavingsListView
         child: Column(
           spacing: 12.sp,
           children: [
-            AppTextFormField(
-              controller: controller.searchCtrl,
-              hintText: 'Cari',
-              prefixIcon: SvgPicture.asset(
-                AppAsset.svgs.searchGray,
-                height: 16.sp,
-              ),
+            Row(
+              spacing: 10.sp,
+              children: [
+                Expanded(
+                  child: AppTextFormField(
+                    controller: controller.searchCtrl,
+                    hintText: 'Cari',
+                    prefixIcon: SvgPicture.asset(
+                      AppAsset.svgs.searchGray,
+                      height: 16.sp,
+                    ),
+                  ),
+                ),
+                Material(
+                  borderRadius: BorderRadius.circular(12.sp),
+                  color: Colors.white,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12.sp),
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1.sp,
+                          color: AppColor.instance.border.lightGray,
+                        ),
+                        borderRadius: BorderRadius.circular(12.sp),
+                      ),
+                      padding: EdgeInsets.all(16.sp),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          AppAsset.svgs.calendarPrimary,
+                          height: 16.sp,
+                          width: 16.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Divider(height: 1, color: AppColor.instance.border.lightGray,),
+            Divider(height: 1, color: AppColor.instance.border.lightGray),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

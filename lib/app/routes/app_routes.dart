@@ -4,7 +4,8 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const LOGIN = _Paths.LOGIN;
-  static const MEETING_DETAIL = _Paths.MEETING_DETAIL;
+  static const EVENT_DETAIL = _Paths.EVENT_DETAIL;
+  static const EVENT_LIST = _Paths.EVENT_LIST;
   static const GROUP_MEMBER_MAIN = _Paths.GROUP_MEMBER_MAIN;
   static const GROUP_MEMBER_MAIN_TABS_HOME = _Paths.GROUP_MEMBER_MAIN_TABS_HOME;
   static const GROUP_MEMBER_MAIN_TABS_PROFILE =
@@ -26,7 +27,8 @@ abstract class Routes {
 abstract class _Paths {
   _Paths._();
   static const LOGIN = '/login';
-  static const MEETING_DETAIL = '/event-detail';
+  static const EVENT_DETAIL = '/event-detail';
+  static const EVENT_LIST = '/event-list';
   static const GROUP_MEMBER_MAIN = '/group-member-main-main';
   static const GROUP_MEMBER_MAIN_TABS_HOME = '/group-member-main-home';
   static const GROUP_MEMBER_MAIN_TABS_PROFILE = '/group-member-main-profile';
