@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/employee_detail/controllers/employee_employee_detail_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/controllers/employee_employee_detail_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 
-class AppEmployee1stForm extends StatelessWidget {
-  const AppEmployee1stForm({super.key, required this.controller});
+class AppEmployee2ndForm extends StatelessWidget {
+  const AppEmployee2ndForm({super.key, required this.controller});
 
   final EmployeeEmployeeDetailController controller;
   @override
@@ -18,24 +16,21 @@ class AppEmployee1stForm extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         AppTextFormGroup(
-          controller: controller.nationalIdCtrl,
-          label: 'NIK',
-          maxLines: 1,
+          controller: controller.phoneCtrl,
+          label: 'Nomor Telepon',
+          keyboardType: TextInputType.number,
         ),
         SizedBox(height: 8.sp),
         AppTextFormGroup(
-          controller: controller.nameCtrl,
-          label: 'Nama Lengkap',
+          controller: controller.jobCtrl,
+          label: 'Posisi',
           maxLines: 1,
         ),
-        SizedBox(height: 8.sp),
-        poppins('Tanggal Lahir', fontSize: 14.sp, fontWeight: FontWeight.w600),
-        AppDateInputField(controller: controller.birthDateCtrl),
-        SizedBox(height: 8.sp),
+        SizedBox(height: 18.sp),
         AppTextFormGroup(
-          controller: controller.addressCtrl,
-          label: 'Alamat Lengkap',
-          maxLines: 2,
+          controller: controller.emailCtrl,
+          label: 'Email',
+          maxLines: 1,
         ),
         SizedBox(height: 18.sp),
         Row(
@@ -44,6 +39,9 @@ class AppEmployee1stForm extends StatelessWidget {
             if (controller.selectedScreen > 0)
               Material(
                 child: InkWell(
+                  onTap: () {
+                    controller.prevScreen();
+                  },
                   child: Container(
                     width: 48.sp,
                     height: 48.sp,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/employee_detail/partials/app_employee_1st_form.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/employee_detail/partials/app_employee_2nd_form.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/employee_detail/partials/app_employee_3rd_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/partials/app_employee_1st_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/partials/app_employee_2nd_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/partials/app_employee_3rd_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_form_wrapper.dart';
 
 import '../controllers/employee_employee_detail_controller.dart';

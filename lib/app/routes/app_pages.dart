@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/group_member_savings_list/controllers/group_member_savings_list_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/bindings/employee_employee_detail_binding.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/detail/views/employee_employee_detail_view.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/loan_list/bindings/group_member_loan_list_binding.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/loan_list/views/group_member_loan_list_view.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/savings_list/bindings/group_member_savings_list_binding.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/savings_list/views/group_member_savings_list_view.dart';
 
-import '../modules/employee/employee_detail/bindings/employee_employee_detail_binding.dart';
-import '../modules/employee/employee_detail/views/employee_employee_detail_view.dart';
 import '../modules/employee/main/bindings/employee_main_binding.dart';
 import '../modules/employee/main/tabs/employee/bindings/employee_main_tabs_employee_binding.dart';
 import '../modules/employee/main/tabs/employee/views/employee_main_tabs_employee_view.dart';
@@ -25,12 +28,8 @@ import '../modules/group_member/main/tabs/profile/views/group_member_main_tabs_p
 import '../modules/group_member/main/views/group_member_main_view.dart';
 import '../modules/group_member/register/bindings/register_binding.dart';
 import '../modules/group_member/register/views/register_view.dart';
-import '../modules/group_member/group_member_loan_list/bindings/group_member_loan_list_binding.dart';
-import '../modules/group_member/group_member_loan_list/views/group_member_loan_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-import '../modules/group_member/group_member_savings_list/bindings/group_member_savings_list_binding.dart';
-import '../modules/group_member/group_member_savings_list/views/group_member_savings_list_view.dart';
 
 part 'app_routes.dart';
 
