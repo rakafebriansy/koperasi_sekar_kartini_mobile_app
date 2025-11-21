@@ -34,13 +34,15 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manage_event/bindings/manage_event_binding.dart';
 import '../modules/manage_event/views/manage_event_view.dart';
+import '../modules/report_list/bindings/report_list_binding.dart';
+import '../modules/report_list/views/report_list_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.EVENT_LIST;
+  static const INITIAL = Routes.REPORT_LIST;
 
   static final routes = [
     GetPage(
@@ -131,6 +133,11 @@ class AppPages {
       name: _Paths.MANAGE_EVENT,
       page: () => const ManageEventView(),
       binding: ManageEventBinding(),
+    ),
+    GetPage(
+      name: _Paths.REPORT_LIST,
+      page: () => const ReportListView(),
+      binding: ReportListBinding(),
     ),
   ];
 }

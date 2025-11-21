@@ -28,6 +28,7 @@ class _AppAssetSvg {
   String locationPinDarkGray = '${_svgsPath}location_pin_dark_gray${_ext}';
   String lockLightGray = '${_svgsPath}lock_light_gray${_ext}';
   String logoutWhite = '${_svgsPath}logout_white${_ext}';
+  String moneyPrimary = '${_svgsPath}money_primary${_ext}';
   String moneyWhite = '${_svgsPath}money_white${_ext}';
   String morePrimary = '${_svgsPath}more_primary${_ext}';
   String notificationBlack = '${_svgsPath}notification_black${_ext}';
