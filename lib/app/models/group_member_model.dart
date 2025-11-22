@@ -2,7 +2,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 
 class GroupMemberModel {
-  final String id;
+  final int id;
   final bool isActive;
   final String note;
   final UserModel user;

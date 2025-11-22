@@ -1,5 +1,5 @@
 class WorkAreaModel {
-  final String id;
+  final int id;
   final String districtName;
   final DateTime? createdAt;
   final DateTime? updatedAt;

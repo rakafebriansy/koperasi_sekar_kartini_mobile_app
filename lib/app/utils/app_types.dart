@@ -6,9 +6,9 @@ enum EventType {
 
   static EventType fromJson(String? value) {
     switch (value) {
-      case 'debit':
+      case 'group':
         return EventType.groupEvent;
-      case 'credit':
+      case 'coop':
       default:
         return EventType.coopEvent;
     }

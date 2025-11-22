@@ -20,7 +20,7 @@ class EventDetailController extends GetxController {
     super.onInit();
     var event = DummyHelper.dummyEvents[5];
     _eventAttendanceModel.value = EventAttendanceModel(
-      id: 'ID-KEHADIRAN-KEGIATAN-1',
+      id: 1,
       event: event,
       user: DummyHelper.dummyUsers[0],
       attendance: AttendanceStatusEnum.attend,

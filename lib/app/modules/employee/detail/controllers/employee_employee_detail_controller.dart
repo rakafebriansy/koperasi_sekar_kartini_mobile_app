@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -11,8 +10,8 @@ class EmployeeEmployeeDetailController extends GetxController {
 
   ScrollController scrollController = ScrollController();
 
-  Rx<String?> _id = Rxn();
-  String? get id => _id.value;
+  Rx<int?> _id = Rxn();
+  int? get id => _id.value;
 
   TextEditingController nationalIdCtrl = TextEditingController(
     // text: !kReleaseMode ? '1234567890123456' : '',

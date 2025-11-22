@@ -3,7 +3,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/attendance_status_enum.dart';
 
 class EventAttendanceModel {
-  String? id;
+  final int id;
   final UserModel user;
   final EventModel event;
   final AttendanceStatusEnum attendance;
@@ -11,7 +11,7 @@ class EventAttendanceModel {
   final DateTime updatedAt;
 
   EventAttendanceModel({
-    this.id,
+    required this.id,
     required this.event,
     required this.user,
     required this.attendance,

@@ -16,7 +16,7 @@ class RegisterController extends GetxController {
     text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
   );
   Rx<RegionModel?> selectedRegionModel = Rx<RegionModel?>(
-    !kReleaseMode ? RegionModel(name: 'Sumbersari') : null,
+    !kReleaseMode ? RegionModel(id: 1, name: 'Sumbersari') : null,
   );
   TextEditingController addressCtrl = TextEditingController(
     text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',

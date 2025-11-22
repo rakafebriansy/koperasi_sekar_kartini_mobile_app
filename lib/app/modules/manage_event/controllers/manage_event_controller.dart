@@ -12,8 +12,8 @@ class ManageEventController extends GetxController {
 
   ScrollController scrollController = ScrollController();
 
-  Rx<String?> _id = Rxn();
-  String? get id => _id.value;
+  Rx<int?> _id = Rxn();
+  int? get id => _id.value;
 
   Rx<EventType?> selectedEventType = Rx<EventType?>(
     !kReleaseMode ? EventType.groupEvent : null,

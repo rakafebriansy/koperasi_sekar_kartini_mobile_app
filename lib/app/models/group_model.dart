@@ -2,7 +2,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/work_area_model.dart';
 
 class GroupModel {
-  final String id;
+  final int id;
   final String number;
   final String regulation;
   final int jointLiabilityFundAmount;

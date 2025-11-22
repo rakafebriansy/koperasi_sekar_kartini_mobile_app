@@ -1,6 +1,7 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/role_enum.dart';
@@ -9,61 +10,61 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 class DummyHelper {
   static final List<WorkAreaModel> dummyWorkAreas = [
     WorkAreaModel(
-      id: 'WORK-AREA-001',
+      id: 1,
       districtName: 'Sukaraja',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-002',
+      id: 2,
       districtName: 'Cibadak',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-003',
+      id: 3,
       districtName: 'Warudoyong',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-004',
+      id: 4,
       districtName: 'Lembursitu',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-005',
+      id: 5,
       districtName: 'Cikole',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-006',
+      id: 6,
       districtName: 'Citamiang',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-007',
+      id: 7,
       districtName: 'Gunungpuyuh',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-008',
+      id: 8,
       districtName: 'Baros',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-009',
+      id: 9,
       districtName: 'Purbaratu',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
     WorkAreaModel(
-      id: 'WORK-AREA-010',
+      id: 10,
       districtName: 'Indihiang',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
@@ -72,7 +73,7 @@ class DummyHelper {
 
   static final List<UserModel> dummyUsers = [
     UserModel(
-      id: 'USER-001',
+      id: 1,
       name: 'Raka Febrian',
       role: RoleEnum.groupLeader,
       nationalId: '1234567890123456',
@@ -86,7 +87,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     UserModel(
-      id: 'USER-002',
+      id: 2,
       name: 'Siti Rahma',
       role: RoleEnum.admin,
       nationalId: '1234567890123456',
@@ -100,7 +101,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     UserModel(
-      id: 'USER-003',
+      id: 3,
       name: 'Taufik Hidayat',
       role: RoleEnum.employee,
       nationalId: '1234567890123456',
@@ -114,7 +115,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     UserModel(
-      id: 'USER-004',
+      id: 4,
       name: 'Dewi Kartika',
       role: RoleEnum.groupMember,
       nationalId: '1234567890123456',
@@ -128,7 +129,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     UserModel(
-      id: 'USER-005',
+      id: 5,
       name: 'Bagas Saputra',
       role: RoleEnum.groupMember,
       nationalId: '1234567890123456',
@@ -142,7 +143,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     UserModel(
-      id: 'USER-006',
+      id: 6,
       name: 'Siti Aminah',
       role: RoleEnum.groupMember,
       nationalId: '1234567890123456',
@@ -156,7 +157,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     UserModel(
-      id: 'USER-007',
+      id: 7,
       name: 'Norman Reedus',
       role: RoleEnum.groupMember,
       nationalId: '1234567890123456',
@@ -173,7 +174,7 @@ class DummyHelper {
 
   static final List<EventModel> dummyEvents = [
     EventModel(
-      id: 'EVENT-001',
+      id: 1,
       title: 'Rapat Anggota Tahunan',
       type: EventType.groupEvent,
       description: '''
@@ -195,7 +196,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: 'EVENT-002',
+      id: 2,
       title: 'Pelatihan Keuangan Pribadi',
       type: EventType.coopEvent,
       description: '''
@@ -215,7 +216,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: 'EVENT-003',
+      id: 3,
       title: 'Bakti Sosial Akhir Tahun',
       type: EventType.coopEvent,
       description: '''
@@ -237,7 +238,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: 'EVENT-004',
+      id: 4,
       title: 'Workshop Digital Marketing',
       type: EventType.coopEvent,
       description: '''
@@ -257,7 +258,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: 'EVENT-005',
+      id: 5,
       title: 'Family Gathering Koperasi',
       type: EventType.coopEvent,
       description: '''
@@ -279,7 +280,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     EventModel(
-      id: 'EVENT-006',
+      id: 6,
       title: 'Syukuran Rumah Baru Bu Nurul',
       type: EventType.groupEvent,
       description: '''
@@ -300,9 +301,9 @@ class DummyHelper {
     ),
   ];
 
-  static final dummyGroups = [
+  static final List<GroupModel> dummyGroups = [
     GroupModel(
-      id: "GROUP-001",
+      id: 1,
       number: "01",
       regulation: "Peraturan Kelompok No. 01/2025",
       jointLiabilityFundAmount: 50000,
@@ -319,7 +320,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     GroupModel(
-      id: "GROUP-002",
+      id: 2,
       number: "02",
       regulation: "Peraturan Kelompok No. 02/2025",
       jointLiabilityFundAmount: 52000,
@@ -334,7 +335,7 @@ class DummyHelper {
       facilitator: dummyUsers[1],
     ),
     GroupModel(
-      id: "GROUP-003",
+      id: 3,
       number: "03",
       regulation: "Peraturan Kelompok No. 03/2025",
       jointLiabilityFundAmount: 54000,
@@ -351,7 +352,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     GroupModel(
-      id: "GROUP-004",
+      id: 4,
       number: "04",
       regulation: "Peraturan Kelompok No. 04/2025",
       jointLiabilityFundAmount: 56000,
@@ -368,7 +369,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     GroupModel(
-      id: "GROUP-005",
+      id: 5,
       number: "05",
       regulation: "Peraturan Kelompok No. 05/2025",
       jointLiabilityFundAmount: 58000,
@@ -386,7 +387,7 @@ class DummyHelper {
     ),
 
     GroupModel(
-      id: "GROUP-006",
+      id: 6,
       number: "06",
       regulation: "Peraturan Kelompok No. 06/2025",
       jointLiabilityFundAmount: 60000,
@@ -404,7 +405,7 @@ class DummyHelper {
     ),
 
     GroupModel(
-      id: "GROUP-007",
+      id: 7,
       number: "07",
       regulation: "Peraturan Kelompok No. 07/2025",
       jointLiabilityFundAmount: 62000,
@@ -422,7 +423,7 @@ class DummyHelper {
     ),
 
     GroupModel(
-      id: "GROUP-008",
+      id: 8,
       number: "08",
       regulation: "Peraturan Kelompok No. 08/2025",
       jointLiabilityFundAmount: 64000,
@@ -440,7 +441,7 @@ class DummyHelper {
     ),
 
     GroupModel(
-      id: "GROUP-009",
+      id: 9,
       number: "09",
       regulation: "Peraturan Kelompok No. 09/2025",
       jointLiabilityFundAmount: 66000,
@@ -458,7 +459,7 @@ class DummyHelper {
     ),
 
     GroupModel(
-      id: "GROUP-010",
+      id: 10,
       number: "10",
       regulation: "Peraturan Kelompok No. 10/2025",
       jointLiabilityFundAmount: 68000,
@@ -476,9 +477,9 @@ class DummyHelper {
     ),
   ];
 
-  static final dummyGroupMembers = <GroupMemberModel>[
+  static final List<GroupMemberModel> dummyGroupMembers = [
     GroupMemberModel(
-      id: 'GROUP-MEMBER-001',
+      id: 1,
       isActive: true,
       note: 'Anggota aktif dengan kontribusi rutin.',
       user: dummyUsers[4],
@@ -487,7 +488,7 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     GroupMemberModel(
-      id: 'GROUP-MEMBER-002',
+      id: 2,
       isActive: false,
       note: 'Status nonaktif karena tidak hadir 3 bulan.',
       user: dummyUsers[5],
@@ -496,11 +497,205 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
     GroupMemberModel(
-      id: 'GROUP-MEMBER-003',
+      id: 3,
       isActive: true,
       note: 'Ketua kelompok.',
       user: dummyUsers[6],
       group: dummyGroups[2],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
+
+  static final List<GroupReportModel> dummyGroupReports = [
+    GroupReportModel(
+      id: '1',
+      quarter: DateTime(2025, 1, 1),
+      incomingMembers: 12,
+      incomingMembersPercentage: 15,
+      outgoingMembers: 3,
+      outgoingMembersPercentage: 5,
+      totalMembers: 45,
+      totalMembersPercentage: 10,
+      administrationOrderPercentage: 90,
+      depositOrderPercentage: 85,
+      attendancePercentage: 88,
+      finalOrganizationScorePercentage: 86,
+      loanParticipationPb: 12,
+      loanParticipationBbm: 8,
+      loanParticipationStore: 15,
+      cashParticipation: 2000000,
+      cashParticipationPercentage: 75,
+      savingParticipation: 1500000,
+      savingParticipationPercentage: 60,
+      meetingDepositPercentage: 80,
+      loanBalancePb: 3000000,
+      loanBalanceBbm: 1500000,
+      loanBalanceStore: 2500000,
+      finalFinanceScorePercentage: 89,
+      combinedScorePercentage: 87,
+      criteria: 1,
+      group: dummyGroups[0],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+
+    GroupReportModel(
+      id: '2',
+      quarter: DateTime(2025, 4, 1),
+      incomingMembers: 8,
+      incomingMembersPercentage: 10,
+      outgoingMembers: 2,
+      outgoingMembersPercentage: 3,
+      totalMembers: 38,
+      totalMembersPercentage: 7,
+      administrationOrderPercentage: 88,
+      depositOrderPercentage: 80,
+      attendancePercentage: 83,
+      finalOrganizationScorePercentage: 82,
+      loanParticipationPb: 10,
+      loanParticipationBbm: 5,
+      loanParticipationStore: 12,
+      cashParticipation: 1800000,
+      cashParticipationPercentage: 70,
+      savingParticipation: 1300000,
+      savingParticipationPercentage: 55,
+      meetingDepositPercentage: 78,
+      loanBalancePb: 2800000,
+      loanBalanceBbm: 1100000,
+      loanBalanceStore: 2000000,
+      finalFinanceScorePercentage: 85,
+      combinedScorePercentage: 84,
+      criteria: 2,
+      group: dummyGroups[1],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+
+    GroupReportModel(
+      id: '3',
+      quarter: DateTime(2025, 9, 1),
+      incomingMembers: 15,
+      incomingMembersPercentage: 18,
+      outgoingMembers: 4,
+      outgoingMembersPercentage: 6,
+      totalMembers: 50,
+      totalMembersPercentage: 12,
+      administrationOrderPercentage: 92,
+      depositOrderPercentage: 87,
+      attendancePercentage: 90,
+      finalOrganizationScorePercentage: 89,
+      loanParticipationPb: 14,
+      loanParticipationBbm: 9,
+      loanParticipationStore: 17,
+      cashParticipation: 2500000,
+      cashParticipationPercentage: 78,
+      savingParticipation: 1700000,
+      savingParticipationPercentage: 68,
+      meetingDepositPercentage: 84,
+      loanBalancePb: 3500000,
+      loanBalanceBbm: 1900000,
+      loanBalanceStore: 3000000,
+      finalFinanceScorePercentage: 91,
+      combinedScorePercentage: 90,
+      criteria: 1,
+      group: dummyGroups[2],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+
+    GroupReportModel(
+      id: '4',
+      quarter: DateTime(2025, 1, 1),
+      incomingMembers: 9,
+      incomingMembersPercentage: 11,
+      outgoingMembers: 1,
+      outgoingMembersPercentage: 2,
+      totalMembers: 40,
+      totalMembersPercentage: 8,
+      administrationOrderPercentage: 83,
+      depositOrderPercentage: 79,
+      attendancePercentage: 81,
+      finalOrganizationScorePercentage: 80,
+      loanParticipationPb: 11,
+      loanParticipationBbm: 4,
+      loanParticipationStore: 10,
+      cashParticipation: 1600000,
+      cashParticipationPercentage: 65,
+      savingParticipation: 1200000,
+      savingParticipationPercentage: 50,
+      meetingDepositPercentage: 76,
+      loanBalancePb: 2400000,
+      loanBalanceBbm: 900000,
+      loanBalanceStore: 1800000,
+      finalFinanceScorePercentage: 82,
+      combinedScorePercentage: 81,
+      criteria: 3,
+      group: dummyGroups[3],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+
+    GroupReportModel(
+      id: '5',
+      quarter: DateTime(2025, 1, 1),
+      incomingMembers: 11,
+      incomingMembersPercentage: 14,
+      outgoingMembers: 3,
+      outgoingMembersPercentage: 4,
+      totalMembers: 42,
+      totalMembersPercentage: 9,
+      administrationOrderPercentage: 87,
+      depositOrderPercentage: 82,
+      attendancePercentage: 85,
+      finalOrganizationScorePercentage: 84,
+      loanParticipationPb: 13,
+      loanParticipationBbm: 7,
+      loanParticipationStore: 14,
+      cashParticipation: 2100000,
+      cashParticipationPercentage: 72,
+      savingParticipation: 1400000,
+      savingParticipationPercentage: 58,
+      meetingDepositPercentage: 79,
+      loanBalancePb: 2700000,
+      loanBalanceBbm: 1300000,
+      loanBalanceStore: 2200000,
+      finalFinanceScorePercentage: 88,
+      combinedScorePercentage: 86,
+      criteria: 2,
+      group: dummyGroups[4],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+
+    GroupReportModel(
+      id: '6',
+      quarter: DateTime(2025, 1, 1),
+      incomingMembers: 6,
+      incomingMembersPercentage: 7,
+      outgoingMembers: 2,
+      outgoingMembersPercentage: 3,
+      totalMembers: 30,
+      totalMembersPercentage: 5,
+      administrationOrderPercentage: 78,
+      depositOrderPercentage: 70,
+      attendancePercentage: 75,
+      finalOrganizationScorePercentage: 74,
+      loanParticipationPb: 6,
+      loanParticipationBbm: 3,
+      loanParticipationStore: 8,
+      cashParticipation: 1200000,
+      cashParticipationPercentage: 50,
+      savingParticipation: 800000,
+      savingParticipationPercentage: 40,
+      meetingDepositPercentage: 65,
+      loanBalancePb: 1500000,
+      loanBalanceBbm: 700000,
+      loanBalanceStore: 1000000,
+      finalFinanceScorePercentage: 76,
+      combinedScorePercentage: 75,
+      criteria: 4,
+      group: dummyGroups[5],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),

@@ -1,8 +1,8 @@
 class RegionModel {
-  String? id;
+  final int id;
   String name;
 
-  RegionModel({required this.name, this.id});
+  RegionModel({required this.name, required this.id});
   factory RegionModel.fromJson(Map<String, dynamic> json) {
     return RegionModel(id: json['id'], name: json['name']);
   }

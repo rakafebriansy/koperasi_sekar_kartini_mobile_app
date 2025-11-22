@@ -86,11 +86,13 @@ Text poppins(
   TextStyle? textStyle,
   bool? softWrap,
   TextAlign? textAlign,
+  TextOverflow? overflow,
 }) {
   return Text(
     text,
     softWrap: softWrap,
     textAlign: textAlign,
+    overflow: overflow,
     style: GoogleFonts.poppins(
       fontSize: fontSize,
       fontWeight: fontWeight,

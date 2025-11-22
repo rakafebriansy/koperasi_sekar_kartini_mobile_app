@@ -1,7 +1,7 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/role_enum.dart';
 
 class UserModel {
-  final String id;
+  final int id;
   final String name;
   final String nationalId;
   final String phone;

@@ -23,6 +23,7 @@ abstract class Routes {
   static const EMPLOYEE_EMPLOYEE_DETAIL = _Paths.EMPLOYEE_EMPLOYEE_DETAIL;
   static const MANAGE_EVENT = _Paths.MANAGE_EVENT;
   static const REPORT_LIST = _Paths.REPORT_LIST;
+  static const REPORT_DETAIL = _Paths.REPORT_DETAIL;
 }
 
 abstract class _Paths {
@@ -45,4 +46,5 @@ abstract class _Paths {
   static const EMPLOYEE_EMPLOYEE_DETAIL = '/employee-employee-detail';
   static const MANAGE_EVENT = '/manage-event';
   static const REPORT_LIST = '/report-list';
+  static const REPORT_DETAIL = '/report-detail';
 }

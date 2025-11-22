@@ -1,13 +1,17 @@
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/region_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 
 extension RegionListExtension on List<RegionModel> {
   List<String> get names => map((region) => region.name).toList();
+}
+
+extension GroupReportListExtension on List<GroupReportModel> {
+  List<String> get labels => map((g) => g.label).toList();
 }
 
 extension GroupMemberListExtension on List<GroupMemberModel> {
