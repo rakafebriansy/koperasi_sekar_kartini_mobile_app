@@ -42,7 +42,7 @@ class GroupMemberMainTabsGroupView
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: AppColor.instance.primary,
+                    color: AppColor.bg.primary,
                     borderRadius: BorderRadius.circular(999),
                   ),
                   padding: EdgeInsets.all(12.sp),
@@ -167,16 +167,17 @@ class GroupMemberMainTabsGroupView
                         horizontal: 14.sp,
                         vertical: 8.sp,
                       ),
-                      foregroundColor: AppColor.instance.primary,
-                      backgroundColor: AppColor.instance.lightPrimary,
-                      overlayColor: AppColor.instance.transparentPrimary
-                          .withOpacity(0.2),
+                      foregroundColor: AppColor.bg.primary,
+                      backgroundColor: AppColor.bg.lightPrimary,
+                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                        0.2,
+                      ),
                       borderRadiusCircularSize: 12.sp,
                     ),
                     onPressed: () {},
                     child: poppins(
                       'Lihat Pembayaran',
-                      color: AppColor.instance.primary,
+                      color: AppColor.bg.primary,
                     ),
                   ),
                 ],
@@ -213,8 +214,8 @@ class _RoundIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColor.instance.lightPrimary,
-        border: Border.all(color: AppColor.instance.primary, width: 2.sp),
+        color: AppColor.bg.lightPrimary,
+        border: Border.all(color: AppColor.bg.primary, width: 2.sp),
         borderRadius: BorderRadius.circular(999),
       ),
       height: 40.sp,
@@ -237,7 +238,7 @@ class _InfoCard extends StatelessWidget {
       padding: EdgeInsets.all(14.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.sp),
-        color: AppColor.instance.transparentPrimary,
+        color: AppColor.bg.transparentPrimary,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,7 +248,7 @@ class _InfoCard extends StatelessWidget {
             padding: EdgeInsets.all(6.sp),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.sp),
-              color: AppColor.instance.primary,
+              color: AppColor.bg.primary,
             ),
             child: SvgPicture.asset(AppAsset.svgs.moneyWhite),
           ),
@@ -255,7 +256,7 @@ class _InfoCard extends StatelessWidget {
           poppins(
             amount.toIdr(),
             fontWeight: FontWeight.bold,
-            color: AppColor.instance.primary,
+            color: AppColor.bg.primary,
             fontSize: 14.sp,
           ),
         ],
@@ -284,7 +285,7 @@ class _GroupedMemberListView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                decoration: BoxDecoration(color: AppColor.instance.lightGray),
+                decoration: BoxDecoration(color: AppColor.bg.lightGray),
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(
                   horizontal: 18.sp,
@@ -294,7 +295,7 @@ class _GroupedMemberListView extends StatelessWidget {
                   letter,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColor.instance.text.gray
+                  color: AppColor.text.gray,
                 ),
               ),
 
@@ -323,7 +324,7 @@ class _GroupedMemberListView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14.sp),
                               side: BorderSide(
                                 width: 1.sp,
-                                color: AppColor.instance.gray,
+                                color: AppColor.bg.gray,
                               ),
                             ),
                             leading: CircleAvatar(child: Text(m.user.name[0])),
@@ -344,7 +345,7 @@ class _GroupedMemberListView extends StatelessWidget {
                               padding: EdgeInsets.all(3.sp),
                               child: Icon(
                                 Icons.arrow_forward_ios_rounded,
-                                color: AppColor.instance.border.gray,
+                                color: AppColor.border.gray,
                               ),
                             ),
                           ),

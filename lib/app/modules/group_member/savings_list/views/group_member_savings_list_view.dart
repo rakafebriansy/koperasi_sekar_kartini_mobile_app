@@ -50,7 +50,7 @@ class GroupMemberSavingsListView
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1.sp,
-                          color: AppColor.instance.border.lightGray,
+                          color: AppColor.border.lightGray,
                         ),
                         borderRadius: BorderRadius.circular(12.sp),
                       ),
@@ -67,7 +67,7 @@ class GroupMemberSavingsListView
                 ),
               ],
             ),
-            Divider(height: 1, color: AppColor.instance.border.lightGray),
+            Divider(height: 1, color: AppColor.border.lightGray),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -91,7 +91,7 @@ class _LoanCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(14.sp),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.instance.border.lightGray),
+        border: Border.all(color: AppColor.border.lightGray),
         borderRadius: BorderRadius.circular(12.sp),
       ),
       child: Column(
@@ -108,7 +108,7 @@ class _LoanCard extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColor.instance.lightPrimary,
+                      color: AppColor.bg.lightPrimary,
                       borderRadius: BorderRadius.circular(8.sp),
                     ),
                     padding: EdgeInsets.all(8.sp),
@@ -117,7 +117,7 @@ class _LoanCard extends StatelessWidget {
                   poppins('Simpanan Pokok', fontWeight: FontWeight.w600),
                 ],
               ),
-              poppins('30/10/2019', color: AppColor.instance.text.gray),
+              poppins('30/10/2019', color: AppColor.text.gray),
             ],
           ),
           Column(
@@ -134,7 +134,7 @@ class _LoanCard extends StatelessWidget {
                 value: poppins(
                   300000.toIdr(decimalDigits: 2),
                   fontWeight: FontWeight.bold,
-                  color: AppColor.instance.primary,
+                  color: AppColor.bg.primary,
                 ),
               ),
             ],
@@ -167,7 +167,7 @@ class _ProfileCell extends StatelessWidget {
           spacing: 4.sp,
           children: [
             icon,
-            poppins(field, color: AppColor.instance.text.gray),
+            poppins(field, color: AppColor.text.gray),
           ],
         ),
         value,

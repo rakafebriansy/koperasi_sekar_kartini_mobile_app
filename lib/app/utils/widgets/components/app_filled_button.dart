@@ -42,10 +42,10 @@ class AppFilledButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: danger
-              ? AppColor.instance.danger
+              ? AppColor.bg.danger
               : backgroundColor != null
               ? backgroundColor
-              : AppColor.instance.primary,
+              : AppColor.bg.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadiusSize ?? 999.sp),
           ),

@@ -23,7 +23,7 @@ class AppEmployee3rdForm extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.all(16.sp),
           decoration: BoxDecoration(
-            border: Border.all(width: 1.sp, color: AppColor.instance.gray),
+            border: Border.all(width: 1.sp, color: AppColor.bg.gray),
             borderRadius: BorderRadius.circular(16.sp),
           ),
           child: Row(
@@ -59,7 +59,7 @@ class AppEmployee3rdForm extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.all(16.sp),
           decoration: BoxDecoration(
-            border: Border.all(width: 1.sp, color: AppColor.instance.gray),
+            border: Border.all(width: 1.sp, color: AppColor.bg.gray),
             borderRadius: BorderRadius.circular(16.sp),
           ),
           child: Row(
@@ -104,7 +104,7 @@ class AppEmployee3rdForm extends StatelessWidget {
                     height: 48.sp,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                         width: 2.sp,
                       ),
                       borderRadius: BorderRadius.circular(99),
@@ -113,7 +113,7 @@ class AppEmployee3rdForm extends StatelessWidget {
                       child: Icon(
                         Icons.arrow_back_outlined,
                         size: 24.sp,
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                     ),
                   ),

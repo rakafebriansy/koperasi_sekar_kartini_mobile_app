@@ -30,21 +30,19 @@ class AppOutlinedButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: danger
-                  ? AppColor.instance.border.danger
-                  : AppColor.instance.border.primary,
+              color: danger ? AppColor.border.danger : AppColor.border.primary,
               width: 1.sp,
             ),
             borderRadius: BorderRadiusGeometry.circular(999.sp),
           ),
           backgroundColor: danger
-              ? AppColor.instance.lightDanger
-              : AppColor.instance.lightPrimary,
+              ? AppColor.bg.lightDanger
+              : AppColor.bg.lightPrimary,
         ),
         onPressed: onTap,
         child: poppins(
           label,
-          color: danger ? AppColor.instance.danger : AppColor.instance.primary,
+          color: danger ? AppColor.bg.danger : AppColor.bg.primary,
           fontSize: fontSize ?? 14.sp,
           fontWeight: FontWeight.w600,
         ),

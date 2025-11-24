@@ -29,14 +29,11 @@ InputDecoration buildAppTextInputDecoration({
     prefixIconConstraints: BoxConstraints(minWidth: 20.sp, minHeight: 20.sp),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12.sp),
-      borderSide: BorderSide(
-        color: AppColor.instance.border.lightGray,
-        width: 1.5,
-      ),
+      borderSide: BorderSide(color: AppColor.border.lightGray, width: 1.5),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12.sp),
-      borderSide: BorderSide(color: AppColor.instance.border.focus, width: 2),
+      borderSide: BorderSide(color: AppColor.border.focus, width: 2),
     ),
     hint: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -45,7 +42,7 @@ InputDecoration buildAppTextInputDecoration({
           hintText,
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          color: AppColor.instance.border.gray,
+          color: AppColor.border.gray,
         ),
       ],
     ),

@@ -30,19 +30,19 @@ class LoginView extends GetView<LoginController> {
               'Selamat',
               fontSize: 36.sp,
               fontWeight: FontWeight.bold,
-              color: AppColor.instance.primary,
+              color: AppColor.bg.primary,
             ),
             poppins(
               'Datang!',
               fontSize: 36.sp,
               fontWeight: FontWeight.bold,
-              color: AppColor.instance.primary,
+              color: AppColor.bg.primary,
             ),
             SizedBox(height: 12.sp),
             poppins(
               'Silakan Login untuk akses lebih lengkap',
               fontSize: 14.sp,
-              color: AppColor.instance.primary,
+              color: AppColor.bg.primary,
             ),
             SizedBox(height: 16.sp),
             AppTextFormGroup(

@@ -30,7 +30,10 @@ class AppEmployee1stForm extends StatelessWidget {
         ),
         SizedBox(height: 8.sp),
         poppins('Tanggal Lahir', fontSize: 14.sp, fontWeight: FontWeight.w600),
-        AppDateInputField(controller: controller.birthDateCtrl, hintText: 'Tanggal Lahir',),
+        AppDateInputField(
+          controller: controller.birthDateCtrl,
+          hintText: 'Tanggal Lahir',
+        ),
         SizedBox(height: 8.sp),
         AppTextFormGroup(
           controller: controller.addressCtrl,
@@ -49,7 +52,7 @@ class AppEmployee1stForm extends StatelessWidget {
                     height: 48.sp,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                         width: 2.sp,
                       ),
                       borderRadius: BorderRadius.circular(99),
@@ -58,7 +61,7 @@ class AppEmployee1stForm extends StatelessWidget {
                       child: Icon(
                         Icons.arrow_back_outlined,
                         size: 24.sp,
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                     ),
                   ),

@@ -34,10 +34,11 @@ class AppGroupMemberList extends StatelessWidget {
                 ),
                 ElevatedButton.icon(
                   style: buildInkWellButtonStyle(
-                    foregroundColor: AppColor.instance.primary,
-                    backgroundColor: AppColor.instance.lightPrimary,
-                    overlayColor: AppColor.instance.transparentPrimary
-                        .withOpacity(0.2),
+                    foregroundColor: AppColor.bg.primary,
+                    backgroundColor: AppColor.bg.lightPrimary,
+                    overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                      0.2,
+                    ),
                     borderRadiusCircularSize: 12.sp,
                   ),
                   onPressed: () {
@@ -49,8 +50,8 @@ class AppGroupMemberList extends StatelessWidget {
                       ),
                     );
                   },
-                  label: poppins('Tambah', color: AppColor.instance.primary),
-                  icon: Icon(Icons.add, color: AppColor.instance.primary),
+                  label: poppins('Tambah', color: AppColor.bg.primary),
+                  icon: Icon(Icons.add, color: AppColor.bg.primary),
                 ),
               ],
             ),
@@ -84,7 +85,7 @@ class _GroupedGroupMemberListView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                decoration: BoxDecoration(color: AppColor.instance.lightGray),
+                decoration: BoxDecoration(color: AppColor.bg.lightGray),
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(
                   horizontal: 18.sp,
@@ -94,7 +95,7 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                   letter,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColor.instance.text.gray,
+                  color: AppColor.text.gray,
                 ),
               ),
 
@@ -123,7 +124,7 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14.sp),
                               side: BorderSide(
                                 width: 1.sp,
-                                color: AppColor.instance.gray,
+                                color: AppColor.bg.gray,
                               ),
                             ),
                             leading: CircleAvatar(child: Text(m.user.name[0])),
@@ -144,7 +145,7 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                               padding: EdgeInsets.all(3.sp),
                               child: Icon(
                                 Icons.arrow_forward_ios_rounded,
-                                color: AppColor.instance.border.gray,
+                                color: AppColor.border.gray,
                               ),
                             ),
                           ),

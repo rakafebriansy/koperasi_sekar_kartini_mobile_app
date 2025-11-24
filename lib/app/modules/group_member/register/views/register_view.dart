@@ -35,30 +35,30 @@ class RegisterView extends GetView<RegisterController> {
         ],
         leading: controller.selectedScreen > 0
             ? Center(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(999),
-                  onTap: () {
-                    controller.prevScreen();
-                  },
-                  child: Container(
-                    height: 36.sp,
-                    width: 36.sp,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColor.instance.border.lightGray,
-                        width: 1.sp,
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(999),
+                    onTap: () {
+                      controller.prevScreen();
+                    },
+                    child: Container(
+                      height: 36.sp,
+                      width: 36.sp,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColor.border.lightGray,
+                          width: 1.sp,
+                        ),
+                        borderRadius: BorderRadius.circular(999),
                       ),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
+                      child: Center(
+                        child: SvgPicture.asset(AppAsset.svgs.arrowLeftBlack),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
+              )
             : null,
         title: poppins('Register', fontWeight: FontWeight.w600),
         child: SingleChildScrollView(
@@ -72,12 +72,12 @@ class RegisterView extends GetView<RegisterController> {
                   controller.getCurrentTitle,
                   fontSize: 36.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColor.instance.primary,
+                  color: AppColor.bg.primary,
                 ),
                 poppins(
                   controller.getCurrentSubtitle,
                   fontSize: 14.sp,
-                  color: AppColor.instance.primary,
+                  color: AppColor.bg.primary,
                 ),
                 SizedBox(height: 16.sp),
                 IndexedStack(

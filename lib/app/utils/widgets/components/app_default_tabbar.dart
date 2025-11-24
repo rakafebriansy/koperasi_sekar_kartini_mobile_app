@@ -26,16 +26,15 @@ class AppDefaultTabbar extends StatelessWidget {
               height: 42.sp,
               padding: EdgeInsets.all(4.sp),
               decoration: BoxDecoration(
-                color: AppColor.instance.lightPrimary,
+                color: AppColor.bg.lightPrimary,
                 borderRadius: BorderRadius.circular(8.sp),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.sp),
                 child: TabBar(
                   indicator: BoxDecoration(
-                    color: AppColor.instance.primary,
+                    color: AppColor.bg.primary,
                     borderRadius: BorderRadius.circular(8.sp),
-                    
                   ),
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.black,

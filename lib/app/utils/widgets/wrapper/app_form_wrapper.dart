@@ -27,7 +27,7 @@ class AppFormWrapper extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColor.instance.primary,
+        backgroundColor: AppColor.bg.primary,
         appBar: AppBar(
           toolbarHeight: 64.sp,
           actionsPadding: EdgeInsets.all(12.sp),
@@ -55,7 +55,7 @@ class AppFormWrapper extends StatelessWidget {
                           width: 36.sp,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: AppColor.instance.border.lightGray,
+                              color: AppColor.border.lightGray,
                               width: 1.sp,
                             ),
                             borderRadius: BorderRadius.circular(999),
@@ -102,12 +102,7 @@ class AppFormWrapper extends StatelessWidget {
                       top: Radius.circular(18.sp),
                     ),
                   ),
-                  padding: EdgeInsets.fromLTRB(
-                     20.sp,
-                     20.sp,
-                     20.sp,
-                     8.sp,
-                  ),
+                  padding: EdgeInsets.fromLTRB(20.sp, 20.sp, 20.sp, 8.sp),
                   child: child,
                 ),
               ),

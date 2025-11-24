@@ -16,7 +16,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_
 
 import '../controllers/group_member_main_tabs_home_controller.dart';
 
-class GroupMemberMainTabsHomeView extends GetView<GroupMemberMainTabsHomeController> {
+class GroupMemberMainTabsHomeView
+    extends GetView<GroupMemberMainTabsHomeController> {
   const GroupMemberMainTabsHomeView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -81,15 +82,16 @@ class GroupMemberMainTabsHomeView extends GetView<GroupMemberMainTabsHomeControl
                 children: [
                   ElevatedButton.icon(
                     style: buildInkWellButtonStyle(
-                      foregroundColor: AppColor.instance.primary,
-                      backgroundColor: AppColor.instance.lightPrimary,
-                      overlayColor: AppColor.instance.transparentPrimary
-                          .withOpacity(0.2),
+                      foregroundColor: AppColor.bg.primary,
+                      backgroundColor: AppColor.bg.lightPrimary,
+                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                        0.2,
+                      ),
                       borderRadiusCircularSize: 12.sp,
                     ),
                     onPressed: () {},
-                    label: poppins('Tambah', color: AppColor.instance.primary),
-                    icon: Icon(Icons.add, color: AppColor.instance.primary),
+                    label: poppins('Tambah', color: AppColor.bg.primary),
+                    icon: Icon(Icons.add, color: AppColor.bg.primary),
                   ),
                   Material(
                     borderRadius: BorderRadius.circular(99.sp),
@@ -100,12 +102,12 @@ class GroupMemberMainTabsHomeView extends GetView<GroupMemberMainTabsHomeControl
                         height: 36.sp,
                         width: 36.sp,
                         decoration: BoxDecoration(
-                          color: AppColor.instance.lightPrimary,
+                          color: AppColor.bg.lightPrimary,
                           borderRadius: BorderRadius.circular(99.sp),
                         ),
                         child: Icon(
                           Icons.arrow_forward_rounded,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                         ),
                       ),
                     ),
@@ -153,7 +155,7 @@ class _InfoCard extends StatelessWidget {
       padding: EdgeInsets.all(14.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.sp),
-        color: AppColor.instance.transparentPrimary,
+        color: AppColor.bg.transparentPrimary,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +168,7 @@ class _InfoCard extends StatelessWidget {
                 padding: EdgeInsets.all(6.sp),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.sp),
-                  color: AppColor.instance.primary,
+                  color: AppColor.bg.primary,
                 ),
                 child: SvgPicture.asset(AppAsset.svgs.moneyWhite),
               ),
@@ -177,7 +179,7 @@ class _InfoCard extends StatelessWidget {
           poppins(
             amount.toIdr(),
             fontWeight: FontWeight.bold,
-            color: AppColor.instance.primary,
+            color: AppColor.bg.primary,
             fontSize: 14.sp,
           ),
           AppFilledButton(

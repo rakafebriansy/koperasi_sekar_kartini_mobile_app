@@ -28,7 +28,7 @@ class AppNotificationBar extends StatelessWidget {
         ? AppAsset.svgs.tickWhite
         : AppAsset.svgs.infoWhite;
     Color color = type == NotificationBarType.danger
-        ? AppColor.instance.danger
+        ? AppColor.bg.danger
         : (type == NotificationBarType.success)
         ? Colors.lightGreen
         : Colors.lightBlue;

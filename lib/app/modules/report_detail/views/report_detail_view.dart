@@ -71,7 +71,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         borderRadius: BorderRadius.circular(14.sp),
                         border: Border.all(
                           width: 1.5.sp,
-                          color: AppColor.instance.gray,
+                          color: AppColor.bg.gray,
                         ),
                       ),
                       child: Icon(Icons.more_vert),
@@ -99,7 +99,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Anggota Masuk',
                         icon: Icon(
                           Icons.arrow_downward_rounded,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         point: 1,
@@ -111,7 +111,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Anggota Keluar',
                         icon: Icon(
                           Icons.arrow_upward_rounded,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         point: 1,
@@ -128,7 +128,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Total Anggota',
                         icon: Icon(
                           Icons.group_rounded,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         point: 15,
@@ -140,7 +140,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Tertib Adm.',
                         icon: Icon(
                           Icons.format_list_bulleted_rounded,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         point: 1,
@@ -157,7 +157,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Tertib Setor',
                         icon: Icon(
                           Icons.sync_alt,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         pointPercentage: 100,
@@ -168,7 +168,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Kehadiran',
                         icon: Icon(
                           Icons.person_rounded,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         pointPercentage: 80,
@@ -196,7 +196,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Setor di Pert.',
                         icon: Icon(
                           Icons.swap_horiz_rounded,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         pointPercentage: 94.1,
@@ -207,7 +207,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                         title: 'Nilai Piutang',
                         icon: Icon(
                           Icons.description,
-                          color: AppColor.instance.primary,
+                          color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
                         pointPercentage: 100,
@@ -221,7 +221,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
               padding: EdgeInsets.all(12.sp),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.sp),
-                border: Border.all(color: AppColor.instance.border.lightGray),
+                border: Border.all(color: AppColor.border.lightGray),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -247,7 +247,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
               padding: EdgeInsets.all(12.sp),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.sp),
-                border: Border.all(color: AppColor.instance.border.lightGray),
+                border: Border.all(color: AppColor.border.lightGray),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -274,7 +274,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
               subtitle: 'Tunai',
               icon: Icon(
                 Icons.attach_money_rounded,
-                color: AppColor.instance.primary,
+                color: AppColor.bg.primary,
               ),
               amount: 9_400_000,
               percentage: 100,
@@ -282,11 +282,11 @@ class ReportDetailView extends GetView<ReportDetailController> {
             _ProfileBigCell(
               title: 'Partisipasi Simpanan',
               subtitle: 'SSR',
-              icon: Icon(Icons.savings, color: AppColor.instance.primary),
+              icon: Icon(Icons.savings, color: AppColor.bg.primary),
               amount: 600_000,
               percentage: 65,
             ),
-            SizedBox(height: 8.sp,)
+            SizedBox(height: 8.sp),
           ],
         ),
       ),
@@ -318,7 +318,7 @@ class _ProfileBigCell extends StatelessWidget {
       padding: EdgeInsets.all(12.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.sp),
-        border: Border.all(color: AppColor.instance.border.lightGray),
+        border: Border.all(color: AppColor.border.lightGray),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -333,7 +333,7 @@ class _ProfileBigCell extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: AppColor.instance.lightGray,
+                    color: AppColor.bg.lightGray,
                     borderRadius: BorderRadius.circular(10.sp),
                   ),
                   padding: EdgeInsets.all(8.sp),
@@ -352,15 +352,15 @@ class _ProfileBigCell extends StatelessWidget {
                         children: [
                           poppins(
                             amount.toIdr(),
-                            color: AppColor.instance.primary,
+                            color: AppColor.bg.primary,
                             fontWeight: FontWeight.bold,
                           ),
-                          if(percentage != null)
-                          poppins(
-                            '${percentage}%',
-                            color: AppColor.instance.primary,
-                            fontSize: 10.sp
-                          ),
+                          if (percentage != null)
+                            poppins(
+                              '${percentage}%',
+                              color: AppColor.bg.primary,
+                              fontSize: 10.sp,
+                            ),
                         ],
                       ),
                     ],
@@ -389,7 +389,7 @@ class _TabBarInfo extends StatelessWidget {
         poppins('PB'),
         poppins(
           10_000_000.toIdr(),
-          color: AppColor.instance.primary,
+          color: AppColor.bg.primary,
           fontWeight: FontWeight.bold,
         ),
       ],
@@ -419,7 +419,7 @@ class _ReportCell extends StatelessWidget {
       padding: EdgeInsets.all(8.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.sp),
-        border: Border.all(color: AppColor.instance.border.lightGray),
+        border: Border.all(color: AppColor.border.lightGray),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -427,7 +427,7 @@ class _ReportCell extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: AppColor.instance.lightGray,
+              color: AppColor.bg.lightGray,
               borderRadius: BorderRadius.circular(6.sp),
             ),
             padding: EdgeInsets.all(8.sp),
@@ -451,14 +451,14 @@ class _ReportCell extends StatelessWidget {
                   children: [
                     poppins(
                       point != null ? point.toString() : '${pointPercentage}%',
-                      color: AppColor.instance.primary,
+                      color: AppColor.bg.primary,
                       fontSize: 10.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     if (point != null)
                       poppins(
                         pointPercentageLabel,
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                         fontSize: 8.sp,
                       ),
                   ],
@@ -484,7 +484,7 @@ class _ReportCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.sp),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColor.instance.primary,
+              color: AppColor.bg.primary,
               borderRadius: BorderRadius.circular(12.sp),
             ),
             child: Stack(
@@ -523,7 +523,7 @@ class _ReportCard extends StatelessWidget {
                           horizontal: 8.sp,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColor.instance.lightPrimary,
+                          color: AppColor.bg.lightPrimary,
                           borderRadius: BorderRadius.circular(99),
                         ),
                         child: poppins('Baik'),
@@ -544,7 +544,7 @@ class _ReportCard extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: AppColor.instance.lightPrimary,
+                  color: AppColor.bg.lightPrimary,
                   borderRadius: BorderRadius.circular(8.sp),
                 ),
                 padding: EdgeInsets.all(8.sp),
@@ -555,7 +555,7 @@ class _ReportCard extends StatelessWidget {
                       padding: EdgeInsets.all(8.sp),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.sp),
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                       child: SvgPicture.asset(
                         AppAsset.svgs.moneyWhite,
@@ -576,7 +576,7 @@ class _ReportCard extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: AppColor.instance.lightPrimary,
+                  color: AppColor.bg.lightPrimary,
                   borderRadius: BorderRadius.circular(8.sp),
                 ),
                 padding: EdgeInsets.all(8.sp),
@@ -587,7 +587,7 @@ class _ReportCard extends StatelessWidget {
                       padding: EdgeInsets.all(8.sp),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.sp),
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                       child: SvgPicture.asset(
                         AppAsset.svgs.moneyWhite,

@@ -47,7 +47,7 @@ class AppEmployee2ndForm extends StatelessWidget {
                     height: 48.sp,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                         width: 2.sp,
                       ),
                       borderRadius: BorderRadius.circular(99),
@@ -56,7 +56,7 @@ class AppEmployee2ndForm extends StatelessWidget {
                       child: Icon(
                         Icons.arrow_back_outlined,
                         size: 24.sp,
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                     ),
                   ),

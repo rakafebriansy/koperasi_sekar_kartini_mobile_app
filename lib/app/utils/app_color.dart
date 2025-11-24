@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 class AppColor {
   AppColor._();
 
-  static final AppColor instance = AppColor._();
-  AppColorBorder border = AppColorBorder();
-  AppColorText text = AppColorText();
+  static AppColorBg bg = AppColorBg();
+  static AppColorBorder border = AppColorBorder();
+  static AppColorText text = AppColorText();
+
+}
+
+class AppColorBg {
   final Color primary = Color(0xFF008473);
   final Color darkPrimary = Color(0x026B5D);
   final Color transparentPrimary = Color(0xFF008473).withOpacity(0.12);

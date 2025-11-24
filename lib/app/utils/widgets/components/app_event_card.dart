@@ -69,7 +69,7 @@ class AppEventCard extends StatelessWidget {
                         model.location,
 
                         fontSize: 10.sp,
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                     ],
                   ),
@@ -86,7 +86,7 @@ class AppEventCard extends StatelessWidget {
                       poppins(
                         model.dateTime.toIdDate(),
                         fontSize: 10.sp,
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                     ],
                   ),
@@ -104,7 +104,7 @@ class AppEventCard extends StatelessWidget {
                         model.dateTime.toDotSeparatedHour(),
 
                         fontSize: 10.sp,
-                        color: AppColor.instance.primary,
+                        color: AppColor.bg.primary,
                       ),
                     ],
                   ),

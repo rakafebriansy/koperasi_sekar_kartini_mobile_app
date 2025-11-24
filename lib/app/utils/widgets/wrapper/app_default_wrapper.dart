@@ -54,7 +54,7 @@ class AppDefaultWrapper extends StatelessWidget {
                         width: 36.sp,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: AppColor.instance.border.lightGray,
+                            color: AppColor.border.lightGray,
                             width: 1.sp,
                           ),
                           borderRadius: BorderRadius.circular(999),
@@ -69,11 +69,12 @@ class AppDefaultWrapper extends StatelessWidget {
               : null,
           title: title,
         ),
-        body: withPadding ? Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.sp),
-          child: child,
-        ) :
-           child,
+        body: withPadding
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                child: child,
+              )
+            : child,
       ),
     );
   }

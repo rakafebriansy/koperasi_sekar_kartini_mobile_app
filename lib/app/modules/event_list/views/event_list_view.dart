@@ -53,7 +53,7 @@ class EventListView extends GetView<EventListController> {
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1.sp,
-                          color: AppColor.instance.border.lightGray,
+                          color: AppColor.border.lightGray,
                         ),
                         borderRadius: BorderRadius.circular(12.sp),
                       ),
@@ -70,7 +70,7 @@ class EventListView extends GetView<EventListController> {
                 ),
               ],
             ),
-            Divider(height: 1, color: AppColor.instance.border.lightGray),
+            Divider(height: 1, color: AppColor.border.lightGray),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -81,8 +81,13 @@ class EventListView extends GetView<EventListController> {
                           (event) => AppEventCard(
                             model: event,
                             onTap: () {
-                              Get.toNamed(Routes.MANAGE_EVENT, arguments: 
-                              ArgsWrapper(action: ActionType.create, data: event));
+                              Get.toNamed(
+                                Routes.MANAGE_EVENT,
+                                arguments: ArgsWrapper(
+                                  action: ActionType.create,
+                                  data: event,
+                                ),
+                              );
                             },
                           ),
                         )

@@ -21,7 +21,7 @@ class AppRegister3rdForm extends StatelessWidget {
           AppTextFormGroup(
             controller: controller.passwordCtrl,
             label: 'Kata Sandi',
-          maxLines: 1,
+            maxLines: 1,
           ),
           SizedBox(height: 8.sp),
           Column(
@@ -33,12 +33,12 @@ class AppRegister3rdForm extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(Icons.check, size: 10.sp),
                     radius: 8.sp,
-                    backgroundColor: AppColor.instance.gray,
+                    backgroundColor: AppColor.bg.gray,
                   ),
                   SizedBox(width: 8.sp),
                   poppins(
                     'Minimal 8 karakter',
-                    color: AppColor.instance.primary,
+                    color: AppColor.bg.primary,
                     fontSize: 12.sp,
                   ),
                 ],
@@ -49,12 +49,12 @@ class AppRegister3rdForm extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(Icons.check, size: 10.sp),
                     radius: 8.sp,
-                    backgroundColor: AppColor.instance.gray,
+                    backgroundColor: AppColor.bg.gray,
                   ),
                   SizedBox(width: 8.sp),
                   poppins(
                     'Mengandung angka',
-                    color: AppColor.instance.primary,
+                    color: AppColor.bg.primary,
                     fontSize: 12.sp,
                   ),
                 ],
@@ -65,12 +65,12 @@ class AppRegister3rdForm extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(Icons.check, size: 10.sp),
                     radius: 8.sp,
-                    backgroundColor: AppColor.instance.gray,
+                    backgroundColor: AppColor.bg.gray,
                   ),
                   SizedBox(width: 8.sp),
                   poppins(
                     'Mengandung karakter unik dan huruf besar',
-                    color: AppColor.instance.primary,
+                    color: AppColor.bg.primary,
                     fontSize: 12.sp,
                   ),
                 ],

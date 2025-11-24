@@ -51,7 +51,7 @@ class GroupMemberLoanListView extends GetView<GroupMemberLoanListController> {
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 1.sp,
-                              color: AppColor.instance.border.lightGray,
+                              color: AppColor.border.lightGray,
                             ),
                             borderRadius: BorderRadius.circular(12.sp),
                           ),
@@ -76,7 +76,7 @@ class GroupMemberLoanListView extends GetView<GroupMemberLoanListController> {
                 children: [
                   poppins(
                     'Filter:',
-                    color: AppColor.instance.text.disabled,
+                    color: AppColor.text.disabled,
                     fontSize: 12.sp,
                   ),
                   _TabFilter(
@@ -116,7 +116,7 @@ class _LoanCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(14.sp),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.instance.border.lightGray),
+        border: Border.all(color: AppColor.border.lightGray),
         borderRadius: BorderRadius.circular(12.sp),
       ),
       child: Column(
@@ -129,7 +129,7 @@ class _LoanCard extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: AppColor.instance.lightPrimary,
+                  color: AppColor.bg.lightPrimary,
                   borderRadius: BorderRadius.circular(8.sp),
                 ),
                 padding: EdgeInsets.all(8.sp),
@@ -152,7 +152,7 @@ class _LoanCard extends StatelessWidget {
                 value: poppins(
                   300000.toIdr(decimalDigits: 2),
                   fontWeight: FontWeight.bold,
-                  color: AppColor.instance.primary,
+                  color: AppColor.bg.primary,
                 ),
               ),
               _ProfileCell(
@@ -161,17 +161,17 @@ class _LoanCard extends StatelessWidget {
                 value: poppins(
                   40000.toIdr(),
                   fontWeight: FontWeight.bold,
-                  color: AppColor.instance.danger,
+                  color: AppColor.bg.danger,
                 ),
               ),
             ],
           ),
-          Divider(color: AppColor.instance.border.lightGray, height: 1.sp),
+          Divider(color: AppColor.border.lightGray, height: 1.sp),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _TabFilter(title: 'Belum disetujui', isActive: false),
-              poppins('30/10/2019', color: AppColor.instance.text.gray),
+              poppins('30/10/2019', color: AppColor.text.gray),
             ],
           ),
         ],
@@ -195,11 +195,11 @@ class _TabFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: isActive ? AppColor.instance.lightPrimary : AppColor.instance.gray,
+      color: isActive ? AppColor.bg.lightPrimary : AppColor.bg.gray,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(99),
         side: isActive
-            ? BorderSide(color: AppColor.instance.border.primary, width: 1.sp)
+            ? BorderSide(color: AppColor.border.primary, width: 1.sp)
             : BorderSide.none,
       ),
       child: InkWell(
@@ -207,11 +207,7 @@ class _TabFilter extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 4.sp),
-          child: poppins(
-            title,
-            color: AppColor.instance.text.gray,
-            fontSize: 11.sp,
-          ),
+          child: poppins(title, color: AppColor.text.gray, fontSize: 11.sp),
         ),
       ),
     );
@@ -240,7 +236,7 @@ class _ProfileCell extends StatelessWidget {
           spacing: 4.sp,
           children: [
             icon,
-            poppins(field, color: AppColor.instance.text.gray),
+            poppins(field, color: AppColor.text.gray),
           ],
         ),
         value,

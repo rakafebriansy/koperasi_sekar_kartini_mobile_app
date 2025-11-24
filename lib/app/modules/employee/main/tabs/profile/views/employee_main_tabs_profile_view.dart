@@ -29,10 +29,7 @@ class EmployeeMainTabsProfileView
                 width: double.infinity,
                 padding: EdgeInsets.all(24.sp),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1.sp,
-                    color: AppColor.instance.gray,
-                  ),
+                  border: Border.all(width: 1.sp, color: AppColor.bg.gray),
                   borderRadius: BorderRadius.circular(12.sp),
                 ),
                 child: Column(
@@ -59,7 +56,7 @@ class EmployeeMainTabsProfileView
                         SizedBox(height: 2.sp),
                         poppins(
                           user.role.displayName,
-                          color: AppColor.instance.text.gray,
+                          color: AppColor.text.gray,
                         ),
                       ],
                     ),
@@ -114,10 +111,7 @@ class EmployeeMainTabsProfileView
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14.sp),
-                    border: Border.all(
-                      width: 1.sp,
-                      color: AppColor.instance.gray,
-                    ),
+                    border: Border.all(width: 1.sp, color: AppColor.bg.gray),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(14.sp),
@@ -131,7 +125,7 @@ class EmployeeMainTabsProfileView
                         Divider(
                           height: 1.sp,
                           thickness: 1.sp,
-                          color: AppColor.instance.gray,
+                          color: AppColor.bg.gray,
                         ),
                         _AppSettingMenuItem(
                           label: 'Ubah Profil',
@@ -140,7 +134,7 @@ class EmployeeMainTabsProfileView
                         Divider(
                           height: 1.sp,
                           thickness: 1.sp,
-                          color: AppColor.instance.gray,
+                          color: AppColor.bg.gray,
                         ),
                         _AppSettingMenuItem(
                           label: 'Wilayah Kerja',
@@ -162,10 +156,7 @@ class EmployeeMainTabsProfileView
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14.sp),
-                    border: Border.all(
-                      width: 1.sp,
-                      color: AppColor.instance.gray,
-                    ),
+                    border: Border.all(width: 1.sp, color: AppColor.bg.gray),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(14.sp),
@@ -179,7 +170,7 @@ class EmployeeMainTabsProfileView
                         Divider(
                           height: 1.sp,
                           thickness: 1.sp,
-                          color: AppColor.instance.gray,
+                          color: AppColor.bg.gray,
                         ),
                         _AppSettingMenuItem(
                           label: 'Notifikasi',
@@ -188,7 +179,7 @@ class EmployeeMainTabsProfileView
                         Divider(
                           height: 1.sp,
                           thickness: 1.sp,
-                          color: AppColor.instance.gray,
+                          color: AppColor.bg.gray,
                         ),
                         _AppSettingMenuItem(
                           label: 'Ubah Kata Sandi',
@@ -245,7 +236,7 @@ class _ProfileCell extends StatelessWidget {
           spacing: 4.sp,
           children: [
             icon,
-            poppins(field, color: AppColor.instance.text.gray),
+            poppins(field, color: AppColor.text.gray),
           ],
         ),
         poppins(value),

@@ -40,7 +40,7 @@ class ReportListView extends GetView<ReportListController> {
                 ),
               ],
             ),
-            Divider(height: 1, color: AppColor.instance.border.lightGray),
+            Divider(height: 1, color: AppColor.border.lightGray),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -65,7 +65,7 @@ class _ReportCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12.sp),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColor.instance.primary,
+          color: AppColor.bg.primary,
           borderRadius: BorderRadius.circular(12.sp),
         ),
         child: Stack(

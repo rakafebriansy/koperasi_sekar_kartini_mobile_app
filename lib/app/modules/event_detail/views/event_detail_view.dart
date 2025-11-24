@@ -72,8 +72,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor:
-                                        AppColor.instance.lightPrimary,
+                                    backgroundColor: AppColor.bg.lightPrimary,
                                     radius: 16.sp,
                                     child: SvgPicture.asset(
                                       AppAsset.svgs.locationPinDarkGray,
@@ -85,8 +84,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                   Expanded(
                                     child: poppins(
                                       controller
-                                          .eventAttendanceModel
-                                          !
+                                          .eventAttendanceModel!
                                           .event
                                           .location,
                                       fontWeight: FontWeight.w500,
@@ -119,8 +117,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor:
-                                        AppColor.instance.lightPrimary,
+                                    backgroundColor: AppColor.bg.lightPrimary,
                                     radius: 16.sp,
                                     child: SvgPicture.asset(
                                       AppAsset.svgs.calendarDarkGray,
@@ -131,8 +128,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                   SizedBox(width: 8.sp),
                                   poppins(
                                     controller
-                                        .eventAttendanceModel
-                                        !
+                                        .eventAttendanceModel!
                                         .event
                                         .dateTime
                                         .toIdDate(),
@@ -165,8 +161,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor:
-                                        AppColor.instance.lightPrimary,
+                                    backgroundColor: AppColor.bg.lightPrimary,
                                     radius: 16.sp,
                                     child: SvgPicture.asset(
                                       AppAsset.svgs.clockDarkGray,
@@ -178,8 +173,7 @@ class EventDetailView extends GetView<EventDetailController> {
 
                                   poppins(
                                     controller
-                                        .eventAttendanceModel
-                                        !
+                                        .eventAttendanceModel!
                                         .event
                                         .dateTime
                                         .toDotSeparatedHour(),
@@ -221,8 +215,7 @@ class EventDetailView extends GetView<EventDetailController> {
                                     ),
                                     child: poppins(
                                       controller
-                                          .eventAttendanceModel
-                                          !
+                                          .eventAttendanceModel!
                                           .attendance
                                           .displayName,
                                       fontWeight: FontWeight.w500,
