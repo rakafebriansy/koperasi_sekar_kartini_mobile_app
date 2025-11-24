@@ -1,4 +1,5 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/fund_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_report_model.dart';
@@ -698,6 +699,51 @@ class DummyHelper {
       group: dummyGroups[5],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
+    ),
+  ];
+
+  static final List<FundModel> dummyFunds = [
+    FundModel(
+      month: 1,
+      year: 2024,
+      amount: 1500000,
+      fundType: FundType.groupFund,
+      group: dummyGroups[0],
+    ),
+    FundModel(
+      month: 2,
+      year: 2024,
+      amount: 1700000,
+      fundType: FundType.groupFund,
+      group: dummyGroups[1],
+    ),
+    FundModel(
+      month: 3,
+      year: 2024,
+      amount: 1300000,
+      fundType: FundType.jointLiabilityFund,
+      group: dummyGroups[1],
+    ),
+    FundModel(
+      month: 4,
+      year: 2024,
+      amount: 2100000,
+      fundType: FundType.socialFund,
+      group: dummyGroups[1],
+    ),
+    FundModel(
+      month: 5,
+      year: 2024,
+      amount: 1600000,
+      fundType: FundType.jointLiabilityFund,
+      group: dummyGroups[1],
+    ),
+    FundModel(
+      month: 6,
+      year: 2024,
+      amount: 2200000,
+      fundType: FundType.groupFund,
+      group: dummyGroups[1],
     ),
   ];
 }

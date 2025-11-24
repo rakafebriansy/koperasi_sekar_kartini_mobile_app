@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/bindings/group_detail_binding.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/views/group_detail_view.dart';
 
 import '../modules/employee/detail/bindings/employee_employee_detail_binding.dart';
 import '../modules/employee/detail/views/employee_employee_detail_view.dart';
@@ -44,7 +46,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.REPORT_DETAIL;
+  static const INITIAL = Routes.GROUP_DETAIL;
 
   static final routes = [
     GetPage(
@@ -145,6 +147,11 @@ class AppPages {
       name: _Paths.REPORT_DETAIL,
       page: () => const ReportDetailView(),
       binding: ReportDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.GROUP_DETAIL,
+      page: () => const GroupDetailView(),
+      binding: GroupDetailBinding(),
     ),
   ];
 }

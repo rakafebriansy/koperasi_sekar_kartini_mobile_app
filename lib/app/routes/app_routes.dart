@@ -24,6 +24,7 @@ abstract class Routes {
   static const MANAGE_EVENT = _Paths.MANAGE_EVENT;
   static const REPORT_LIST = _Paths.REPORT_LIST;
   static const REPORT_DETAIL = _Paths.REPORT_DETAIL;
+  static const GROUP_DETAIL = _Paths.GROUP_DETAIL;
 }
 
 abstract class _Paths {
@@ -47,4 +48,5 @@ abstract class _Paths {
   static const MANAGE_EVENT = '/manage-event';
   static const REPORT_LIST = '/report-list';
   static const REPORT_DETAIL = '/report-detail';
+  static const GROUP_DETAIL = '/group-detail';
 }

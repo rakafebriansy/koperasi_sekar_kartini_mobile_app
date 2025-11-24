@@ -3,9 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/partials/app_group_fund_amount_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/partials/app_joint_liability_fund_amount_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/partials/app_social_fund_amount_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/widgets/group_info_cell.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 
@@ -18,175 +22,132 @@ class GroupDetailView extends GetView<GroupDetailController> {
     GroupModel group = DummyHelper.dummyGroups[0];
     return AppDefaultWrapper(
       ableToBack: true,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              spacing: 8.sp,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  style: buildInkWellButtonStyle(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.sp,
-                      vertical: 8.sp,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 10.sp,
+        children: [
+          Column(
+            spacing: 10.sp,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                spacing: 10.sp,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    style: buildInkWellButtonStyle(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.sp,
+                        vertical: 8.sp,
+                      ),
+                      foregroundColor: AppColor.bg.primary,
+                      backgroundColor: AppColor.bg.lightPrimary,
+                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                        0.2,
+                      ),
+                      borderRadiusCircularSize: 12.sp,
                     ),
-                    foregroundColor: AppColor.bg.primary,
-                    backgroundColor: AppColor.bg.lightPrimary,
-                    overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                      0.2,
+                    onPressed: () {},
+                    child: poppins(
+                      'Detail Anggota',
+                      color: AppColor.bg.primary,
                     ),
-                    borderRadiusCircularSize: 12.sp,
                   ),
-                  onPressed: () {},
-                  child: poppins('Detail Anggota', color: AppColor.bg.primary),
-                ),
-                ElevatedButton(
-                  style: buildInkWellButtonStyle(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.sp,
-                      vertical: 8.sp,
+                  ElevatedButton(
+                    style: buildInkWellButtonStyle(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.sp,
+                        vertical: 8.sp,
+                      ),
+                      foregroundColor: AppColor.bg.primary,
+                      backgroundColor: AppColor.bg.lightPrimary,
+                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                        0.2,
+                      ),
+                      borderRadiusCircularSize: 12.sp,
                     ),
-                    foregroundColor: AppColor.bg.primary,
-                    backgroundColor: AppColor.bg.lightPrimary,
-                    overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                      0.2,
-                    ),
-                    borderRadiusCircularSize: 12.sp,
+                    onPressed: () {},
+                    child: poppins('Atur Rapot', color: AppColor.bg.primary),
                   ),
-                  onPressed: () {},
-                  child: poppins('Atur Rapot', color: AppColor.bg.primary),
+                ],
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(18.sp),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1.sp, color: AppColor.bg.gray),
+                  borderRadius: BorderRadius.circular(12.sp),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 8.sp),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(24.sp),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1.sp, color: AppColor.bg.gray),
-                      borderRadius: BorderRadius.circular(12.sp),
-                    ),
-                    child: Column(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 16.sp,
+                  children: [
+                    Column(
                       mainAxisSize: MainAxisSize.min,
-                      spacing: 16.sp,
                       children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CircleAvatar(
-                              child: poppins(
-                                group.number,
-                                fontSize: 40.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              radius: 44.sp,
-                            ),
-                            SizedBox(height: 6.sp),
-                            poppins(
-                              group.chairman!.name,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            SizedBox(height: 2.sp),
-                            poppins(
-                              group.facilitator!.name,
-                              color: AppColor.text.gray,
-                            ),
-                          ],
+                        poppins(
+                          'Kelompok ${group.number}',
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Column(
-                          spacing: 3.sp,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            _ProfileCell(
-                              icon: Icon(
-                                Icons.calendar_today,
-                                color: AppColor.bg.primary,
-                              ),
-                              field: 'Tanggal Lahir',
-                              value: '17 Juli 1977',
-                            ),
-                            _ProfileCell(
-                              icon: Icon(
-                                Icons.business_center,
-                                color: AppColor.bg.primary,
-                              ),
-                              field: 'Pekerjaan',
-                              value: 'Karyawan Swasta',
-                            ),
-                            _ProfileCell(
-                              icon: Icon(
-                                Icons.calendar_month,
-                                color: AppColor.bg.primary,
-                              ),
-                              field: 'Tanggal Masuk',
-                              value: '18 November 2001',
-                            ),
-                            _ProfileCell(
-                              icon: Icon(
-                                Icons.person,
-                                color: AppColor.bg.primary,
-                              ),
-                              field: 'No. Anggota',
-                              value: '1079',
-                            ),
-                            _ProfileCell(
-                              icon: Icon(
-                                Icons.apps,
-                                color: AppColor.bg.primary,
-                              ),
-                              field: 'Kelompok',
-                              value: '7',
-                            ),
-                          ],
-                        ),
-                        AppFilledButton(
-                          width: 156.sp,
-                          height: 32.sp,
-                          label: 'Lihat Kartu',
-                          onTap: () {},
+                        SizedBox(height: 2.sp),
+                        poppins(
+                          group.workArea.districtName,
+                          color: AppColor.text.gray,
                         ),
                       ],
                     ),
-                  ),
+                    Column(
+                      spacing: 3.sp,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GroupInfoCell(
+                          icon: Icon(Icons.phone, color: AppColor.bg.primary),
+                          field: 'Nomor',
+                          value: '087665253441',
+                        ),
+                        GroupInfoCell(
+                          icon: Icon(
+                            Icons.person_4,
+                            color: AppColor.bg.primary,
+                          ),
+                          field: 'PPK',
+                          value: group.facilitator!.name,
+                        ),
+                        GroupInfoCell(
+                          icon: Icon(Icons.person, color: AppColor.bg.primary),
+                          field: 'PJK',
+                          value: group.chairman!.name,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 2.sp, 0, 0),
+                child: poppins(
+                  'Riwayat',
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: AppDefaultTabbar(
+              views: [
+                AppJointLiabilityFundAmountList(controller: controller),
+                AppGroupFundAmountList(controller: controller),
+                AppSocialFundAmountList(controller: controller),
               ],
+              tabLabels: ['Kas T.R.', 'Kas Kel.', 'Dana Sosial'],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       title: poppins('Detail Kelompok', fontWeight: FontWeight.w600),
-    );
-  }
-}
-
-class _ProfileCell extends StatelessWidget {
-  const _ProfileCell({
-    super.key,
-    required this.icon,
-    required this.field,
-    required this.value,
-  });
-
-  final Icon icon;
-  final String field;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 4.sp,
-          children: [
-            icon,
-            poppins(field, color: AppColor.text.gray),
-          ],
-        ),
-        poppins(value),
-      ],
     );
   }
 }

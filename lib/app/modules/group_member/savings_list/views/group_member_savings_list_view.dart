@@ -123,12 +123,12 @@ class _LoanCard extends StatelessWidget {
           Column(
             spacing: 4.sp,
             children: [
-              _ProfileCell(
+              _LoanInfoCell(
                 icon: SvgPicture.asset(AppAsset.svgs.calendarPrimary),
                 field: 'Bulan',
                 value: poppins('Oktober'),
               ),
-              _ProfileCell(
+              _LoanInfoCell(
                 icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
                 field: 'Total Simpanan',
                 value: poppins(
@@ -145,8 +145,8 @@ class _LoanCard extends StatelessWidget {
   }
 }
 
-class _ProfileCell extends StatelessWidget {
-  const _ProfileCell({
+class _LoanInfoCell extends StatelessWidget {
+  const _LoanInfoCell({
     super.key,
     required this.icon,
     required this.field,
