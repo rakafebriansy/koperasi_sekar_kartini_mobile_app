@@ -58,7 +58,9 @@ class LoginView extends GetView<LoginController> {
             SizedBox(height: 18.sp),
             AppFilledButton(
               label: 'Login',
-              onTap: () {},
+              onTap: () {
+                Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
+              },
               width: double.infinity,
             ),
             SizedBox(height: 12.sp),

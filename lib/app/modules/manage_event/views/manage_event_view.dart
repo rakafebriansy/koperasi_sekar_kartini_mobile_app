@@ -22,7 +22,7 @@ class ManageEventView extends GetView<ManageEventController> {
       canPop: false,
       child: AppFormWrapper(
         ableToBack: true,
-        title: 'Detail Karyawan',
+        title: 'Detail Kegiatan',
         child: SingleChildScrollView(
             controller: controller.scrollController,
             child: Column(
@@ -93,9 +93,8 @@ class ManageEventView extends GetView<ManageEventController> {
                   children: [
                     Expanded(
                       child: AppFilledButton(
-                        label: 'Lanjut',
+                        label: 'Simpan',
                         onTap: () {
-                          controller.nextScreen();
                         },
                         width: double.infinity,
                       ),

@@ -18,6 +18,7 @@ class AppFilledButton extends StatelessWidget {
     this.svgSize,
     this.backgroundColor,
     this.textColor,
+    this.padding,
     this.borderRadiusSize,
   });
 
@@ -32,6 +33,7 @@ class AppFilledButton extends StatelessWidget {
   final bool danger;
   final String? svgPath;
   final double? svgSize;
+  final EdgeInsets? padding;
   final double? borderRadiusSize;
 
   @override
@@ -41,6 +43,7 @@ class AppFilledButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          padding: padding,
           backgroundColor: danger
               ? AppColor.bg.danger
               : backgroundColor != null

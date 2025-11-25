@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/widgets/group_info_cell.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_group_info_cell.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
-class GroupCashCard extends StatelessWidget {
-  const GroupCashCard({super.key});
+class AppGroupFundCard extends StatelessWidget {
+  const AppGroupFundCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +46,12 @@ class GroupCashCard extends StatelessWidget {
           Column(
             spacing: 4.sp,
             children: [
-              GroupInfoCell(
+              AppGroupInfoCell(
                 icon: Icon(Icons.calendar_month, color: AppColor.bg.primary),
                 field: 'Bulan',
                 value: 'Oktober',
               ),
-              GroupInfoCell(
+              AppGroupInfoCell(
                 icon: Icon(Icons.calendar_month, color: AppColor.bg.primary),
                 field: 'Total Simpanan',
                 value: 300000.toIdr(decimalDigits: 2),

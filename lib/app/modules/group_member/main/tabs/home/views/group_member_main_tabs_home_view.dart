@@ -89,14 +89,18 @@ class GroupMemberMainTabsHomeView
                       ),
                       borderRadiusCircularSize: 12.sp,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.MANAGE_EVENT);
+                    },
                     label: poppins('Tambah', color: AppColor.bg.primary),
                     icon: Icon(Icons.add, color: AppColor.bg.primary),
                   ),
                   Material(
                     borderRadius: BorderRadius.circular(99.sp),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.EVENT_LIST);
+                      },
                       borderRadius: BorderRadius.circular(99.sp),
                       child: Container(
                         height: 36.sp,
@@ -122,7 +126,14 @@ class GroupMemberMainTabsHomeView
                 spacing: 10.sp,
                 children: [
                   ...DummyHelper.dummyEvents
-                      .map((event) => AppEventCard(model: event, onTap: () {}))
+                      .map(
+                        (event) => AppEventCard(
+                          model: event,
+                          onTap: () {
+                            Get.toNamed(Routes.EVENT_DETAIL);
+                          },
+                        ),
+                      )
                       .toList(),
                   SizedBox(height: 10.sp),
                 ],

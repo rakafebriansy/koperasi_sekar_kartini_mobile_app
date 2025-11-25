@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/bindings/group_detail_binding.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/views/group_detail_view.dart';
 
 import '../modules/employee/detail/bindings/employee_employee_detail_binding.dart';
 import '../modules/employee/detail/views/employee_employee_detail_view.dart';
@@ -18,6 +16,10 @@ import '../modules/event_detail/bindings/event_detail_binding.dart';
 import '../modules/event_detail/views/event_detail_view.dart';
 import '../modules/event_list/bindings/event_list_binding.dart';
 import '../modules/event_list/views/event_list_view.dart';
+import '../modules/group_detail/bindings/group_detail_binding.dart';
+import '../modules/group_detail/views/group_detail_view.dart';
+import '../modules/group_member/fund_list/bindings/group_member_fund_list_binding.dart';
+import '../modules/group_member/fund_list/views/group_member_fund_list_view.dart';
 import '../modules/group_member/loan_list/bindings/group_member_loan_list_binding.dart';
 import '../modules/group_member/loan_list/views/group_member_loan_list_view.dart';
 import '../modules/group_member/main/bindings/group_member_main_binding.dart';
@@ -152,6 +154,11 @@ class AppPages {
       name: _Paths.GROUP_DETAIL,
       page: () => const GroupDetailView(),
       binding: GroupDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.GROUP_MEMBER_FUND_LIST,
+      page: () => const GroupMemberFundListView(),
+      binding: GroupMemberFundListBinding(),
     ),
   ];
 }

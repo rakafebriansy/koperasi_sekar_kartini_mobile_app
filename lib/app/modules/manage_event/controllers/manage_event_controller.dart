@@ -56,8 +56,4 @@ class ManageEventController extends GetxController {
     }
     super.onInit();
   }
-
-  void nextScreen() {
-    _selectedScreen.value++;
-  }
 }

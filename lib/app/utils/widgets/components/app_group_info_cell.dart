@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
-class GroupInfoCell extends StatelessWidget {
-  const GroupInfoCell({
+class AppGroupInfoCell extends StatelessWidget {
+  const AppGroupInfoCell({
     super.key,
     required this.icon,
     required this.field,

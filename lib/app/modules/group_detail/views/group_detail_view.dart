@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/partials/app_group_fund_amount_list.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/partials/app_joint_liability_fund_amount_list.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/partials/app_social_fund_amount_list.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/widgets/group_info_cell.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_group_info_cell.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_group_fund_amount_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_joint_liability_fund_amount_list.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_social_fund_amount_list.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 
@@ -102,12 +102,12 @@ class GroupDetailView extends GetView<GroupDetailController> {
                       spacing: 3.sp,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        GroupInfoCell(
+                        AppGroupInfoCell(
                           icon: Icon(Icons.phone, color: AppColor.bg.primary),
                           field: 'Nomor',
                           value: '087665253441',
                         ),
-                        GroupInfoCell(
+                        AppGroupInfoCell(
                           icon: Icon(
                             Icons.person_4,
                             color: AppColor.bg.primary,
@@ -115,7 +115,7 @@ class GroupDetailView extends GetView<GroupDetailController> {
                           field: 'PPK',
                           value: group.facilitator!.name,
                         ),
-                        GroupInfoCell(
+                        AppGroupInfoCell(
                           icon: Icon(Icons.person, color: AppColor.bg.primary),
                           field: 'PJK',
                           value: group.chairman!.name,

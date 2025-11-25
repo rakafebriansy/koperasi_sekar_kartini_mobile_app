@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -125,7 +126,9 @@ class GroupMemberMainTabsGroupView
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
                       borderRadiusSize: 6.sp,
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.REPORT_DETAIL);
+                      },
                     ),
                   ),
                   Expanded(
@@ -135,52 +138,37 @@ class GroupMemberMainTabsGroupView
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
                       borderRadiusSize: 6.sp,
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.EVENT_LIST);
+                      },
                     ),
                   ),
                   Expanded(
                     child: AppFilledButton(
+                      padding: EdgeInsets.zero,
                       height: 28.sp,
-                      label: 'Struktur',
+                      label: 'Pembayaran',
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
                       borderRadiusSize: 6.sp,
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.GROUP_MEMBER_FUND_LIST);
+                      },
                     ),
                   ),
                 ],
               ),
             ),
+            SizedBox.shrink(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  poppins(
-                    'Anggota',
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  ElevatedButton(
-                    style: buildInkWellButtonStyle(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 14.sp,
-                        vertical: 8.sp,
-                      ),
-                      foregroundColor: AppColor.bg.primary,
-                      backgroundColor: AppColor.bg.lightPrimary,
-                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                        0.2,
-                      ),
-                      borderRadiusCircularSize: 12.sp,
-                    ),
-                    onPressed: () {},
-                    child: poppins(
-                      'Lihat Pembayaran',
-                      color: AppColor.bg.primary,
-                    ),
-                  ),
-                ],
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: poppins(
+                  'Anggota',
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             Padding(

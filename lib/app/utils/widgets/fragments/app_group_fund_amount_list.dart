@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/controllers/group_detail_controller.dart';
+import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
-class AppJointLiabilityFundAmountList extends StatelessWidget {
-  const AppJointLiabilityFundAmountList({super.key, required this.controller});
+class AppGroupFundAmountList extends StatelessWidget {
+  const AppGroupFundAmountList({super.key, required this.controller});
 
-  final GroupDetailController controller;
+  final GetxController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,13 @@ class AppJointLiabilityFundAmountList extends StatelessWidget {
         spacing: 12.sp,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 4.sp),
+          SizedBox(
+            height: 4.sp,
+          ),
           ...List.generate(6, (context) => _FundCard()),
-          SizedBox(height: 4.sp),
+          SizedBox(
+            height: 4.sp,
+          )
         ],
       ),
     );
@@ -59,7 +63,7 @@ class _FundCard extends StatelessWidget {
                     padding: EdgeInsets.all(8.sp),
                     child: Icon(Icons.arrow_downward_rounded),
                   ),
-                  poppins('Kas Tanggung Renteng', fontWeight: FontWeight.w600),
+                  poppins('Kas Kelompok', fontWeight: FontWeight.w600),
                 ],
               ),
               poppins('30/10/2019', color: AppColor.text.gray),
@@ -89,6 +93,7 @@ class _FundCard extends StatelessWidget {
     );
   }
 }
+
 
 class _FundInfoCell extends StatelessWidget {
   const _FundInfoCell({

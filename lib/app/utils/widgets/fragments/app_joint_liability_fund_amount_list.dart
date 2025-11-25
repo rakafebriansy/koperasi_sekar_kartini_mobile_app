@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_detail/controllers/group_detail_controller.dart';
+import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
-class AppSocialFundAmountList extends StatelessWidget {
-  const AppSocialFundAmountList({super.key, required this.controller});
+class AppJointLiabilityFundAmountList extends StatelessWidget {
+  const AppJointLiabilityFundAmountList({super.key, required this.controller});
 
-  final GroupDetailController controller;
+  final GetxController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class _FundCard extends StatelessWidget {
                     padding: EdgeInsets.all(8.sp),
                     child: Icon(Icons.arrow_downward_rounded),
                   ),
-                  poppins('Dana Sosial', fontWeight: FontWeight.w600),
+                  poppins('Kas Tanggung Renteng', fontWeight: FontWeight.w600),
                 ],
               ),
               poppins('30/10/2019', color: AppColor.text.gray),

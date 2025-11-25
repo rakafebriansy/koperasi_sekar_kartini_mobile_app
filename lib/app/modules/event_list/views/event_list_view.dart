@@ -82,7 +82,7 @@ class EventListView extends GetView<EventListController> {
                             model: event,
                             onTap: () {
                               Get.toNamed(
-                                Routes.MANAGE_EVENT,
+                                Routes.EVENT_DETAIL,
                                 arguments: ArgsWrapper(
                                   action: ActionType.create,
                                   data: event,
