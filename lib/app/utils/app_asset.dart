@@ -53,4 +53,5 @@ class _AppAssetImages {
   String growMoneyIllustration = '${imagesPath}grow_money_illustration${_ext1}';
   String logoLamaKoperasi = '${imagesPath}logo_lama_koperasi${_ext1}';
   String subtract1 = '${imagesPath}subtract_1${_ext1}';
+  String defaultMemberCard = '${imagesPath}default_member_card${_ext1}';
 }

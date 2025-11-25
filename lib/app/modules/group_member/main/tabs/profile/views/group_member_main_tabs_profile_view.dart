@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -95,7 +96,56 @@ class GroupMemberMainTabsProfileView
                       width: 156.sp,
                       height: 32.sp,
                       label: 'Lihat Kartu',
-                      onTap: () {},
+                      onTap: () {
+                        Get.bottomSheet(
+                          Wrap(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(16.sp),
+                                decoration: BoxDecoration(color: Colors.white,
+                                
+                                borderRadius: BorderRadius.circular(16.sp)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  spacing: 16.sp,
+                                  children: [
+                                    poppins(
+                                      'Kartu Anggota Anda',
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                            16.sp,
+                                          ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            16.sp,
+                                          ),
+                                          border: Border.all(
+                                            width: 1.sp,
+                                            color: AppColor.bg.gray,
+                                          ),
+                                        ),
+                                        child: Image.asset(
+                                          AppAsset.images.defaultMemberCard,
+                                        ),
+                                      ),
+                                    ),
+                                    AppFilledButton(
+                                      label: 'Unduh Kartu',
+                                      width: double.infinity,
+                                      height: 42.sp,
+                                      onTap: () {},
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -121,6 +171,11 @@ class GroupMemberMainTabsProfileView
                         _AppSettingMenuItem(
                           label: 'Sisa Hasil Usaha',
                           iconPath: AppAsset.svgs.dollarCoinLightGray,
+                        ),
+                        Divider(
+                          height: 1.sp,
+                          thickness: 1.sp,
+                          color: AppColor.bg.gray,
                         ),
                         _AppSettingMenuItem(
                           label: 'Ubah Profil',
@@ -177,7 +232,9 @@ class GroupMemberMainTabsProfileView
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(14.sp),
                 child: _AppSettingMenuItem(
-                  onTap: () {},
+                  onTap: () {
+                    AuthController.find.logout();
+                  },
                   label: 'Keluar',
                   textColor: Colors.white,
                   iconPath: AppAsset.svgs.logoutWhite,
