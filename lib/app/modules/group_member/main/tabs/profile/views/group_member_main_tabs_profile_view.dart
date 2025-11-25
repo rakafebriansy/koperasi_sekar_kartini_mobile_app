@@ -151,42 +151,42 @@ class GroupMemberMainTabsProfileView
                 ),
               ),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                poppins('Kepengurusan', fontSize: 16.sp),
-                SizedBox(height: 8.sp),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14.sp),
-                    border: Border.all(width: 1.sp, color: AppColor.bg.gray),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(14.sp),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        _AppSettingMenuItem(
-                          label: 'Sisa Hasil Usaha',
-                          iconPath: AppAsset.svgs.dollarCoinLightGray,
-                        ),
-                        Divider(
-                          height: 1.sp,
-                          thickness: 1.sp,
-                          color: AppColor.bg.gray,
-                        ),
-                        _AppSettingMenuItem(
-                          label: 'Ubah Profil',
-                          iconPath: AppAsset.svgs.userPrimary,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Column(
+            //   mainAxisSize: MainAxisSize.min,
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     poppins('Keanggotaan', fontSize: 16.sp),
+            //     SizedBox(height: 8.sp),
+            //     Container(
+            //       width: double.infinity,
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(14.sp),
+            //         border: Border.all(width: 1.sp, color: AppColor.bg.gray),
+            //       ),
+            //       child: ClipRRect(
+            //         borderRadius: BorderRadius.circular(14.sp),
+            //         child: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           children: [
+            //             _AppSettingMenuItem(
+            //               label: 'Sisa Hasil Usaha',
+            //               iconPath: AppAsset.svgs.dollarCoinLightGray,
+            //             ),
+            //             Divider(
+            //               height: 1.sp,
+            //               thickness: 1.sp,
+            //               color: AppColor.bg.gray,
+            //             ),
+            //             _AppSettingMenuItem(
+            //               label: 'Ubah Profil',
+            //               iconPath: AppAsset.svgs.userPrimary,
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

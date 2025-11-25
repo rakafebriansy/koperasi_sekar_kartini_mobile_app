@@ -35,11 +35,12 @@ class GroupMemberMainTabsGroupView
               spacing: 12.sp,
               children: [
                 _RoundIconButton(
-                  SvgPicture.asset(
-                    AppAsset.svgs.exclamationMarkPrimary,
-                    width: 20.sp,
-                    height: 20.sp,
-                  ),
+                  // SvgPicture.asset(
+                  //   AppAsset.svgs.exclamationMarkPrimary,
+                  //   width: 20.sp,
+                  //   height: 20.sp,
+                  // ),
+                  Icon(Icons.api_rounded, color: AppColor.bg.primary,)
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -78,11 +79,12 @@ class GroupMemberMainTabsGroupView
                   ),
                 ),
                 _RoundIconButton(
-                  SvgPicture.asset(
-                    AppAsset.svgs.editPrimary,
-                    width: 16.sp,
-                    height: 16.sp,
-                  ),
+                  // SvgPicture.asset(
+                  //   AppAsset.svgs.editPrimary,
+                  //   width: 16.sp,
+                  //   height: 16.sp,
+                  // ),
+                  Icon(Icons.api_rounded, color: AppColor.bg.primary,)
                 ),
               ],
             ),
@@ -196,7 +198,8 @@ class GroupMemberMainTabsGroupView
 class _RoundIconButton extends StatelessWidget {
   const _RoundIconButton(this.icon, {super.key});
 
-  final SvgPicture icon;
+  // final SvgPicture? icon;
+  final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
