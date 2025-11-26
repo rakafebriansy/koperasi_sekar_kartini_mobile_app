@@ -1,46 +1,105 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/controllers/employee_main_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/data/wrapper/args_wrapper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 
-class AppGroupMemberList extends StatelessWidget {
-  const AppGroupMemberList({super.key, required this.controller});
+import '../controllers/employee_group_member_detail_controller.dart';
 
-  final EmployeeMainController controller;
-
+class EmployeeGroupMemberDetailView
+    extends GetView<EmployeeGroupMemberDetailController> {
+  const EmployeeGroupMemberDetailView({super.key});
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        spacing: 8.sp,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.sp),
-            child: poppins(
-              'Daftar Anggota',
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
+    return AppDefaultWrapper(
+      withPadding: false,
+      title: poppins('Detail Anggota', fontWeight: FontWeight.w600),
+      child: SingleChildScrollView(
+        child: Column(
+          spacing: 8.sp,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.sp),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                spacing: 8.sp,
+                children: [
+                  ElevatedButton(
+                    style: buildInkWellButtonStyle(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.sp,
+                        vertical: 8.sp,
+                      ),
+                      foregroundColor: AppColor.bg.primary,
+                      backgroundColor: AppColor.bg.lightPrimary,
+                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                        0.2,
+                      ),
+                      borderRadiusCircularSize: 12.sp,
+                    ),
+                    onPressed: () {
+                    },
+                    child: poppins(
+                      'Pilih PJK',
+                      color: AppColor.bg.primary,
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: buildInkWellButtonStyle(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.sp,
+                        vertical: 8.sp,
+                      ),
+                      foregroundColor: AppColor.bg.primary,
+                      backgroundColor: AppColor.bg.lightPrimary,
+                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                        0.2,
+                      ),
+                      borderRadiusCircularSize: 12.sp,
+                    ),
+                    onPressed: () {
+                    },
+                    child: poppins(
+                      'Pilih PPK',
+                      color: AppColor.bg.primary,
+                    ),
+                  ),
+                  ElevatedButton.icon(
+                    style: buildInkWellButtonStyle(
+                      foregroundColor: AppColor.bg.primary,
+                      backgroundColor: AppColor.bg.lightPrimary,
+                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                        0.2,
+                      ),
+                      borderRadiusCircularSize: 12.sp,
+                    ),
+                    onPressed: () {
+                    },
+                    icon: Icon(Icons.add),
+                    label: poppins('Tambah'),
+                  ),
+                ],
+              )
             ),
-          ),
-          SizedBox.shrink(),
-          _GroupedGroupMemberListView(
-            groupedMembers: DummyHelper.dummyGroupMembers.groupedByFirstLetter,
-          ),
-        ],
+            SizedBox.shrink(),
+            _GroupedGroupMemberListView(
+              groupedMembers: DummyHelper.dummyGroupMembers.groupedByFirstLetter,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
 
 class _GroupedGroupMemberListView extends StatelessWidget {
   final Map<String, List<GroupMemberModel>> groupedMembers;

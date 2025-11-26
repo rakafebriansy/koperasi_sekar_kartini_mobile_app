@@ -2,12 +2,12 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_report_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/region_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 
-extension RegionListExtension on List<RegionModel> {
-  List<String> get names => map((region) => region.name).toList();
+extension WorkAreaListExtension on List<WorkAreaModel> {
+  List<String> get names => map((region) => region.districtName).toList();
 }
 
 extension GroupReportListExtension on List<GroupReportModel> {
@@ -45,6 +45,7 @@ extension GroupMemberListExtension on List<GroupMemberModel> {
 }
 
 extension UserListExtension on List<UserModel> {
+  List<String> get names => map((region) => region.name).toList();
   List<UserModel> sortByName({bool desc = false}) {
     final copy = [...this];
 

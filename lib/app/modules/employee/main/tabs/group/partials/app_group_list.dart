@@ -44,7 +44,7 @@ class AppGroupList extends StatelessWidget {
                   ),
                   onPressed: () {
                     Get.toNamed(
-                      Routes.EMPLOYEE_EMPLOYEE_DETAIL,
+                      Routes.MANAGE_GROUP,
                       arguments: ArgsWrapper(
                         action: ActionType.create,
                         data: null,
@@ -117,7 +117,7 @@ class _GroupedGroupListView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(14.sp),
                           onTap: () {
                             Get.toNamed(
-                              Routes.EMPLOYEE_EMPLOYEE_DETAIL,
+                              Routes.GROUP_DETAIL,
                               arguments: ArgsWrapper(
                                 action: ActionType.update,
                                 data: g,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
@@ -48,7 +49,9 @@ class GroupDetailView extends GetView<GroupDetailController> {
                       ),
                       borderRadiusCircularSize: 12.sp,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.EMPLOYEE_GROUP_MEMBER_DETAIL);
+                    },
                     child: poppins(
                       'Detail Anggota',
                       color: AppColor.bg.primary,

@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constants.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
@@ -32,7 +31,6 @@ class ReportDetailView extends GetView<ReportDetailController> {
                 Expanded(
                   child: DropdownSearch<String>(
                     enabled: controller.groupReportModels.isNotEmpty,
-                    key: AppConstants.appFormKey.register_dropdownSearch,
                     selectedItem:
                         controller.selectedGroupReport?.label ??
                         controller.groupReportModels.labels.first,

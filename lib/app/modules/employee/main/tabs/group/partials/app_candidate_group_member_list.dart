@@ -21,42 +21,18 @@ class AppCandidateGroupMemberList extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         spacing: 8.sp,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.sp),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                poppins(
-                  'Daftar Calon Anggota',
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                ElevatedButton.icon(
-                  style: buildInkWellButtonStyle(
-                    foregroundColor: AppColor.bg.primary,
-                    backgroundColor: AppColor.bg.lightPrimary,
-                    overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                      0.2,
-                    ),
-                    borderRadiusCircularSize: 12.sp,
-                  ),
-                  onPressed: () {
-                    Get.toNamed(
-                      Routes.EMPLOYEE_EMPLOYEE_DETAIL,
-                      arguments: ArgsWrapper(
-                        action: ActionType.create,
-                        data: null,
-                      ),
-                    );
-                  },
-                  label: poppins('Tambah', color: AppColor.bg.primary),
-                  icon: Icon(Icons.add, color: AppColor.bg.primary),
-                ),
-              ],
+            child: poppins(
+              'Daftar Calon Anggota',
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
             ),
           ),
+          SizedBox.shrink(),
           _GroupedGroupMemberListView(
             groupedMembers: DummyHelper.dummyGroupMembers.groupedByFirstLetter,
           ),

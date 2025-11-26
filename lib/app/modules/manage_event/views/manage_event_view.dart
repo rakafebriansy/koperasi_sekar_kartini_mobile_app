@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constants.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_datetime_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
@@ -35,7 +34,6 @@ class ManageEventView extends GetView<ManageEventController> {
                 ),
                 DropdownSearch<String>(
                   enabled: controller.eventTypeData.isNotEmpty,
-                  key: AppConstants.appFormKey.register_dropdownSearch,
                   selectedItem: 'Pilih jenis kegiatan',
                   items: (filter, infiniteScrollProps) =>
                       controller.eventTypeData.names,

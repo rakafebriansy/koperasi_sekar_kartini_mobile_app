@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/employee/detail/bindings/employee_employee_detail_binding.dart';
 import '../modules/employee/detail/views/employee_employee_detail_view.dart';
+import '../modules/employee/group_member_detail/bindings/employee_group_member_detail_binding.dart';
+import '../modules/employee/group_member_detail/views/employee_group_member_detail_view.dart';
 import '../modules/employee/main/bindings/employee_main_binding.dart';
 import '../modules/employee/main/tabs/employee/bindings/employee_main_tabs_employee_binding.dart';
 import '../modules/employee/main/tabs/employee/views/employee_main_tabs_employee_view.dart';
@@ -38,6 +40,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manage_event/bindings/manage_event_binding.dart';
 import '../modules/manage_event/views/manage_event_view.dart';
+import '../modules/manage_group/bindings/manage_group_binding.dart';
+import '../modules/manage_group/views/manage_group_view.dart';
 import '../modules/report_detail/bindings/report_detail_binding.dart';
 import '../modules/report_detail/views/report_detail_view.dart';
 import '../modules/report_list/bindings/report_list_binding.dart';
@@ -48,7 +52,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.GROUP_DETAIL;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
@@ -159,6 +163,16 @@ class AppPages {
       name: _Paths.GROUP_MEMBER_FUND_LIST,
       page: () => const GroupMemberFundListView(),
       binding: GroupMemberFundListBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_GROUP,
+      page: () => const ManageGroupView(),
+      binding: ManageGroupBinding(),
+    ),
+    GetPage(
+      name: _Paths.EMPLOYEE_GROUP_MEMBER_DETAIL,
+      page: () => const EmployeeGroupMemberDetailView(),
+      binding: EmployeeGroupMemberDetailBinding(),
     ),
   ];
 }

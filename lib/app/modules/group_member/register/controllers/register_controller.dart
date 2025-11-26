@@ -4,9 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/region_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/static/register_caption.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constants.dart';
 
 class RegisterController extends GetxController {
   TextEditingController regNumberCtrl = TextEditingController(
@@ -15,8 +14,8 @@ class RegisterController extends GetxController {
   TextEditingController nameCtrl = TextEditingController(
     text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
   );
-  Rx<RegionModel?> selectedRegionModel = Rx<RegionModel?>(
-    !kReleaseMode ? RegionModel(id: 1, name: 'Sumbersari') : null,
+  Rx<WorkAreaModel?> selectedWorkArea = Rx<WorkAreaModel?>(
+    !kReleaseMode ? WorkAreaModel(id: 1, districtName: 'Sumbersari') : null,
   );
   TextEditingController addressCtrl = TextEditingController(
     text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
@@ -48,7 +47,6 @@ class RegisterController extends GetxController {
 
   ScrollController scrollController = ScrollController();
 
-  List<RegionModel> regionModelData = [];
   late RegisterCaption caption;
 
   String get getCurrentTitle => caption.title[selectedScreen];
@@ -63,12 +61,6 @@ class RegisterController extends GetxController {
   final ImagePicker _picker = ImagePicker();
 
   RegisterController({required this.caption});
-
-  @override
-  void onInit() {
-    regionModelData = AppConstants.regionModelsFromApi;
-    super.onInit();
-  }
 
   @override
   void onClose() {
