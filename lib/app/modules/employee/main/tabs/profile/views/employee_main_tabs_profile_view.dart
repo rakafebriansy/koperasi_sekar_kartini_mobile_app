@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
@@ -95,57 +96,59 @@ class EmployeeMainTabsProfileView
                       width: 156.sp,
                       height: 32.sp,
                       label: 'Lihat Kartu',
-                      onTap: () {},
+                      onTap: () {
+                        showMemberCard();
+                      },
                     ),
                   ],
                 ),
               ),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                poppins('Keanggotaan', fontSize: 16.sp),
-                SizedBox(height: 8.sp),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14.sp),
-                    border: Border.all(width: 1.sp, color: AppColor.bg.gray),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(14.sp),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        _AppSettingMenuItem(
-                          label: 'Sisa Hasil Usaha',
-                          iconPath: AppAsset.svgs.dollarCoinLightGray,
-                        ),
-                        Divider(
-                          height: 1.sp,
-                          thickness: 1.sp,
-                          color: AppColor.bg.gray,
-                        ),
-                        _AppSettingMenuItem(
-                          label: 'Ubah Profil',
-                          iconPath: AppAsset.svgs.profileGray,
-                        ),
-                        Divider(
-                          height: 1.sp,
-                          thickness: 1.sp,
-                          color: AppColor.bg.gray,
-                        ),
-                        _AppSettingMenuItem(
-                          label: 'Wilayah Kerja',
-                          iconPath: AppAsset.svgs.pinLocationGray,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Column(
+            //   mainAxisSize: MainAxisSize.min,
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     poppins('Keanggotaan', fontSize: 16.sp),
+            //     SizedBox(height: 8.sp),
+            //     Container(
+            //       width: double.infinity,
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(14.sp),
+            //         border: Border.all(width: 1.sp, color: AppColor.bg.gray),
+            //       ),
+            //       child: ClipRRect(
+            //         borderRadius: BorderRadius.circular(14.sp),
+            //         child: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           children: [
+            //             _AppSettingMenuItem(
+            //               label: 'Sisa Hasil Usaha',
+            //               iconPath: AppAsset.svgs.dollarCoinLightGray,
+            //             ),
+            //             Divider(
+            //               height: 1.sp,
+            //               thickness: 1.sp,
+            //               color: AppColor.bg.gray,
+            //             ),
+            //             _AppSettingMenuItem(
+            //               label: 'Ubah Profil',
+            //               iconPath: AppAsset.svgs.profileGray,
+            //             ),
+            //             Divider(
+            //               height: 1.sp,
+            //               thickness: 1.sp,
+            //               color: AppColor.bg.gray,
+            //             ),
+            //             _AppSettingMenuItem(
+            //               label: 'Wilayah Kerja',
+            //               iconPath: AppAsset.svgs.pinLocationGray,
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,15 +166,15 @@ class EmployeeMainTabsProfileView
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        _AppSettingMenuItem(
-                          label: 'Laporan',
-                          iconPath: AppAsset.svgs.reportGray,
-                        ),
-                        Divider(
-                          height: 1.sp,
-                          thickness: 1.sp,
-                          color: AppColor.bg.gray,
-                        ),
+                        // _AppSettingMenuItem(
+                        //   label: 'Laporan',
+                        //   iconPath: AppAsset.svgs.reportGray,
+                        // ),
+                        // Divider(
+                        //   height: 1.sp,
+                        //   thickness: 1.sp,
+                        //   color: AppColor.bg.gray,
+                        // ),
                         _AppSettingMenuItem(
                           label: 'Notifikasi',
                           iconPath: AppAsset.svgs.bellLightGray,
@@ -200,7 +203,9 @@ class EmployeeMainTabsProfileView
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(14.sp),
                 child: _AppSettingMenuItem(
-                  onTap: () {},
+                  onTap: () {
+                    AuthController.find.logout();
+                  },
                   label: 'Keluar',
                   textColor: Colors.white,
                   iconPath: AppAsset.svgs.logoutWhite,

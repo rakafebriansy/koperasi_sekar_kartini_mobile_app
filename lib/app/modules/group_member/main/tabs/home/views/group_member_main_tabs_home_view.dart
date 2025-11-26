@@ -22,125 +22,124 @@ class GroupMemberMainTabsHomeView
   @override
   Widget build(BuildContext context) {
     return AppHomeWrapper(
-      child: Column(
-        spacing: 16.sp,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            spacing: 16.sp,
-            children: [
-              Expanded(
-                child: _InfoCard(
-                  title: 'Simpanan',
-                  amount: 1_124_500,
-                  route: Routes.GROUP_MEMBER_SAVINGS_LIST,
-                ),
-              ),
-              Expanded(
-                child: _InfoCard(
-                  title: 'Pinjaman',
-                  amount: 724_500,
-                  route: Routes.GROUP_MEMBER_LOAN_LIST,
-                ),
-              ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: poppins(
-              'Notifikasi',
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            spacing: 10.sp,
-            children: [
-              AppNotificationBar(
-                message: 'Anda terlambat 3 hari dalam membayar kas!',
-                dateTime: DateTime.now(),
-                type: NotificationBarType.danger,
-                onTap: () {},
-              ),
-              AppNotificationBar(
-                message:
-                    'Reminder : 1 hari  menuju Pertemuan Rutin bulan Oktober 2025',
-                dateTime: DateTime.now(),
-                type: NotificationBarType.info,
-                onTap: () {},
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              poppins('Kegiatan', fontSize: 20.sp, fontWeight: FontWeight.w600),
-              Row(
-                spacing: 6.sp,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ElevatedButton.icon(
-                    style: buildInkWellButtonStyle(
-                      foregroundColor: AppColor.bg.primary,
-                      backgroundColor: AppColor.bg.lightPrimary,
-                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                        0.2,
-                      ),
-                      borderRadiusCircularSize: 12.sp,
-                    ),
-                    onPressed: () {
-                      Get.toNamed(Routes.MANAGE_EVENT);
-                    },
-                    label: poppins('Tambah', color: AppColor.bg.primary),
-                    icon: Icon(Icons.add, color: AppColor.bg.primary),
+      child: SingleChildScrollView(
+        child: Column(
+          spacing: 16.sp,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              spacing: 16.sp,
+              children: [
+                Expanded(
+                  child: _InfoCard(
+                    title: 'Simpanan',
+                    amount: 1_124_500,
+                    route: Routes.GROUP_MEMBER_SAVINGS_LIST,
                   ),
-                  Material(
-                    borderRadius: BorderRadius.circular(99.sp),
-                    child: InkWell(
-                      onTap: () {
-                        Get.toNamed(Routes.EVENT_LIST);
+                ),
+                Expanded(
+                  child: _InfoCard(
+                    title: 'Pinjaman',
+                    amount: 724_500,
+                    route: Routes.GROUP_MEMBER_LOAN_LIST,
+                  ),
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: poppins(
+                'Notifikasi',
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 10.sp,
+              children: [
+                AppNotificationBar(
+                  message: 'Anda terlambat 3 hari dalam membayar kas!',
+                  dateTime: DateTime.now(),
+                  type: NotificationBarType.danger,
+                  onTap: () {},
+                ),
+                AppNotificationBar(
+                  message:
+                      'Reminder : 1 hari  menuju Pertemuan Rutin bulan Oktober 2025',
+                  dateTime: DateTime.now(),
+                  type: NotificationBarType.info,
+                  onTap: () {},
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                poppins('Kegiatan', fontSize: 20.sp, fontWeight: FontWeight.w600),
+                Row(
+                  spacing: 6.sp,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ElevatedButton.icon(
+                      style: buildInkWellButtonStyle(
+                        foregroundColor: AppColor.bg.primary,
+                        backgroundColor: AppColor.bg.lightPrimary,
+                        overlayColor: AppColor.bg.transparentPrimary.withOpacity(
+                          0.2,
+                        ),
+                        borderRadiusCircularSize: 12.sp,
+                      ),
+                      onPressed: () {
+                        Get.toNamed(Routes.MANAGE_EVENT);
                       },
+                      label: poppins('Tambah', color: AppColor.bg.primary),
+                      icon: Icon(Icons.add, color: AppColor.bg.primary),
+                    ),
+                    Material(
                       borderRadius: BorderRadius.circular(99.sp),
-                      child: Container(
-                        height: 36.sp,
-                        width: 36.sp,
-                        decoration: BoxDecoration(
-                          color: AppColor.bg.lightPrimary,
-                          borderRadius: BorderRadius.circular(99.sp),
-                        ),
-                        child: Icon(
-                          Icons.arrow_forward_rounded,
-                          color: AppColor.bg.primary,
+                      child: InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.EVENT_LIST);
+                        },
+                        borderRadius: BorderRadius.circular(99.sp),
+                        child: Container(
+                          height: 36.sp,
+                          width: 36.sp,
+                          decoration: BoxDecoration(
+                            color: AppColor.bg.lightPrimary,
+                            borderRadius: BorderRadius.circular(99.sp),
+                          ),
+                          child: Icon(
+                            Icons.arrow_forward_rounded,
+                            color: AppColor.bg.primary,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 10.sp,
-                children: [
-                  ...DummyHelper.dummyEvents
-                      .map(
-                        (event) => AppEventCard(
-                          model: event,
-                          onTap: () {
-                            Get.toNamed(Routes.EVENT_DETAIL);
-                          },
-                        ),
-                      )
-                      .toList(),
-                  SizedBox(height: 10.sp),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
-          ),
-        ],
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 10.sp,
+              children: [
+                ...DummyHelper.dummyEvents
+                    .map(
+                      (event) => AppEventCard(
+                        model: event,
+                        onTap: () {
+                          Get.toNamed(Routes.EVENT_DETAIL);
+                        },
+                      ),
+                    )
+                    .toList(),
+                SizedBox(height: 10.sp),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

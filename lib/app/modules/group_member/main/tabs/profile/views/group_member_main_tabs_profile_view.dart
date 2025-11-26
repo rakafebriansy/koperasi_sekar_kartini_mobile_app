@@ -97,54 +97,7 @@ class GroupMemberMainTabsProfileView
                       height: 32.sp,
                       label: 'Lihat Kartu',
                       onTap: () {
-                        Get.bottomSheet(
-                          Wrap(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(16.sp),
-                                decoration: BoxDecoration(color: Colors.white,
-                                
-                                borderRadius: BorderRadius.circular(16.sp)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  spacing: 16.sp,
-                                  children: [
-                                    poppins(
-                                      'Kartu Anggota Anda',
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            16.sp,
-                                          ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            16.sp,
-                                          ),
-                                          border: Border.all(
-                                            width: 1.sp,
-                                            color: AppColor.bg.gray,
-                                          ),
-                                        ),
-                                        child: Image.asset(
-                                          AppAsset.images.defaultMemberCard,
-                                        ),
-                                      ),
-                                    ),
-                                    AppFilledButton(
-                                      label: 'Unduh Kartu',
-                                      width: double.infinity,
-                                      height: 42.sp,
-                                      onTap: () {},
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        showMemberCard();
                       },
                     ),
                   ],

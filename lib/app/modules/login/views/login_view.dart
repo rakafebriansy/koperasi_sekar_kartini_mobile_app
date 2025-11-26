@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -48,6 +47,7 @@ class LoginView extends GetView<LoginController> {
             AppTextFormGroup(
               controller: controller.phoneCtrl,
               label: 'Nomor Telepon',
+              keyboardType: TextInputType.phone,
             ),
             SizedBox(height: 8.sp),
             AppTextFormGroup(
@@ -59,7 +59,11 @@ class LoginView extends GetView<LoginController> {
             AppFilledButton(
               label: 'Login',
               onTap: () {
-                Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
+                if (controller.phoneCtrl.text == '08123456789') {
+                  Get.offAllNamed(Routes.EMPLOYEE_MAIN);
+                } else {
+                  Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
+                }
               },
               width: double.infinity,
             ),

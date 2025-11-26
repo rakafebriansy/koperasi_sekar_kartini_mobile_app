@@ -20,6 +20,7 @@ class AppCandidateGroupMemberList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        spacing: 8.sp,
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(

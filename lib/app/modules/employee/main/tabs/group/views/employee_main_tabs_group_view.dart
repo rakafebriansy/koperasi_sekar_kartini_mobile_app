@@ -22,8 +22,9 @@ class EmployeeMainTabsGroupView
       withPadding: false,
       ableToBack: false,
       child: AppDefaultTabbar(
+        tabBarPadding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 14.sp),
         header: Padding(
-          padding: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 0),
+          padding: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 0.sp),
           child: AppTextFormField(
             controller: controller.searchCtrl,
             hintText: 'Cari',
