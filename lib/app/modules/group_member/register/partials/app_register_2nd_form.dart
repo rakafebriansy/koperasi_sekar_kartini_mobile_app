@@ -20,27 +20,31 @@ class AppRegister2ndForm extends StatelessWidget {
         children: [
           poppins(
             'Tanggal Lahir',
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          AppDateInputField(controller: controller.datetimeCtrl, hintText: 'Tanggal Lahir',),
-          SizedBox(height: 8.sp),
-          AppTextFormGroup(controller: controller.jobCtrl, label: 'Pekerjaan',
-          maxLines: 1,
-          
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+          ),
+          AppDateInputField(
+            controller: controller.dateCtrl,
+            hintText: 'Tanggal Lahir',
           ),
           SizedBox(height: 8.sp),
-          AppTextFormGroup(controller: controller.emailCtrl, label: 'Email',
-          maxLines: 1,
-          
+          AppTextFormGroup(
+            controller: controller.jobCtrl,
+            label: 'Pekerjaan',
+            maxLines: 1,
+          ),
+          SizedBox(height: 8.sp),
+          AppTextFormGroup(
+            controller: controller.emailCtrl,
+            label: 'Email',
+            maxLines: 1,
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
             controller: controller.phoneCtrl,
             label: 'Nomor Telepon',
             keyboardType: TextInputType.number,
-          maxLines: 1,
-
+            maxLines: 1,
           ),
           SizedBox(height: 18.sp),
           AppFilledButton(

@@ -14,6 +14,8 @@ import '../modules/employee/main/tabs/home/views/employee_main_tabs_home_view.da
 import '../modules/employee/main/tabs/profile/bindings/employee_main_tabs_profile_binding.dart';
 import '../modules/employee/main/tabs/profile/views/employee_main_tabs_profile_view.dart';
 import '../modules/employee/main/views/employee_main_view.dart';
+import '../modules/employee/manage_report/bindings/employee_manage_report_binding.dart';
+import '../modules/employee/manage_report/views/employee_manage_report_view.dart';
 import '../modules/event_detail/bindings/event_detail_binding.dart';
 import '../modules/event_detail/views/event_detail_view.dart';
 import '../modules/event_list/bindings/event_list_binding.dart';
@@ -173,6 +175,11 @@ class AppPages {
       name: _Paths.EMPLOYEE_GROUP_MEMBER_DETAIL,
       page: () => const EmployeeGroupMemberDetailView(),
       binding: EmployeeGroupMemberDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.EMPLOYEE_MANAGE_REPORT,
+      page: () => const EmployeeManageReportView(),
+      binding: EmployeeManageReportBinding(),
     ),
   ];
 }

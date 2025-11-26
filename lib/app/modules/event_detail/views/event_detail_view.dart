@@ -274,6 +274,7 @@ class EventDetailView extends GetView<EventDetailController> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 12.sp),
                 ],
               )
             : Column(

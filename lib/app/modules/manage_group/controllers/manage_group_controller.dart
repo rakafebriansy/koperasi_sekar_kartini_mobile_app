@@ -11,7 +11,7 @@ class ManageGroupController extends GetxController {
   RxInt _selectedScreen = 0.obs;
   int get selectedScreen => _selectedScreen.value;
 
-    @override
+  @override
   void onClose() {
     numberCtrl.dispose();
     nameCtrl.dispose();

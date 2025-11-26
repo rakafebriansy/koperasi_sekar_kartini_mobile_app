@@ -20,7 +20,7 @@ class RegisterController extends GetxController {
   TextEditingController addressCtrl = TextEditingController(
     text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
   );
-  TextEditingController datetimeCtrl = TextEditingController(
+  TextEditingController dateCtrl = TextEditingController(
     text: !kReleaseMode ? '29/02/2004' : '',
   );
   TextEditingController jobCtrl = TextEditingController(
@@ -67,7 +67,7 @@ class RegisterController extends GetxController {
     regNumberCtrl.dispose();
     nameCtrl.dispose();
     addressCtrl.dispose();
-    datetimeCtrl.dispose();
+    dateCtrl.dispose();
     jobCtrl.dispose();
     emailCtrl.dispose();
     phoneCtrl.dispose();

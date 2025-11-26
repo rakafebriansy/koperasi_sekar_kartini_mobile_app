@@ -70,7 +70,9 @@ class GroupDetailView extends GetView<GroupDetailController> {
                       ),
                       borderRadiusCircularSize: 12.sp,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.EMPLOYEE_MANAGE_REPORT);
+                    },
                     child: poppins('Atur Rapot', color: AppColor.bg.primary),
                   ),
                 ],

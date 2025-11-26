@@ -38,6 +38,7 @@ class GroupReportModel {
   final int finalFinanceScorePercentage;
   final int combinedScorePercentage;
 
+  final int receivableScorePercentage;
   final int criteria;
 
   final GroupModel group;
@@ -80,6 +81,7 @@ class GroupReportModel {
     required this.finalFinanceScorePercentage,
     required this.combinedScorePercentage,
     required this.criteria,
+    required this.receivableScorePercentage,
     required this.group,
     this.createdAt,
     this.updatedAt,
@@ -113,6 +115,7 @@ class GroupReportModel {
       finalFinanceScorePercentage: json['final_finance_score_%'],
       combinedScorePercentage: json['combined_score_%'],
       criteria: json['criteria'],
+      receivableScorePercentage: json['receivable_score_%'],
       group: GroupModel.fromJson(json['group']),
       createdAt: json['created_at'] != null
           ? DateTime.parse(json['created_at'])
@@ -149,6 +152,7 @@ class GroupReportModel {
       'loan_balance_tore': loanBalanceStore,
       'final_finance_score_%': finalFinanceScorePercentage,
       'combined_score_%': combinedScorePercentage,
+      'receivable_score_%': receivableScorePercentage,
       'criteria': criteria,
       'group': group.toJson(),
       'created_at': createdAt?.toIso8601String(),
