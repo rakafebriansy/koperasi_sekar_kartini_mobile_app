@@ -76,7 +76,11 @@ class GroupMemberMainTabsHomeView
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                poppins('Kegiatan', fontSize: 20.sp, fontWeight: FontWeight.w600),
+                poppins(
+                  'Kegiatan',
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                ),
                 Row(
                   spacing: 6.sp,
                   mainAxisSize: MainAxisSize.min,
@@ -85,8 +89,8 @@ class GroupMemberMainTabsHomeView
                       style: buildInkWellButtonStyle(
                         foregroundColor: AppColor.bg.primary,
                         backgroundColor: AppColor.bg.lightPrimary,
-                        overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                          0.2,
+                        overlayColor: AppColor.bg.transparentPrimary.withValues(
+                          alpha: 0.2,
                         ),
                         borderRadiusCircularSize: 12.sp,
                       ),
@@ -125,7 +129,7 @@ class GroupMemberMainTabsHomeView
               mainAxisSize: MainAxisSize.min,
               spacing: 10.sp,
               children: [
-                ...DummyHelper.dummyEvents
+                ...DummyHelper.events
                     .map(
                       (event) => AppEventCard(
                         model: event,
@@ -147,7 +151,6 @@ class GroupMemberMainTabsHomeView
 
 class _InfoCard extends StatelessWidget {
   const _InfoCard({
-    super.key,
     required this.title,
     required this.amount,
     required this.route,

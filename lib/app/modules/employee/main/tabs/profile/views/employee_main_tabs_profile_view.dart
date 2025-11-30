@@ -18,7 +18,7 @@ class EmployeeMainTabsProfileView
   const EmployeeMainTabsProfileView({super.key});
   @override
   Widget build(BuildContext context) {
-    var user = DummyHelper.dummyUsers[0];
+    var user = DummyHelper.users[0];
     return AppHomeWrapper(
       child: SingleChildScrollView(
         child: Column(
@@ -41,12 +41,12 @@ class EmployeeMainTabsProfileView
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CircleAvatar(
+                          radius: 44.sp,
                           child: poppins(
                             user.name[0],
                             fontSize: 40.sp,
                             fontWeight: FontWeight.bold,
                           ),
-                          radius: 44.sp,
                         ),
                         SizedBox(height: 6.sp),
                         poppins(
@@ -56,7 +56,7 @@ class EmployeeMainTabsProfileView
                         ),
                         SizedBox(height: 2.sp),
                         poppins(
-                          user.role.displayName,
+                          user.role,
                           color: AppColor.text.gray,
                         ),
                       ],
@@ -221,7 +221,6 @@ class EmployeeMainTabsProfileView
 
 class _ProfileCell extends StatelessWidget {
   const _ProfileCell({
-    super.key,
     required this.icon,
     required this.field,
     required this.value,
@@ -252,7 +251,6 @@ class _ProfileCell extends StatelessWidget {
 
 class _AppSettingMenuItem extends StatelessWidget {
   const _AppSettingMenuItem({
-    super.key,
     required this.label,
     required this.iconPath,
     this.onTap,

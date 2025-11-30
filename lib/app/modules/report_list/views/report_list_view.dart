@@ -57,7 +57,7 @@ class ReportListView extends GetView<ReportListController> {
 }
 
 class _ReportCard extends StatelessWidget {
-  const _ReportCard({super.key});
+  const _ReportCard();
 
   @override
   Widget build(BuildContext context) {

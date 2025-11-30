@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/data/wrapper/args_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class EmployeeEmployeeDetailController extends GetxController {
   final RxInt _selectedScreen = 0.obs;
@@ -10,10 +10,10 @@ class EmployeeEmployeeDetailController extends GetxController {
 
   ScrollController scrollController = ScrollController();
 
-  Rx<int?> _id = Rxn();
+  final Rx<int?> _id = Rxn();
   int? get id => _id.value;
 
-  TextEditingController nationalIdCtrl = TextEditingController(
+  TextEditingController identityNumberCtrl = TextEditingController(
     // text: !kReleaseMode ? '1234567890123456' : '',
   );
   TextEditingController nameCtrl = TextEditingController(
@@ -38,20 +38,18 @@ class EmployeeEmployeeDetailController extends GetxController {
   @override
   void onInit() {
     try {
-      final args = Get.arguments as ArgsWrapper;
-      if (args.isUpdateAction) {
-        final user = args.data as UserModel;
+      final user = (Get.arguments as ArgsWrapper).data as UserModel;
 
-        final parsedDate = DateFormat('dd/MM/yyyy').format(user.birthDate);
-
+      if ((Get.arguments as ArgsWrapper).isUpdateAction) {
         _id.value = user.id;
-        nationalIdCtrl.text = user.nationalId;
+        birthDateCtrl.text = user.birthDate == null
+            ? ''
+            : DateFormat('dd/MM/yyyy').format(user.birthDate!);
+        identityNumberCtrl.text = user.identityNumber ?? '';
         nameCtrl.text = user.name;
-        phoneCtrl.text = user.phone;
-        birthDateCtrl.text = parsedDate;
-        addressCtrl.text = user.address;
-        jobCtrl.text = user.job;
-        emailCtrl.text = user.email ?? '';
+        phoneCtrl.text = user.phoneNumber ?? '';
+        addressCtrl.text = user.address?? '';
+        jobCtrl.text = user.occupation ?? '';
       }
     } catch (e) {
       print(e);

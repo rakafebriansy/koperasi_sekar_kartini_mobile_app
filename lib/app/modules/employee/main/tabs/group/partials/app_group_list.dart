@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/controllers/employee_main_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/data/wrapper/args_wrapper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
@@ -37,8 +37,8 @@ class AppGroupList extends StatelessWidget {
                   style: buildInkWellButtonStyle(
                     foregroundColor: AppColor.bg.primary,
                     backgroundColor: AppColor.bg.lightPrimary,
-                    overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                      0.2,
+                    overlayColor: AppColor.bg.transparentPrimary.withValues(
+                      alpha: 0.2,
                     ),
                     borderRadiusCircularSize: 12.sp,
                   ),
@@ -58,7 +58,7 @@ class AppGroupList extends StatelessWidget {
             ),
           ),
           _GroupedGroupListView(
-            groupedGroup: DummyHelper.dummyGroups.groupedByDistrict,
+            groupedGroup: DummyHelper.groups.groupedByDistrict,
           ),
         ],
       ),
@@ -69,14 +69,13 @@ class AppGroupList extends StatelessWidget {
 class _GroupedGroupListView extends StatelessWidget {
   final Map<String, List<GroupModel>> groupedGroup;
 
-  const _GroupedGroupListView({super.key, required this.groupedGroup});
+  const _GroupedGroupListView({required this.groupedGroup});
 
   @override
   Widget build(BuildContext context) {
     final letters = groupedGroup.keys.toList()..sort();
 
-    return Container(
-      child: Column(
+    return  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(letters.length, (index) {
           final letter = letters[index];
@@ -156,7 +155,6 @@ class _GroupedGroupListView extends StatelessWidget {
             ],
           );
         }),
-      ),
     );
   }
 }

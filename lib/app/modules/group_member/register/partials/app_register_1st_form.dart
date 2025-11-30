@@ -33,10 +33,10 @@ class AppRegister1stForm extends StatelessWidget {
         SizedBox(height: 8.sp),
         poppins('Wilayah Kerja', fontSize: 14.sp, fontWeight: FontWeight.w600),
         DropdownSearch<String>(
-          enabled: DummyHelper.dummyWorkAreas.isNotEmpty,
-          selectedItem: controller.selectedWorkArea.value?.districtName,
+          enabled: DummyHelper.workAreas.isNotEmpty,
+          selectedItem: controller.selectedWorkArea.value?.name,
           items: (filter, infiniteScrollProps) =>
-              DummyHelper.dummyWorkAreas.names,
+              DummyHelper.workAreas.names,
           decoratorProps: DropDownDecoratorProps(
             baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
             decoration: buildAppTextInputDecoration(hintText: ''),

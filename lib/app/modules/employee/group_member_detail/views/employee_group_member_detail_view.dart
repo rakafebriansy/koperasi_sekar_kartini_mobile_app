@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
@@ -40,17 +39,13 @@ class EmployeeGroupMemberDetailView
                       ),
                       foregroundColor: AppColor.bg.primary,
                       backgroundColor: AppColor.bg.lightPrimary,
-                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                        0.2,
+                      overlayColor: AppColor.bg.transparentPrimary.withValues(
+                        alpha: 0.2,
                       ),
                       borderRadiusCircularSize: 12.sp,
                     ),
-                    onPressed: () {
-                    },
-                    child: poppins(
-                      'Pilih PJK',
-                      color: AppColor.bg.primary,
-                    ),
+                    onPressed: () {},
+                    child: poppins('Pilih PJK', color: AppColor.bg.primary),
                   ),
                   ElevatedButton(
                     style: buildInkWellButtonStyle(
@@ -60,38 +55,33 @@ class EmployeeGroupMemberDetailView
                       ),
                       foregroundColor: AppColor.bg.primary,
                       backgroundColor: AppColor.bg.lightPrimary,
-                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                        0.2,
+                      overlayColor: AppColor.bg.transparentPrimary.withValues(
+                        alpha: 0.2,
                       ),
                       borderRadiusCircularSize: 12.sp,
                     ),
-                    onPressed: () {
-                    },
-                    child: poppins(
-                      'Pilih PPK',
-                      color: AppColor.bg.primary,
-                    ),
+                    onPressed: () {},
+                    child: poppins('Pilih PPK', color: AppColor.bg.primary),
                   ),
                   ElevatedButton.icon(
                     style: buildInkWellButtonStyle(
                       foregroundColor: AppColor.bg.primary,
                       backgroundColor: AppColor.bg.lightPrimary,
-                      overlayColor: AppColor.bg.transparentPrimary.withOpacity(
-                        0.2,
+                      overlayColor: AppColor.bg.transparentPrimary.withValues(
+                        alpha: 0.2,
                       ),
                       borderRadiusCircularSize: 12.sp,
                     ),
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.add),
                     label: poppins('Tambah'),
                   ),
                 ],
-              )
+              ),
             ),
             SizedBox.shrink(),
             _GroupedGroupMemberListView(
-              groupedMembers: DummyHelper.dummyGroupMembers.groupedByFirstLetter,
+              groupedMembers: DummyHelper.users.groupedByFirstLetter,
             ),
           ],
         ),
@@ -100,18 +90,16 @@ class EmployeeGroupMemberDetailView
   }
 }
 
-
 class _GroupedGroupMemberListView extends StatelessWidget {
-  final Map<String, List<GroupMemberModel>> groupedMembers;
+  final Map<String, List<UserModel>> groupedMembers;
 
-  const _GroupedGroupMemberListView({super.key, required this.groupedMembers});
+  const _GroupedGroupMemberListView({required this.groupedMembers});
 
   @override
   Widget build(BuildContext context) {
     final letters = groupedMembers.keys.toList()..sort();
 
-    return Container(
-      child: Column(
+    return  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(letters.length, (index) {
           final letter = letters[index];
@@ -163,12 +151,12 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                                 color: AppColor.bg.gray,
                               ),
                             ),
-                            leading: CircleAvatar(child: Text(m.user.name[0])),
+                            leading: CircleAvatar(child: Text(m.name[0])),
                             title: Row(
                               mainAxisSize: MainAxisSize.min,
                               spacing: 8.sp,
                               children: [
-                                Text(m.user.name),
+                                Text(m.name),
                                 Icon(
                                   Icons.circle,
                                   color: m.isActive ? Colors.green : Colors.red,
@@ -176,7 +164,7 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            subtitle: Text('#${m.user.id}'),
+                            subtitle: Text('#${m.id}'),
                             trailing: Container(
                               padding: EdgeInsets.all(3.sp),
                               child: Icon(
@@ -194,7 +182,6 @@ class _GroupedGroupMemberListView extends StatelessWidget {
             ],
           );
         }),
-      ),
     );
   }
 }

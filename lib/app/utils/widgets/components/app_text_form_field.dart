@@ -83,8 +83,12 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                       });
                     },
                     borderRadius: BorderRadius.circular(12),
-                    splashColor: AppColor.bg.lightPrimary.withOpacity(0.3),
-                    highlightColor: AppColor.bg.lightPrimary.withOpacity(0.1),
+                    splashColor: AppColor.bg.lightPrimary.withValues(
+                      alpha: 0.3,
+                    ),
+                    highlightColor: AppColor.bg.lightPrimary.withValues(
+                      alpha: 0.1,
+                    ),
                     child: Icon(
                       isHidden ? Icons.visibility_off : Icons.visibility,
                       color: Color(0xFFD9D9D9),

@@ -22,10 +22,10 @@ class AppGroup2ndForm extends StatelessWidget {
       children: [
         poppins('Penanggung Jawab Kelompok', fontSize: 14.sp, fontWeight: FontWeight.w600),
         DropdownSearch<String>(
-          enabled: DummyHelper.dummyUsers.isNotEmpty,
+          enabled: DummyHelper.users.isNotEmpty,
           selectedItem: controller.selectedChairman.value?.name,
           items: (filter, infiniteScrollProps) =>
-              DummyHelper.dummyUsers.names,
+              DummyHelper.users.names,
           decoratorProps: DropDownDecoratorProps(
             baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
             decoration: buildAppTextInputDecoration(hintText: ''),
@@ -48,10 +48,10 @@ class AppGroup2ndForm extends StatelessWidget {
         SizedBox(height: 8.sp),
         poppins('Petugas Pendamping Kelompok', fontSize: 14.sp, fontWeight: FontWeight.w600),
         DropdownSearch<String>(
-          enabled: DummyHelper.dummyUsers.isNotEmpty,
+          enabled: DummyHelper.users.isNotEmpty,
           selectedItem: controller.selectedFacilitator.value?.name,
           items: (filter, infiniteScrollProps) =>
-              DummyHelper.dummyUsers.names,
+              DummyHelper.users.names,
           decoratorProps: DropDownDecoratorProps(
             baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
             decoration: buildAppTextInputDecoration(hintText: ''),

@@ -148,7 +148,6 @@ class _LoanCard extends StatelessWidget {
 
 class _LoanInfoCell extends StatelessWidget {
   const _LoanInfoCell({
-    super.key,
     required this.icon,
     required this.field,
     required this.value,

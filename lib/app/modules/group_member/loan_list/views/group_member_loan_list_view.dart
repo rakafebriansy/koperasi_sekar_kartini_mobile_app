@@ -13,7 +13,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_
 import '../controllers/group_member_loan_list_controller.dart';
 
 class GroupMemberLoanListView extends GetView<GroupMemberLoanListController> {
-  const GroupMemberLoanListView({super.key});
+  const GroupMemberLoanListView();
   @override
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
@@ -109,7 +109,7 @@ class GroupMemberLoanListView extends GetView<GroupMemberLoanListController> {
 }
 
 class _LoanCard extends StatelessWidget {
-  const _LoanCard({super.key});
+  const _LoanCard();
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +182,6 @@ class _LoanCard extends StatelessWidget {
 
 class _TabFilter extends StatelessWidget {
   const _TabFilter({
-    super.key,
     required this.title,
     this.onTap,
     required this.isActive,

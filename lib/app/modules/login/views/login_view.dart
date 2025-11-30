@@ -56,16 +56,16 @@ class LoginView extends GetView<LoginController> {
               obscureText: true,
             ),
             SizedBox(height: 18.sp),
-            AppFilledButton(
-              label: 'Login',
-              onTap: () {
-                if (controller.phoneCtrl.text == '08123456789') {
-                  Get.offAllNamed(Routes.EMPLOYEE_MAIN);
-                } else {
-                  Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
-                }
-              },
-              width: double.infinity,
+            Obx(
+              () => AppFilledButton(
+                label: 'Login',
+                onTap: controller.isSubmitted
+                    ? null
+                    : () {
+                        controller.login();
+                      },
+                width: double.infinity,
+              ),
             ),
             SizedBox(height: 12.sp),
             Row(

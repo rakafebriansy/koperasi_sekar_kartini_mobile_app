@@ -1,4 +1,4 @@
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 
 class GroupReportModel {
   final String id;

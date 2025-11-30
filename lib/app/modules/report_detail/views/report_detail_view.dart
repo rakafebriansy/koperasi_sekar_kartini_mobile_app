@@ -20,6 +20,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
   @override
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
+      title: poppins('Detail Rapor', fontWeight: FontWeight.w600),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -288,14 +289,12 @@ class ReportDetailView extends GetView<ReportDetailController> {
           ],
         ),
       ),
-      title: poppins('Detail Rapor', fontWeight: FontWeight.w600),
     );
   }
 }
 
 class _ProfileBigCell extends StatelessWidget {
   const _ProfileBigCell({
-    super.key,
     required this.title,
     required this.amount,
     required this.subtitle,
@@ -324,48 +323,46 @@ class _ProfileBigCell extends StatelessWidget {
         spacing: 8.sp,
         children: [
           poppins(title, fontSize: 13.sp, fontWeight: FontWeight.w600),
-          Container(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 12.sp,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColor.bg.lightGray,
-                    borderRadius: BorderRadius.circular(10.sp),
-                  ),
-                  padding: EdgeInsets.all(8.sp),
-                  child: icon,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 12.sp,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColor.bg.lightGray,
+                  borderRadius: BorderRadius.circular(10.sp),
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 4.sp,
-                    children: [
-                      poppins(subtitle),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                padding: EdgeInsets.all(8.sp),
+                child: icon,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 4.sp,
+                  children: [
+                    poppins(subtitle),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        poppins(
+                          amount.toIdr(),
+                          color: AppColor.bg.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        if (percentage != null)
                           poppins(
-                            amount.toIdr(),
+                            '$percentage%',
                             color: AppColor.bg.primary,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 10.sp,
                           ),
-                          if (percentage != null)
-                            poppins(
-                              '${percentage}%',
-                              color: AppColor.bg.primary,
-                              fontSize: 10.sp,
-                            ),
-                        ],
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
@@ -374,7 +371,7 @@ class _ProfileBigCell extends StatelessWidget {
 }
 
 class _TabBarInfo extends StatelessWidget {
-  const _TabBarInfo({super.key});
+  const _TabBarInfo();
 
   @override
   Widget build(BuildContext context) {
@@ -397,7 +394,6 @@ class _TabBarInfo extends StatelessWidget {
 
 class _ReportCell extends StatelessWidget {
   const _ReportCell({
-    super.key,
     required this.title,
     required this.icon,
     this.point,
@@ -412,7 +408,7 @@ class _ReportCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String pointPercentageLabel =
-        '${pointPercentage < 0 ? pointPercentage : '+${pointPercentage}'}%';
+        '${pointPercentage < 0 ? pointPercentage : '+$pointPercentage'}%';
     return Container(
       padding: EdgeInsets.all(8.sp),
       decoration: BoxDecoration(
@@ -448,7 +444,7 @@ class _ReportCell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     poppins(
-                      point != null ? point.toString() : '${pointPercentage}%',
+                      point != null ? point.toString() : '$pointPercentage%',
                       color: AppColor.bg.primary,
                       fontSize: 10.sp,
                       fontWeight: FontWeight.bold,
@@ -471,7 +467,7 @@ class _ReportCell extends StatelessWidget {
 }
 
 class _ReportCard extends StatelessWidget {
-  const _ReportCard({super.key});
+  const _ReportCard();
 
   @override
   Widget build(BuildContext context) {

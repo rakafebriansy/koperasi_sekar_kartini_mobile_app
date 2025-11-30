@@ -18,7 +18,7 @@ class AppEmployee1stForm extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         AppTextFormGroup(
-          controller: controller.nationalIdCtrl,
+          controller: controller.identityNumberCtrl,
           label: 'NIK',
           maxLines: 1,
         ),

@@ -1,47 +1,49 @@
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_report_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/work_area_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group_report/group_report_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 
-extension WorkAreaListExtension on List<WorkAreaModel> {
-  List<String> get names => map((region) => region.districtName).toList();
-}
+extension ListExtension<T> on List<T> {
+  bool areEqualTo(
+    List<T> other, {
+    int Function(T a, T b)? compare,
+    dynamic Function(int index, T element)? a,
+    dynamic Function(int index, T element)? b,
+  }) {
+    if (length != other.length) return false;
 
-extension GroupReportListExtension on List<GroupReportModel> {
-  List<String> get labels => map((g) => g.label).toList();
-}
+    sort(compare);
+    other.sort(compare);
 
-extension GroupMemberListExtension on List<GroupMemberModel> {
-  List<GroupMemberModel> sortByName({bool desc = false}) {
-    final copy = [...this];
-
-    copy.sort((a, b) {
-      final nameA = a.user.name.toLowerCase();
-      final nameB = b.user.name.toLowerCase();
-      return desc ? nameB.compareTo(nameA) : nameA.compareTo(nameB);
-    });
-
-    return copy;
-  }
-  Map<String, List<GroupMemberModel>> groupByFirstLetter() {
-    final Map<String, List<GroupMemberModel>> grouped = {};
-
-    for (final member in sortedByAsc) {
-      final firstLetter = member.user.name.substring(0, 1).toUpperCase();
-
-      grouped.putIfAbsent(firstLetter, () => []);
-      grouped[firstLetter]!.add(member);
+    for (int i = 0; i < length; i++) {
+      if ((a?.call(i, this[i]) ?? this[i]) != (b?.call(i, other[i]) ?? other[i])) return false;
     }
 
-    return grouped;
+    return true;
   }
 
-  List<GroupMemberModel> get sortedByAsc => this.sortByName();
-  List<GroupMemberModel> get sortedByDesc => this.sortByName(desc: true);
-  Map<String, List<GroupMemberModel>> get groupedByFirstLetter => this.groupByFirstLetter();
+  bool containSameElement({int Function(T a, T b)? compare}) {
+    if (isEmpty) return false;
+
+    sort(compare);
+
+    for (int i = 0; i < length; i++) {
+      for (int j = 0; j < length; j++) {
+        if (this[i] == this[j] && i != j) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+}
+
+
+extension WorkAreaListExtension on List<WorkAreaModel> {
+  List<String> get names => map((region) => region.name).toList();
 }
 
 extension UserListExtension on List<UserModel> {
@@ -81,8 +83,8 @@ extension GroupListExtension on List<GroupModel> {
     final copy = [...this];
 
     copy.sort((a, b) {
-      final aDistrict = a.workArea.districtName.toLowerCase();
-      final bDistrict = b.workArea.districtName.toLowerCase();
+      final aDistrict = a.workArea!.name.toLowerCase();
+      final bDistrict = b.workArea!.name.toLowerCase();
 
       return desc
           ? bDistrict.compareTo(aDistrict)
@@ -97,7 +99,7 @@ extension GroupListExtension on List<GroupModel> {
 
     for (final group in sortedByDistrictAsc) {
       final district =
-          group.workArea.districtName.capitalize;
+          group.workArea!.name.capitalize;
 
       grouped.putIfAbsent(district!, () => []);
       grouped[district]!.add(group);
@@ -119,4 +121,8 @@ extension GroupListExtension on List<GroupModel> {
 
 extension EventTypeListExtension on List<EventType> {
   List<String> get names => map((event) => event.displayName).toList();
+}
+
+extension GroupReportListExtension on List<GroupReportModel> {
+  List<String> get labels => map((g) => g.label).toList();
 }

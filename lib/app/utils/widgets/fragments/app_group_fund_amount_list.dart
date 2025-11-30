@@ -33,7 +33,7 @@ class AppGroupFundAmountList extends StatelessWidget {
 }
 
 class _FundCard extends StatelessWidget {
-  const _FundCard({super.key});
+  const _FundCard();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,6 @@ class _FundCard extends StatelessWidget {
 
 class _FundInfoCell extends StatelessWidget {
   const _FundInfoCell({
-    super.key,
     required this.icon,
     required this.field,
     required this.value,

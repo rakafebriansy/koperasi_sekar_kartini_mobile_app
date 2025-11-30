@@ -26,11 +26,11 @@ class GroupMemberMainView extends GetView<GroupMemberMainController> {
             item: ItemConfig(
               inactiveIcon: Icon(
                 Icons.home_outlined,
-                color: AppColor.bg.primary.withOpacity(0.7),
+                color: AppColor.bg.primary.withValues(alpha: 0.7),
               ),
               icon: Icon(
                 Icons.home,
-                color: AppColor.bg.primary.withOpacity(0.7),
+                color: AppColor.bg.primary.withValues(alpha: 0.7),
               ),
               textStyle: GoogleFonts.poppins(color: AppColor.bg.primary),
               title: "Beranda",
@@ -42,11 +42,11 @@ class GroupMemberMainView extends GetView<GroupMemberMainController> {
             item: ItemConfig(
               inactiveIcon: Icon(
                 Icons.view_module_outlined,
-                color: AppColor.bg.primary.withOpacity(0.7),
+                color: AppColor.bg.primary.withValues(alpha: 0.7),
               ),
               icon: Icon(
                 Icons.view_module,
-                color: AppColor.bg.primary.withOpacity(0.7),
+                color: AppColor.bg.primary.withValues(alpha: 0.7),
               ),
               textStyle: GoogleFonts.poppins(color: AppColor.bg.primary),
               title: "Kelompok",
@@ -58,11 +58,11 @@ class GroupMemberMainView extends GetView<GroupMemberMainController> {
             item: ItemConfig(
               inactiveIcon: Icon(
                 Icons.person_outlined,
-                color: AppColor.bg.primary.withOpacity(0.7),
+                color: AppColor.bg.primary.withValues(alpha: 0.7),
               ),
               icon: Icon(
                 Icons.person,
-                color: AppColor.bg.primary.withOpacity(0.7),
+                color: AppColor.bg.primary.withValues(alpha: 0.7),
               ),
               textStyle: GoogleFonts.poppins(color: AppColor.bg.primary),
               title: "Profil",

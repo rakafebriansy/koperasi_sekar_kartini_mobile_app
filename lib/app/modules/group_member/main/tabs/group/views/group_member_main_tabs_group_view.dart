@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/group_member_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
@@ -52,7 +52,6 @@ class GroupMemberMainTabsGroupView
                     spacing: 12.sp,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      //TODO: dynamic
                       Container(
                         width: 40.sp,
                         height: 40.sp,
@@ -186,7 +185,7 @@ class GroupMemberMainTabsGroupView
             ),
             _GroupedMemberListView(
               groupedMembers:
-                  DummyHelper.dummyGroupMembers.groupedByFirstLetter,
+                  DummyHelper.users.groupedByFirstLetter,
             ),
           ],
         ),
@@ -196,7 +195,7 @@ class GroupMemberMainTabsGroupView
 }
 
 class _RoundIconButton extends StatelessWidget {
-  const _RoundIconButton(this.icon, {super.key});
+  const _RoundIconButton(this.icon);
 
   // final SvgPicture? icon;
   final Icon? icon;
@@ -217,7 +216,7 @@ class _RoundIconButton extends StatelessWidget {
 }
 
 class _InfoCard extends StatelessWidget {
-  const _InfoCard({super.key, required this.title, required this.amount});
+  const _InfoCard({required this.title, required this.amount});
 
   final String title;
   final int amount;
@@ -257,16 +256,15 @@ class _InfoCard extends StatelessWidget {
 }
 
 class _GroupedMemberListView extends StatelessWidget {
-  final Map<String, List<GroupMemberModel>> groupedMembers;
+  final Map<String, List<UserModel>> groupedMembers;
 
-  const _GroupedMemberListView({super.key, required this.groupedMembers});
+  const _GroupedMemberListView({required this.groupedMembers});
 
   @override
   Widget build(BuildContext context) {
     final letters = groupedMembers.keys.toList()..sort();
 
-    return Container(
-      child: Column(
+    return  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(letters.length, (index) {
           final letter = letters[index];
@@ -318,12 +316,12 @@ class _GroupedMemberListView extends StatelessWidget {
                                 color: AppColor.bg.gray,
                               ),
                             ),
-                            leading: CircleAvatar(child: Text(m.user.name[0])),
+                            leading: CircleAvatar(child: Text(m.name[0])),
                             title: Row(
                               mainAxisSize: MainAxisSize.min,
                               spacing: 8.sp,
                               children: [
-                                Text(m.user.name),
+                                Text(m.name),
                                 Icon(
                                   Icons.circle,
                                   color: m.isActive ? Colors.green : Colors.red,
@@ -331,7 +329,7 @@ class _GroupedMemberListView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            subtitle: Text('#${m.user.id}'),
+                            subtitle: Text('#${m.id}'),
                             trailing: Container(
                               padding: EdgeInsets.all(3.sp),
                               child: Icon(
@@ -349,7 +347,6 @@ class _GroupedMemberListView extends StatelessWidget {
             ],
           );
         }),
-      ),
     );
   }
 }

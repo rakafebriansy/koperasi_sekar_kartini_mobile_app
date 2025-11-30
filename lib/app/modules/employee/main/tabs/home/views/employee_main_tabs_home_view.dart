@@ -81,8 +81,9 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                       style: buildInkWellButtonStyle(
                         foregroundColor: AppColor.bg.primary,
                         backgroundColor: AppColor.bg.lightPrimary,
-                        overlayColor: AppColor.bg.transparentPrimary
-                            .withOpacity(0.2),
+                        overlayColor: AppColor.bg.transparentPrimary.withValues(
+                          alpha: 0.2,
+                        ),
                         borderRadiusCircularSize: 12.sp,
                       ),
                       onPressed: () {
@@ -120,7 +121,7 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
               mainAxisSize: MainAxisSize.min,
               spacing: 10.sp,
               children: [
-                ...DummyHelper.dummyEvents
+                ...DummyHelper.events
                     .map(
                       (event) => AppEventCard(
                         model: event,
@@ -128,8 +129,7 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                           Get.toNamed(Routes.EVENT_DETAIL);
                         },
                       ),
-                    )
-                    .toList(),
+                    ),
                 SizedBox(height: 10.sp),
               ],
             ),
@@ -175,7 +175,7 @@ class MemberLineChart extends StatelessWidget {
         show: true,
         drawVerticalLine: false,
         getDrawingHorizontalLine: (value) =>
-            FlLine(color: Colors.grey.withOpacity(0.2), strokeWidth: 1),
+            FlLine(color: Colors.grey.withValues(alpha: 0.2), strokeWidth: 1),
       ),
 
       titlesData: FlTitlesData(
@@ -234,8 +234,8 @@ class MemberLineChart extends StatelessWidget {
             show: true,
             gradient: LinearGradient(
               colors: [
-                const Color(0xFF009688).withOpacity(0.4),
-                const Color(0xFF009688).withOpacity(0.05),
+                const Color(0xFF009688).withValues(alpha: 0.4),
+                const Color(0xFF009688).withValues(alpha: 0.05),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -324,24 +324,6 @@ class _SimplePieChartState extends State<SimplePieChart> {
     );
   }
 
-  Widget _tabButton(String text, bool active, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        decoration: BoxDecoration(
-          color: active ? const Color(0xFF007F67) : Colors.transparent,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: poppins(
-          text,
-          color: active ? Colors.white : Colors.black87,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
   Widget _legendItem(Color color, String label) {
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -364,7 +346,6 @@ class _SimplePieChartState extends State<SimplePieChart> {
 
 class _InfoCard extends StatelessWidget {
   const _InfoCard({
-    super.key,
     required this.title,
     required this.amount,
     required this.route,

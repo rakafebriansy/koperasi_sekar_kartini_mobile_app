@@ -7,13 +7,12 @@ class AppColor {
   static AppColorBg bg = AppColorBg();
   static AppColorBorder border = AppColorBorder();
   static AppColorText text = AppColorText();
-
 }
 
 class AppColorBg {
   final Color primary = Color(0xFF008473);
   final Color darkPrimary = Color(0x026B5D);
-  final Color transparentPrimary = Color(0xFF008473).withOpacity(0.12);
+  final Color transparentPrimary = Color(0xFF008473).withValues(alpha: 0.12);
   final Color danger = Color(0xFFEA2929);
   final Color lightDanger = Color(0xFFFEE5E5);
   final Color lightPrimary = Color(0xFFE0F0EE);

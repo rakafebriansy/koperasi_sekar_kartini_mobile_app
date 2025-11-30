@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/work_area_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/static/register_caption.dart';
 
 class RegisterController extends GetxController {
@@ -15,7 +15,7 @@ class RegisterController extends GetxController {
     text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
   );
   Rx<WorkAreaModel?> selectedWorkArea = Rx<WorkAreaModel?>(
-    !kReleaseMode ? WorkAreaModel(id: 1, districtName: 'Sumbersari') : null,
+    !kReleaseMode ? WorkAreaModel(id: 1, name: 'Sumbersari') : null,
   );
   TextEditingController addressCtrl = TextEditingController(
     text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
@@ -52,10 +52,10 @@ class RegisterController extends GetxController {
   String get getCurrentTitle => caption.title[selectedScreen];
   String get getCurrentSubtitle => caption.subtitle[selectedScreen];
 
-  Rx<File?> _idCardImage = Rxn();
+  final Rx<File?> _idCardImage = Rxn();
   File? get idCardImage => _idCardImage.value;
 
-  Rx<File?> _selfImage = Rxn();
+  final Rx<File?> _selfImage = Rxn();
   File? get selfImage => _selfImage.value;
 
   final ImagePicker _picker = ImagePicker();

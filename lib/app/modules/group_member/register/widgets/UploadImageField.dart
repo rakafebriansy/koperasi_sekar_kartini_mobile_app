@@ -36,8 +36,8 @@ class UploadImageField extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(16.sp),
                     onTap: () => func(ImageSource.gallery),
-                    splashColor: AppColor.bg.primary.withOpacity(0.1),
-                    highlightColor: AppColor.bg.primary.withOpacity(0.1),
+                    splashColor: AppColor.bg.primary.withValues(alpha: 0.1),
+                    highlightColor: AppColor.bg.primary.withValues(alpha: 0.1),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(

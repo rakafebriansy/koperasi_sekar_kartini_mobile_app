@@ -1,11 +1,12 @@
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/event_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/types/enum/attendance_status_enum.dart';
 
 class EventAttendanceModel {
   final int id;
   final UserModel user;
   final EventModel event;
+
   final AttendanceStatusEnum attendance;
   final DateTime createdAt;
   final DateTime updatedAt;
