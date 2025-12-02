@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/local/secure_storage/token_manager.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/login/login_request.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/dio_client.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_client/dio_client.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constant.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/connectivity_helper.dart';
@@ -60,5 +60,10 @@ abstract class ApiClient {
     @Part(name: "work_area_id") required int workAreaId,
     @Part(name: "identity_card_photo") required File identityCardPhoto,
     @Part(name: "self_photo") required File selfPhoto,
+  });
+
+  @GET("/employees")
+  Future<dynamic> getUsers({
+    @Query('search') String? search
   });
 }

@@ -1,0 +1,21 @@
+import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/model_registry.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
+
+void registerModels() {
+  ModelRegistry.register<UserModel>(
+    fromJson: (json) => UserModel.fromJson(json),
+    toJson: (obj) => obj.toJson(),
+  );
+
+  ModelRegistry.register<GroupModel>(
+    fromJson: (json) => GroupModel.fromJson(json),
+    toJson: (obj) => obj.toJson(),
+  );
+
+  ModelRegistry.register<WorkAreaModel>(
+    fromJson: (json) => WorkAreaModel.fromJson(json),
+    toJson: (obj) => obj.toJson(),
+  );
+}

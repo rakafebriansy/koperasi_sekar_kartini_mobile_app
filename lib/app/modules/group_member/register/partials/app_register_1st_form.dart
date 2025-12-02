@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/controllers/register_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_link_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
@@ -81,6 +83,18 @@ class AppRegister1stForm extends StatelessWidget {
             onTap: controller.submitButton,
           ),
           SizedBox(height: 12.sp),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  poppins('Sudah punya akun?', fontSize: 12.sp),
+                  SizedBox(width: 6.sp),
+                  AppLinkButton(
+                    link: Routes.LOGIN,
+                    label: 'Login',
+                    isPath: true,
+                    fontSize: 12.sp,
+                  ),
+                ],)
         ],
       ),
     );

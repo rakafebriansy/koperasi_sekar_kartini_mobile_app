@@ -56,7 +56,6 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       children: [
         TextFormField(
           style: GoogleFonts.poppins(fontSize: 14.sp),
-          key: widget.key,
           obscureText: isHidden,
           controller: widget.controller,
           decoration: buildAppTextInputDecoration(

@@ -11,7 +11,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
 
@@ -75,8 +74,15 @@ class EmployeeMainTabsEmployeeView
                 ],
               ),
             ),
-            _GroupedEmployeeListView(
-              groupedEmployee: DummyHelper.users.groupedByFirstLetter,
+            Obx(
+              () => controller.isFetching
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : _GroupedEmployeeListView(
+                      groupedEmployee: controller.users.groupedByFirstLetter,
+                    ),
             ),
           ],
         ),

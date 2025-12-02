@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/login/login_request.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
@@ -14,7 +15,11 @@ class LoginController extends GetxController {
   bool get isSubmitted => _isSubmitted.value;
 
   TextEditingController phoneCtrl = TextEditingController(
-    text: !kReleaseMode ? '087712345678' : '',
+    text: !kReleaseMode
+        ?
+          // '087712345678'
+          '081234567870'
+        : '',
   );
   TextEditingController passwordCtrl = TextEditingController(
     text: !kReleaseMode ? 'password' : '',
@@ -45,9 +50,13 @@ class LoginController extends GetxController {
         ),
       );
 
-      if (user?.role == 'group_member') {
+      if (user == null) throw Exception('User is not found');
+      
+      AuthController.find.saveUserData(user: user);
+
+      if (user.role == 'group_member') {
         Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
-      } else if (user?.role == 'employee' || user?.role == 'admin') {
+      } else if (user.role == 'employee' || user.role == 'admin') {
         Get.offAllNamed(Routes.EMPLOYEE_MAIN);
       } else {
         throw Exception('Role tidak ditemukan');
