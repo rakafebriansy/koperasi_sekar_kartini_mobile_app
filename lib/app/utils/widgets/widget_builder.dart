@@ -9,10 +9,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/a
 
 InputDecoration buildAppTextInputDecoration({
   String? counterText,
-  // Icon prefixIcon,
-  SvgPicture? prefixIcon,
-  // Icon suffixIcon,
-  SvgPicture? suffixIcon,
+  Widget? prefixIcon,
+  Widget? suffixIcon,
   required String hintText,
 }) {
   return InputDecoration(
@@ -37,6 +35,14 @@ InputDecoration buildAppTextInputDecoration({
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12.sp),
       borderSide: BorderSide(color: AppColor.border.focus, width: 2),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.sp),
+      borderSide: BorderSide(color: AppColor.border.lightDanger, width: 2),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.sp),
+      borderSide: BorderSide(color: AppColor.border.danger, width: 2),
     ),
     hint: Row(
       mainAxisAlignment: MainAxisAlignment.start,

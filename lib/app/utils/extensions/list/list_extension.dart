@@ -18,7 +18,9 @@ extension ListExtension<T> on List<T> {
     other.sort(compare);
 
     for (int i = 0; i < length; i++) {
-      if ((a?.call(i, this[i]) ?? this[i]) != (b?.call(i, other[i]) ?? other[i])) return false;
+      if ((a?.call(i, this[i]) ?? this[i]) !=
+          (b?.call(i, other[i]) ?? other[i]))
+        return false;
     }
 
     return true;
@@ -41,9 +43,13 @@ extension ListExtension<T> on List<T> {
   }
 }
 
-
 extension WorkAreaListExtension on List<WorkAreaModel> {
   List<String> get names => map((region) => region.name).toList();
+
+  WorkAreaModel? findByName(String? name) {
+    if (name == null) return null;
+    return firstWhere((item) => item.name == name);
+  }
 }
 
 extension UserListExtension on List<UserModel> {
@@ -59,6 +65,7 @@ extension UserListExtension on List<UserModel> {
 
     return copy;
   }
+
   Map<String, List<UserModel>> groupByFirstLetter() {
     final Map<String, List<UserModel>> grouped = {};
 
@@ -72,11 +79,10 @@ extension UserListExtension on List<UserModel> {
     return grouped;
   }
 
-  List<UserModel> get sortedByAsc => this.sortByName();
-  List<UserModel> get sortedByDesc => this.sortByName(desc: true);
-  Map<String, List<UserModel>> get groupedByFirstLetter => this.groupByFirstLetter();
+  List<UserModel> get sortedByAsc => sortByName();
+  List<UserModel> get sortedByDesc => sortByName(desc: true);
+  Map<String, List<UserModel>> get groupedByFirstLetter => groupByFirstLetter();
 }
-
 
 extension GroupListExtension on List<GroupModel> {
   List<GroupModel> sortByDistrictName({bool desc = false}) {
@@ -98,8 +104,7 @@ extension GroupListExtension on List<GroupModel> {
     final Map<String, List<GroupModel>> grouped = {};
 
     for (final group in sortedByDistrictAsc) {
-      final district =
-          group.workArea!.name.capitalize;
+      final district = group.workArea!.name.capitalize;
 
       grouped.putIfAbsent(district!, () => []);
       grouped[district]!.add(group);
@@ -108,16 +113,12 @@ extension GroupListExtension on List<GroupModel> {
     return grouped;
   }
 
-  List<GroupModel> get sortedByDistrictAsc =>
-      sortByDistrictName(desc: false);
+  List<GroupModel> get sortedByDistrictAsc => sortByDistrictName(desc: false);
 
-  List<GroupModel> get sortedByDistrictDesc =>
-      sortByDistrictName(desc: true);
+  List<GroupModel> get sortedByDistrictDesc => sortByDistrictName(desc: true);
 
-  Map<String, List<GroupModel>> get groupedByDistrict =>
-      groupByDistrict();
+  Map<String, List<GroupModel>> get groupedByDistrict => groupByDistrict();
 }
-
 
 extension EventTypeListExtension on List<EventType> {
   List<String> get names => map((event) => event.displayName).toList();

@@ -1,12 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/login/login_request.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class LoginController extends GetxController {
-  final RxBool _isSubmitted = RxBool(false);
+  final formKey = GlobalKey<FormState>();
+
+  final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
   TextEditingController phoneCtrl = TextEditingController(
@@ -30,17 +34,27 @@ class LoginController extends GetxController {
     _isSubmitted.value = true;
 
     try {
+      if (!formKey.currentState!.validate()) return;
+
       final user = await ApiHelper.fetch<UserModel>(
-        request: (api) => api.login({
-          'phone_number': phoneCtrl.text,
-          'password': passwordCtrl.text,
-        }),
+        request: (api) => api.login(
+          LoginRequest(
+            phoneNumber: phoneCtrl.text,
+            password: passwordCtrl.text,
+          ),
+        ),
       );
 
-      print(user?.name);
+      if (user?.role == 'group_member') {
+        Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
+      } else if (user?.role == 'employee' || user?.role == 'admin') {
+        Get.offAllNamed(Routes.EMPLOYEE_MAIN);
+      } else {
+        throw Exception('Role tidak ditemukan');
+      }
     } catch (e) {
-      print(e.toString());
-      ErrorHelper.handleError(e);
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
       _isSubmitted.value = false;
     }

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/local/secure_storage/token_manager.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/login/login_request.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/dio_client.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constant.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
@@ -41,5 +44,21 @@ abstract class ApiClient {
   }
 
   @POST("/login")
-  Future<dynamic> login(@Body() Map<String, dynamic> body);
+  Future<dynamic> login(@Body() LoginRequest body);
+
+  @POST("/register")
+  @MultiPart()
+  Future<dynamic> register({
+    @Part(name: "identity_number") required String identityNumber,
+    @Part(name: "member_number") required String memberNumber,
+    @Part(name: "name") required String name,
+    @Part(name: "birth_date") required String birthDate,
+    @Part(name: "phone_number") required String phoneNumber,
+    @Part(name: "address") required String address,
+    @Part(name: "occupation") required String occupation,
+    @Part(name: "password") required String password,
+    @Part(name: "work_area_id") required int workAreaId,
+    @Part(name: "identity_card_photo") required File identityCardPhoto,
+    @Part(name: "self_photo") required File selfPhoto,
+  });
 }

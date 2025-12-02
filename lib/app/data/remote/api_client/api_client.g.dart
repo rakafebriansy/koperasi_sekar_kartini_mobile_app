@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.110.39:8000';
+    baseUrl ??= 'http://192.168.110.98:8000';
   }
 
   final Dio _dio;
@@ -24,12 +24,12 @@ class _ApiClient implements ApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<dynamic> login(Map<String, dynamic> body) async {
+  Future<dynamic> login(LoginRequest body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
+    _data.addAll(body.toJson());
     final _options = _setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -38,6 +38,96 @@ class _ApiClient implements ApiClient {
         .compose(
           _dio.options,
           '/login',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> register({
+    required String identityNumber,
+    required String memberNumber,
+    required String name,
+    required String birthDate,
+    required String phoneNumber,
+    required String address,
+    required String occupation,
+    required String password,
+    required int workAreaId,
+    required File identityCardPhoto,
+    required File selfPhoto,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'identity_number',
+      identityNumber,
+    ));
+    _data.fields.add(MapEntry(
+      'member_number',
+      memberNumber,
+    ));
+    _data.fields.add(MapEntry(
+      'name',
+      name,
+    ));
+    _data.fields.add(MapEntry(
+      'birth_date',
+      birthDate,
+    ));
+    _data.fields.add(MapEntry(
+      'phone_number',
+      phoneNumber,
+    ));
+    _data.fields.add(MapEntry(
+      'address',
+      address,
+    ));
+    _data.fields.add(MapEntry(
+      'occupation',
+      occupation,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      password,
+    ));
+    _data.fields.add(MapEntry(
+      'work_area_id',
+      workAreaId.toString(),
+    ));
+    _data.files.add(MapEntry(
+      'identity_card_photo',
+      MultipartFile.fromFileSync(
+        identityCardPhoto.path,
+        filename: identityCardPhoto.path.split(Platform.pathSeparator).last,
+      ),
+    ));
+    _data.files.add(MapEntry(
+      'self_photo',
+      MultipartFile.fromFileSync(
+        selfPhoto.path,
+        filename: selfPhoto.path.split(Platform.pathSeparator).last,
+      ),
+    ));
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+        .compose(
+          _dio.options,
+          '/register',
           queryParameters: queryParameters,
           data: _data,
         )

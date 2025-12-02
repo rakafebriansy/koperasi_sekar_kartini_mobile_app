@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +19,8 @@ class AppTextFormField extends StatefulWidget {
     this.readOnly = false,
     this.onTap,
     this.keyboardType,
+    this.validator,
+    this.inputFormatters,
   });
 
   final TextEditingController controller;
@@ -32,6 +35,8 @@ class AppTextFormField extends StatefulWidget {
   final bool readOnly;
   final VoidCallback? onTap;
   final TextInputType? keyboardType;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
@@ -57,20 +62,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           decoration: buildAppTextInputDecoration(
             hintText: widget.hintText,
             prefixIcon: widget.prefixIcon,
-            suffixIcon: widget.suffixIcon,
-            counterText: widget.counterText,
-          ),
-          maxLines: widget.obscureText ? 1 : widget.maxLines,
-          readOnly: widget.readOnly,
-          onTap: widget.onTap,
-          keyboardType: widget.keyboardType,
-        ),
-        if (widget.obscureText)
-          Positioned(
-            top: 0,
-            bottom: 0,
-            right: MediaQuery.of(context).size.width * 0.04,
-            child: Center(
+            suffixIcon: widget.obscureText ? Center(
               child: SizedBox(
                 height: 24.sp,
                 width: 24.sp,
@@ -97,8 +89,16 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                   ),
                 ),
               ),
-            ),
+            ) : widget.suffixIcon,
+            counterText: widget.counterText,
           ),
+          maxLines: widget.obscureText ? 1 : widget.maxLines,
+          readOnly: widget.readOnly,
+          onTap: widget.onTap,
+          keyboardType: widget.keyboardType,
+          validator: widget.validator,
+          inputFormatters: widget.inputFormatters,
+        ),
       ],
     );
   }

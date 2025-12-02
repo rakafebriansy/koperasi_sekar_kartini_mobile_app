@@ -64,34 +64,32 @@ class RegisterView extends GetView<RegisterController> {
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           controller: controller.scrollController,
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                poppins(
-                  controller.getCurrentTitle,
-                  fontSize: 36.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.bg.primary,
-                ),
-                poppins(
-                  controller.getCurrentSubtitle,
-                  fontSize: 14.sp,
-                  color: AppColor.bg.primary,
-                ),
-                SizedBox(height: 16.sp),
-                IndexedStack(
-                  index: controller.selectedScreen,
-                  children: [
-                    AppRegister1stForm(controller: controller),
-                    AppRegister2ndForm(controller: controller),
-                    AppRegister3rdForm(controller: controller),
-                    AppRegister4thForm(controller: controller),
-                    AppRegister5thForm(controller: controller),
-                  ],
-                ),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              poppins(
+                controller.getCurrentTitle,
+                fontSize: 36.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColor.bg.primary,
+              ),
+              poppins(
+                controller.getCurrentSubtitle,
+                fontSize: 14.sp,
+                color: AppColor.bg.primary,
+              ),
+              SizedBox(height: 16.sp),
+              IndexedStack(
+                index: controller.selectedScreen,
+                children: [
+                  AppRegister1stForm(controller: controller),
+                  AppRegister2ndForm(controller: controller),
+                  AppRegister3rdForm(controller: controller),
+                  AppRegister4thForm(controller: controller),
+                  AppRegister5thForm(controller: controller),
+                ],
+              ),
+            ],
           ),
         ),
       ),

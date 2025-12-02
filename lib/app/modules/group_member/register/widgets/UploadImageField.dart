@@ -9,11 +9,26 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 
-class UploadImageField extends StatelessWidget {
-  UploadImageField({required this.imageFile, required this.func});
+class UploadImageField extends StatefulWidget {
+  const UploadImageField({super.key, required this.onPick});
 
-  final File? imageFile;
-  final Future<void> Function(ImageSource) func;
+  final Future<void> Function(File?) onPick;
+
+  @override
+  State<UploadImageField> createState() => _UploadImageFieldState();
+}
+
+class _UploadImageFieldState extends State<UploadImageField> {
+  File? value;
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> pickImage(ImageSource source) async {
+    final XFile? pickedFile = await _picker.pickImage(source: source);
+    if (pickedFile != null) {
+      value = File(pickedFile.path);
+      widget.onPick(value);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +36,7 @@ class UploadImageField extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          imageFile != null
+          value != null
               ? Container(
                   decoration: BoxDecoration(
                     border: Border.all(width: 3.sp, color: AppColor.bg.gray),
@@ -29,13 +44,13 @@ class UploadImageField extends StatelessWidget {
                   ),
                   height: 220.sp,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  child: Image.file(imageFile!),
+                  child: Image.file(value!),
                 )
               : Material(
                   color: Colors.white,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(16.sp),
-                    onTap: () => func(ImageSource.gallery),
+                    onTap: () => pickImage(ImageSource.gallery),
                     splashColor: AppColor.bg.primary.withValues(alpha: 0.1),
                     highlightColor: AppColor.bg.primary.withValues(alpha: 0.1),
                     child: Container(
@@ -88,7 +103,7 @@ class UploadImageField extends StatelessWidget {
             svgPath: AppAsset.svgs.cameraIcon,
             textColor: AppColor.bg.primary,
             backgroundColor: AppColor.bg.lightPrimary,
-            onTap: () => func(ImageSource.camera),
+            onTap: () => pickImage(ImageSource.camera),
           ),
         ],
       ),
