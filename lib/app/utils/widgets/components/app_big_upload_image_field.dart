@@ -9,16 +9,16 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 
-class UploadImageField extends StatefulWidget {
-  const UploadImageField({super.key, required this.onPick});
+class AppBigUploadImageField extends StatefulWidget {
+  const AppBigUploadImageField({super.key, required this.onPick});
 
   final Future<void> Function(File?) onPick;
 
   @override
-  State<UploadImageField> createState() => _UploadImageFieldState();
+  State<AppBigUploadImageField> createState() => _AppBigUploadImageFieldState();
 }
 
-class _UploadImageFieldState extends State<UploadImageField> {
+class _AppBigUploadImageFieldState extends State<AppBigUploadImageField> {
   File? value;
   final ImagePicker _picker = ImagePicker();
 

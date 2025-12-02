@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/controllers/register_controller.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/widgets/UploadImageFormField.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_big_upload_image_field.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_upload_image_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
@@ -20,7 +21,10 @@ class AppRegister5thForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            UploadImageFormField(
+            AppUploadImageFormField(
+              builder: (onPick) {
+                return AppBigUploadImageField(onPick: onPick);
+              },
               onPick: (file) async {
                 controller.setSelfImage(file);
               },

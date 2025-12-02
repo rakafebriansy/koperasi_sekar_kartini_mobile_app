@@ -61,7 +61,7 @@ class EmployeeMainTabsEmployeeView
                     ),
                     onPressed: () {
                       Get.toNamed(
-                        Routes.EMPLOYEE_EMPLOYEE_DETAIL,
+                        Routes.EMPLOYEE_MANAGE_EMPLOYEE,
                         arguments: ArgsWrapper(
                           action: ActionType.create,
                           data: null,
@@ -135,7 +135,7 @@ class _GroupedEmployeeListView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14.sp),
                         onTap: () {
                           Get.toNamed(
-                            Routes.EMPLOYEE_EMPLOYEE_DETAIL,
+                            Routes.EMPLOYEE_MANAGE_EMPLOYEE,
                             arguments: ArgsWrapper(
                               action: ActionType.update,
                               data: u,

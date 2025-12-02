@@ -43,6 +43,7 @@ abstract class ApiClient {
     );
   }
 
+  // AUTH
   @POST("/login")
   Future<dynamic> login(@Body() LoginRequest body);
 
@@ -50,7 +51,6 @@ abstract class ApiClient {
   @MultiPart()
   Future<dynamic> register({
     @Part(name: "identity_number") required String identityNumber,
-    @Part(name: "member_number") required String memberNumber,
     @Part(name: "name") required String name,
     @Part(name: "birth_date") required String birthDate,
     @Part(name: "phone_number") required String phoneNumber,
@@ -62,8 +62,22 @@ abstract class ApiClient {
     @Part(name: "self_photo") required File selfPhoto,
   });
 
+  // EMPLOYEE
   @GET("/employees")
-  Future<dynamic> getUsers({
-    @Query('search') String? search
+  Future<dynamic> getEmployees({@Query('search') String? search});
+
+  @POST("/employees")
+  @MultiPart()
+  Future<dynamic> createEmployee({
+    @Part(name: "identity_number") required String identityNumber,
+    @Part(name: "member_number") required String memberNumber,
+    @Part(name: "name") required String name,
+    @Part(name: "birth_date") required String birthDate,
+    @Part(name: "phone_number") required String phoneNumber,
+    @Part(name: "address") required String address,
+    @Part(name: "occupation") required String occupation,
+    @Part(name: "password") required String password,
+    @Part(name: "identity_card_photo") required File identityCardPhoto,
+    @Part(name: "self_photo") required File selfPhoto,
   });
 }

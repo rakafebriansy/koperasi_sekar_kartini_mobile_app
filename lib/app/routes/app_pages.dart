@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../modules/employee/detail/bindings/employee_employee_detail_binding.dart';
-import '../modules/employee/detail/views/employee_employee_detail_view.dart';
+import '../modules/employee/manage_employee/bindings/employee_manage_employee_binding.dart';
+import '../modules/employee/manage_employee/views/employee_manage_employee_view.dart';
 import '../modules/employee/group_member_detail/bindings/employee_group_member_detail_binding.dart';
 import '../modules/employee/group_member_detail/views/employee_group_member_detail_view.dart';
 import '../modules/employee/main/bindings/employee_main_binding.dart';
@@ -137,9 +137,9 @@ class AppPages {
       binding: GroupMemberLoanListBinding(),
     ),
     GetPage(
-      name: _Paths.EMPLOYEE_EMPLOYEE_DETAIL,
-      page: () => const EmployeeEmployeeDetailView(),
-      binding: EmployeeEmployeeDetailBinding(),
+      name: _Paths.EMPLOYEE_MANAGE_EMPLOYEE,
+      page: () => const EmployeeManageEmployeeView(),
+      binding: EmployeeManageEmployeeBinding(),
     ),
     GetPage(
       name: _Paths.MANAGE_EVENT,

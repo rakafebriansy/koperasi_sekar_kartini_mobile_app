@@ -89,7 +89,7 @@ Text poppins(
   Color? color,
   double? fontSize,
   FontWeight? fontWeight,
-  TextStyle? textStyle,
+  FontStyle? fontStyle,
   bool? softWrap,
   TextAlign? textAlign,
   TextOverflow? overflow,
@@ -103,7 +103,7 @@ Text poppins(
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color,
-      textStyle: textStyle,
+      fontStyle: fontStyle,
     ),
   );
 }

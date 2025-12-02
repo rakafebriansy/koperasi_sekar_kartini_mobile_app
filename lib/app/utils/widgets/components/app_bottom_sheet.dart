@@ -8,31 +8,44 @@ class AppBottomSheet extends StatelessWidget {
     this.titleText,
     this.subtitleText,
     this.children,
+    this.padding,
+    this.spacing,
     this.crossAxisAlignment = CrossAxisAlignment.start,
   });
 
   final String? titleText;
   final String? subtitleText;
+  final EdgeInsets? padding;
+  final double? spacing;
   final List<Widget>? children;
   final CrossAxisAlignment crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) => Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 32.sp),
-        decoration: BoxDecoration(
-          color: context.theme.scaffoldBackgroundColor,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
-        ),
-        child: Column(
-          crossAxisAlignment: crossAxisAlignment,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (titleText?.isNotEmpty ?? false) Text(titleText!, style: context.textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold)),
-            if (subtitleText?.isNotEmpty ?? false) Text(subtitleText!),
-            if ((titleText?.isNotEmpty ?? false) || (subtitleText?.isNotEmpty ?? false)) SizedBox(height: 16.sp),
-            ...children ?? [],
-          ],
-        ),
-      );
+    width: double.infinity,
+    padding: padding ?? EdgeInsets.all(16.sp),
+    decoration: BoxDecoration(
+      color: context.theme.scaffoldBackgroundColor,
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
+    ),
+    child: Column(
+      spacing: spacing ?? 12.sp,
+      crossAxisAlignment: crossAxisAlignment,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (titleText?.isNotEmpty ?? false)
+          Text(
+            titleText!,
+            style: context.textTheme.headlineSmall!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        if (subtitleText?.isNotEmpty ?? false) Text(subtitleText!),
+        if ((titleText?.isNotEmpty ?? false) ||
+            (subtitleText?.isNotEmpty ?? false))
+          SizedBox(height: 16.sp),
+        ...children ?? [],
+      ],
+    ),
+  );
 }

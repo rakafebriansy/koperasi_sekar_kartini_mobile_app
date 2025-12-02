@@ -27,6 +27,7 @@ class AppRegister1stForm extends StatelessWidget {
           AppTextFormGroup(
             controller: controller.identityNumberCtrl,
             label: 'NIK',
+            placeholder: 'Masukkan NIK',
             maxLines: 1,
             validator: (value) => value.isRequired('NIK') ?? value.exactLength(16, 'NIK'),
           ),

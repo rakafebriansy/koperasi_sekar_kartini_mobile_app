@@ -24,7 +24,7 @@ class EmployeeMainTabsEmployeeController extends GetxController {
 
     try {
       final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUsers(),
+        request: (api) => api.getEmployees(),
       );
 
       _users.value = data;

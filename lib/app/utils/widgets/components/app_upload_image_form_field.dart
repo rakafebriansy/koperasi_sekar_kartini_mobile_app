@@ -2,35 +2,40 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/widgets/UploadImageField.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
-class UploadImageFormField extends FormField<File?> {
-  UploadImageFormField({
-    Key? key,
+class AppUploadImageFormField extends FormField<File?> {
+  AppUploadImageFormField({
+    super.key,
     required Future<void> Function(File?) onPick,
     FormFieldSetter<File?>? onSaved,
     FormFieldValidator<File?>? validator,
+    required Widget Function(Future<void> Function(File?) onPick) builder,
+    double? spacing,
+    double? leftMessagePadding,
   }) : super(
-         key: key,
          validator: validator,
          onSaved: onSaved,
          builder: (field) {
            return Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: [
-               UploadImageField(
-                 onPick: (file) async {
-                   await onPick(file);
-                   field.didChange(file);
-                 },
-               ),
+               builder((file) async {
+                 await onPick(file);
+                 field.didChange(file);
+               }),
                if (field.hasError)
                  Padding(
-                   padding: EdgeInsets.only(top: 14.sp),
+                   padding: EdgeInsets.fromLTRB(
+                     leftMessagePadding ?? 10.sp,
+                     spacing ?? 6.sp,
+                     0,
+                     0
+                   ),
                    child: poppins(
                      field.errorText ?? '',
-                     color: Colors.red,
+                     color: AppColor.bg.danger,
                      fontSize: 10.sp,
                    ),
                  ),

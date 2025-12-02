@@ -1,57 +1,46 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/user/user_request.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/static/register_caption.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
-class RegisterController extends GetxController {
+class EmployeeManageEmployeeController extends GetxController {
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();
-  final thirdFormKey = GlobalKey<FormState>();
-  final fourthFormKey = GlobalKey<FormState>();
-  final fifthFormKey = GlobalKey<FormState>();
 
   TextEditingController identityNumberCtrl = TextEditingController(
     text: !kReleaseMode ? '1234567890123456' : '',
   );
+  TextEditingController memberNumberCtrl = TextEditingController(
+    text: !kReleaseMode ? '000001' : '',
+  );
   TextEditingController nameCtrl = TextEditingController(
     text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
-  );
-  TextEditingController addressCtrl = TextEditingController(
-    text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
-  );
-  TextEditingController birthDateCtrl = TextEditingController(
-    text: !kReleaseMode ? '29/02/2004' : '',
-  );
-  TextEditingController occupationCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Programmer' : '',
-  );
-  TextEditingController emailCtrl = TextEditingController(
-    text: !kReleaseMode ? 'raka@example.com' : '',
   );
   TextEditingController phoneCtrl = TextEditingController(
     text: !kReleaseMode ? '08123456789' : '',
   );
-  TextEditingController passwordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Password123' : '',
+  TextEditingController birthDateCtrl = TextEditingController(
+    text: !kReleaseMode ? '29/02/2004' : '',
   );
-  TextEditingController confirmPasswordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Password123' : '',
+  TextEditingController addressCtrl = TextEditingController(
+    text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
   );
-
-  final RxInt _selectedScreen = 0.obs;
-  int get selectedScreen => _selectedScreen.value;
+  TextEditingController occupationCtrl = TextEditingController(
+    text: !kReleaseMode ? 'Resepsionis' : '',
+  );
+  TextEditingController emailCtrl = TextEditingController(
+    text: !kReleaseMode ? 'raka@example.com' : '',
+  );
+  TextEditingController passwordCtrl = TextEditingController(text: '12345678');
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
@@ -62,23 +51,35 @@ class RegisterController extends GetxController {
   final Rx<File?> _selfImage = Rxn();
   File? get selfImage => _selfImage.value;
 
-  final int totalStep = 5;
-  double get progress => (selectedScreen + 1) / totalStep;
+  final RxInt _selectedScreen = 0.obs;
+  int get selectedScreen => _selectedScreen.value;
+
+  final Rx<int?> _id = Rxn();
+  int? get id => _id.value;
 
   ScrollController scrollController = ScrollController();
 
-  late RegisterCaption caption;
+  @override
+  void onInit() {
+    try {
+      final user = (Get.arguments as ArgsWrapper).data as UserModel;
 
-  String get getCurrentTitle => caption.title[selectedScreen];
-  String get getCurrentSubtitle => caption.subtitle[selectedScreen];
-
-  Rx<WorkAreaModel?> selectedWorkArea = Rx<WorkAreaModel?>(
-    !kReleaseMode
-        ? WorkAreaModel(id: 1, name: DummyHelper.workAreas.first.name)
-        : null,
-  );
-
-  RegisterController({required this.caption});
+      if ((Get.arguments as ArgsWrapper).isUpdateAction) {
+        _id.value = user.id;
+        birthDateCtrl.text = user.birthDate == null
+            ? ''
+            : DateFormat('dd/MM/yyyy').format(user.birthDate!);
+        identityNumberCtrl.text = user.identityNumber ?? '';
+        nameCtrl.text = user.name;
+        phoneCtrl.text = user.phoneNumber ?? '';
+        addressCtrl.text = user.address ?? '';
+        occupationCtrl.text = user.occupation ?? '';
+      }
+    } catch (e) {
+      print(e);
+    }
+    super.onInit();
+  }
 
   @override
   void dispose() {
@@ -86,11 +87,9 @@ class RegisterController extends GetxController {
     nameCtrl.dispose();
     addressCtrl.dispose();
     birthDateCtrl.dispose();
-    occupationCtrl.dispose();
     emailCtrl.dispose();
     phoneCtrl.dispose();
     passwordCtrl.dispose();
-    confirmPasswordCtrl.dispose();
     scrollController.dispose();
     super.dispose();
   }
@@ -121,39 +120,37 @@ class RegisterController extends GetxController {
     }
   }
 
-  Future<void> register() async {
+  Future<void> create() async {
     _isSubmitted.value = true;
-
-    if (selectedWorkArea.value == null) throw Exception('Work Area is null');
 
     try {
       final req = UserRequest(
         name: nameCtrl.text,
         identityNumber: identityNumberCtrl.text,
+        memberNumber: memberNumberCtrl.text,
         birthDate: birthDateCtrl.text,
         phoneNumber: phoneCtrl.text,
         address: addressCtrl.text,
         occupation: occupationCtrl.text,
         password: passwordCtrl.text,
-        workAreaId: selectedWorkArea.value!.id,
       );
 
       await ApiHelper.fetch<UserModel>(
-        request: (api) => api.register(
+        request: (api) => api.createEmployee(
           identityNumber: req.identityNumber,
           name: req.name,
+          memberNumber: req.memberNumber!,
           birthDate: req.birthDate.toIsoDateString(),
           phoneNumber: req.phoneNumber,
           address: req.address,
           occupation: req.occupation,
           password: req.password,
-          workAreaId: req.workAreaId!,
           identityCardPhoto: idCardImage!,
           selfPhoto: selfImage!,
         ),
       );
 
-      Get.offAllNamed(Routes.LOGIN);
+      Get.back();
       Get.snackbar('INFO', 'Berhasil membuat akun!');
     } catch (e) {
       debugPrint(e.toString());
@@ -172,21 +169,6 @@ class RegisterController extends GetxController {
         return;
       case 1:
         if (secondFormKey.currentState!.validate()) {
-          nextScreen();
-        }
-        return;
-      case 2:
-        if (thirdFormKey.currentState!.validate()) {
-          nextScreen();
-        }
-        return;
-      case 3:
-        if (fourthFormKey.currentState!.validate()) {
-          nextScreen();
-        }
-        return;
-      case 4:
-        if (fifthFormKey.currentState!.validate()) {
           try {
             var error = await idCardImage.maxSize(
               maxInMB: 2,
@@ -204,7 +186,7 @@ class RegisterController extends GetxController {
               throw Exception(error2);
             }
 
-            register();
+            create();
           } catch (e) {
             ErrorHelper.handleError(e);
           }

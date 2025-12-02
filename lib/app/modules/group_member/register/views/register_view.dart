@@ -21,6 +21,7 @@ class RegisterView extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     return Obx(
       () => AppDefaultWrapper(
+        ableToBack: false,
         actions: [
           SizedBox(
             width: 60.sp,
