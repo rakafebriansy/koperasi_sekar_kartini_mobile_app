@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -66,9 +65,11 @@ class EmployeeManageEmployeeController extends GetxController {
   @override
   void onInit() {
     try {
-      final user = (Get.arguments as ArgsWrapper).data as UserModel;
+      final args = (Get.arguments as ArgsWrapper);
+      _action.value = args.action;
 
-      if ((Get.arguments as ArgsWrapper).action.isUpdateAction) {
+      if (args.action.isUpdateAction) {
+        final user = args.data as UserModel;
         _id.value = user.id;
         birthDateCtrl.text = user.birthDate == null
             ? ''
@@ -140,12 +141,12 @@ class EmployeeManageEmployeeController extends GetxController {
           address: addressCtrl.text.nullIfEmpty,
           occupation: occupationCtrl.text.nullIfEmpty,
           password: passwordCtrl.text.nullIfEmpty,
-          identityCardPhoto: idCardImage!,
-          selfPhoto: selfImage!,
+          identityCardPhoto: idCardImage,
+          selfPhoto: selfImage,
         ),
       );
 
-      Get.back();
+      Get.back(result: true);
       Get.snackbar('INFO', 'Berhasil membuat akun!');
     } catch (e) {
       debugPrint(e.toString());
@@ -158,23 +159,26 @@ class EmployeeManageEmployeeController extends GetxController {
   Future<void> updateEmployee() async {
     _isSubmitted.value = true;
 
+    if (id == null) throw Exception('id is null');
+
     try {
-      await ApiHelper.fetch<UserModel>(
+      final user = await ApiHelper.fetch<UserModel>(
         request: (api) => api.updateEmployee(
-          name: nameCtrl.text.nullIfEmpty,
-          identityNumber: identityNumberCtrl.text.nullIfEmpty,
-          memberNumber: memberNumberCtrl.text.nullIfEmpty,
-          birthDate: birthDateCtrl.text.nullIfEmpty,
-          phoneNumber: phoneCtrl.text.nullIfEmpty,
-          address: addressCtrl.text.nullIfEmpty,
-          occupation: occupationCtrl.text.nullIfEmpty,
-          password: passwordCtrl.text.nullIfEmpty,
-          identityCardPhoto: idCardImage!,
-          selfPhoto: selfImage!,
+          id: id!,
+          name: nameCtrl.text,
+          identityNumber: identityNumberCtrl.text,
+          memberNumber: memberNumberCtrl.text,
+          birthDate: birthDateCtrl.text.toIsoDateString(),
+          phoneNumber: phoneCtrl.text,
+          address: addressCtrl.text,
+          occupation: occupationCtrl.text,
+          password: passwordCtrl.text,
+          identityCardPhoto: idCardImage,
+          selfPhoto: selfImage,
         ),
       );
 
-      Get.back();
+      Get.back(result: true);
       Get.snackbar('INFO', 'Berhasil memperbarui akun!');
     } catch (e) {
       debugPrint(e.toString());
@@ -187,14 +191,13 @@ class EmployeeManageEmployeeController extends GetxController {
   Future<void> deleteEmployee() async {
     _isSubmitted.value = true;
 
-    if(id == null) {
+    if (id == null) {
       throw Exception('id is null');
     }
 
     try {
       await ApiHelper.fetchNonReturnable(
-        request: (api) => api.deleteEmployee(
-          id: id!),
+        request: (api) => api.deleteEmployee(id: id!),
       );
 
       Get.back();
@@ -217,26 +220,28 @@ class EmployeeManageEmployeeController extends GetxController {
       case 1:
         if (secondFormKey.currentState!.validate()) {
           try {
-            if (idCardImage != null || selfImage != null) {
-              var error = await idCardImage.maxSize(
-                maxInMB: 2,
-                fieldName: 'Foto KTP',
-              );
-              if (error != null) {
-                throw Exception(error);
-              }
-
-              var error2 = await selfImage.maxSize(
-                maxInMB: 2,
-                fieldName: 'Foto KTP',
-              );
-              if (error2 != null) {
-                throw Exception(error2);
-              }
-            }
-
             if (action != null) {
-              if (action!.isCreateAction) createEmployee();
+              if (action!.isCreateAction) {
+                if (idCardImage == null || selfImage == null) {
+                  var error = await idCardImage.maxSize(
+                    maxInMB: 2,
+                    fieldName: 'Foto KTP',
+                  );
+                  if (error != null) {
+                    throw Exception(error);
+                  }
+
+                  var error2 = await selfImage.maxSize(
+                    maxInMB: 2,
+                    fieldName: 'Foto KTP',
+                  );
+
+                  if (error2 != null) {
+                    throw Exception(error2);
+                  }
+                }
+                createEmployee();
+              }
               if (action!.isUpdateAction) updateEmployee();
             }
           } catch (e) {

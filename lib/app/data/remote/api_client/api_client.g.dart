@@ -355,6 +355,8 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<dynamic> updateEmployee({
+    required int id,
+    String method = "PUT",
     String? identityNumber,
     String? memberNumber,
     String? name,
@@ -371,6 +373,10 @@ class _ApiClient implements ApiClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
+    _data.fields.add(MapEntry(
+      '_method',
+      method,
+    ));
     if (identityNumber != null) {
       _data.fields.add(MapEntry(
         'identity_number',
@@ -442,14 +448,14 @@ class _ApiClient implements ApiClient {
       }
     }
     final _options = _setStreamType<dynamic>(Options(
-      method: 'PUT',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,
-          '/employees',
+          '/employees/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

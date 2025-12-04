@@ -17,9 +17,11 @@ class AppStandardUploadImageField extends StatefulWidget implements IPickImage {
   const AppStandardUploadImageField({
     super.key,
     required this.onPick,
+    this.textButton,
   });
 
   final Future<void> Function(File?) onPick;
+  final String? textButton;
 
   @override
   State<AppStandardUploadImageField> createState() =>
@@ -97,7 +99,7 @@ class _AppStandardUploadImageFieldState
           ),
           AppOutlinedButton(
             height: 30.sp,
-            label: 'Pilih',
+            label: widget.textButton ?? 'Pilih',
             onTap: _chooseImageSource,
             fontSize: 12.sp,
           ),

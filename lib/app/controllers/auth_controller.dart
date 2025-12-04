@@ -39,7 +39,7 @@ class AuthController extends GetxController {
         await refreshToken();
         break;
       case AuthState.authenticated:
-        Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
+        Get.offAllNamed(currentUser?.role == 'group_member' ? Routes.GROUP_MEMBER_MAIN : Routes.EMPLOYEE_MAIN);
         break;
       default:
       //TODO: Loading screen

@@ -87,9 +87,13 @@ abstract class ApiClient {
     @Part(name: "self_photo") File? selfPhoto,
   });
 
-  @PUT("/employees")
+  @POST("/employees/{id}")
   @MultiPart()
   Future<dynamic> updateEmployee({
+    @Path('id') required int id,
+
+    @Part(name: "_method") String method = "PUT",
+
     @Part(name: "identity_number") String? identityNumber,
     @Part(name: "member_number") String? memberNumber,
     @Part(name: "name") String? name,

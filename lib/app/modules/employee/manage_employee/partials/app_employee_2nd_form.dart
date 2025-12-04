@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/controllers/employee_manage_employee_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_standard_upload_image_field.dart';
@@ -42,24 +43,29 @@ class AppEmployee2ndForm extends StatelessWidget {
           poppins('Foto KTP', fontSize: 14.sp, fontWeight: FontWeight.w600),
           AppUploadImageFormField(
             builder: (onPick) {
-              return AppStandardUploadImageField(onPick: onPick);
+              return AppStandardUploadImageField(onPick: onPick, textButton: 'Ubah',);
             },
             onPick: (file) async {
               controller.setIdCardImage(file);
             },
-            validator: (value) => value.isRequired('Pas Foto'),
+            validator: (value) =>
+                controller.action != null && controller.action!.isCreateAction
+                ? value.isRequired('Pas Foto')
+                : null,
           ),
           SizedBox(height: 8.sp),
           poppins('Pas Foto', fontSize: 14.sp, fontWeight: FontWeight.w600),
           AppUploadImageFormField(
             builder: (onPick) {
-              return AppStandardUploadImageField(onPick: onPick);
+              return AppStandardUploadImageField(onPick: onPick, textButton: 'Ubah',);
             },
             onPick: (file) async {
-              print('object');
               controller.setSelfImage(file);
             },
-            validator: (value) => value.isRequired('Pas Foto'),
+            validator: (value) =>
+                controller.action != null && controller.action!.isCreateAction
+                ? value.isRequired('Pas Foto')
+                : null,
           ),
           SizedBox(height: 18.sp),
           Row(

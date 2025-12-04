@@ -112,7 +112,6 @@ class ApiHelper {
       if (raw is Map<String, dynamic> && raw['token'] != null) {
         AuthController.find.tokenManager.setToken(raw['token']);
       }
-
     } catch (e) {
       rethrow;
     }

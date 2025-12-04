@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
@@ -59,14 +58,17 @@ class EmployeeMainTabsEmployeeView
                       ),
                       borderRadiusCircularSize: 12.sp,
                     ),
-                    onPressed: () {
-                      Get.toNamed(
+                    onPressed: () async {
+                      final result = await Get.toNamed(
                         Routes.EMPLOYEE_MANAGE_EMPLOYEE,
                         arguments: ArgsWrapper(
                           action: ActionType.create,
                           data: null,
                         ),
                       );
+                      if (result == true) {
+                        controller.fetchListData();
+                      }
                     },
                     label: poppins('Tambah', color: AppColor.bg.primary),
                     icon: Icon(Icons.add, color: AppColor.bg.primary),
@@ -80,9 +82,7 @@ class EmployeeMainTabsEmployeeView
                       height: MediaQuery.of(context).size.height * 0.5,
                       child: Center(child: CircularProgressIndicator()),
                     )
-                  : _GroupedEmployeeListView(
-                      groupedEmployee: controller.users.groupedByFirstLetter,
-                    ),
+                  : _GroupedEmployeeListView(controller: controller),
             ),
           ],
         ),
@@ -92,12 +92,13 @@ class EmployeeMainTabsEmployeeView
 }
 
 class _GroupedEmployeeListView extends StatelessWidget {
-  final Map<String, List<UserModel>> groupedEmployee;
+  final EmployeeMainTabsEmployeeController controller;
 
-  const _GroupedEmployeeListView({required this.groupedEmployee});
+  const _GroupedEmployeeListView({required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final groupedEmployee = controller.users.groupedByFirstLetter;
     final letters = groupedEmployee.keys.toList()..sort();
 
     var container = Column(
@@ -133,14 +134,18 @@ class _GroupedEmployeeListView extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(14.sp),
-                        onTap: () {
-                          Get.toNamed(
+                        onTap: () async {
+                          final result = await Get.toNamed(
                             Routes.EMPLOYEE_MANAGE_EMPLOYEE,
                             arguments: ArgsWrapper(
                               action: ActionType.update,
                               data: u,
                             ),
                           );
+
+                          if (result == true) {
+                            controller.fetchListData();
+                          }
                         },
                         child: ListTile(
                           contentPadding: EdgeInsets.symmetric(
