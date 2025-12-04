@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -21,15 +20,14 @@ class AppTextFormField extends StatefulWidget {
     this.keyboardType,
     this.validator,
     this.inputFormatters,
+    this.onChanged,
   });
 
   final TextEditingController controller;
   final bool obscureText;
   final String hintText;
-  final SvgPicture? prefixIcon;
-  // final Icon? prefixIcon;
-  final SvgPicture? suffixIcon;
-  // final Icon? suffixIcon;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final int? maxLines;
   final String? counterText;
   final bool readOnly;
@@ -37,6 +35,7 @@ class AppTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
+  final Function(String)? onChanged;
 
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
@@ -55,40 +54,43 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
     return Stack(
       children: [
         TextFormField(
+          onChanged: widget.onChanged,
           style: GoogleFonts.poppins(fontSize: 14.sp),
           obscureText: isHidden,
           controller: widget.controller,
           decoration: buildAppTextInputDecoration(
             hintText: widget.hintText,
             prefixIcon: widget.prefixIcon,
-            suffixIcon: widget.obscureText ? Center(
-              child: SizedBox(
-                height: 24.sp,
-                width: 24.sp,
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        isHidden = !isHidden;
-                      });
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    splashColor: AppColor.bg.lightPrimary.withValues(
-                      alpha: 0.3,
+            suffixIcon: widget.obscureText
+                ? Center(
+                    child: SizedBox(
+                      height: 24.sp,
+                      width: 24.sp,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              isHidden = !isHidden;
+                            });
+                          },
+                          borderRadius: BorderRadius.circular(12),
+                          splashColor: AppColor.bg.lightPrimary.withValues(
+                            alpha: 0.3,
+                          ),
+                          highlightColor: AppColor.bg.lightPrimary.withValues(
+                            alpha: 0.1,
+                          ),
+                          child: Icon(
+                            isHidden ? Icons.visibility_off : Icons.visibility,
+                            color: Color(0xFFD9D9D9),
+                            size: 24.sp,
+                          ),
+                        ),
+                      ),
                     ),
-                    highlightColor: AppColor.bg.lightPrimary.withValues(
-                      alpha: 0.1,
-                    ),
-                    child: Icon(
-                      isHidden ? Icons.visibility_off : Icons.visibility,
-                      color: Color(0xFFD9D9D9),
-                      size: 24.sp,
-                    ),
-                  ),
-                ),
-              ),
-            ) : widget.suffixIcon,
+                  )
+                : widget.suffixIcon,
             counterText: widget.counterText,
           ),
           maxLines: widget.obscureText ? 1 : widget.maxLines,

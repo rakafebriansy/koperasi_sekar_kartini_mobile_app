@@ -37,6 +37,7 @@ class EmployeeMainTabsEmployeeView
                   AppAsset.svgs.searchGray,
                   height: 16.sp,
                 ),
+                onChanged: (value) => controller.onSearchChanged(value),
               ),
             ),
             Padding(
@@ -101,85 +102,96 @@ class _GroupedEmployeeListView extends StatelessWidget {
     final groupedEmployee = controller.users.groupedByFirstLetter;
     final letters = groupedEmployee.keys.toList()..sort();
 
-    var container = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate(letters.length, (index) {
-        final letter = letters[index];
-        final users = groupedEmployee[letter]!;
+    var container = groupedEmployee.length > 0
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(letters.length, (index) {
+              final letter = letters[index];
+              final users = groupedEmployee[letter]!;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(color: AppColor.bg.lightGray),
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 18.sp, vertical: 4.sp),
-              child: poppins(
-                letter,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColor.text.gray,
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
-              child: Column(
-                children: List.generate(users.length, (idx) {
-                  final u = users[idx];
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 4.sp),
-                    child: Material(
-                      borderRadius: BorderRadius.circular(14.sp),
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(14.sp),
-                        onTap: () async {
-                          final result = await Get.toNamed(
-                            Routes.EMPLOYEE_MANAGE_EMPLOYEE,
-                            arguments: ArgsWrapper(
-                              action: ActionType.update,
-                              data: u,
-                            ),
-                          );
-
-                          if (result == true) {
-                            controller.fetchListData();
-                          }
-                        },
-                        child: ListTile(
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 8.sp,
-                            vertical: 1.sp,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14.sp),
-                            side: BorderSide(
-                              width: 1.sp,
-                              color: AppColor.bg.gray,
-                            ),
-                          ),
-                          leading: CircleAvatar(child: Text(u.name[0])),
-                          title: Text(u.name),
-                          subtitle: Text('#${u.id}'),
-                          trailing: Container(
-                            padding: EdgeInsets.all(3.sp),
-                            child: Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: AppColor.border.gray,
-                            ),
-                          ),
-                        ),
-                      ),
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(color: AppColor.bg.lightGray),
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 18.sp,
+                      vertical: 4.sp,
                     ),
-                  );
-                }),
-              ),
-            ),
-          ],
-        );
-      }),
-    );
+                    child: poppins(
+                      letter,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.text.gray,
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.sp,
+                      vertical: 8.sp,
+                    ),
+                    child: Column(
+                      children: List.generate(users.length, (idx) {
+                        final u = users[idx];
+                        return Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4.sp),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(14.sp),
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(14.sp),
+                              onTap: () async {
+                                final result = await Get.toNamed(
+                                  Routes.EMPLOYEE_MANAGE_EMPLOYEE,
+                                  arguments: ArgsWrapper(
+                                    action: ActionType.update,
+                                    data: u,
+                                  ),
+                                );
+
+                                if (result == true) {
+                                  controller.fetchListData();
+                                }
+                              },
+                              child: ListTile(
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8.sp,
+                                  vertical: 1.sp,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14.sp),
+                                  side: BorderSide(
+                                    width: 1.sp,
+                                    color: AppColor.bg.gray,
+                                  ),
+                                ),
+                                leading: CircleAvatar(child: Text(u.name[0])),
+                                title: Text(u.name),
+                                subtitle: Text('#${u.id}'),
+                                trailing: Container(
+                                  padding: EdgeInsets.all(3.sp),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: AppColor.border.gray,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              );
+            }),
+          )
+        : SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: Center(child: poppins('Tidak ada daa.')),
+          );
     return container;
   }
 }
