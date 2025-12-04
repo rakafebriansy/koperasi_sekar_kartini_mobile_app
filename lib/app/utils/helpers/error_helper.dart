@@ -112,7 +112,7 @@ abstract class ErrorHelper {
       return DialogHelper.showFailedDialog(e.source.toString());
     } else if (e == 'You are offline') {
       try {
-        return SnackbarHelper.showSnackbar(messageText: 'Anda sedang offline');
+        // return SnackbarHelper.showSnackbar(messageText: 'Anda sedang offline');
       } catch (e) {
         // Ignored, really
       }

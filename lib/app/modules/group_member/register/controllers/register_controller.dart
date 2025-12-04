@@ -4,12 +4,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/user/user_request.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/static/register_caption.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
@@ -127,27 +125,16 @@ class RegisterController extends GetxController {
     if (selectedWorkArea.value == null) throw Exception('Work Area is null');
 
     try {
-      final req = UserRequest(
-        name: nameCtrl.text,
-        identityNumber: identityNumberCtrl.text,
-        birthDate: birthDateCtrl.text,
-        phoneNumber: phoneCtrl.text,
-        address: addressCtrl.text,
-        occupation: occupationCtrl.text,
-        password: passwordCtrl.text,
-        workAreaId: selectedWorkArea.value!.id,
-      );
-
       await ApiHelper.fetch<UserModel>(
         request: (api) => api.register(
-          identityNumber: req.identityNumber,
-          name: req.name,
-          birthDate: req.birthDate.toIsoDateString(),
-          phoneNumber: req.phoneNumber,
-          address: req.address,
-          occupation: req.occupation,
-          password: req.password,
-          workAreaId: req.workAreaId!,
+          name: nameCtrl.text,
+          identityNumber: identityNumberCtrl.text,
+          birthDate: birthDateCtrl.text,
+          phoneNumber: phoneCtrl.text,
+          address: addressCtrl.text,
+          occupation: occupationCtrl.text,
+          password: passwordCtrl.text,
+          workAreaId: selectedWorkArea.value!.id,
           identityCardPhoto: idCardImage!,
           selfPhoto: selfImage!,
         ),

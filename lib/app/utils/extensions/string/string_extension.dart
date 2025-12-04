@@ -18,3 +18,8 @@ extension StringDateExtension on String {
     }
   }
 }
+
+extension NullableStringExtension on String? {
+  String? get nullIfEmpty =>
+      this != null && this!.trim().isNotEmpty ? this!.trim() : null;
+}

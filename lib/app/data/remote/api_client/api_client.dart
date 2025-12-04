@@ -50,17 +50,23 @@ abstract class ApiClient {
   @POST("/register")
   @MultiPart()
   Future<dynamic> register({
-    @Part(name: "identity_number") required String identityNumber,
-    @Part(name: "name") required String name,
-    @Part(name: "birth_date") required String birthDate,
-    @Part(name: "phone_number") required String phoneNumber,
-    @Part(name: "address") required String address,
-    @Part(name: "occupation") required String occupation,
-    @Part(name: "password") required String password,
-    @Part(name: "work_area_id") required int workAreaId,
-    @Part(name: "identity_card_photo") required File identityCardPhoto,
-    @Part(name: "self_photo") required File selfPhoto,
+    @Part(name: "identity_number") String? identityNumber,
+    @Part(name: "name") String? name,
+    @Part(name: "birth_date") String? birthDate,
+    @Part(name: "phone_number") String? phoneNumber,
+    @Part(name: "address") String? address,
+    @Part(name: "occupation") String? occupation,
+    @Part(name: "password") String? password,
+    @Part(name: "work_area_id") int? workAreaId,
+    @Part(name: "identity_card_photo") File? identityCardPhoto,
+    @Part(name: "self_photo") File? selfPhoto,
   });
+
+  @GET("/refresh")
+  Future<dynamic> refreshToken();
+
+  @POST("/logout")
+  Future<dynamic> logout();
 
   // EMPLOYEE
   @GET("/employees")
@@ -69,15 +75,33 @@ abstract class ApiClient {
   @POST("/employees")
   @MultiPart()
   Future<dynamic> createEmployee({
-    @Part(name: "identity_number") required String identityNumber,
-    @Part(name: "member_number") required String memberNumber,
-    @Part(name: "name") required String name,
-    @Part(name: "birth_date") required String birthDate,
-    @Part(name: "phone_number") required String phoneNumber,
-    @Part(name: "address") required String address,
-    @Part(name: "occupation") required String occupation,
-    @Part(name: "password") required String password,
-    @Part(name: "identity_card_photo") required File identityCardPhoto,
-    @Part(name: "self_photo") required File selfPhoto,
+    @Part(name: "identity_number") String? identityNumber,
+    @Part(name: "member_number") String? memberNumber,
+    @Part(name: "name") String? name,
+    @Part(name: "birth_date") String? birthDate,
+    @Part(name: "phone_number") String? phoneNumber,
+    @Part(name: "address") String? address,
+    @Part(name: "occupation") String? occupation,
+    @Part(name: "password") String? password,
+    @Part(name: "identity_card_photo") File? identityCardPhoto,
+    @Part(name: "self_photo") File? selfPhoto,
   });
+
+  @PUT("/employees")
+  @MultiPart()
+  Future<dynamic> updateEmployee({
+    @Part(name: "identity_number") String? identityNumber,
+    @Part(name: "member_number") String? memberNumber,
+    @Part(name: "name") String? name,
+    @Part(name: "birth_date") String? birthDate,
+    @Part(name: "phone_number") String? phoneNumber,
+    @Part(name: "address") String? address,
+    @Part(name: "occupation") String? occupation,
+    @Part(name: "password") String? password,
+    @Part(name: "identity_card_photo") File? identityCardPhoto,
+    @Part(name: "self_photo") File? selfPhoto,
+  });
+
+  @DELETE("/employees")
+  Future<dynamic> deleteEmployee({@Path('id') required int id});
 }

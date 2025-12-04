@@ -9,6 +9,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class LoginController extends GetxController {
+
   final formKey = GlobalKey<FormState>();
 
   final RxBool _isSubmitted = false.obs;
@@ -50,8 +51,6 @@ class LoginController extends GetxController {
         ),
       );
 
-      if (user == null) throw Exception('User is not found');
-      
       AuthController.find.saveUserData(user: user);
 
       if (user.role == 'group_member') {

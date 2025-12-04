@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.110.59:8000';
+    baseUrl ??= 'http://192.168.110.84:8000';
   }
 
   final Dio _dio;
@@ -53,72 +53,92 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<dynamic> register({
-    required String identityNumber,
-    required String memberNumber,
-    required String name,
-    required String birthDate,
-    required String phoneNumber,
-    required String address,
-    required String occupation,
-    required String password,
-    required int workAreaId,
-    required File identityCardPhoto,
-    required File selfPhoto,
+    String? identityNumber,
+    String? name,
+    String? birthDate,
+    String? phoneNumber,
+    String? address,
+    String? occupation,
+    String? password,
+    int? workAreaId,
+    File? identityCardPhoto,
+    File? selfPhoto,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.fields.add(MapEntry(
-      'identity_number',
-      identityNumber,
-    ));
-    _data.fields.add(MapEntry(
-      'member_number',
-      memberNumber,
-    ));
-    _data.fields.add(MapEntry(
-      'name',
-      name,
-    ));
-    _data.fields.add(MapEntry(
-      'birth_date',
-      birthDate,
-    ));
-    _data.fields.add(MapEntry(
-      'phone_number',
-      phoneNumber,
-    ));
-    _data.fields.add(MapEntry(
-      'address',
-      address,
-    ));
-    _data.fields.add(MapEntry(
-      'occupation',
-      occupation,
-    ));
-    _data.fields.add(MapEntry(
-      'password',
-      password,
-    ));
-    _data.fields.add(MapEntry(
-      'work_area_id',
-      workAreaId.toString(),
-    ));
-    _data.files.add(MapEntry(
-      'identity_card_photo',
-      MultipartFile.fromFileSync(
-        identityCardPhoto.path,
-        filename: identityCardPhoto.path.split(Platform.pathSeparator).last,
-      ),
-    ));
-    _data.files.add(MapEntry(
-      'self_photo',
-      MultipartFile.fromFileSync(
-        selfPhoto.path,
-        filename: selfPhoto.path.split(Platform.pathSeparator).last,
-      ),
-    ));
+    if (identityNumber != null) {
+      _data.fields.add(MapEntry(
+        'identity_number',
+        identityNumber,
+      ));
+    }
+    if (name != null) {
+      _data.fields.add(MapEntry(
+        'name',
+        name,
+      ));
+    }
+    if (birthDate != null) {
+      _data.fields.add(MapEntry(
+        'birth_date',
+        birthDate,
+      ));
+    }
+    if (phoneNumber != null) {
+      _data.fields.add(MapEntry(
+        'phone_number',
+        phoneNumber,
+      ));
+    }
+    if (address != null) {
+      _data.fields.add(MapEntry(
+        'address',
+        address,
+      ));
+    }
+    if (occupation != null) {
+      _data.fields.add(MapEntry(
+        'occupation',
+        occupation,
+      ));
+    }
+    if (password != null) {
+      _data.fields.add(MapEntry(
+        'password',
+        password,
+      ));
+    }
+    if (workAreaId != null) {
+      _data.fields.add(MapEntry(
+        'work_area_id',
+        workAreaId.toString(),
+      ));
+    }
+    if (identityCardPhoto != null) {
+      if (identityCardPhoto != null) {
+        _data.files.add(MapEntry(
+          'identity_card_photo',
+          MultipartFile.fromFileSync(
+            identityCardPhoto.path,
+            filename: identityCardPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    if (selfPhoto != null) {
+      if (selfPhoto != null) {
+        _data.files.add(MapEntry(
+          'self_photo',
+          MultipartFile.fromFileSync(
+            selfPhoto.path,
+            filename: selfPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
     final _options = _setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -128,6 +148,60 @@ class _ApiClient implements ApiClient {
         .compose(
           _dio.options,
           '/register',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> refreshToken() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/refresh',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> logout() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/logout',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -171,72 +245,234 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<dynamic> createEmployee({
-    required String identityNumber,
-    required String memberNumber,
-    required String name,
-    required String birthDate,
-    required String phoneNumber,
-    required String address,
-    required String occupation,
-    required String password,
-    required File identityCardPhoto,
-    required File selfPhoto,
+    String? identityNumber,
+    String? memberNumber,
+    String? name,
+    String? birthDate,
+    String? phoneNumber,
+    String? address,
+    String? occupation,
+    String? password,
+    File? identityCardPhoto,
+    File? selfPhoto,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.fields.add(MapEntry(
-      'identity_number',
-      identityNumber,
-    ));
-    _data.fields.add(MapEntry(
-      'member_number',
-      memberNumber,
-    ));
-    _data.fields.add(MapEntry(
-      'name',
-      name,
-    ));
-    _data.fields.add(MapEntry(
-      'birth_date',
-      birthDate,
-    ));
-    _data.fields.add(MapEntry(
-      'phone_number',
-      phoneNumber,
-    ));
-    _data.fields.add(MapEntry(
-      'address',
-      address,
-    ));
-    _data.fields.add(MapEntry(
-      'occupation',
-      occupation,
-    ));
-    _data.fields.add(MapEntry(
-      'password',
-      password,
-    ));
-    _data.files.add(MapEntry(
-      'identity_card_photo',
-      MultipartFile.fromFileSync(
-        identityCardPhoto.path,
-        filename: identityCardPhoto.path.split(Platform.pathSeparator).last,
-      ),
-    ));
-    _data.files.add(MapEntry(
-      'self_photo',
-      MultipartFile.fromFileSync(
-        selfPhoto.path,
-        filename: selfPhoto.path.split(Platform.pathSeparator).last,
-      ),
-    ));
+    if (identityNumber != null) {
+      _data.fields.add(MapEntry(
+        'identity_number',
+        identityNumber,
+      ));
+    }
+    if (memberNumber != null) {
+      _data.fields.add(MapEntry(
+        'member_number',
+        memberNumber,
+      ));
+    }
+    if (name != null) {
+      _data.fields.add(MapEntry(
+        'name',
+        name,
+      ));
+    }
+    if (birthDate != null) {
+      _data.fields.add(MapEntry(
+        'birth_date',
+        birthDate,
+      ));
+    }
+    if (phoneNumber != null) {
+      _data.fields.add(MapEntry(
+        'phone_number',
+        phoneNumber,
+      ));
+    }
+    if (address != null) {
+      _data.fields.add(MapEntry(
+        'address',
+        address,
+      ));
+    }
+    if (occupation != null) {
+      _data.fields.add(MapEntry(
+        'occupation',
+        occupation,
+      ));
+    }
+    if (password != null) {
+      _data.fields.add(MapEntry(
+        'password',
+        password,
+      ));
+    }
+    if (identityCardPhoto != null) {
+      if (identityCardPhoto != null) {
+        _data.files.add(MapEntry(
+          'identity_card_photo',
+          MultipartFile.fromFileSync(
+            identityCardPhoto.path,
+            filename: identityCardPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    if (selfPhoto != null) {
+      if (selfPhoto != null) {
+        _data.files.add(MapEntry(
+          'self_photo',
+          MultipartFile.fromFileSync(
+            selfPhoto.path,
+            filename: selfPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
     final _options = _setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
+    )
+        .compose(
+          _dio.options,
+          '/employees',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> updateEmployee({
+    String? identityNumber,
+    String? memberNumber,
+    String? name,
+    String? birthDate,
+    String? phoneNumber,
+    String? address,
+    String? occupation,
+    String? password,
+    File? identityCardPhoto,
+    File? selfPhoto,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (identityNumber != null) {
+      _data.fields.add(MapEntry(
+        'identity_number',
+        identityNumber,
+      ));
+    }
+    if (memberNumber != null) {
+      _data.fields.add(MapEntry(
+        'member_number',
+        memberNumber,
+      ));
+    }
+    if (name != null) {
+      _data.fields.add(MapEntry(
+        'name',
+        name,
+      ));
+    }
+    if (birthDate != null) {
+      _data.fields.add(MapEntry(
+        'birth_date',
+        birthDate,
+      ));
+    }
+    if (phoneNumber != null) {
+      _data.fields.add(MapEntry(
+        'phone_number',
+        phoneNumber,
+      ));
+    }
+    if (address != null) {
+      _data.fields.add(MapEntry(
+        'address',
+        address,
+      ));
+    }
+    if (occupation != null) {
+      _data.fields.add(MapEntry(
+        'occupation',
+        occupation,
+      ));
+    }
+    if (password != null) {
+      _data.fields.add(MapEntry(
+        'password',
+        password,
+      ));
+    }
+    if (identityCardPhoto != null) {
+      if (identityCardPhoto != null) {
+        _data.files.add(MapEntry(
+          'identity_card_photo',
+          MultipartFile.fromFileSync(
+            identityCardPhoto.path,
+            filename: identityCardPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    if (selfPhoto != null) {
+      if (selfPhoto != null) {
+        _data.files.add(MapEntry(
+          'self_photo',
+          MultipartFile.fromFileSync(
+            selfPhoto.path,
+            filename: selfPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+        .compose(
+          _dio.options,
+          '/employees',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> deleteEmployee({required int id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
     )
         .compose(
           _dio.options,

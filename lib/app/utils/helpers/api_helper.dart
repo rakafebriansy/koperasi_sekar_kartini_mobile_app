@@ -27,6 +27,10 @@ class ApiHelper {
         return ModelRegistry.fromJson<T>(dataObj);
       });
 
+      if (response.success == false) {
+        throw Exception("API returned false");
+      }
+
       if (response.data == null) {
         throw Exception("API returned null data for type $T");
       }
@@ -59,11 +63,16 @@ class ApiHelper {
       final raw = await request(apiClient);
 
       final response = ResponseParser.parse<List<T>>(raw, (dataObj) {
-          return dataObj
-                  .map((e) => ModelRegistry.fromJson<T>(e))
-                  .toList().cast<T>()
-              as List<T>;
+        return dataObj
+                .map((e) => ModelRegistry.fromJson<T>(e))
+                .toList()
+                .cast<T>()
+            as List<T>;
       });
+
+      if (response.success == false) {
+        throw Exception("API returned false");
+      }
 
       if (response.data == null) {
         throw Exception("API returned null data for type $T");
@@ -74,6 +83,36 @@ class ApiHelper {
       }
 
       return response.data as List<T>;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<void> fetchNonReturnable({
+    required Future<dynamic> Function(ApiClient api) request,
+    Map<String, dynamic> headers = const {},
+    int connectTimeout = 30000,
+    int receiveTimeout = 30000,
+  }) async {
+    try {
+      final apiClient = await ApiClient.create(
+        headers: headers,
+        connectTimeout: connectTimeout,
+        receiveTimeout: receiveTimeout,
+      );
+
+      if (apiClient == null) throw Exception('API Client is null');
+
+      final raw = await request(apiClient);
+
+      if (raw is Map<String, dynamic> && raw['success'] == false) {
+        throw Exception("API returned false");
+      }
+
+      if (raw is Map<String, dynamic> && raw['token'] != null) {
+        AuthController.find.tokenManager.setToken(raw['token']);
+      }
+
     } catch (e) {
       rethrow;
     }

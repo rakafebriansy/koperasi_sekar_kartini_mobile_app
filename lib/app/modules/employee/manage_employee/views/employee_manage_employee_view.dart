@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/partials/app_employee_1st_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/partials/app_employee_2nd_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_form_wrapper.dart';
 
 import '../controllers/employee_manage_employee_controller.dart';
@@ -14,7 +16,16 @@ class EmployeeManageEmployeeView
   Widget build(BuildContext context) {
     return AppFormWrapper(
       ableToBack: true,
-      title: 'Detail Karyawan',
+      title: controller.action != null
+          ? (controller.action!.isCreateAction
+                ? 'Tambah Karyawan'
+                : 'Ubah Karyawan')
+          : 'Detail Karyawan',
+      actions: [
+        Material(
+          child: InkWell(child: Icon(Icons.delete, color: AppColor.bg.danger)),
+        ),
+      ],
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         controller: controller.scrollController,
