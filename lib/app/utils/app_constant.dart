@@ -1,1 +1,1 @@
-const DEVELOPMENT_BASE_URL = "http://172.20.10.4:8000";
+const DEVELOPMENT_BASE_URL = "http://10.222.57.219:8000";

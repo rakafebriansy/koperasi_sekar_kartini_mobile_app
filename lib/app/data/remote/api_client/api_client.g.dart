@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://10.196.13.219:8000';
+    baseUrl ??= 'http://10.222.57.219:8000';
   }
 
   final Dio _dio;
@@ -255,6 +255,7 @@ class _ApiClient implements ApiClient {
     String? password,
     File? identityCardPhoto,
     File? selfPhoto,
+    File? memberCardPhoto,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -327,6 +328,17 @@ class _ApiClient implements ApiClient {
           MultipartFile.fromFileSync(
             selfPhoto.path,
             filename: selfPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    if (memberCardPhoto != null) {
+      if (memberCardPhoto != null) {
+        _data.files.add(MapEntry(
+          'member_card_photo',
+          MultipartFile.fromFileSync(
+            memberCardPhoto.path,
+            filename: memberCardPhoto.path.split(Platform.pathSeparator).last,
           ),
         ));
       }

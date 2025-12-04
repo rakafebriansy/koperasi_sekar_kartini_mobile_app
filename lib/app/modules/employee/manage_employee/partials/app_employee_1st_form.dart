@@ -44,8 +44,7 @@ class AppEmployee1stForm extends StatelessWidget {
             maxLines: 1,
             keyboardType: TextInputType.number,
             placeholder: 'Masukkan no anggota',
-            validator: (value) =>
-                value.isRequired('Nomor Anggota')
+            validator: (value) => value.isRequired('Nomor Anggota'),
           ),
           SizedBox(height: 8.sp),
           poppins(
@@ -59,12 +58,20 @@ class AppEmployee1stForm extends StatelessWidget {
             label: 'Tanggal Lahir',
           ),
           SizedBox(height: 8.sp),
-                    AppTextFormGroup(
-            controller: controller.addressCtrl,
-            label: 'Alamat Lengkap',
-            maxLines: 2,
-            placeholder: 'Masukkan alamat',
-            validator: (value) => value.isRequired('Alamat Lengkap'),
+          AppTextFormGroup(
+            controller: controller.phoneCtrl,
+            label: 'Nomor Telepon',
+            keyboardType: TextInputType.number,
+            validator: (value) =>
+                value.isRequired('Nomor Telepon') ?? value.isPhoneNumber(),
+          ),
+          SizedBox(height: 8.sp),
+          AppTextFormGroup(
+            controller: controller.occupationCtrl,
+            label: 'Posisi',
+            placeholder: 'Masukkan posisi',
+            maxLines: 1,
+            validator: (value) => value.isRequired('Pekerjaan'),
           ),
           SizedBox(height: 18.sp),
           AppFilledButton(

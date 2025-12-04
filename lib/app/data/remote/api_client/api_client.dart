@@ -85,6 +85,7 @@ abstract class ApiClient {
     @Part(name: "password") String? password,
     @Part(name: "identity_card_photo") File? identityCardPhoto,
     @Part(name: "self_photo") File? selfPhoto,
+    @Part(name: "member_card_photo") File? memberCardPhoto,
   });
 
   @POST("/employees/{id}")

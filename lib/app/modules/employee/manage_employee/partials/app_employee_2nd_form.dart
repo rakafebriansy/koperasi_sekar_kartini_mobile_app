@@ -26,19 +26,11 @@ class AppEmployee2ndForm extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AppTextFormGroup(
-            controller: controller.phoneCtrl,
-            label: 'Nomor Telepon',
-            keyboardType: TextInputType.number,
-            validator: (value) =>
-                value.isRequired('Nomor Telepon') ?? value.isPhoneNumber(),
-          ),
-          SizedBox(height: 8.sp),
-          AppTextFormGroup(
-            controller: controller.occupationCtrl,
-            label: 'Posisi',
-            placeholder: 'Masukkan posisi',
-            maxLines: 1,
-            validator: (value) => value.isRequired('Pekerjaan'),
+            controller: controller.addressCtrl,
+            label: 'Alamat Lengkap',
+            maxLines: 2,
+            placeholder: 'Masukkan alamat',
+            validator: (value) => value.isRequired('Alamat Lengkap'),
           ),
           SizedBox(height: 8.sp),
           poppins('Foto KTP', fontSize: 14.sp, fontWeight: FontWeight.w600),
@@ -58,7 +50,7 @@ class AppEmployee2ndForm extends StatelessWidget {
                 : null,
           ),
           SizedBox(height: 8.sp),
-          poppins('Pas Foto', fontSize: 14.sp, fontWeight: FontWeight.w600),
+          poppins('Foto Diri', fontSize: 14.sp, fontWeight: FontWeight.w600),
           AppUploadImageFormField(
             builder: (onPick) {
               return AppStandardUploadImageField(
@@ -71,8 +63,21 @@ class AppEmployee2ndForm extends StatelessWidget {
             },
             validator: (value) =>
                 controller.action != null && controller.action!.isCreateAction
-                ? value.isRequired('Pas Foto')
+                ? value.isRequired('Foto Diri')
                 : null,
+          ),
+          SizedBox(height: 8.sp),
+          poppins('Foto Kartu Anggota', fontSize: 14.sp, fontWeight: FontWeight.w600),
+          AppUploadImageFormField(
+            builder: (onPick) {
+              return AppStandardUploadImageField(
+                onPick: onPick,
+                textButton: 'Ubah',
+              );
+            },
+            onPick: (file) async {
+              controller.setMemberCardImage(file);
+            },
           ),
           SizedBox(height: 18.sp),
           Row(

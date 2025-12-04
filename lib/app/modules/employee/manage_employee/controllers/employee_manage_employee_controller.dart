@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -17,28 +18,28 @@ class EmployeeManageEmployeeController extends GetxController {
   final secondFormKey = GlobalKey<FormState>();
 
   TextEditingController identityNumberCtrl = TextEditingController(
-    // text: !kReleaseMode ? '1234567890123456' : '',
+    text: !kReleaseMode ? '1234567890123456' : '',
   );
   TextEditingController memberNumberCtrl = TextEditingController(
-    // text: !kReleaseMode ? '000001' : '',
+    text: !kReleaseMode ? '000001' : '',
   );
   TextEditingController nameCtrl = TextEditingController(
-    // text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
+    text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
   );
   TextEditingController phoneCtrl = TextEditingController(
-    // text: !kReleaseMode ? '08123456789' : '',
+    text: !kReleaseMode ? '08123456789' : '',
   );
   TextEditingController birthDateCtrl = TextEditingController(
-    // text: !kReleaseMode ? '29/02/2004' : '',
+    text: !kReleaseMode ? '29/02/2004' : '',
   );
   TextEditingController addressCtrl = TextEditingController(
-    // text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
+    text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
   );
   TextEditingController occupationCtrl = TextEditingController(
-    // text: !kReleaseMode ? 'Resepsionis' : '',
+    text: !kReleaseMode ? 'Resepsionis' : '',
   );
   TextEditingController emailCtrl = TextEditingController(
-    // text: !kReleaseMode ? 'raka@example.com' : '',
+    text: !kReleaseMode ? 'raka@example.com' : '',
   );
   TextEditingController passwordCtrl = TextEditingController(text: '12345678');
 
@@ -53,6 +54,9 @@ class EmployeeManageEmployeeController extends GetxController {
 
   final Rx<File?> _selfImage = Rxn();
   File? get selfImage => _selfImage.value;
+
+  final Rx<File?> _memberCardImage = Rxn();
+  File? get memberCardImage => _selfImage.value;
 
   final RxInt _selectedScreen = 0.obs;
   int get selectedScreen => _selectedScreen.value;
@@ -127,22 +131,32 @@ class EmployeeManageEmployeeController extends GetxController {
     }
   }
 
+  Future<void> setMemberCardImage(File? file) async {
+    try {
+      if (file == null) throw Exception('Gambar kosong.');
+      _memberCardImage.value = file;
+    } catch (e) {
+      ErrorHelper.handleError('Gagal unggah gambar: ${e.toString()}');
+    }
+  }
+
   Future<void> createEmployee() async {
     _isSubmitted.value = true;
 
     try {
       await ApiHelper.fetch<UserModel>(
         request: (api) => api.createEmployee(
-          name: nameCtrl.text.nullIfEmpty,
-          identityNumber: identityNumberCtrl.text.nullIfEmpty,
-          memberNumber: memberNumberCtrl.text.nullIfEmpty,
-          birthDate: birthDateCtrl.text.nullIfEmpty,
-          phoneNumber: phoneCtrl.text.nullIfEmpty,
-          address: addressCtrl.text.nullIfEmpty,
-          occupation: occupationCtrl.text.nullIfEmpty,
-          password: passwordCtrl.text.nullIfEmpty,
+          name: nameCtrl.text,
+          identityNumber: identityNumberCtrl.text,
+          memberNumber: memberNumberCtrl.text,
+          birthDate: birthDateCtrl.text.toIsoDateString(),
+          phoneNumber: phoneCtrl.text,
+          address: addressCtrl.text,
+          occupation: occupationCtrl.text,
+          password: passwordCtrl.text,
           identityCardPhoto: idCardImage,
           selfPhoto: selfImage,
+          memberCardPhoto: memberCardImage,
         ),
       );
 
