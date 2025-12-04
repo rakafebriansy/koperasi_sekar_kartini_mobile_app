@@ -13,8 +13,8 @@ class AppBottomSheet extends StatelessWidget {
     this.crossAxisAlignment = CrossAxisAlignment.start,
   });
 
-  final String? titleText;
-  final String? subtitleText;
+  final Text? titleText;
+  final Text? subtitleText;
   final EdgeInsets? padding;
   final double? spacing;
   final List<Widget>? children;
@@ -33,16 +33,9 @@ class AppBottomSheet extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (titleText?.isNotEmpty ?? false)
-          Text(
-            titleText!,
-            style: context.textTheme.headlineSmall!.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        if (subtitleText?.isNotEmpty ?? false) Text(subtitleText!),
-        if ((titleText?.isNotEmpty ?? false) ||
-            (subtitleText?.isNotEmpty ?? false))
+        if (titleText != null) titleText!,
+        if (subtitleText != null) subtitleText!,
+        if (children != null)
           SizedBox(height: 16.sp),
         ...children ?? [],
       ],

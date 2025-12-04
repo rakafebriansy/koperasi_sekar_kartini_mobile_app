@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/controllers/employee_manage_employee_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
@@ -43,7 +44,10 @@ class AppEmployee2ndForm extends StatelessWidget {
           poppins('Foto KTP', fontSize: 14.sp, fontWeight: FontWeight.w600),
           AppUploadImageFormField(
             builder: (onPick) {
-              return AppStandardUploadImageField(onPick: onPick, textButton: 'Ubah',);
+              return AppStandardUploadImageField(
+                onPick: onPick,
+                textButton: 'Ubah',
+              );
             },
             onPick: (file) async {
               controller.setIdCardImage(file);
@@ -57,7 +61,10 @@ class AppEmployee2ndForm extends StatelessWidget {
           poppins('Pas Foto', fontSize: 14.sp, fontWeight: FontWeight.w600),
           AppUploadImageFormField(
             builder: (onPick) {
-              return AppStandardUploadImageField(onPick: onPick, textButton: 'Ubah',);
+              return AppStandardUploadImageField(
+                onPick: onPick,
+                textButton: 'Ubah',
+              );
             },
             onPick: (file) async {
               controller.setSelfImage(file);
@@ -99,7 +106,11 @@ class AppEmployee2ndForm extends StatelessWidget {
                 child: Obx(
                   () => AppFilledButton(
                     label: 'Simpan',
-                    onTap: controller.isSubmitted
+                    onTap:
+                        controller.isSubmitted ||
+                            (AuthController.find.currentUser != null &&
+                                AuthController.find.currentUser!.role !=
+                                    'admin')
                         ? null
                         : controller.submitButton,
                     width: double.infinity,

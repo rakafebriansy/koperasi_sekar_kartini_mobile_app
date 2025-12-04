@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -47,12 +48,13 @@ class AppHomeWrapper extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 14.sp,
                   ),
-                  poppins(
-                    "Raka",
-                    color: Colors.black,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  if (AuthController.find.currentUser != null)
+                    poppins(
+                      AuthController.find.currentUser!.name,
+                      color: Colors.black,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                 ],
               ),
             ],

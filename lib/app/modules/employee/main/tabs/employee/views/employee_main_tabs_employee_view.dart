@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
@@ -50,30 +51,32 @@ class EmployeeMainTabsEmployeeView
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),
-                  ElevatedButton.icon(
-                    style: buildInkWellButtonStyle(
-                      foregroundColor: AppColor.bg.primary,
-                      backgroundColor: AppColor.bg.lightPrimary,
-                      overlayColor: AppColor.bg.transparentPrimary.withValues(
-                        alpha: 0.2,
-                      ),
-                      borderRadiusCircularSize: 12.sp,
-                    ),
-                    onPressed: () async {
-                      final result = await Get.toNamed(
-                        Routes.EMPLOYEE_MANAGE_EMPLOYEE,
-                        arguments: ArgsWrapper(
-                          action: ActionType.create,
-                          data: null,
+                  if (AuthController.find.currentUser != null &&
+                      AuthController.find.currentUser!.role == 'admin')
+                    ElevatedButton.icon(
+                      style: buildInkWellButtonStyle(
+                        foregroundColor: AppColor.bg.primary,
+                        backgroundColor: AppColor.bg.lightPrimary,
+                        overlayColor: AppColor.bg.transparentPrimary.withValues(
+                          alpha: 0.2,
                         ),
-                      );
-                      if (result == true) {
-                        controller.fetchListData();
-                      }
-                    },
-                    label: poppins('Tambah', color: AppColor.bg.primary),
-                    icon: Icon(Icons.add, color: AppColor.bg.primary),
-                  ),
+                        borderRadiusCircularSize: 12.sp,
+                      ),
+                      onPressed: () async {
+                        final result = await Get.toNamed(
+                          Routes.EMPLOYEE_MANAGE_EMPLOYEE,
+                          arguments: ArgsWrapper(
+                            action: ActionType.create,
+                            data: null,
+                          ),
+                        );
+                        if (result == true) {
+                          controller.fetchListData();
+                        }
+                      },
+                      label: poppins('Tambah', color: AppColor.bg.primary),
+                      icon: Icon(Icons.add, color: AppColor.bg.primary),
+                    ),
                 ],
               ),
             ),
@@ -102,7 +105,7 @@ class _GroupedEmployeeListView extends StatelessWidget {
     final groupedEmployee = controller.users.groupedByFirstLetter;
     final letters = groupedEmployee.keys.toList()..sort();
 
-    var container = groupedEmployee.length > 0
+    var container = groupedEmployee.isNotEmpty
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(letters.length, (index) {
