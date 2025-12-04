@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/partials/app_employee_1st_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/partials/app_employee_2nd_form.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_form_wrapper.dart';
 
@@ -23,7 +22,11 @@ class EmployeeManageEmployeeView
           : 'Detail Karyawan',
       actions: [
         Material(
-          child: InkWell(child: Icon(Icons.delete, color: AppColor.bg.danger)),
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: controller.deleteEmployee,
+            child: Icon(Icons.delete, color: Colors.white),
+          ),
         ),
       ],
       child: SingleChildScrollView(

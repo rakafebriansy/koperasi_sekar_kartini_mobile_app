@@ -106,6 +106,10 @@ abstract class ApiClient {
     @Part(name: "self_photo") File? selfPhoto,
   });
 
-  @DELETE("/employees")
-  Future<dynamic> deleteEmployee({@Path('id') required int id});
+  @POST("/employees/{id}")
+  Future<dynamic> deleteEmployee({
+    @Part(name: "_method") String method = "DELETE",
+
+    @Path('id') required int id,
+  });
 }

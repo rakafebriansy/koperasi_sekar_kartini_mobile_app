@@ -162,7 +162,7 @@ class EmployeeManageEmployeeController extends GetxController {
     if (id == null) throw Exception('id is null');
 
     try {
-      final user = await ApiHelper.fetch<UserModel>(
+      await ApiHelper.fetch<UserModel>(
         request: (api) => api.updateEmployee(
           id: id!,
           name: nameCtrl.text,
@@ -200,7 +200,7 @@ class EmployeeManageEmployeeController extends GetxController {
         request: (api) => api.deleteEmployee(id: id!),
       );
 
-      Get.back();
+      Get.back(result: true);
       Get.snackbar('INFO', 'Berhasil menghapus akun!');
     } catch (e) {
       debugPrint(e.toString());

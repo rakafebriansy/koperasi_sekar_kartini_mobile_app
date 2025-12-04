@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.110.84:8000';
+    baseUrl ??= 'http://10.196.13.219:8000';
   }
 
   final Dio _dio;
@@ -470,19 +470,26 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> deleteEmployee({required int id}) async {
+  Future<dynamic> deleteEmployee({
+    String method = "DELETE",
+    required int id,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      '_method',
+      method,
+    ));
     final _options = _setStreamType<dynamic>(Options(
-      method: 'DELETE',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/employees',
+          '/employees/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
