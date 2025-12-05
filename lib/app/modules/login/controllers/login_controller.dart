@@ -15,15 +15,12 @@ class LoginController extends GetxController {
 
   TextEditingController phoneCtrl = TextEditingController(
     text: !kReleaseMode
-        ?
-          // '087712345678'
-          '08123456789'
-        // '089876543210'
-        // '081234567870'
+        ? '081200000001'
+        // '081200000102'
         : '',
   );
   TextEditingController passwordCtrl = TextEditingController(
-    text: !kReleaseMode ? '12345678' : '',
+    text: !kReleaseMode ? 'password' : '',
   );
 
   ScrollController scrollController = ScrollController();

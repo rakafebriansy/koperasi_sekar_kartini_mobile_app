@@ -70,13 +70,42 @@ abstract class ApiClient {
   @POST("/logout")
   Future<dynamic> logout();
 
-  // EMPLOYEE
-  @GET("/employees")
-  Future<dynamic> getEmployees({@Query('search') String? search});
+  // WORK AREA
 
-  @POST("/employees")
+  @GET("/work-areas")
+  Future<dynamic> getWorkAreas({@Query('search') String? search});
+
+  @POST("/work-areas")
+  Future<dynamic> createWorkArea({
+    @Field("name") String? name,
+  });
+
+  @POST("/work-areas/{id}")
+  Future<dynamic> updateWorkArea({
+    @Path('id') required int id,
+
+    @Field("_method") String method = "PUT",
+
+    @Field("name") String? name,
+  });
+
+  @POST("/work-areas/{id}")
+  Future<dynamic> deleteWorkArea({
+    @Path('id') required int id,
+
+    @Field("_method") String method = "DELETE",
+  });
+
+  // EMPLOYEE
+  @GET("/users")
+  Future<dynamic> getUsers({
+    @Query('search') String? search,
+    @Query('role') String? role,
+    });
+
+  @POST("/users")
   @MultiPart()
-  Future<dynamic> createEmployee({
+  Future<dynamic> createUser({
     @Part(name: "identity_number") String? identityNumber,
     @Part(name: "member_number") String? memberNumber,
     @Part(name: "name") String? name,
@@ -85,14 +114,15 @@ abstract class ApiClient {
     @Part(name: "address") String? address,
     @Part(name: "occupation") String? occupation,
     @Part(name: "password") String? password,
+    @Part(name: "role") String? role,
     @Part(name: "identity_card_photo") File? identityCardPhoto,
     @Part(name: "self_photo") File? selfPhoto,
     @Part(name: "member_card_photo") File? memberCardPhoto,
   });
 
-  @POST("/employees/{id}")
+  @POST("/users/{id}")
   @MultiPart()
-  Future<dynamic> updateEmployee({
+  Future<dynamic> updateUser({
     @Path('id') required int id,
 
     @Part(name: "_method") String method = "PUT",
@@ -105,13 +135,14 @@ abstract class ApiClient {
     @Part(name: "address") String? address,
     @Part(name: "occupation") String? occupation,
     @Part(name: "password") String? password,
+    @Part(name: "role") String? role,
     @Part(name: "identity_card_photo") File? identityCardPhoto,
     @Part(name: "self_photo") File? selfPhoto,
     @Part(name: "member_card_photo") File? memberCardPhoto,
   });
 
-  @POST("/employees/{id}")
-  Future<dynamic> deleteEmployee({
+  @POST("/users/{id}")
+  Future<dynamic> deleteUser({
     @Part(name: "_method") String method = "DELETE",
 
     @Path('id') required int id,

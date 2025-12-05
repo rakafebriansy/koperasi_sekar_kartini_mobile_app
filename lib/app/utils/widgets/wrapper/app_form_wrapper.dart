@@ -26,7 +26,7 @@ class AppFormWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         backgroundColor: AppColor.bg.primary,
         appBar: AppBar(
           toolbarHeight: 64.sp,
@@ -37,9 +37,7 @@ class AppFormWrapper extends StatelessWidget {
           centerTitle: true,
           leadingWidth: 64.sp,
           surfaceTintColor: Colors.white,
-          leading: leading != null
-              ? leading
-              : ableToBack
+          leading: leading ?? (ableToBack
               ? Center(
                   child: Padding(
                     padding: EdgeInsets.only(left: 12.sp),
@@ -71,7 +69,7 @@ class AppFormWrapper extends StatelessWidget {
                     ),
                   ),
                 )
-              : null,
+              : null),
           title: poppins(
             title,
             color: Colors.white,
@@ -91,8 +89,8 @@ class AppFormWrapper extends StatelessWidget {
                   height: 400.sp,
                 ),
               ),
-              Positioned(
-                bottom: 0,
+              Align(
+                alignment: Alignment.bottomCenter,
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.86,

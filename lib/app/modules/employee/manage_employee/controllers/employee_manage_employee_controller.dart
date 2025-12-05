@@ -145,7 +145,7 @@ class EmployeeManageEmployeeController extends GetxController {
 
     try {
       await ApiHelper.fetch<UserModel>(
-        request: (api) => api.createEmployee(
+        request: (api) => api.createUser(
           name: nameCtrl.text,
           identityNumber: identityNumberCtrl.text,
           memberNumber: memberNumberCtrl.text,
@@ -156,6 +156,7 @@ class EmployeeManageEmployeeController extends GetxController {
           password: passwordCtrl.text,
           identityCardPhoto: idCardImage,
           selfPhoto: selfImage,
+          role: 'employee',
           memberCardPhoto: memberCardImage,
         ),
       );
@@ -177,7 +178,7 @@ class EmployeeManageEmployeeController extends GetxController {
 
     try {
       await ApiHelper.fetch<UserModel>(
-        request: (api) => api.updateEmployee(
+        request: (api) => api.updateUser(
           id: id!,
           name: nameCtrl.text,
           identityNumber: identityNumberCtrl.text,
@@ -187,6 +188,7 @@ class EmployeeManageEmployeeController extends GetxController {
           address: addressCtrl.text,
           occupation: occupationCtrl.text,
           password: passwordCtrl.text,
+          role: 'employee',
           identityCardPhoto: idCardImage,
           selfPhoto: selfImage,
           memberCardPhoto: memberCardImage,
@@ -212,7 +214,7 @@ class EmployeeManageEmployeeController extends GetxController {
 
     try {
       await ApiHelper.fetchNonReturnable(
-        request: (api) => api.deleteEmployee(id: id!),
+        request: (api) => api.deleteUser(id: id!),
       );
 
       Get.back(result: true);

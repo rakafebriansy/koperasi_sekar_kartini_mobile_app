@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://10.222.57.219:8000';
+    baseUrl ??= 'http://192.168.1.10:8000';
   }
 
   final Dio _dio;
@@ -221,7 +221,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> getEmployees({String? search}) async {
+  Future<dynamic> getWorkAreas({String? search}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'search': search};
     queryParameters.removeWhere((k, v) => v == null);
@@ -234,7 +234,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/employees',
+          '/work-areas',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -249,7 +249,136 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> createEmployee({
+  Future<dynamic> createWorkArea({String? name}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {'name': name};
+    _data.removeWhere((k, v) => v == null);
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/work-areas',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> updateWorkArea({
+    required int id,
+    String method = "PUT",
+    String? name,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      '_method': method,
+      'name': name,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/work-areas/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> deleteWorkArea({
+    required int id,
+    String method = "DELETE",
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'_method': method};
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/work-areas/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> getUsers({
+    String? search,
+    String? role,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'search': search,
+      r'role': role,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/users',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> createUser({
     String? identityNumber,
     String? memberNumber,
     String? name,
@@ -258,6 +387,7 @@ class _ApiClient implements ApiClient {
     String? address,
     String? occupation,
     String? password,
+    String? role,
     File? identityCardPhoto,
     File? selfPhoto,
     File? memberCardPhoto,
@@ -315,6 +445,12 @@ class _ApiClient implements ApiClient {
         password,
       ));
     }
+    if (role != null) {
+      _data.fields.add(MapEntry(
+        'role',
+        role,
+      ));
+    }
     if (identityCardPhoto != null) {
       if (identityCardPhoto != null) {
         _data.files.add(MapEntry(
@@ -356,7 +492,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/employees',
+          '/users',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -371,7 +507,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> updateEmployee({
+  Future<dynamic> updateUser({
     required int id,
     String method = "PUT",
     String? identityNumber,
@@ -382,6 +518,7 @@ class _ApiClient implements ApiClient {
     String? address,
     String? occupation,
     String? password,
+    String? role,
     File? identityCardPhoto,
     File? selfPhoto,
     File? memberCardPhoto,
@@ -443,6 +580,12 @@ class _ApiClient implements ApiClient {
         password,
       ));
     }
+    if (role != null) {
+      _data.fields.add(MapEntry(
+        'role',
+        role,
+      ));
+    }
     if (identityCardPhoto != null) {
       if (identityCardPhoto != null) {
         _data.files.add(MapEntry(
@@ -484,7 +627,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/employees/${id}',
+          '/users/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -499,7 +642,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> deleteEmployee({
+  Future<dynamic> deleteUser({
     String method = "DELETE",
     required int id,
   }) async {
@@ -518,7 +661,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/employees/${id}',
+          '/users/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

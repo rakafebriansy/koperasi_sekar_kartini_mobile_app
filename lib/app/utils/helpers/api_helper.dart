@@ -4,7 +4,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/download_clien
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/model_registry.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_client/api_client.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/response_parser.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 

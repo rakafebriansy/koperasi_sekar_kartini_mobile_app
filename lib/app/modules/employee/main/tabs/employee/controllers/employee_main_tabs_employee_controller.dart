@@ -28,7 +28,7 @@ class EmployeeMainTabsEmployeeController extends GetxController {
 
     try {
       final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getEmployees(search: search),
+        request: (api) => api.getUsers(search: search, role: 'employee'),
       );
 
       _users.value = data;
@@ -39,7 +39,7 @@ class EmployeeMainTabsEmployeeController extends GetxController {
     }
   }
 
-    void onSearchChanged(String value) {
+  void onSearchChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
 
     _debounce = Timer(const Duration(seconds: 1), () {

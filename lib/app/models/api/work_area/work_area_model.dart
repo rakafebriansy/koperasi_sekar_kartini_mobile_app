@@ -8,7 +8,7 @@ part 'work_area_model.g.dart';
 class WorkAreaModel with _$WorkAreaModel {
   const factory WorkAreaModel({
     required int id,
-    @JsonKey(name: 'name_work_area') required String name,
+    @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _WorkAreaModel;

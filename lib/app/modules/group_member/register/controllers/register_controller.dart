@@ -8,6 +8,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/static/register_caption.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
@@ -129,7 +130,7 @@ class RegisterController extends GetxController {
         request: (api) => api.register(
           name: nameCtrl.text,
           identityNumber: identityNumberCtrl.text,
-          birthDate: birthDateCtrl.text,
+          birthDate: birthDateCtrl.text.toIsoDateString(),
           phoneNumber: phoneCtrl.text,
           address: addressCtrl.text,
           occupation: occupationCtrl.text,

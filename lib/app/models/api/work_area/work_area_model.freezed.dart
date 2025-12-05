@@ -21,7 +21,7 @@ WorkAreaModel _$WorkAreaModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WorkAreaModel {
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name_work_area')
+  @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $WorkAreaModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: 'name_work_area') String name,
+      @JsonKey(name: 'name') String name,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -102,7 +102,7 @@ abstract class _$$WorkAreaModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: 'name_work_area') String name,
+      @JsonKey(name: 'name') String name,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -151,7 +151,7 @@ class __$$WorkAreaModelImplCopyWithImpl<$Res>
 class _$WorkAreaModelImpl implements _WorkAreaModel {
   const _$WorkAreaModelImpl(
       {required this.id,
-      @JsonKey(name: 'name_work_area') required this.name,
+      @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
@@ -161,7 +161,7 @@ class _$WorkAreaModelImpl implements _WorkAreaModel {
   @override
   final int id;
   @override
-  @JsonKey(name: 'name_work_area')
+  @JsonKey(name: 'name')
   final String name;
   @override
   @JsonKey(name: 'created_at')
@@ -211,7 +211,7 @@ class _$WorkAreaModelImpl implements _WorkAreaModel {
 abstract class _WorkAreaModel implements WorkAreaModel {
   const factory _WorkAreaModel(
           {required final int id,
-          @JsonKey(name: 'name_work_area') required final String name,
+          @JsonKey(name: 'name') required final String name,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$WorkAreaModelImpl;
@@ -222,7 +222,7 @@ abstract class _WorkAreaModel implements WorkAreaModel {
   @override
   int get id;
   @override
-  @JsonKey(name: 'name_work_area')
+  @JsonKey(name: 'name')
   String get name;
   @override
   @JsonKey(name: 'created_at')
