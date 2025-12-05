@@ -36,6 +36,8 @@ mixin _$UserModel {
   String? get identityCardPhoto => throw _privateConstructorUsedError;
   @JsonKey(name: 'self_photo')
   String? get selfPhoto => throw _privateConstructorUsedError;
+  @JsonKey(name: 'member_card_photo')
+  String? get memberCardPhoto => throw _privateConstructorUsedError;
   @JsonKey(name: 'email_verified_at')
   DateTime? get emailVerifiedAt => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
@@ -77,6 +79,7 @@ abstract class $UserModelCopyWith<$Res> {
       String? occupation,
       @JsonKey(name: 'identity_card_photo') String? identityCardPhoto,
       @JsonKey(name: 'self_photo') String? selfPhoto,
+      @JsonKey(name: 'member_card_photo') String? memberCardPhoto,
       @JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,
       String role,
       @JsonKey(name: 'is_verified') bool isVerified,
@@ -115,6 +118,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? occupation = freezed,
     Object? identityCardPhoto = freezed,
     Object? selfPhoto = freezed,
+    Object? memberCardPhoto = freezed,
     Object? emailVerifiedAt = freezed,
     Object? role = null,
     Object? isVerified = null,
@@ -164,6 +168,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       selfPhoto: freezed == selfPhoto
           ? _value.selfPhoto
           : selfPhoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      memberCardPhoto: freezed == memberCardPhoto
+          ? _value.memberCardPhoto
+          : memberCardPhoto // ignore: cast_nullable_to_non_nullable
               as String?,
       emailVerifiedAt: freezed == emailVerifiedAt
           ? _value.emailVerifiedAt
@@ -248,6 +256,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? occupation,
       @JsonKey(name: 'identity_card_photo') String? identityCardPhoto,
       @JsonKey(name: 'self_photo') String? selfPhoto,
+      @JsonKey(name: 'member_card_photo') String? memberCardPhoto,
       @JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,
       String role,
       @JsonKey(name: 'is_verified') bool isVerified,
@@ -286,6 +295,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? occupation = freezed,
     Object? identityCardPhoto = freezed,
     Object? selfPhoto = freezed,
+    Object? memberCardPhoto = freezed,
     Object? emailVerifiedAt = freezed,
     Object? role = null,
     Object? isVerified = null,
@@ -335,6 +345,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
       selfPhoto: freezed == selfPhoto
           ? _value.selfPhoto
           : selfPhoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      memberCardPhoto: freezed == memberCardPhoto
+          ? _value.memberCardPhoto
+          : memberCardPhoto // ignore: cast_nullable_to_non_nullable
               as String?,
       emailVerifiedAt: freezed == emailVerifiedAt
           ? _value.emailVerifiedAt
@@ -386,6 +400,7 @@ class _$UserModelImpl implements _UserModel {
       this.occupation,
       @JsonKey(name: 'identity_card_photo') this.identityCardPhoto,
       @JsonKey(name: 'self_photo') this.selfPhoto,
+      @JsonKey(name: 'member_card_photo') this.memberCardPhoto,
       @JsonKey(name: 'email_verified_at') this.emailVerifiedAt,
       required this.role,
       @JsonKey(name: 'is_verified') required this.isVerified,
@@ -425,6 +440,9 @@ class _$UserModelImpl implements _UserModel {
   @JsonKey(name: 'self_photo')
   final String? selfPhoto;
   @override
+  @JsonKey(name: 'member_card_photo')
+  final String? memberCardPhoto;
+  @override
   @JsonKey(name: 'email_verified_at')
   final DateTime? emailVerifiedAt;
   @override
@@ -449,7 +467,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, memberNumber: $memberNumber, identityNumber: $identityNumber, birthDate: $birthDate, phoneNumber: $phoneNumber, address: $address, occupation: $occupation, identityCardPhoto: $identityCardPhoto, selfPhoto: $selfPhoto, emailVerifiedAt: $emailVerifiedAt, role: $role, isVerified: $isVerified, isActive: $isActive, workArea: $workArea, group: $group, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, name: $name, memberNumber: $memberNumber, identityNumber: $identityNumber, birthDate: $birthDate, phoneNumber: $phoneNumber, address: $address, occupation: $occupation, identityCardPhoto: $identityCardPhoto, selfPhoto: $selfPhoto, memberCardPhoto: $memberCardPhoto, emailVerifiedAt: $emailVerifiedAt, role: $role, isVerified: $isVerified, isActive: $isActive, workArea: $workArea, group: $group, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -474,6 +492,8 @@ class _$UserModelImpl implements _UserModel {
                 other.identityCardPhoto == identityCardPhoto) &&
             (identical(other.selfPhoto, selfPhoto) ||
                 other.selfPhoto == selfPhoto) &&
+            (identical(other.memberCardPhoto, memberCardPhoto) ||
+                other.memberCardPhoto == memberCardPhoto) &&
             (identical(other.emailVerifiedAt, emailVerifiedAt) ||
                 other.emailVerifiedAt == emailVerifiedAt) &&
             (identical(other.role, role) || other.role == role) &&
@@ -492,26 +512,28 @@ class _$UserModelImpl implements _UserModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      memberNumber,
-      identityNumber,
-      birthDate,
-      phoneNumber,
-      address,
-      occupation,
-      identityCardPhoto,
-      selfPhoto,
-      emailVerifiedAt,
-      role,
-      isVerified,
-      isActive,
-      workArea,
-      group,
-      createdAt,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        name,
+        memberNumber,
+        identityNumber,
+        birthDate,
+        phoneNumber,
+        address,
+        occupation,
+        identityCardPhoto,
+        selfPhoto,
+        memberCardPhoto,
+        emailVerifiedAt,
+        role,
+        isVerified,
+        isActive,
+        workArea,
+        group,
+        createdAt,
+        updatedAt
+      ]);
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -541,6 +563,7 @@ abstract class _UserModel implements UserModel {
           final String? occupation,
           @JsonKey(name: 'identity_card_photo') final String? identityCardPhoto,
           @JsonKey(name: 'self_photo') final String? selfPhoto,
+          @JsonKey(name: 'member_card_photo') final String? memberCardPhoto,
           @JsonKey(name: 'email_verified_at') final DateTime? emailVerifiedAt,
           required final String role,
           @JsonKey(name: 'is_verified') required final bool isVerified,
@@ -580,6 +603,9 @@ abstract class _UserModel implements UserModel {
   @override
   @JsonKey(name: 'self_photo')
   String? get selfPhoto;
+  @override
+  @JsonKey(name: 'member_card_photo')
+  String? get memberCardPhoto;
   @override
   @JsonKey(name: 'email_verified_at')
   DateTime? get emailVerifiedAt;

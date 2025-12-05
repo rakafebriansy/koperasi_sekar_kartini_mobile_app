@@ -2,8 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/local/secure_storage/token_manager.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/login/login_request.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_client/dio_client.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/dio_client.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constant.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/connectivity_helper.dart';
@@ -45,7 +44,10 @@ abstract class ApiClient {
 
   // AUTH
   @POST("/login")
-  Future<dynamic> login(@Body() LoginRequest body);
+  Future<dynamic> login({
+    @Field('phone_number') required String phoneNumber,
+    @Field('password') required String password,
+  });
 
   @POST("/register")
   @MultiPart()
@@ -105,6 +107,7 @@ abstract class ApiClient {
     @Part(name: "password") String? password,
     @Part(name: "identity_card_photo") File? identityCardPhoto,
     @Part(name: "self_photo") File? selfPhoto,
+    @Part(name: "member_card_photo") File? memberCardPhoto,
   });
 
   @POST("/employees/{id}")

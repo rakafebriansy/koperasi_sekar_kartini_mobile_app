@@ -41,7 +41,7 @@ class EmployeeManageEmployeeController extends GetxController {
   TextEditingController emailCtrl = TextEditingController(
     text: !kReleaseMode ? 'raka@example.com' : '',
   );
-  TextEditingController passwordCtrl = TextEditingController(text: '12345678');
+  TextEditingController passwordCtrl = TextEditingController(text: 'password');
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
@@ -189,6 +189,7 @@ class EmployeeManageEmployeeController extends GetxController {
           password: passwordCtrl.text,
           identityCardPhoto: idCardImage,
           selfPhoto: selfImage,
+          memberCardPhoto: memberCardImage,
         ),
       );
 

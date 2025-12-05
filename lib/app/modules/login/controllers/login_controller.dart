@@ -2,14 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_requests/login/login_request.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class LoginController extends GetxController {
-
   final formKey = GlobalKey<FormState>();
 
   final RxBool _isSubmitted = false.obs;
@@ -19,12 +17,13 @@ class LoginController extends GetxController {
     text: !kReleaseMode
         ?
           // '087712345678'
-          // '089876543210'
-          '081234567870'
+          '08123456789'
+        // '089876543210'
+        // '081234567870'
         : '',
   );
   TextEditingController passwordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'password' : '',
+    text: !kReleaseMode ? '12345678' : '',
   );
 
   ScrollController scrollController = ScrollController();
@@ -44,12 +43,8 @@ class LoginController extends GetxController {
       if (!formKey.currentState!.validate()) return;
 
       final user = await ApiHelper.fetch<UserModel>(
-        request: (api) => api.login(
-          LoginRequest(
-            phoneNumber: phoneCtrl.text,
-            password: passwordCtrl.text,
-          ),
-        ),
+        request: (api) =>
+            api.login(phoneNumber: phoneCtrl.text, password: passwordCtrl.text),
       );
 
       AuthController.find.saveUserData(user: user);

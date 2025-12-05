@@ -20,6 +20,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       occupation: json['occupation'] as String?,
       identityCardPhoto: json['identity_card_photo'] as String?,
       selfPhoto: json['self_photo'] as String?,
+      memberCardPhoto: json['member_card_photo'] as String?,
       emailVerifiedAt: json['email_verified_at'] == null
           ? null
           : DateTime.parse(json['email_verified_at'] as String),
@@ -52,6 +53,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'occupation': instance.occupation,
       'identity_card_photo': instance.identityCardPhoto,
       'self_photo': instance.selfPhoto,
+      'member_card_photo': instance.memberCardPhoto,
       'email_verified_at': instance.emailVerifiedAt?.toIso8601String(),
       'role': instance.role,
       'is_verified': instance.isVerified,

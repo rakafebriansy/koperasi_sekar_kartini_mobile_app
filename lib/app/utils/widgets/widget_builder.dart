@@ -1,10 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_constant.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 
 InputDecoration buildAppTextInputDecoration({
@@ -108,7 +113,8 @@ Text poppins(
   );
 }
 
-void showMemberCard() {
+Future<void> showMemberCard() async {
+  String? filePath = AuthController.find.currentUser?.memberCardPhoto;
   Get.bottomSheet(
     Wrap(
       children: [
@@ -135,14 +141,31 @@ void showMemberCard() {
                     borderRadius: BorderRadius.circular(16.sp),
                     border: Border.all(width: 1.sp, color: AppColor.bg.gray),
                   ),
-                  child: Image.asset(AppAsset.images.defaultMemberCard),
+                  child: filePath != null
+                      ? CachedNetworkImage(
+                          imageUrl: '${Environments.apiUrl}/file/$filePath',
+                        )
+                      : Image.asset(AppAsset.images.defaultMemberCard),
                 ),
               ),
               AppFilledButton(
                 label: 'Unduh Kartu',
                 width: double.infinity,
                 height: 42.sp,
-                onTap: () {},
+                onTap: filePath == null
+                    ? null
+                    : () async {
+                        try {
+                          Get.back();
+                          await ApiHelper.downloadFileAndroid(filePath);
+                          Get.snackbar(
+                            'Unduh berhasil!',
+                            'Unduhan disimpan di $LOCAL_DOWNLOAD_PATH.',
+                          );
+                        } catch (e) {
+                          ErrorHelper.handleError(e);
+                        }
+                      },
               ),
             ],
           ),

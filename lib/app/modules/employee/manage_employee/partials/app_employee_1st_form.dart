@@ -73,6 +73,15 @@ class AppEmployee1stForm extends StatelessWidget {
             maxLines: 1,
             validator: (value) => value.isRequired('Pekerjaan'),
           ),
+          SizedBox(height: 8.sp),
+          AppTextFormGroup(
+            controller: controller.passwordCtrl,
+            label: 'Kata Sandi',
+            placeholder: '******',
+            maxLines: 1,
+            obscureText: true,
+            validator: (value) => value.isRequired('Kata Sandi') ?? value.minLength(8, 'Kata Sandi'),
+          ),
           SizedBox(height: 18.sp),
           AppFilledButton(
             label: 'Lanjut',

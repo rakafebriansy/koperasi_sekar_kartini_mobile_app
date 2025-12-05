@@ -24,12 +24,17 @@ class _ApiClient implements ApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<dynamic> login(LoginRequest body) async {
+  Future<dynamic> login({
+    required String phoneNumber,
+    required String password,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    final _data = {
+      'phone_number': phoneNumber,
+      'password': password,
+    };
     final _options = _setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -379,6 +384,7 @@ class _ApiClient implements ApiClient {
     String? password,
     File? identityCardPhoto,
     File? selfPhoto,
+    File? memberCardPhoto,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -455,6 +461,17 @@ class _ApiClient implements ApiClient {
           MultipartFile.fromFileSync(
             selfPhoto.path,
             filename: selfPhoto.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    if (memberCardPhoto != null) {
+      if (memberCardPhoto != null) {
+        _data.files.add(MapEntry(
+          'member_card_photo',
+          MultipartFile.fromFileSync(
+            memberCardPhoto.path,
+            filename: memberCardPhoto.path.split(Platform.pathSeparator).last,
           ),
         ));
       }
