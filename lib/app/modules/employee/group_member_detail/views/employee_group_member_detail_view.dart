@@ -72,7 +72,7 @@ class EmployeeGroupMemberDetailView
                                               controller.selectMember(value),
                                           selectedItem:
                                               controller.selectedMember?.name ??
-                                              'Pilih Karyawan',
+                                              'Pilih Anggota',
                                           items:
                                               (filter, infiniteScrollProps) =>
                                                   controller.members.names,

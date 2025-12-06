@@ -102,6 +102,11 @@ abstract class ApiClient {
     @Query('role') String? role,
   });
 
+  @GET("/unlisted-users")
+  Future<dynamic> getUnlistedUsers({
+    @Query('search') String? search,
+  });
+
   @POST("/users")
   @MultiPart()
   Future<dynamic> createUser({
