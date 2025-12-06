@@ -98,6 +98,7 @@ abstract class ApiClient {
   @GET("/users")
   Future<dynamic> getUsers({
     @Query('search') String? search,
+    @Query('group_id') int? groupId,
     @Query('role') String? role,
   });
 
@@ -146,6 +147,14 @@ abstract class ApiClient {
     @Path('id') required int id,
   });
 
+  @POST("/users/{id}/group/{group_id}")
+  Future<dynamic> addGroupMember({
+    @Path('id') required int id,
+    @Path('group_id') required int groupId,
+
+    @Field("_method") String method = "PATCH",
+  });
+
   // GROUP
   @GET("/groups")
   Future<dynamic> getGroups({
@@ -186,7 +195,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{id}/chairman/{user_id}")
-  Future<dynamic> updateChairman({
+  Future<dynamic> updateGroupChairman({
     @Path('id') required int id,
     @Path('user_id') required int userId,
 
@@ -194,7 +203,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{id}/facilitator/{user_id}")
-  Future<dynamic> updateFacilitator({
+  Future<dynamic> updateGroupFacilitator({
     @Path('id') required int id,
     @Path('user_id') required int userId,
 

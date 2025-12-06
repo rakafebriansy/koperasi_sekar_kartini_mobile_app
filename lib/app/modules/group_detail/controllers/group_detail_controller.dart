@@ -48,16 +48,12 @@ class GroupDetailController extends GetxController {
 
   @override
   void onInit() {
-    try {
-      final args = (Get.arguments as ArgsWrapper);
-      _action.value = args.action;
-      var group = args.data as GroupModel;
-      fetchListEmployee();
-      fetchListMember();
-      fetchGroupById(group.id);
-    } catch (e) {
-      ErrorHelper.handleError(e);
-    }
+    final args = (Get.arguments as ArgsWrapper);
+    _action.value = args.action;
+    var group = args.data as GroupModel;
+    fetchListEmployee();
+    fetchListMember();
+    fetchGroupById(group.id);
     super.onInit();
   }
 
@@ -87,8 +83,6 @@ class GroupDetailController extends GetxController {
 
       _employees.value = data;
     } catch (e) {
-      rethrow;
-
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingEmployee.value = false;
@@ -105,8 +99,6 @@ class GroupDetailController extends GetxController {
 
       _members.value = data;
     } catch (e) {
-      rethrow;
-
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingMember.value = false;
@@ -122,7 +114,6 @@ class GroupDetailController extends GetxController {
 
       _group.value = data;
     } catch (e) {
-      rethrow;
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingGroup.value = false;
@@ -138,7 +129,7 @@ class GroupDetailController extends GetxController {
 
       try {
         await ApiHelper.fetch<GroupModel>(
-          request: (api) => api.updateFacilitator(
+          request: (api) => api.updateGroupFacilitator(
             id: group!.id,
             userId: selectedFacilitator!.id,
           ),
@@ -166,7 +157,7 @@ class GroupDetailController extends GetxController {
       try {
         await ApiHelper.fetch<GroupModel>(
           request: (api) =>
-              api.updateChairman(id: group!.id, userId: selectedChairman!.id),
+              api.updateGroupChairman(id: group!.id, userId: selectedChairman!.id),
         );
 
         Get.back();

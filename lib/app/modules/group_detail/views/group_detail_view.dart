@@ -8,6 +8,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
@@ -20,6 +21,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/ap
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_social_fund_amount_list.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 import '../controllers/group_detail_controller.dart';
 
@@ -58,10 +60,71 @@ class GroupDetailView extends GetView<GroupDetailController> {
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                poppins(
-                                  'Kelompok ${controller.group!.number}',
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  spacing: 4.sp,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SizedBox(width: 32.sp, height: 32.sp),
+                                    poppins(
+                                      'Kelompok ${controller.group!.number}',
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    AuthController.find.currentUser!.role ==
+                                            'admin'
+                                        ? Material(
+                                            borderRadius: BorderRadius.circular(
+                                              99,
+                                            ),
+                                            child: InkWell(
+                                              onTap: controller.group == null
+                                                  ? null
+                                                  : () async {
+                                                      final result = Get.toNamed(
+                                                        Routes.MANAGE_GROUP,
+                                                        arguments: ArgsWrapper(
+                                                          action:
+                                                              ActionType.update,
+                                                          data:
+                                                              controller.group!,
+                                                        ),
+                                                      );
+                                                      if (result == true) {
+                                                        controller
+                                                            .fetchGroupById(
+                                                              controller
+                                                                  .group!
+                                                                  .id,
+                                                            );
+                                                      }
+                                                    },
+                                              borderRadius:
+                                                  BorderRadius.circular(99),
+                                              child: SizedBox(
+                                                width: 32.sp,
+                                                height: 32.sp,
+                                                child: Center(
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            99,
+                                                          ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.edit,
+                                                        size: 20.sp,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : SizedBox(height: 32.sp, width: 32.sp),
+                                  ],
                                 ),
                                 SizedBox(height: 2.sp),
                                 poppins(
@@ -95,7 +158,7 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                               .find
                                               .currentUser
                                               ?.role ==
-                                          'admin')
+                                          'employee')
                                         Material(
                                           child: InkWell(
                                             onTap: () {
@@ -246,7 +309,7 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                               .find
                                               .currentUser
                                               ?.role ==
-                                          'admin')
+                                          'employee')
                                         Material(
                                           child: InkWell(
                                             onTap: () {
@@ -416,6 +479,9 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                       onPressed: () {
                                         Get.toNamed(
                                           Routes.EMPLOYEE_GROUP_MEMBER_DETAIL,
+                                          arguments: ArgsWrapper(
+                                            data: controller.group,
+                                          ),
                                         );
                                       },
                                       child: Icon(Icons.group),

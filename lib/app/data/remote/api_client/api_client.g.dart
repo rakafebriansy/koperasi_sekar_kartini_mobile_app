@@ -346,11 +346,13 @@ class _ApiClient implements ApiClient {
   @override
   Future<dynamic> getUsers({
     String? search,
+    int? groupId,
     String? role,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'search': search,
+      r'group_id': groupId,
       r'role': role,
     };
     queryParameters.removeWhere((k, v) => v == null);
@@ -676,6 +678,37 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<dynamic> addGroupMember({
+    required int id,
+    required int groupId,
+    String method = "PATCH",
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'_method': method};
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/users/${id}/group/${groupId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
   Future<dynamic> getGroups({
     String? search,
     int? workAreaId,
@@ -856,7 +889,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> updateChairman({
+  Future<dynamic> updateGroupChairman({
     required int id,
     required int userId,
     String method = "PATCH",
@@ -887,7 +920,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> updateFacilitator({
+  Future<dynamic> updateGroupFacilitator({
     required int id,
     required int userId,
     String method = "PATCH",

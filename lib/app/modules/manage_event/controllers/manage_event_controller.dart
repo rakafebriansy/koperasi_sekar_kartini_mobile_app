@@ -41,7 +41,9 @@ class ManageEventController extends GetxController {
   void onInit() {
     try {
       final args = Get.arguments as ArgsWrapper;
-      if (args.action.isUpdateAction) {
+      if (args.action == null) throw Exception('action is null');
+
+      if (args.action!.isUpdateAction) {
         final event = args.data as EventModel;
 
         _id.value = event.id;

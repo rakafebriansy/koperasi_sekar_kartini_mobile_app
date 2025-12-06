@@ -29,9 +29,9 @@ class ManageGroupView extends GetView<ManageGroupController> {
       ableToBack: true,
       title: controller.action != null
           ? (controller.action!.isCreateAction
-                ? 'Tambah Karyawan'
-                : 'Ubah Karyawan')
-          : 'Detail Karyawan',
+                ? 'Tambah Kelompok'
+                : 'Ubah Kelompok')
+          : 'Detail Kelompok',
       actions: [
         if (AuthController.find.currentUser?.role == 'admin')
           Material(

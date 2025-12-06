@@ -47,7 +47,7 @@ class ManageGroupController extends GetxController {
 
   final RxBool _isFetchingEmployee = false.obs;
   bool get isFetchingEmployee => _isFetchingEmployee.value;
-  
+
   final RxBool _isFetchingMember = false.obs;
   bool get isFetchingMember => _isFetchingMember.value;
 
@@ -77,13 +77,19 @@ class ManageGroupController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
+      if (args.action == null) throw Exception('action is null');
+
     _action.value = args.action;
 
-    if (args.action.isUpdateAction) {
+    if (args.action!.isUpdateAction) {
       final group = args.data as GroupModel;
       _id.value = group.id;
       descCtrl.text = group.description ?? '';
       numberCtrl.text = group.number.toString();
+      _isActive.value = group.isActive;
+      _selectedWorkArea.value = group.workArea;
+      _selectedChairman.value = group.chairman;
+      _selectedFacilitator.value = group.facilitator;
     }
 
     fetchListWorkArea();

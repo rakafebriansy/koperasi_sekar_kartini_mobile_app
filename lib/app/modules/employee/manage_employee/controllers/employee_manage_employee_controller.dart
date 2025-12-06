@@ -70,9 +70,11 @@ class EmployeeManageEmployeeController extends GetxController {
   void onInit() {
     try {
       final args = (Get.arguments as ArgsWrapper);
+      if (args.action == null) throw Exception('action is null');
+
       _action.value = args.action;
 
-      if (args.action.isUpdateAction) {
+      if (args.action!.isUpdateAction) {
         final user = args.data as UserModel;
         _id.value = user.id;
         birthDateCtrl.text = user.birthDate == null
