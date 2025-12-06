@@ -44,8 +44,10 @@ class ManageGroupController extends GetxController {
 
   final RxBool _isFetchingWorkArea = false.obs;
   bool get isFetchingWorkArea => _isFetchingWorkArea.value;
+
   final RxBool _isFetchingEmployee = false.obs;
   bool get isFetchingEmployee => _isFetchingEmployee.value;
+  
   final RxBool _isFetchingMember = false.obs;
   bool get isFetchingMember => _isFetchingMember.value;
 
@@ -238,8 +240,6 @@ class ManageGroupController extends GetxController {
       Get.snackbar('INFO', 'Berhasil memperbarui grup!');
     } catch (e) {
       debugPrint(e.toString());
-      rethrow;
-
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
       _isSubmitted.value = false;
@@ -262,8 +262,6 @@ class ManageGroupController extends GetxController {
       Get.snackbar('INFO', 'Berhasil menghapus grup!');
     } catch (e) {
       debugPrint(e.toString());
-      rethrow;
-
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
       _isSubmitted.value = false;
@@ -271,7 +269,6 @@ class ManageGroupController extends GetxController {
   }
 
   Future<void> submitButton() async {
-    print(formKey.currentState!.validate());
     if (formKey.currentState!.validate()) {
       try {
         if (action != null) {

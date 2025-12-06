@@ -29,9 +29,6 @@ _$GroupModelImpl _$$GroupModelImplFromJson(Map<String, dynamic> json) =>
       facilitator: json['facilitator'] == null
           ? null
           : UserModel.fromJson(json['facilitator'] as Map<String, dynamic>),
-      treasurer: json['trasurer'] == null
-          ? null
-          : UserModel.fromJson(json['trasurer'] as Map<String, dynamic>),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -55,7 +52,6 @@ Map<String, dynamic> _$$GroupModelImplToJson(_$GroupModelImpl instance) =>
       'work_area': instance.workArea,
       'chairman': instance.chairman,
       'facilitator': instance.facilitator,
-      'trasurer': instance.treasurer,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };

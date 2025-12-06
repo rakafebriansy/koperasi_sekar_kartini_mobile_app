@@ -10,6 +10,7 @@ class AppBottomSheet extends StatelessWidget {
     this.children,
     this.padding,
     this.spacing,
+    this.formKey,
     this.crossAxisAlignment = CrossAxisAlignment.start,
   });
 
@@ -18,6 +19,7 @@ class AppBottomSheet extends StatelessWidget {
   final EdgeInsets? padding;
   final double? spacing;
   final List<Widget>? children;
+  final GlobalKey<FormState>? formKey;
   final CrossAxisAlignment crossAxisAlignment;
 
   @override
@@ -28,17 +30,22 @@ class AppBottomSheet extends StatelessWidget {
       color: context.theme.scaffoldBackgroundColor,
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
     ),
-    child: Column(
+    child: formKey != null
+        ? Form(key: formKey, child: _buildBottomSheetChildren())
+        : _buildBottomSheetChildren(),
+  );
+
+  Column _buildBottomSheetChildren() {
+    return Column(
       spacing: spacing ?? 12.sp,
       crossAxisAlignment: crossAxisAlignment,
       mainAxisSize: MainAxisSize.min,
       children: [
         if (titleText != null) titleText!,
         if (subtitleText != null) subtitleText!,
-        if (children != null)
-          SizedBox(height: 16.sp),
+        if (children != null) SizedBox(height: 16.sp),
         ...children ?? [],
       ],
-    ),
-  );
+    );
+  }
 }

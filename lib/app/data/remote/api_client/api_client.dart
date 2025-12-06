@@ -153,6 +153,9 @@ abstract class ApiClient {
     @Query('work_area_id') int? workAreaId,
   });
 
+  @GET("/groups/{id}")
+  Future<dynamic> getGroup({@Path('id') required int id});
+
   @POST("/groups")
   Future<dynamic> createGroup({
     @Field("number") int? number,
@@ -180,5 +183,21 @@ abstract class ApiClient {
     @Part(name: "_method") String method = "DELETE",
 
     @Path('id') required int id,
+  });
+
+  @POST("/groups/{id}/chairman/{user_id}")
+  Future<dynamic> updateChairman({
+    @Path('id') required int id,
+    @Path('user_id') required int userId,
+
+    @Field("_method") String method = "PATCH",
+  });
+
+  @POST("/groups/{id}/facilitator/{user_id}")
+  Future<dynamic> updateFacilitator({
+    @Path('id') required int id,
+    @Path('user_id') required int userId,
+
+    @Field("_method") String method = "PATCH",
   });
 }

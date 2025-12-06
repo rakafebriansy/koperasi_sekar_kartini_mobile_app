@@ -14,7 +14,7 @@ class AppGroupInfoCell extends StatelessWidget {
 
   final Icon icon;
   final String field;
-  final String value;
+  final Widget value;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class AppGroupInfoCell extends StatelessWidget {
             poppins(field, color: AppColor.text.gray),
           ],
         ),
-        poppins(value),
+        value,
       ],
     );
   }

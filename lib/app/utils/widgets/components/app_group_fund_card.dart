@@ -49,12 +49,12 @@ class AppGroupFundCard extends StatelessWidget {
               AppGroupInfoCell(
                 icon: Icon(Icons.calendar_month, color: AppColor.bg.primary),
                 field: 'Bulan',
-                value: 'Oktober',
+                value: poppins('Oktober'),
               ),
               AppGroupInfoCell(
                 icon: Icon(Icons.calendar_month, color: AppColor.bg.primary),
                 field: 'Total Simpanan',
-                value: 300000.toIdr(decimalDigits: 2),
+                value: poppins(300000.toIdr(decimalDigits: 2)),
               ),
             ],
           ),

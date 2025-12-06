@@ -102,6 +102,7 @@ Text poppins(
   bool? softWrap,
   TextAlign? textAlign,
   TextOverflow? overflow,
+  TextStyle? textStyle,
 }) {
   return Text(
     text,
@@ -113,6 +114,7 @@ Text poppins(
       fontWeight: fontWeight,
       color: color,
       fontStyle: fontStyle,
+      textStyle: textStyle,
     ),
   );
 }

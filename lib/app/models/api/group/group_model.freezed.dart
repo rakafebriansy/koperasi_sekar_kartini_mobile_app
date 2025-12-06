@@ -43,8 +43,6 @@ mixin _$GroupModel {
   UserModel? get chairman => throw _privateConstructorUsedError;
   @JsonKey(name: 'facilitator')
   UserModel? get facilitator => throw _privateConstructorUsedError;
-  @JsonKey(name: 'trasurer')
-  UserModel? get treasurer => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -82,14 +80,12 @@ abstract class $GroupModelCopyWith<$Res> {
       @JsonKey(name: 'work_area') WorkAreaModel? workArea,
       @JsonKey(name: 'chairman') UserModel? chairman,
       @JsonKey(name: 'facilitator') UserModel? facilitator,
-      @JsonKey(name: 'trasurer') UserModel? treasurer,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   $WorkAreaModelCopyWith<$Res>? get workArea;
   $UserModelCopyWith<$Res>? get chairman;
   $UserModelCopyWith<$Res>? get facilitator;
-  $UserModelCopyWith<$Res>? get treasurer;
 }
 
 /// @nodoc
@@ -120,7 +116,6 @@ class _$GroupModelCopyWithImpl<$Res, $Val extends GroupModel>
     Object? workArea = freezed,
     Object? chairman = freezed,
     Object? facilitator = freezed,
-    Object? treasurer = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -177,10 +172,6 @@ class _$GroupModelCopyWithImpl<$Res, $Val extends GroupModel>
           ? _value.facilitator
           : facilitator // ignore: cast_nullable_to_non_nullable
               as UserModel?,
-      treasurer: freezed == treasurer
-          ? _value.treasurer
-          : treasurer // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -233,20 +224,6 @@ class _$GroupModelCopyWithImpl<$Res, $Val extends GroupModel>
       return _then(_value.copyWith(facilitator: value) as $Val);
     });
   }
-
-  /// Create a copy of GroupModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res>? get treasurer {
-    if (_value.treasurer == null) {
-      return null;
-    }
-
-    return $UserModelCopyWith<$Res>(_value.treasurer!, (value) {
-      return _then(_value.copyWith(treasurer: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -273,7 +250,6 @@ abstract class _$$GroupModelImplCopyWith<$Res>
       @JsonKey(name: 'work_area') WorkAreaModel? workArea,
       @JsonKey(name: 'chairman') UserModel? chairman,
       @JsonKey(name: 'facilitator') UserModel? facilitator,
-      @JsonKey(name: 'trasurer') UserModel? treasurer,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
@@ -283,8 +259,6 @@ abstract class _$$GroupModelImplCopyWith<$Res>
   $UserModelCopyWith<$Res>? get chairman;
   @override
   $UserModelCopyWith<$Res>? get facilitator;
-  @override
-  $UserModelCopyWith<$Res>? get treasurer;
 }
 
 /// @nodoc
@@ -313,7 +287,6 @@ class __$$GroupModelImplCopyWithImpl<$Res>
     Object? workArea = freezed,
     Object? chairman = freezed,
     Object? facilitator = freezed,
-    Object? treasurer = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -370,10 +343,6 @@ class __$$GroupModelImplCopyWithImpl<$Res>
           ? _value.facilitator
           : facilitator // ignore: cast_nullable_to_non_nullable
               as UserModel?,
-      treasurer: freezed == treasurer
-          ? _value.treasurer
-          : treasurer // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -405,7 +374,6 @@ class _$GroupModelImpl implements _GroupModel {
       @JsonKey(name: 'work_area') this.workArea,
       @JsonKey(name: 'chairman') this.chairman,
       @JsonKey(name: 'facilitator') this.facilitator,
-      @JsonKey(name: 'trasurer') this.treasurer,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
@@ -449,9 +417,6 @@ class _$GroupModelImpl implements _GroupModel {
   @JsonKey(name: 'facilitator')
   final UserModel? facilitator;
   @override
-  @JsonKey(name: 'trasurer')
-  final UserModel? treasurer;
-  @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @override
@@ -460,7 +425,7 @@ class _$GroupModelImpl implements _GroupModel {
 
   @override
   String toString() {
-    return 'GroupModel(id: $id, number: $number, description: $description, sharedLiabilityFundAmount: $sharedLiabilityFundAmount, groupFundAmount: $groupFundAmount, socialFundAmount: $socialFundAmount, totalSharedLiabilityFund: $totalSharedLiabilityFund, totalGroupFund: $totalGroupFund, totalSocialFund: $totalSocialFund, isActive: $isActive, workArea: $workArea, chairman: $chairman, facilitator: $facilitator, treasurer: $treasurer, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'GroupModel(id: $id, number: $number, description: $description, sharedLiabilityFundAmount: $sharedLiabilityFundAmount, groupFundAmount: $groupFundAmount, socialFundAmount: $socialFundAmount, totalSharedLiabilityFund: $totalSharedLiabilityFund, totalGroupFund: $totalGroupFund, totalSocialFund: $totalSocialFund, isActive: $isActive, workArea: $workArea, chairman: $chairman, facilitator: $facilitator, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -494,8 +459,6 @@ class _$GroupModelImpl implements _GroupModel {
                 other.chairman == chairman) &&
             (identical(other.facilitator, facilitator) ||
                 other.facilitator == facilitator) &&
-            (identical(other.treasurer, treasurer) ||
-                other.treasurer == treasurer) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -519,7 +482,6 @@ class _$GroupModelImpl implements _GroupModel {
       workArea,
       chairman,
       facilitator,
-      treasurer,
       createdAt,
       updatedAt);
 
@@ -556,7 +518,6 @@ abstract class _GroupModel implements GroupModel {
           @JsonKey(name: 'work_area') final WorkAreaModel? workArea,
           @JsonKey(name: 'chairman') final UserModel? chairman,
           @JsonKey(name: 'facilitator') final UserModel? facilitator,
-          @JsonKey(name: 'trasurer') final UserModel? treasurer,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$GroupModelImpl;
@@ -600,9 +561,6 @@ abstract class _GroupModel implements GroupModel {
   @override
   @JsonKey(name: 'facilitator')
   UserModel? get facilitator;
-  @override
-  @JsonKey(name: 'trasurer')
-  UserModel? get treasurer;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

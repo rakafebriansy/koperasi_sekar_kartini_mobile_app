@@ -28,6 +28,7 @@ class EmployeeMainController extends GetxController {
 
       _groups.value = data;
     } catch (e) {
+      rethrow;
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingGroup.value = false;
