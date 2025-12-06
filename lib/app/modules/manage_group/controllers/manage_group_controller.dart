@@ -6,8 +6,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
@@ -22,26 +22,44 @@ class ManageGroupController extends GetxController {
     text: !kReleaseMode ? '1' : '',
   );
 
-  Rx<WorkAreaModel?> selectedWorkArea = Rx<WorkAreaModel?>(
-    !kReleaseMode ? DummyHelper.workAreas[0] : null,
-  );
+  final Rx<WorkAreaModel?> _selectedWorkArea = Rxn();
+  WorkAreaModel? get selectedWorkArea => _selectedWorkArea.value;
 
-  Rx<UserModel?> selectedChairman = Rx<UserModel?>(
-    !kReleaseMode ? DummyHelper.users[0] : null,
-  );
+  final Rx<UserModel?> _selectedChairman = Rxn();
+  UserModel? get selectedChairman => _selectedChairman.value;
 
-  Rx<UserModel?> selectedFacilitator = Rx<UserModel?>(
-    !kReleaseMode ? DummyHelper.users[1] : null,
-  );
+  final Rx<UserModel?> _selectedFacilitator = Rxn();
+  UserModel? get selectedFacilitator => _selectedFacilitator.value;
+
+  final Rx<bool?> _isActive = Rxn();
+  bool? get isActive => _isActive.value;
+  String? get isActiveString => isActive == null
+      ? null
+      : isActive!
+      ? 'Aktif'
+      : 'Tidak Aktif';
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
-  final RxBool _isFetching = false.obs;
-  bool get isFetching => _isFetching.value;
+  final RxBool _isFetchingWorkArea = false.obs;
+  bool get isFetchingWorkArea => _isFetchingWorkArea.value;
+  final RxBool _isFetchingEmployee = false.obs;
+  bool get isFetchingEmployee => _isFetchingEmployee.value;
+  final RxBool _isFetchingMember = false.obs;
+  bool get isFetchingMember => _isFetchingMember.value;
+
+  bool get isLoading =>
+      isFetchingEmployee || isFetchingWorkArea || isFetchingMember;
 
   final RxList<WorkAreaModel> _workAreas = RxList();
   List<WorkAreaModel> get workAreas => _workAreas;
+
+  final RxList<UserModel> _employees = RxList();
+  List<UserModel> get employees => _employees;
+
+  final RxList<UserModel> _members = RxList();
+  List<UserModel> get members => _members;
 
   final Rx<ActionType?> _action = Rxn();
   ActionType? get action => _action.value;
@@ -52,33 +70,23 @@ class ManageGroupController extends GetxController {
   final Rx<int?> _id = Rxn();
   int? get id => _id.value;
 
-  final Rx<bool?> _isActive = Rxn();
-  bool? get isActive => _isActive.value;
-  String? get isActiveString => isActive == null
-      ? 'Belum di-set'
-      : isActive!
-      ? 'Aktif'
-      : 'Tidak Aktif';
-
   ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
-    try {
-      final args = (Get.arguments as ArgsWrapper);
-      _action.value = args.action;
+    final args = (Get.arguments as ArgsWrapper);
+    _action.value = args.action;
 
-      if (args.action.isUpdateAction) {
-        final group = args.data as GroupModel;
-        _id.value = group.id;
-        descCtrl.text = group.description ?? '';
-        numberCtrl.text = group.number;
-      }
-
-      fetchListWorkArea();
-    } catch (e) {
-      ErrorHelper.handleError(e);
+    if (args.action.isUpdateAction) {
+      final group = args.data as GroupModel;
+      _id.value = group.id;
+      descCtrl.text = group.description ?? '';
+      numberCtrl.text = group.number.toString();
     }
+
+    fetchListWorkArea();
+    fetchListEmployee();
+    fetchListMember();
     super.onInit();
   }
 
@@ -98,24 +106,43 @@ class ManageGroupController extends GetxController {
     _selectedScreen.value--;
   }
 
-  Future<void> fetchListWorkArea({String? search}) async {
-    _isFetching.value = true;
+  void selectWorkArea(String? name) {
+    if (name == null) return;
 
-    try {
-      final List<WorkAreaModel> data = await ApiHelper.fetchList<WorkAreaModel>(
-        request: (api) => api.getWorkAreas(search: search),
-      );
+    _selectedWorkArea.value = _workAreas.firstWhere(
+      (item) => item.name.toLowerCase() == name.toLowerCase(),
+    );
+  }
 
-      _workAreas.value = data;
-    } catch (e) {
-      ErrorHelper.handleError(e);
-    } finally {
-      _isFetching.value = false;
+  void selectChairman(String? name) {
+    if (name == null) return;
+
+    _selectedChairman.value = _members.firstWhere(
+      (item) => item.name.toLowerCase() == name.toLowerCase(),
+    );
+  }
+
+  void selectStatus(String? value) {
+    if (value == null) return;
+
+    switch (value) {
+      case 'Aktif':
+        _isActive.value = true;
+      case 'Tidak Aktif':
+        _isActive.value = false;
     }
   }
 
-  Future<void> fetchListUser({String? search}) async {
-    _isFetching.value = true;
+  void selectFacilitator(String? name) {
+    if (name == null) return;
+
+    _selectedFacilitator.value = _employees.firstWhere(
+      (item) => item.name.toLowerCase() == name.toLowerCase(),
+    );
+  }
+
+  Future<void> fetchListWorkArea({String? search}) async {
+    _isFetchingWorkArea.value = true;
 
     try {
       final List<WorkAreaModel> data = await ApiHelper.fetchList<WorkAreaModel>(
@@ -126,7 +153,136 @@ class ManageGroupController extends GetxController {
     } catch (e) {
       ErrorHelper.handleError(e);
     } finally {
-      _isFetching.value = false;
+      _isFetchingWorkArea.value = false;
+    }
+  }
+
+  Future<void> fetchListEmployee({String? search}) async {
+    _isFetchingEmployee.value = true;
+
+    try {
+      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(search: search, role: 'employee'),
+      );
+
+      _employees.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingEmployee.value = false;
+    }
+  }
+
+  Future<void> fetchListMember({String? search}) async {
+    _isFetchingMember.value = true;
+
+    try {
+      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(search: search, role: 'group_member'),
+      );
+
+      _members.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingMember.value = false;
+    }
+  }
+
+  Future<void> createGroup() async {
+    _isSubmitted.value = true;
+
+    try {
+      await ApiHelper.fetch<GroupModel>(
+        request: (api) => api.createGroup(
+          number: numberCtrl.text.isNotEmpty
+              ? int.parse(numberCtrl.text)
+              : null,
+          description: descCtrl.text.nullIfEmpty,
+          workAreaId: selectedWorkArea?.id,
+          chairmanId: selectedChairman?.id,
+          facilitatorId: selectedFacilitator?.id,
+        ),
+      );
+
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil membuat grup!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e, canUseNavigator: false);
+    } finally {
+      _isSubmitted.value = false;
+    }
+  }
+
+  Future<void> updateGroup() async {
+    _isSubmitted.value = true;
+
+    if (id == null) throw Exception('id is null');
+
+    try {
+      await ApiHelper.fetch<UserModel>(
+        request: (api) => api.updateGroup(
+          id: id!,
+          number: numberCtrl.text.isNotEmpty
+              ? int.parse(numberCtrl.text)
+              : null,
+          description: descCtrl.text.nullIfEmpty,
+          workAreaId: selectedWorkArea?.id,
+          chairmanId: selectedChairman?.id,
+          facilitatorId: selectedFacilitator?.id,
+        ),
+      );
+
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil memperbarui grup!');
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+
+      ErrorHelper.handleError(e, canUseNavigator: false);
+    } finally {
+      _isSubmitted.value = false;
+    }
+  }
+
+  Future<void> deleteGroup() async {
+    _isSubmitted.value = true;
+
+    if (id == null) {
+      throw Exception('id is null');
+    }
+
+    try {
+      await ApiHelper.fetchNonReturnable(
+        request: (api) => api.deleteGroup(id: id!),
+      );
+
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil menghapus grup!');
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+
+      ErrorHelper.handleError(e, canUseNavigator: false);
+    } finally {
+      _isSubmitted.value = false;
+    }
+  }
+
+  Future<void> submitButton() async {
+    print(formKey.currentState!.validate());
+    if (formKey.currentState!.validate()) {
+      try {
+        if (action != null) {
+          if (action!.isCreateAction) {
+            createGroup();
+          }
+          if (action!.isUpdateAction) updateGroup();
+        }
+      } catch (e) {
+        ErrorHelper.handleError(e);
+      }
     }
   }
 }

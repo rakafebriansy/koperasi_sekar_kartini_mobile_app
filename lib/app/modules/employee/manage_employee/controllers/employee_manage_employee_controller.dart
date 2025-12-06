@@ -146,14 +146,16 @@ class EmployeeManageEmployeeController extends GetxController {
     try {
       await ApiHelper.fetch<UserModel>(
         request: (api) => api.createUser(
-          name: nameCtrl.text,
-          identityNumber: identityNumberCtrl.text,
-          memberNumber: memberNumberCtrl.text,
-          birthDate: birthDateCtrl.text.toIsoDateString(),
-          phoneNumber: phoneCtrl.text,
-          address: addressCtrl.text,
-          occupation: occupationCtrl.text,
-          password: passwordCtrl.text,
+          name: nameCtrl.text.nullIfEmpty,
+          identityNumber: identityNumberCtrl.text.nullIfEmpty,
+          memberNumber: memberNumberCtrl.text.nullIfEmpty,
+          birthDate: birthDateCtrl.text.isNotEmpty
+              ? birthDateCtrl.text.toIsoDateString()
+              : null,
+          phoneNumber: phoneCtrl.text.nullIfEmpty,
+          address: addressCtrl.text.nullIfEmpty,
+          occupation: occupationCtrl.text.nullIfEmpty,
+          password: passwordCtrl.text.nullIfEmpty,
           identityCardPhoto: idCardImage,
           selfPhoto: selfImage,
           role: 'employee',
@@ -180,14 +182,16 @@ class EmployeeManageEmployeeController extends GetxController {
       await ApiHelper.fetch<UserModel>(
         request: (api) => api.updateUser(
           id: id!,
-          name: nameCtrl.text,
-          identityNumber: identityNumberCtrl.text,
-          memberNumber: memberNumberCtrl.text,
-          birthDate: birthDateCtrl.text.toIsoDateString(),
-          phoneNumber: phoneCtrl.text,
-          address: addressCtrl.text,
-          occupation: occupationCtrl.text,
-          password: passwordCtrl.text,
+          name: nameCtrl.text.nullIfEmpty,
+          identityNumber: identityNumberCtrl.text.nullIfEmpty,
+          memberNumber: memberNumberCtrl.text.nullIfEmpty,
+          birthDate: birthDateCtrl.text.isNotEmpty
+              ? birthDateCtrl.text.toIsoDateString()
+              : null,
+          phoneNumber: phoneCtrl.text.nullIfEmpty,
+          address: addressCtrl.text.nullIfEmpty,
+          occupation: occupationCtrl.text.nullIfEmpty,
+          password: passwordCtrl.text.nullIfEmpty,
           role: 'employee',
           identityCardPhoto: idCardImage,
           selfPhoto: selfImage,

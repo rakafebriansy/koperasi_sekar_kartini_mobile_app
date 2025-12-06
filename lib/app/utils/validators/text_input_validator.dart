@@ -6,6 +6,14 @@ extension TextInputValidator on String? {
     return null;
   }
 
+  String? isDropdownRequired(String fieldName, String? value) {
+    print(value);
+    if (value == null || value.trim().isEmpty) {
+      return "$fieldName wajib dipilih.";
+    }
+    return null;
+  }
+
   String? minLength(int length, String fieldName) {
     if ((this ?? '').trim().length < length) {
       return "$fieldName memiliki minimal $length karakter.";
@@ -29,8 +37,7 @@ extension TextInputValidator on String? {
 
   String? isEmail() {
     final value = this?.trim() ?? "";
-    const pattern =
-        r'^[\w\.-]+@[\w\.-]+\.\w+$';
+    const pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$';
     if (!RegExp(pattern).hasMatch(value)) {
       return "Format email tidak valid.";
     }

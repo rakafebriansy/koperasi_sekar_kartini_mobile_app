@@ -9,7 +9,7 @@ part 'group_model.g.dart';
 class GroupModel with _$GroupModel {
   const factory GroupModel({
     required int id,
-    required String number,
+    required int number,
     String? description,
     @JsonKey(name: 'shared_liability_fund_amount')
         int? sharedLiabilityFundAmount,
@@ -23,7 +23,6 @@ class GroupModel with _$GroupModel {
     @JsonKey(name: 'work_area') WorkAreaModel? workArea,
     @JsonKey(name: 'chairman') UserModel? chairman,
     @JsonKey(name: 'facilitator') UserModel? facilitator,
-    @JsonKey(name: 'trasurer') UserModel? treasurer,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _GroupModel;

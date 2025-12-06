@@ -9,7 +9,7 @@ part of 'group_model.dart';
 _$GroupModelImpl _$$GroupModelImplFromJson(Map<String, dynamic> json) =>
     _$GroupModelImpl(
       id: (json['id'] as num).toInt(),
-      number: json['number'] as String,
+      number: (json['number'] as num).toInt(),
       description: json['description'] as String?,
       sharedLiabilityFundAmount:
           (json['shared_liability_fund_amount'] as num?)?.toInt(),

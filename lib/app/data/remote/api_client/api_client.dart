@@ -76,9 +76,7 @@ abstract class ApiClient {
   Future<dynamic> getWorkAreas({@Query('search') String? search});
 
   @POST("/work-areas")
-  Future<dynamic> createWorkArea({
-    @Field("name") String? name,
-  });
+  Future<dynamic> createWorkArea({@Field("name") String? name});
 
   @POST("/work-areas/{id}")
   Future<dynamic> updateWorkArea({
@@ -96,12 +94,12 @@ abstract class ApiClient {
     @Field("_method") String method = "DELETE",
   });
 
-  // EMPLOYEE
+  // USER
   @GET("/users")
   Future<dynamic> getUsers({
     @Query('search') String? search,
     @Query('role') String? role,
-    });
+  });
 
   @POST("/users")
   @MultiPart()
@@ -143,6 +141,42 @@ abstract class ApiClient {
 
   @POST("/users/{id}")
   Future<dynamic> deleteUser({
+    @Part(name: "_method") String method = "DELETE",
+
+    @Path('id') required int id,
+  });
+
+  // GROUP
+  @GET("/groups")
+  Future<dynamic> getGroups({
+    @Query('search') String? search,
+    @Query('work_area_id') int? workAreaId,
+  });
+
+  @POST("/groups")
+  Future<dynamic> createGroup({
+    @Field("number") int? number,
+    @Field("description") String? description,
+    @Field("work_area_id") int? workAreaId,
+    @Field("chairman_id") int? chairmanId,
+    @Field("facilitator_id") int? facilitatorId,
+  });
+
+  @POST("/groups/{id}")
+  Future<dynamic> updateGroup({
+    @Path('id') required int id,
+
+    @Field("_method") String method = "PUT",
+
+    @Field("number") int? number,
+    @Field("description") String? description,
+    @Field("work_area_id") int? workAreaId,
+    @Field("chairman_id") int? chairmanId,
+    @Field("facilitator_id") int? facilitatorId,
+  });
+
+  @POST("/groups/{id}")
+  Future<dynamic> deleteGroup({
     @Part(name: "_method") String method = "DELETE",
 
     @Path('id') required int id,

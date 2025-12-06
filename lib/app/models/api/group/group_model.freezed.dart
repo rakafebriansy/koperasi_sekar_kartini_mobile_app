@@ -21,7 +21,7 @@ GroupModel _$GroupModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GroupModel {
   int get id => throw _privateConstructorUsedError;
-  String get number => throw _privateConstructorUsedError;
+  int get number => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'shared_liability_fund_amount')
   int? get sharedLiabilityFundAmount => throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $GroupModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String number,
+      int number,
       String? description,
       @JsonKey(name: 'shared_liability_fund_amount')
       int? sharedLiabilityFundAmount,
@@ -132,7 +132,7 @@ class _$GroupModelCopyWithImpl<$Res, $Val extends GroupModel>
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -259,7 +259,7 @@ abstract class _$$GroupModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      String number,
+      int number,
       String? description,
       @JsonKey(name: 'shared_liability_fund_amount')
       int? sharedLiabilityFundAmount,
@@ -325,7 +325,7 @@ class __$$GroupModelImplCopyWithImpl<$Res>
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -415,7 +415,7 @@ class _$GroupModelImpl implements _GroupModel {
   @override
   final int id;
   @override
-  final String number;
+  final int number;
   @override
   final String? description;
   @override
@@ -542,7 +542,7 @@ class _$GroupModelImpl implements _GroupModel {
 abstract class _GroupModel implements GroupModel {
   const factory _GroupModel(
           {required final int id,
-          required final String number,
+          required final int number,
           final String? description,
           @JsonKey(name: 'shared_liability_fund_amount')
           final int? sharedLiabilityFundAmount,
@@ -567,7 +567,7 @@ abstract class _GroupModel implements GroupModel {
   @override
   int get id;
   @override
-  String get number;
+  int get number;
   @override
   String? get description;
   @override

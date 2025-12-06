@@ -14,6 +14,7 @@ class AppTextFormGroup extends StatelessWidget {
     this.maxLines,
     this.keyboardType,
     this.validator,
+    this.suffixIcon,
     this.inputFormatters,
   });
 
@@ -22,6 +23,7 @@ class AppTextFormGroup extends StatelessWidget {
   final String? placeholder;
   final bool obscureText;
   final int? maxLines;
+  final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
@@ -45,6 +47,7 @@ class AppTextFormGroup extends StatelessWidget {
           validator: validator,
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
+          suffixIcon: suffixIcon,
         ),
       ],
     );

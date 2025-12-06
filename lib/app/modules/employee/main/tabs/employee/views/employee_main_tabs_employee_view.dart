@@ -71,7 +71,7 @@ class EmployeeMainTabsEmployeeView
                           ),
                         );
                         if (result == true) {
-                          controller.fetchListData();
+                          controller.fetchListEmployee();
                         }
                       },
                       label: poppins('Tambah', color: AppColor.bg.primary),
@@ -155,7 +155,7 @@ class _GroupedEmployeeListView extends StatelessWidget {
                                 );
 
                                 if (result == true) {
-                                  controller.fetchListData();
+                                  controller.fetchListEmployee();
                                 }
                               },
                               child: ListTile(

@@ -19,11 +19,11 @@ class EmployeeMainTabsEmployeeController extends GetxController {
 
   @override
   void onInit() {
-    fetchListData();
+    fetchListEmployee();
     super.onInit();
   }
 
-  Future<void> fetchListData({String? search}) async {
+  Future<void> fetchListEmployee({String? search}) async {
     _isFetching.value = true;
 
     try {
@@ -43,7 +43,7 @@ class EmployeeMainTabsEmployeeController extends GetxController {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
 
     _debounce = Timer(const Duration(seconds: 1), () {
-      fetchListData(search: value);
+      fetchListEmployee(search: value);
     });
   }
 }

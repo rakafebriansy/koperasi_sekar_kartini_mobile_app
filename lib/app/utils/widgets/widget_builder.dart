@@ -33,6 +33,10 @@ InputDecoration buildAppTextInputDecoration({
           )
         : null,
     prefixIconConstraints: BoxConstraints(minWidth: 20.sp, minHeight: 20.sp),
+    disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.sp),
+      borderSide: BorderSide(color: AppColor.border.lightGray, width: 1.5),
+    ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12.sp),
       borderSide: BorderSide(color: AppColor.border.lightGray, width: 1.5),
