@@ -16,6 +16,7 @@ class AppTextFormGroup extends StatelessWidget {
     this.validator,
     this.suffixIcon,
     this.inputFormatters,
+    this.initialValue
   });
 
   final TextEditingController controller;
@@ -27,6 +28,7 @@ class AppTextFormGroup extends StatelessWidget {
   final TextInputType? keyboardType;
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class AppTextFormGroup extends StatelessWidget {
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
           suffixIcon: suffixIcon,
+          initialValue: initialValue,
         ),
       ],
     );

@@ -55,6 +55,15 @@ class RegisterController extends GetxController {
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
+  final RxBool _isFetchingWorkArea = false.obs;
+  bool get isFetchingWorkArea => _isFetchingWorkArea.value;
+
+  final RxList<WorkAreaModel> _workAreas = RxList();
+  List<WorkAreaModel>? get workAreas => _workAreas;
+
+  final Rx<WorkAreaModel?> _selectedWorkArea = Rxn();
+  WorkAreaModel? get selectedWorkArea => _selectedWorkArea.value;
+
   final Rx<File?> _idCardImage = Rxn();
   File? get idCardImage => _idCardImage.value;
 
@@ -71,13 +80,13 @@ class RegisterController extends GetxController {
   String get getCurrentTitle => caption.title[selectedScreen];
   String get getCurrentSubtitle => caption.subtitle[selectedScreen];
 
-  Rx<WorkAreaModel?> selectedWorkArea = Rx<WorkAreaModel?>(
-    !kReleaseMode
-        ? WorkAreaModel(id: 1, name: DummyHelper.workAreas.first.name)
-        : null,
-  );
-
   RegisterController({required this.caption});
+
+  @override
+  void onInit() {
+    fetchListWorkArea();
+    super.onInit();
+  }
 
   @override
   void dispose() {
@@ -102,6 +111,14 @@ class RegisterController extends GetxController {
     _selectedScreen.value--;
   }
 
+  void selectMember(String? name) {
+    if (name == null) return;
+
+    _selectedWorkArea.value = _workAreas.firstWhere(
+      (item) => item.name.toLowerCase() == name.toLowerCase(),
+    );
+  }
+
   Future<void> setIdCardImage(File? file) async {
     try {
       if (file == null) throw Exception('Gambar kosong.');
@@ -120,10 +137,26 @@ class RegisterController extends GetxController {
     }
   }
 
+  Future<void> fetchListWorkArea({String? search}) async {
+    _isFetchingWorkArea.value = true;
+
+    try {
+      final List<WorkAreaModel> data = await ApiHelper.fetchList<WorkAreaModel>(
+        request: (api) => api.getWorkAreas(search: search),
+      );
+
+      _workAreas.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingWorkArea.value = false;
+    }
+  }
+
   Future<void> register() async {
     _isSubmitted.value = true;
 
-    if (selectedWorkArea.value == null) throw Exception('Work Area is null');
+    if (selectedWorkArea == null) throw Exception('Work Area is null');
 
     try {
       await ApiHelper.fetch<UserModel>(
@@ -135,7 +168,7 @@ class RegisterController extends GetxController {
           address: addressCtrl.text,
           occupation: occupationCtrl.text,
           password: passwordCtrl.text,
-          workAreaId: selectedWorkArea.value!.id,
+          workAreaId: selectedWorkArea!.id,
           identityCardPhoto: idCardImage!,
           selfPhoto: selfImage!,
         ),

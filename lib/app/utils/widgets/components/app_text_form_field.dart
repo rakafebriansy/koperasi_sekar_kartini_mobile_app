@@ -21,6 +21,7 @@ class AppTextFormField extends StatefulWidget {
     this.validator,
     this.inputFormatters,
     this.onChanged,
+    this.initialValue,
   });
 
   final TextEditingController controller;
@@ -36,6 +37,7 @@ class AppTextFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
   final Function(String)? onChanged;
+  final String? initialValue;
 
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
@@ -50,10 +52,12 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
     isHidden = widget.obscureText;
   }
 
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         TextFormField(
+          initialValue: widget.initialValue,
           onChanged: widget.onChanged,
           style: GoogleFonts.poppins(fontSize: 14.sp),
           obscureText: isHidden,

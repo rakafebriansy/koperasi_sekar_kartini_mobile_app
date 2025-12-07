@@ -1,6 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/controllers/register_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
@@ -45,26 +46,30 @@ class AppRegister1stForm extends StatelessWidget {
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
           ),
-          DropdownSearch<String>(
-            validator: (value) => value.isRequired('Wilayah Kerja'),
-            enabled: DummyHelper.workAreas.isNotEmpty,
-            selectedItem: controller.selectedWorkArea.value?.name,
-            items: (filter, infiniteScrollProps) => DummyHelper.workAreas.names,
-            decoratorProps: DropDownDecoratorProps(
-              baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
-              decoration: buildAppTextInputDecoration(hintText: 'Pilih wilayah kerja'),
-            ),
-            popupProps: PopupProps.menu(
-              fit: FlexFit.loose,
-              constraints: BoxConstraints(maxHeight: 200.sp),
-              itemBuilder: (context, item, isSelected, onTap) => InkWell(
-                borderRadius: BorderRadius.circular(12),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12.sp,
-                    vertical: 12.sp,
+          Obx(
+            () => DropdownSearch<String>(
+              validator: (value) => value.isRequired('Wilayah Kerja'),
+              enabled: !controller.isFetchingWorkArea && controller.workAreas != null,
+              selectedItem: controller.selectedWorkArea?.name,
+              items: (filter, infiniteScrollProps) => controller.workAreas!.names,
+              decoratorProps: DropDownDecoratorProps(
+                baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
+                decoration: buildAppTextInputDecoration(hintText: 'Pilih wilayah kerja'),
+              ),
+              onChanged: (value) =>
+                                              controller.selectMember(value),
+              popupProps: PopupProps.menu(
+                fit: FlexFit.loose,
+                constraints: BoxConstraints(maxHeight: 200.sp),
+                itemBuilder: (context, item, isSelected, onTap) => InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.sp,
+                      vertical: 12.sp,
+                    ),
+                    child: poppins(item, fontSize: 14.sp),
                   ),
-                  child: poppins(item, fontSize: 14.sp),
                 ),
               ),
             ),

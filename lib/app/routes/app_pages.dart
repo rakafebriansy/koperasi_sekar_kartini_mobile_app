@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 
-import '../modules/employee/manage_employee/bindings/employee_manage_employee_binding.dart';
-import '../modules/employee/manage_employee/views/employee_manage_employee_view.dart';
 import '../modules/employee/group_member_detail/bindings/employee_group_member_detail_binding.dart';
 import '../modules/employee/group_member_detail/views/employee_group_member_detail_view.dart';
 import '../modules/employee/main/bindings/employee_main_binding.dart';
@@ -14,6 +12,8 @@ import '../modules/employee/main/tabs/home/views/employee_main_tabs_home_view.da
 import '../modules/employee/main/tabs/profile/bindings/employee_main_tabs_profile_binding.dart';
 import '../modules/employee/main/tabs/profile/views/employee_main_tabs_profile_view.dart';
 import '../modules/employee/main/views/employee_main_view.dart';
+import '../modules/employee/manage_employee/bindings/employee_manage_employee_binding.dart';
+import '../modules/employee/manage_employee/views/employee_manage_employee_view.dart';
 import '../modules/employee/manage_report/bindings/employee_manage_report_binding.dart';
 import '../modules/employee/manage_report/views/employee_manage_report_view.dart';
 import '../modules/event_detail/bindings/event_detail_binding.dart';
@@ -44,6 +44,8 @@ import '../modules/manage_event/bindings/manage_event_binding.dart';
 import '../modules/manage_event/views/manage_event_view.dart';
 import '../modules/manage_group/bindings/manage_group_binding.dart';
 import '../modules/manage_group/views/manage_group_view.dart';
+import '../modules/manage_group_member_profile/bindings/manage_group_member_profile_binding.dart';
+import '../modules/manage_group_member_profile/views/manage_group_member_profile_view.dart';
 import '../modules/report_detail/bindings/report_detail_binding.dart';
 import '../modules/report_detail/views/report_detail_view.dart';
 import '../modules/report_list/bindings/report_list_binding.dart';
@@ -180,6 +182,11 @@ class AppPages {
       name: _Paths.EMPLOYEE_MANAGE_REPORT,
       page: () => const EmployeeManageReportView(),
       binding: EmployeeManageReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_GROUP_MEMBER_PROFILE,
+      page: () => const ManageGroupMemberProfileView(),
+      binding: ManageGroupMemberProfileBinding(),
     ),
   ];
 }

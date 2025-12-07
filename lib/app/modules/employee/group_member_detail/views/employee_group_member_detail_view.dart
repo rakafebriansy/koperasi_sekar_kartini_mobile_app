@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
@@ -13,6 +14,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/a
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 import '../controllers/employee_group_member_detail_controller.dart';
 
@@ -139,10 +141,7 @@ class EmployeeGroupMemberDetailView
                       ),
                     ),
                     SizedBox.shrink(),
-                    _GroupedGroupMemberListView(
-                      groupedMembers:
-                          controller.groupMembers.groupedByFirstLetter,
-                    ),
+                    _GroupedGroupMemberListView(controller: controller),
                   ],
                 ),
         ),
@@ -152,12 +151,13 @@ class EmployeeGroupMemberDetailView
 }
 
 class _GroupedGroupMemberListView extends StatelessWidget {
-  final Map<String, List<UserModel>> groupedMembers;
+  final EmployeeGroupMemberDetailController controller;
 
-  const _GroupedGroupMemberListView({required this.groupedMembers});
+  const _GroupedGroupMemberListView({required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final groupedMembers = controller.groupMembers.groupedByFirstLetter;
     final letters = groupedMembers.keys.toList()..sort();
 
     return groupedMembers.isNotEmpty
@@ -200,7 +200,17 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(14.sp),
-                              onTap: () {},
+                              onTap: () async {
+                                final result = await Get.toNamed(
+                                  Routes.MANAGE_GROUP_MEMBER_PROFILE,
+                                  arguments: ArgsWrapper(data: m),
+                                );
+
+                                if (result == true) {
+                                  controller.fetchListGroupMember();
+                                  controller.fetchUnlistedMembers();
+                                }
+                              },
                               child: ListTile(
                                 contentPadding: EdgeInsets.symmetric(
                                   horizontal: 8.sp,
