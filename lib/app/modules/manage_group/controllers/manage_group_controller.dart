@@ -90,11 +90,11 @@ class ManageGroupController extends GetxController {
       _selectedWorkArea.value = group.workArea;
       _selectedChairman.value = group.chairman;
       _selectedFacilitator.value = group.facilitator;
+      fetchListMember();
     }
 
     fetchListWorkArea();
     fetchListEmployee();
-    fetchListMember();
     super.onInit();
   }
 
@@ -186,7 +186,8 @@ class ManageGroupController extends GetxController {
 
     try {
       final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUsers(search: search, role: 'group_member'),
+        request: (api) =>
+            api.getUsers(search: search, role: 'group_member', groupId: id),
       );
 
       _members.value = data;

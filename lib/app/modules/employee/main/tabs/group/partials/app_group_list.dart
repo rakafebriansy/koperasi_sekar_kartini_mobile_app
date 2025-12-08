@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/controllers/employee_main_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/group/controllers/employee_main_tabs_group_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
@@ -65,9 +66,7 @@ class AppGroupList extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: Center(child: CircularProgressIndicator()),
                   )
-                : _GroupedGroupListView(
-                    groupedGroup: controller.groups.groupedByDistrict,
-                  ),
+                : _GroupedGroupListView(controller: controller),
           ),
         ],
       ),
@@ -76,12 +75,13 @@ class AppGroupList extends StatelessWidget {
 }
 
 class _GroupedGroupListView extends StatelessWidget {
-  final Map<String, List<GroupModel>> groupedGroup;
+  final EmployeeMainController controller;
 
-  const _GroupedGroupListView({required this.groupedGroup});
+  const _GroupedGroupListView({required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final groupedGroup = controller.groups.groupedByDistrict;
     final letters = groupedGroup.keys.toList()..sort();
 
     return Column(
@@ -117,14 +117,18 @@ class _GroupedGroupListView extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(14.sp),
-                        onTap: () {
-                          Get.toNamed(
+                        onTap: () async {
+                          final result = await Get.toNamed(
                             Routes.GROUP_DETAIL,
                             arguments: ArgsWrapper(
                               action: ActionType.update,
                               data: g,
                             ),
                           );
+
+                          if (result == true) {
+                            controller.fetchListGroup();
+                          }
                         },
                         child: ListTile(
                           contentPadding: EdgeInsets.symmetric(

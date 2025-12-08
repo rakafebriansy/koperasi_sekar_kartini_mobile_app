@@ -52,7 +52,6 @@ class GroupDetailController extends GetxController {
     _action.value = args.action;
     var group = args.data as GroupModel;
     fetchListEmployee();
-    fetchListMember();
     fetchGroupById(group.id);
     super.onInit();
   }
@@ -86,22 +85,6 @@ class GroupDetailController extends GetxController {
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingEmployee.value = false;
-    }
-  }
-
-  Future<void> fetchListMember({String? search}) async {
-    _isFetchingMember.value = true;
-
-    try {
-      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUsers(search: search, role: 'group_member'),
-      );
-
-      _members.value = data;
-    } catch (e) {
-      ErrorHelper.handleError(e);
-    } finally {
-      _isFetchingMember.value = false;
     }
   }
 

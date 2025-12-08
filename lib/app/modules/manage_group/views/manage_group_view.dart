@@ -191,7 +191,7 @@ class ManageGroupView extends GetView<ManageGroupController> {
                 ),
                 SizedBox(height: 4.sp),
                 DropdownSearch<String>(
-                  enabled: !controller.isFetchingMember,
+                  enabled: controller.action!.isUpdateAction && !controller.isFetchingMember,
                   onChanged: (value) => controller.selectChairman(value),
                   selectedItem:
                       controller.selectedChairman?.name ?? 'Pilih Anggota',

@@ -145,13 +145,13 @@ Future<void> showMemberCard() async {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.sp),
-                    border: Border.all(width: 1.sp, color: AppColor.bg.gray),
+                    border: filePath != null ? Border.all(width: 1.sp, color: AppColor.bg.gray) : null,
                   ),
                   child: filePath != null
                       ? CachedNetworkImage(
                           imageUrl: '${Environments.apiUrl}/file/$filePath',
                         )
-                      : Image.asset(AppAsset.images.defaultMemberCard),
+                      : poppins('Tidak ada gambar.'),
                 ),
               ),
               AppFilledButton(
