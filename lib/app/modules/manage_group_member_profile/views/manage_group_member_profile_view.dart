@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_1st_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_2nd_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_3rd_Form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_5th_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_form_wrapper.dart';
 
 import '../controllers/manage_group_member_profile_controller.dart';
 
@@ -12,9 +15,9 @@ class ManageGroupMemberProfileView
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => AppDefaultWrapper(
+      () => AppFormWrapper(
         ableToBack: true,
-        title: poppins('Detail Anggota', fontWeight: FontWeight.w600),
+        title: 'Detail Anggota',
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
@@ -23,11 +26,11 @@ class ManageGroupMemberProfileView
               IndexedStack(
                 index: controller.selectedScreen,
                 children: [
-                  // AppRegister1stForm(controller: controller),
-                  // AppRegister2ndForm(controller: controller),
-                  // AppRegister3rdForm(controller: controller),
-                  // AppRegister4thForm(controller: controller),
-                  // AppRegister5thForm(controller: controller),
+                  AppManageGroupMemberProfile1stForm(controller: controller),
+                  AppManageGroupMemberProfile2ndForm(controller: controller),
+                  AppManageGroupMemberProfile3rdForm(controller: controller),
+                  AppManageGroupMemberProfile3rdForm(controller: controller),
+                  AppManageGroupMemberProfile5thForm(controller: controller),
                 ],
               ),
             ],

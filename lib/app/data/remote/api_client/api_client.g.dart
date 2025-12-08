@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://172.20.10.4:8000';
+    baseUrl ??= 'http://192.168.1.8:8000';
   }
 
   final Dio _dio;
@@ -541,14 +541,15 @@ class _ApiClient implements ApiClient {
     required int id,
     String method = "PUT",
     String? identityNumber,
-    String? memberNumber,
     String? name,
     String? birthDate,
+    String? memberNumber,
     String? phoneNumber,
     String? address,
     String? occupation,
-    String? password,
     String? role,
+    String? password,
+    int? workAreaId,
     File? identityCardPhoto,
     File? selfPhoto,
     File? memberCardPhoto,
@@ -568,12 +569,6 @@ class _ApiClient implements ApiClient {
         identityNumber,
       ));
     }
-    if (memberNumber != null) {
-      _data.fields.add(MapEntry(
-        'member_number',
-        memberNumber,
-      ));
-    }
     if (name != null) {
       _data.fields.add(MapEntry(
         'name',
@@ -584,6 +579,12 @@ class _ApiClient implements ApiClient {
       _data.fields.add(MapEntry(
         'birth_date',
         birthDate,
+      ));
+    }
+    if (memberNumber != null) {
+      _data.fields.add(MapEntry(
+        'member_number',
+        memberNumber,
       ));
     }
     if (phoneNumber != null) {
@@ -604,16 +605,22 @@ class _ApiClient implements ApiClient {
         occupation,
       ));
     }
+    if (role != null) {
+      _data.fields.add(MapEntry(
+        'role',
+        role,
+      ));
+    }
     if (password != null) {
       _data.fields.add(MapEntry(
         'password',
         password,
       ));
     }
-    if (role != null) {
+    if (workAreaId != null) {
       _data.fields.add(MapEntry(
-        'role',
-        role,
+        'work_area_id',
+        workAreaId.toString(),
       ));
     }
     if (identityCardPhoto != null) {

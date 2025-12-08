@@ -81,15 +81,16 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                               onTap: controller.group == null
                                                   ? null
                                                   : () async {
-                                                      final result = Get.toNamed(
-                                                        Routes.MANAGE_GROUP,
-                                                        arguments: ArgsWrapper(
-                                                          action:
-                                                              ActionType.update,
-                                                          data:
-                                                              controller.group!,
-                                                        ),
-                                                      );
+                                                      final result =
+                                                          await Get.toNamed(
+                                                            Routes.MANAGE_GROUP,
+                                                            arguments: ArgsWrapper(
+                                                              action: ActionType
+                                                                  .update,
+                                                              data: controller
+                                                                  .group!,
+                                                            ),
+                                                          );
                                                       if (result == true) {
                                                         controller
                                                             .fetchGroupById(
@@ -137,6 +138,157 @@ class GroupDetailView extends GetView<GroupDetailController> {
                               spacing: 3.sp,
                               mainAxisSize: MainAxisSize.min,
                               children: [
+                                AppGroupInfoCell(
+                                  icon: Icon(
+                                    Icons.person,
+                                    color: AppColor.bg.primary,
+                                  ),
+                                  field: 'PJK',
+                                  value: Row(
+                                    children: [
+                                      controller.group!.chairman != null
+                                          ? poppins(
+                                              controller.group!.chairman!.name,
+                                            )
+                                          : poppins('-'),
+                                      if (AuthController
+                                              .find
+                                              .currentUser
+                                              ?.role ==
+                                          'employee')
+                                        Material(
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.bottomSheet(
+                                                AppBottomSheet(
+                                                  formKey: controller
+                                                      .chairmanFormKey,
+                                                  titleText: poppins(
+                                                    'Pilih Penanggung Jawab',
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20.sp,
+                                                  ),
+                                                  children: [
+                                                    poppins(
+                                                      'PJK',
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                    DropdownSearch<String>(
+                                                      enabled: !controller
+                                                          .isFetchingMember,
+                                                      onChanged: (value) =>
+                                                          controller
+                                                              .selectChairman(
+                                                                value,
+                                                              ),
+                                                      selectedItem:
+                                                          controller
+                                                              .selectedChairman
+                                                              ?.name ??
+                                                          'Pilih Anggota',
+                                                      items:
+                                                          (
+                                                            filter,
+                                                            infiniteScrollProps,
+                                                          ) => controller
+                                                              .members
+                                                              .names,
+                                                      decoratorProps:
+                                                          DropDownDecoratorProps(
+                                                            baseStyle:
+                                                                GoogleFonts.poppins(
+                                                                  fontSize:
+                                                                      14.sp,
+                                                                ),
+                                                            decoration:
+                                                                buildAppTextInputDecoration(
+                                                                  hintText: '',
+                                                                ),
+                                                          ),
+                                                      validator: (value) => value
+                                                          .isDropdownRequired(
+                                                            'PJK',
+                                                            controller
+                                                                .selectedChairman
+                                                                ?.name,
+                                                          ),
+                                                      popupProps: PopupProps.menu(
+                                                        fit: FlexFit.loose,
+                                                        constraints:
+                                                            BoxConstraints(
+                                                              maxHeight: 200.sp,
+                                                            ),
+                                                        itemBuilder:
+                                                            (
+                                                              context,
+                                                              item,
+                                                              isSelected,
+                                                              onTap,
+                                                            ) => InkWell(
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                    12,
+                                                                  ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsets.symmetric(
+                                                                      horizontal:
+                                                                          12.sp,
+                                                                      vertical:
+                                                                          12.sp,
+                                                                    ),
+                                                                child: poppins(
+                                                                  item,
+                                                                  fontSize:
+                                                                      14.sp,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 18.sp),
+                                                    SizedBox(
+                                                      width: double.infinity,
+                                                      child: AppFilledButton(
+                                                        label: 'Simpan',
+                                                        onTap:
+                                                            controller
+                                                                .isSubmitted
+                                                            ? null
+                                                            : controller
+                                                                  .updateChairman,
+                                                        width: double.infinity,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 8.sp,
+                                              ),
+                                              child: poppins(
+                                                controller.group!.chairman !=
+                                                        null
+                                                    ? 'Ubah'
+                                                    : 'Atur',
+                                                color: Colors.blue,
+                                                textStyle: TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  decorationColor: Colors.blue,
+                                                  decorationThickness: 2,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
                                 AppGroupInfoCell(
                                   icon: Icon(
                                     Icons.person_4,
@@ -292,157 +444,6 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                     ],
                                   ),
                                 ),
-                                AppGroupInfoCell(
-                                  icon: Icon(
-                                    Icons.person,
-                                    color: AppColor.bg.primary,
-                                  ),
-                                  field: 'PJK',
-                                  value: Row(
-                                    children: [
-                                      controller.group!.chairman != null
-                                          ? poppins(
-                                              controller.group!.chairman!.name,
-                                            )
-                                          : poppins('-'),
-                                      if (AuthController
-                                              .find
-                                              .currentUser
-                                              ?.role ==
-                                          'employee')
-                                        Material(
-                                          child: InkWell(
-                                            onTap: () {
-                                              Get.bottomSheet(
-                                                AppBottomSheet(
-                                                  formKey: controller
-                                                      .chairmanFormKey,
-                                                  titleText: poppins(
-                                                    'Pilih Penanggung Jawab',
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20.sp,
-                                                  ),
-                                                  children: [
-                                                    poppins(
-                                                      'PJK',
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                    DropdownSearch<String>(
-                                                      enabled: !controller
-                                                          .isFetchingMember,
-                                                      onChanged: (value) =>
-                                                          controller
-                                                              .selectChairman(
-                                                                value,
-                                                              ),
-                                                      selectedItem:
-                                                          controller
-                                                              .selectedChairman
-                                                              ?.name ??
-                                                          'Pilih Anggota',
-                                                      items:
-                                                          (
-                                                            filter,
-                                                            infiniteScrollProps,
-                                                          ) => controller
-                                                              .members
-                                                              .names,
-                                                      decoratorProps:
-                                                          DropDownDecoratorProps(
-                                                            baseStyle:
-                                                                GoogleFonts.poppins(
-                                                                  fontSize:
-                                                                      14.sp,
-                                                                ),
-                                                            decoration:
-                                                                buildAppTextInputDecoration(
-                                                                  hintText: '',
-                                                                ),
-                                                          ),
-                                                      validator: (value) => value
-                                                          .isDropdownRequired(
-                                                            'PJK',
-                                                            controller
-                                                                .selectedChairman
-                                                                ?.name,
-                                                          ),
-                                                      popupProps: PopupProps.menu(
-                                                        fit: FlexFit.loose,
-                                                        constraints:
-                                                            BoxConstraints(
-                                                              maxHeight: 200.sp,
-                                                            ),
-                                                        itemBuilder:
-                                                            (
-                                                              context,
-                                                              item,
-                                                              isSelected,
-                                                              onTap,
-                                                            ) => InkWell(
-                                                              borderRadius:
-                                                                  BorderRadius.circular(
-                                                                    12,
-                                                                  ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsets.symmetric(
-                                                                      horizontal:
-                                                                          12.sp,
-                                                                      vertical:
-                                                                          12.sp,
-                                                                    ),
-                                                                child: poppins(
-                                                                  item,
-                                                                  fontSize:
-                                                                      14.sp,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: 18.sp),
-                                                    SizedBox(
-                                                      width: double.infinity,
-                                                      child: AppFilledButton(
-                                                        label: 'Simpan',
-                                                        onTap:
-                                                            controller
-                                                                .isSubmitted
-                                                            ? null
-                                                            : controller
-                                                                  .updateChairman,
-                                                        width: double.infinity,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 8.sp,
-                                              ),
-                                              child: poppins(
-                                                controller.group!.chairman !=
-                                                        null
-                                                    ? 'Ubah'
-                                                    : 'Atur',
-                                                color: Colors.blue,
-                                                textStyle: TextStyle(
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  decorationColor: Colors.blue,
-                                                  decorationThickness: 2,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
                                 SizedBox(height: 4.sp),
                                 Divider(
                                   height: 0.5.sp,
@@ -476,13 +477,19 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                             .withValues(alpha: 0.2),
                                         borderRadiusCircularSize: 12.sp,
                                       ),
-                                      onPressed: () {
-                                        Get.toNamed(
+                                      onPressed: () async {
+                                        final result = await Get.toNamed(
                                           Routes.EMPLOYEE_GROUP_MEMBER_DETAIL,
                                           arguments: ArgsWrapper(
                                             data: controller.group,
                                           ),
                                         );
+
+                                        if (result == true) {
+                                          controller.fetchGroupById(
+                                            controller.group!.id,
+                                          );
+                                        }
                                       },
                                       child: Icon(Icons.group),
                                     ),
@@ -502,11 +509,16 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                                 .withValues(alpha: 0.2),
                                             borderRadiusCircularSize: 12.sp,
                                           ),
-                                          onPressed: () {
-                                            Get.toNamed(
+                                          onPressed: () async {
+                                            final result = await Get.toNamed(
                                               Routes
                                                   .EMPLOYEE_GROUP_MEMBER_DETAIL,
                                             );
+                                            if (result == true) {
+                                              controller.fetchGroupById(
+                                                controller.group!.id,
+                                              );
+                                            }
                                           },
                                           child: poppins(
                                             'Atur Kas',
@@ -525,10 +537,15 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                                 .withValues(alpha: 0.2),
                                             borderRadiusCircularSize: 12.sp,
                                           ),
-                                          onPressed: () {
-                                            Get.toNamed(
+                                          onPressed: () async {
+                                            final result = await Get.toNamed(
                                               Routes.EMPLOYEE_MANAGE_REPORT,
                                             );
+                                            if (result == true) {
+                                              controller.fetchGroupById(
+                                                controller.group!.id,
+                                              );
+                                            }
                                           },
                                           child: poppins(
                                             'Atur Rapot',

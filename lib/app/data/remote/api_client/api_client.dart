@@ -103,9 +103,7 @@ abstract class ApiClient {
   });
 
   @GET("/unlisted-users")
-  Future<dynamic> getUnlistedUsers({
-    @Query('search') String? search,
-  });
+  Future<dynamic> getUnlistedUsers({@Query('search') String? search});
 
   @POST("/users")
   @MultiPart()
@@ -124,27 +122,30 @@ abstract class ApiClient {
     @Part(name: "member_card_photo") File? memberCardPhoto,
   });
 
+  
   @POST("/users/{id}")
   @MultiPart()
   Future<dynamic> updateUser({
-    @Path('id') required int id,
+    @Path("id") required int id,
 
     @Part(name: "_method") String method = "PUT",
 
     @Part(name: "identity_number") String? identityNumber,
-    @Part(name: "member_number") String? memberNumber,
     @Part(name: "name") String? name,
     @Part(name: "birth_date") String? birthDate,
+    @Part(name: "member_number") String? memberNumber,
     @Part(name: "phone_number") String? phoneNumber,
     @Part(name: "address") String? address,
     @Part(name: "occupation") String? occupation,
-    @Part(name: "password") String? password,
     @Part(name: "role") String? role,
+    @Part(name: "password") String? password,
+    @Part(name: "work_area_id") int? workAreaId,
     @Part(name: "identity_card_photo") File? identityCardPhoto,
     @Part(name: "self_photo") File? selfPhoto,
     @Part(name: "member_card_photo") File? memberCardPhoto,
   });
 
+  
   @POST("/users/{id}")
   Future<dynamic> deleteUser({
     @Part(name: "_method") String method = "DELETE",

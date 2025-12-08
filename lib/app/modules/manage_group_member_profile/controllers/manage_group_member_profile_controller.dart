@@ -3,7 +3,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class ManageGroupMemberProfileController extends GetxController {
   final firstFormKey = GlobalKey<FormState>();
@@ -46,11 +50,135 @@ class ManageGroupMemberProfileController extends GetxController {
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
+  final RxBool _isFetchingWorkArea = false.obs;
+  bool get isFetchingWorkArea => _isFetchingWorkArea.value;
+
   final Rx<File?> _idCardImage = Rxn();
   File? get idCardImage => _idCardImage.value;
 
   final Rx<File?> _selfImage = Rxn();
   File? get selfImage => _selfImage.value;
 
-  Rx<WorkAreaModel?> selectedWorkArea = Rxn();
+  final RxList<WorkAreaModel> _workAreas = RxList();
+  List<WorkAreaModel>? get workAreas => _workAreas;
+
+  final Rx<WorkAreaModel?> _selectedWorkArea = Rxn();
+  WorkAreaModel? get selectedWorkArea => _selectedWorkArea.value;
+
+  @override
+  void onInit() {
+    fetchListWorkArea();
+    super.onInit();
+  }
+
+  void nextScreen() {
+    _selectedScreen.value++;
+  }
+
+  void prevScreen() {
+    _selectedScreen.value--;
+  }
+
+  void selectMember(String? name) {
+    if (name == null) return;
+
+    _selectedWorkArea.value = _workAreas.firstWhere(
+      (item) => item.name.toLowerCase() == name.toLowerCase(),
+    );
+  }
+
+  Future<void> setIdCardImage(File? file) async {
+    try {
+      if (file == null) throw Exception('Gambar kosong.');
+      _idCardImage.value = file;
+    } catch (e) {
+      ErrorHelper.handleError('Gagal unggah gambar: ${e.toString()}');
+    }
+  }
+
+  Future<void> setSelfImage(File? file) async {
+    try {
+      if (file == null) throw Exception('Gambar kosong.');
+      _selfImage.value = file;
+    } catch (e) {
+      ErrorHelper.handleError('Gagal unggah gambar: ${e.toString()}');
+    }
+  }
+
+  Future<void> fetchListWorkArea({String? search}) async {
+    _isFetchingWorkArea.value = true;
+
+    try {
+      final List<WorkAreaModel> data = await ApiHelper.fetchList<WorkAreaModel>(
+        request: (api) => api.getWorkAreas(search: search),
+      );
+
+      _workAreas.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingWorkArea.value = false;
+    }
+  }
+
+  Future<void> register() async {
+    _isSubmitted.value = true;
+
+    if (selectedWorkArea == null) throw Exception('Work Area is null');
+
+    try {
+      await ApiHelper.fetch<UserModel>(
+        request: (api) => api.register(
+          name: nameCtrl.text,
+          identityNumber: identityNumberCtrl.text,
+          birthDate: birthDateCtrl.text.toIsoDateString(),
+          phoneNumber: phoneCtrl.text,
+          address: addressCtrl.text,
+          occupation: occupationCtrl.text,
+          password: passwordCtrl.text,
+          workAreaId: selectedWorkArea!.id,
+          identityCardPhoto: idCardImage!,
+          selfPhoto: selfImage!,
+        ),
+      );
+
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil membuat akun!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e, canUseNavigator: false);
+    } finally {
+      _isSubmitted.value = false;
+    }
+  }
+
+  Future<void> submitButton() async {
+    switch (selectedScreen) {
+      case 0:
+        if (firstFormKey.currentState!.validate()) {
+          nextScreen();
+        }
+        return;
+      case 1:
+        if (secondFormKey.currentState!.validate()) {
+          nextScreen();
+        }
+        return;
+      case 2:
+        if (thirdFormKey.currentState!.validate()) {
+          nextScreen();
+        }
+        return;
+      case 3:
+        if (fourthFormKey.currentState!.validate()) {
+          nextScreen();
+        }
+        return;
+      case 4:
+        if (fifthFormKey.currentState!.validate()) {
+          register();
+        }
+        return;
+    }
+  }
 }

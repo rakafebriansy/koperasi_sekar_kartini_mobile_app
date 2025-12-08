@@ -156,13 +156,16 @@ class GroupDetailController extends GetxController {
 
       try {
         await ApiHelper.fetch<GroupModel>(
-          request: (api) =>
-              api.updateGroupChairman(id: group!.id, userId: selectedChairman!.id),
+          request: (api) => api.updateGroupChairman(
+            id: group!.id,
+            userId: selectedChairman!.id,
+          ),
         );
 
         Get.back();
         Get.snackbar('INFO', 'Berhasil memperbarui informasi PJK!');
       } catch (e) {
+        rethrow;
         debugPrint(e.toString());
         ErrorHelper.handleError(e, canUseNavigator: false);
       } finally {

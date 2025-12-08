@@ -77,7 +77,7 @@ class ManageGroupController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
-      if (args.action == null) throw Exception('action is null');
+    if (args.action == null) throw Exception('action is null');
 
     _action.value = args.action;
 
@@ -201,7 +201,7 @@ class ManageGroupController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.fetch<GroupModel>(
+      await ApiHelper.fetchNonReturnable(
         request: (api) => api.createGroup(
           number: numberCtrl.text.isNotEmpty
               ? int.parse(numberCtrl.text)
@@ -229,7 +229,7 @@ class ManageGroupController extends GetxController {
     if (id == null) throw Exception('id is null');
 
     try {
-      await ApiHelper.fetch<UserModel>(
+      await ApiHelper.fetchNonReturnable(
         request: (api) => api.updateGroup(
           id: id!,
           number: numberCtrl.text.isNotEmpty
@@ -245,6 +245,7 @@ class ManageGroupController extends GetxController {
       Get.back(result: true);
       Get.snackbar('INFO', 'Berhasil memperbarui grup!');
     } catch (e) {
+      rethrow;
       debugPrint(e.toString());
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
