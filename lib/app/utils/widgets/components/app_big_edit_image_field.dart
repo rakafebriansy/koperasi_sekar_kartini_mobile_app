@@ -58,7 +58,7 @@ class _AppBigEditImageFieldState extends State<AppBigEditImageField> {
                     borderRadius: BorderRadius.circular(16.sp),
                   ),
                   height: 220.sp,
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: getScreenWidth(context, scale: 0.9),
                   child: Center(
                     child: Stack(
                       children: [
@@ -119,7 +119,7 @@ class _AppBigEditImageFieldState extends State<AppBigEditImageField> {
                     border: Border.all(width: 3.sp, color: AppColor.bg.gray),
                     borderRadius: BorderRadius.circular(16.sp),
                   ),
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: getScreenWidth(context, scale: 0.9),
                   height: 220.sp,
                   child: Center(
                     child: widget.readOnly

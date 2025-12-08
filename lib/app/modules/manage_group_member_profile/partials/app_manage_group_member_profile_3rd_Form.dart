@@ -93,15 +93,24 @@ class AppManageGroupMemberProfile3rdForm extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if(AuthController.find.currentUser!.role == 'group_member')
                 Expanded(
-                  child: AppFilledButton(
-                    width: double.infinity,
-                    label: 'Daftar',
-                    onTap: controller.isSubmitted
-                        ? null
-                        : controller.submitButton,
-                  ),
+                  child: AuthController.find.currentUser!.role == 'group_member'
+                      ? AppFilledButton(
+                          width: double.infinity,
+                          label: 'Daftar',
+                          onTap: controller.isSubmitted
+                              ? null
+                              : controller.submitButton,
+                        )
+                      : AppFilledButton(
+                          width: double.infinity,
+                          label: controller.user!.isActive
+                              ? 'Nonaktifkan'
+                              : 'Aktifkan',
+                          onTap: controller.isSubmitted
+                              ? null
+                              : controller.submitButton,
+                        ),
                 ),
               ],
             ),

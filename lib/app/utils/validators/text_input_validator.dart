@@ -7,7 +7,6 @@ extension TextInputValidator on String? {
   }
 
   String? isDropdownRequired(String fieldName, String? value) {
-    print(value);
     if (value == null || value.trim().isEmpty) {
       return "$fieldName wajib dipilih.";
     }

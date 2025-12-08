@@ -21,7 +21,7 @@ class ReportListView extends GetView<ReportListController> {
       title: poppins('Daftar Rapor', fontWeight: FontWeight.w600),
       child: Container(
         padding: EdgeInsets.all(16.sp),
-        height: MediaQuery.of(context).size.height,
+        height: getScreenHeight(context),
         child: Column(
           spacing: 12.sp,
           children: [

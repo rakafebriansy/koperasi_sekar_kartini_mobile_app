@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +7,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
@@ -68,8 +66,8 @@ class ManageGroupMemberProfileController extends GetxController {
   final Rx<WorkAreaModel?> _selectedWorkArea = Rxn();
   WorkAreaModel? get selectedWorkArea => _selectedWorkArea.value;
 
-  final Rx<UserModel?> _user= Rxn();
-  UserModel? get user=> _user.value;
+  final Rx<UserModel?> _user = Rxn();
+  UserModel? get user => _user.value;
 
   final Rx<ActionType?> _action = Rxn();
   ActionType? get action => _action.value;
@@ -77,24 +75,19 @@ class ManageGroupMemberProfileController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
-    if (args.action == null) throw Exception('action is null');
 
-    _action.value = args.action;
+    final user = args.data as UserModel;
 
-    if (args.action!.isUpdateAction) {
-      final user = args.data as UserModel;
-
-      _user.value = user;
-      identityNumberCtrl.text = user.identityNumber ?? '';
-      nameCtrl.text = user.name;
-      addressCtrl.text = user.address ?? '';
-      birthDateCtrl.text = DateFormat('dd/MM/yyyy').format(user.birthDate!);
-      occupationCtrl.text = user.occupation ?? '';
-      phoneCtrl.text = user.phoneNumber ?? '';
-      passwordCtrl.text = '';
-      confirmPasswordCtrl.text = '';
-      _selectedWorkArea.value = user.workArea;
-    }
+    _user.value = user;
+    identityNumberCtrl.text = user.identityNumber ?? '';
+    nameCtrl.text = user.name;
+    addressCtrl.text = user.address ?? '';
+    birthDateCtrl.text = DateFormat('dd/MM/yyyy').format(user.birthDate!);
+    occupationCtrl.text = user.occupation ?? '';
+    phoneCtrl.text = user.phoneNumber ?? '';
+    passwordCtrl.text = '';
+    confirmPasswordCtrl.text = '';
+    _selectedWorkArea.value = user.workArea;
 
     fetchListWorkArea();
     super.onInit();
@@ -195,6 +188,26 @@ class ManageGroupMemberProfileController extends GetxController {
     }
   }
 
+  Future<void> activateMember() async {
+    //TODO: Apakah anda yakin?
+    _isSubmitted.value = true;
+
+    try {
+      await ApiHelper.fetch<UserModel>(
+        request: (api) =>
+            api.activateMember(id: user!.id, isActive: !(user!.isActive)),
+      );
+
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil mengubah aktivasi akun!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e, canUseNavigator: false);
+    } finally {
+      _isSubmitted.value = false;
+    }
+  }
+
   Future<void> submitButton() async {
     final role = AuthController.find.currentUser!.role;
 
@@ -206,11 +219,7 @@ class ManageGroupMemberProfileController extends GetxController {
                 secondFormKey.currentState!.validate() ? nextScreen() : null,
             2: () => thirdFormKey.currentState!.validate() ? register() : null,
           }
-        : {
-            0: () =>
-                firstFormKey.currentState!.validate() ? nextScreen() : null,
-            1: () => thirdFormKey.currentState!.validate() ? register() : null,
-          };
+        : {0: () => nextScreen(), 1: () => activateMember()};
 
     steps[selectedScreen]?.call();
   }

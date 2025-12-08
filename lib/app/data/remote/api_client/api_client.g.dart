@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.1.8:8000';
+    baseUrl ??= 'http://10.132.0.67:8000';
   }
 
   final Dio _dio;
@@ -380,10 +380,41 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> getUnlistedUsers({
-    required int workAreaId,
+  Future<dynamic> getUnlistedMembers({
     String? search,
+    int? workAreaId,
   }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'search': search,
+      r'work_area_id': workAreaId,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/unlisted-members',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> getInactiveMembers({String? search}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'search': search};
     queryParameters.removeWhere((k, v) => v == null);
@@ -396,7 +427,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/work-areas/${workAreaId}/unlisted-users',
+          '/inactive-members',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -668,6 +699,42 @@ class _ApiClient implements ApiClient {
         .compose(
           _dio.options,
           '/users/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> activateMember({
+    required int id,
+    String method = "PATCH",
+    bool? isActive,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      '_method': method,
+      'is_active': isActive,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/users/${id}/activate',
           queryParameters: queryParameters,
           data: _data,
         )

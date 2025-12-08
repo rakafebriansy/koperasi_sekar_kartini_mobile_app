@@ -30,7 +30,7 @@ class EmployeeGroupMemberDetailView
         child: Obx(
           () => controller.isLoading
               ? SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.7,
+                  height: getScreenHeight(context, scale: 0.7),
                   child: Center(child: CircularProgressIndicator()),
                 )
               : Column(
@@ -261,7 +261,7 @@ class _GroupedGroupMemberListView extends StatelessWidget {
             }),
           )
         : SizedBox(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: getScreenHeight(context, scale: 0.7),
             child: Align(
               alignment: Alignment.center,
               child: poppins('Tidak ada data.'),

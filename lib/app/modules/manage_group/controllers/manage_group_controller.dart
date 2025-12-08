@@ -90,7 +90,7 @@ class ManageGroupController extends GetxController {
       _selectedWorkArea.value = group.workArea;
       _selectedChairman.value = group.chairman;
       _selectedFacilitator.value = group.facilitator;
-      fetchListMember();
+      fetchListGroupMember();
     }
 
     fetchListWorkArea();
@@ -181,7 +181,7 @@ class ManageGroupController extends GetxController {
     }
   }
 
-  Future<void> fetchListMember({String? search}) async {
+  Future<void> fetchListGroupMember({String? search}) async {
     _isFetchingMember.value = true;
 
     try {
@@ -246,7 +246,6 @@ class ManageGroupController extends GetxController {
       Get.back(result: true);
       Get.snackbar('INFO', 'Berhasil memperbarui grup!');
     } catch (e) {
-      rethrow;
       debugPrint(e.toString());
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {

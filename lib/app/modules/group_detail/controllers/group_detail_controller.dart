@@ -148,7 +148,6 @@ class GroupDetailController extends GetxController {
         Get.back();
         Get.snackbar('INFO', 'Berhasil memperbarui informasi PJK!');
       } catch (e) {
-        rethrow;
         debugPrint(e.toString());
         ErrorHelper.handleError(e, canUseNavigator: false);
       } finally {

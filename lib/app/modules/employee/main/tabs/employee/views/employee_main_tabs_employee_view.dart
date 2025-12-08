@@ -83,7 +83,7 @@ class EmployeeMainTabsEmployeeView
             Obx(
               () => controller.isFetching
                   ? SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
+                      height: getScreenHeight(context, scale: 0.7),
                       child: Center(child: CircularProgressIndicator()),
                     )
                   : _GroupedEmployeeListView(controller: controller),
@@ -192,7 +192,7 @@ class _GroupedEmployeeListView extends StatelessWidget {
             }),
           )
         : SizedBox(
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: getScreenHeight(context, scale: 0.7),
             child: Center(child: poppins('Tidak ada daa.')),
           );
     return container;

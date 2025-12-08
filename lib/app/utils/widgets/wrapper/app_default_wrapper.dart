@@ -38,16 +38,14 @@ class AppDefaultWrapper extends StatelessWidget {
           centerTitle: true,
           leadingWidth: 64.sp,
           surfaceTintColor: Colors.white,
-          leading: leading != null
-              ? leading
-              : ableToBack
+          leading: leading ?? (ableToBack
               ? Center(
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(999),
                       onTap: () {
-                        Get.back();
+                        Get.back(result: true);
                       },
                       child: Container(
                         height: 36.sp,
@@ -66,7 +64,7 @@ class AppDefaultWrapper extends StatelessWidget {
                     ),
                   ),
                 )
-              : null,
+              : null),
           title: title,
         ),
         body: withPadding

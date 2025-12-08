@@ -102,11 +102,15 @@ abstract class ApiClient {
     @Query('role') String? role,
   });
 
-  @GET("/work-areas/{id}/unlisted-users")
-  Future<dynamic> getUnlistedUsers({
-    @Path('id') required int workAreaId,
+  @GET("/unlisted-members")
+  Future<dynamic> getUnlistedMembers({
+    @Query('search') String? search,
+    @Query('work_area_id') int? workAreaId
+  });
 
-    @Query('search') String? search
+  @GET("/inactive-members")
+  Future<dynamic> getInactiveMembers({
+    @Query('search') String? search,
   });
 
   @POST("/users")
@@ -147,6 +151,17 @@ abstract class ApiClient {
     @Part(name: "self_photo") File? selfPhoto,
     @Part(name: "member_card_photo") File? memberCardPhoto,
   });
+
+  
+  @POST("/users/{id}/activate")
+  Future<dynamic> activateMember({
+    @Path('id') required int id,
+
+    @Field("_method") String method = "PATCH",
+
+    @Field("is_active") bool? isActive,
+  });
+
 
   @POST("/users/{id}")
   Future<dynamic> deleteUser({

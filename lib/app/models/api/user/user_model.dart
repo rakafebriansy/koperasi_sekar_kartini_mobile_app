@@ -21,7 +21,6 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'member_card_photo') String? memberCardPhoto,
     @JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,
     required String role,
-    @JsonKey(name: 'is_verified') required bool isVerified,
     @JsonKey(name: 'is_active') required bool isActive,
     @JsonKey(name: 'work_area') WorkAreaModel? workArea,
     GroupModel? group,

@@ -11,8 +11,6 @@ class DownloadClientImpl extends DownloadClient {
   Future<String?> downloadFile(String path) async {
     final url = "$baseUrl/download/$path";
 
-    print(url);
-
     final perm = await Permission.storage.request();
     if (!perm.isGranted) return null;
 

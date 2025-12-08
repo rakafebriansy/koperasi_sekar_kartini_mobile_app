@@ -37,39 +37,41 @@ class AppFormWrapper extends StatelessWidget {
           centerTitle: true,
           leadingWidth: 64.sp,
           surfaceTintColor: Colors.white,
-          leading: leading ?? (ableToBack
-              ? Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 12.sp),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(999),
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          height: 36.sp,
-                          width: 36.sp,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColor.border.lightGray,
-                              width: 1.sp,
-                            ),
+          leading:
+              leading ??
+              (ableToBack
+                  ? Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 12.sp),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
                             borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              AppAsset.svgs.arrowLeftBlack,
-                              color: Colors.white,
+                            onTap: () {
+                              Get.back(result: true);
+                            },
+                            child: Container(
+                              height: 36.sp,
+                              width: 36.sp,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColor.border.lightGray,
+                                  width: 1.sp,
+                                ),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  AppAsset.svgs.arrowLeftBlack,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                )
-              : null),
+                    )
+                  : null),
           title: poppins(
             title,
             color: Colors.white,
@@ -92,8 +94,8 @@ class AppFormWrapper extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.86,
+                  width: getScreenWidth(context),
+                  height: getScreenHeight(context, scale: 0.86),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(

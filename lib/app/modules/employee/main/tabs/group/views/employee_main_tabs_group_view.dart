@@ -39,7 +39,7 @@ class EmployeeMainTabsGroupView
           AppGroupMemberList(controller: controller.mainController),
           AppCandidateGroupMemberList(controller: controller.mainController),
         ],
-        tabLabels: ['Kelompok', 'Anggota', 'Calon'],
+        tabLabels: ['Kelompok', 'Anggota', 'Nonaktif'],
       ),
     );
   }

@@ -22,7 +22,7 @@ class GroupMemberLoanListView extends GetView<GroupMemberLoanListController> {
       title: poppins('Riwayat Pinjaman', fontWeight: FontWeight.w600),
       child: Container(
         padding: EdgeInsets.all(16.sp),
-        height: MediaQuery.of(context).size.height,
+        height: getScreenHeight(context),
         child: Column(
           spacing: 12.sp,
           children: [
@@ -181,11 +181,7 @@ class _LoanCard extends StatelessWidget {
 }
 
 class _TabFilter extends StatelessWidget {
-  const _TabFilter({
-    required this.title,
-    this.onTap,
-    required this.isActive,
-  });
+  const _TabFilter({required this.title, this.onTap, required this.isActive});
 
   final String title;
   final VoidCallback? onTap;

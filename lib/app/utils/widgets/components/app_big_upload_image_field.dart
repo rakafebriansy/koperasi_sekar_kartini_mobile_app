@@ -43,7 +43,7 @@ class _AppBigUploadImageFieldState extends State<AppBigUploadImageField> {
                     borderRadius: BorderRadius.circular(16.sp),
                   ),
                   height: 220.sp,
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: getScreenWidth(context, scale: 0.9),
                   child: Image.file(value!),
                 )
               : Material(
@@ -61,7 +61,7 @@ class _AppBigUploadImageFieldState extends State<AppBigUploadImageField> {
                         ),
                         borderRadius: BorderRadius.circular(16.sp),
                       ),
-                      width: MediaQuery.of(context).size.width * 0.9,
+                      width: getScreenWidth(context, scale: 0.9),
                       height: 220.sp,
                       child: Center(
                         child: Column(

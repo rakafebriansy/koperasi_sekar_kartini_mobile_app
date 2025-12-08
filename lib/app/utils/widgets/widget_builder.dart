@@ -145,7 +145,9 @@ Future<void> showMemberCard() async {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.sp),
-                    border: filePath != null ? Border.all(width: 1.sp, color: AppColor.bg.gray) : null,
+                    border: filePath != null
+                        ? Border.all(width: 1.sp, color: AppColor.bg.gray)
+                        : null,
                   ),
                   child: filePath != null
                       ? CachedNetworkImage(
@@ -179,4 +181,11 @@ Future<void> showMemberCard() async {
       ],
     ),
   );
+}
+
+double getScreenHeight(BuildContext context, {double scale = 1}) {
+  return MediaQuery.of(context).size.height * scale;
+}
+double getScreenWidth(BuildContext context,  {double scale = 1}) {
+  return MediaQuery.of(context).size.height * scale;
 }
