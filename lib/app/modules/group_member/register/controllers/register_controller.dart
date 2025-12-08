@@ -10,7 +10,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/regis
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
 
@@ -35,9 +34,6 @@ class RegisterController extends GetxController {
   );
   TextEditingController occupationCtrl = TextEditingController(
     text: !kReleaseMode ? 'Programmer' : '',
-  );
-  TextEditingController emailCtrl = TextEditingController(
-    text: !kReleaseMode ? 'raka@example.com' : '',
   );
   TextEditingController phoneCtrl = TextEditingController(
     text: !kReleaseMode ? '08123456789' : '',
@@ -95,7 +91,6 @@ class RegisterController extends GetxController {
     addressCtrl.dispose();
     birthDateCtrl.dispose();
     occupationCtrl.dispose();
-    emailCtrl.dispose();
     phoneCtrl.dispose();
     passwordCtrl.dispose();
     confirmPasswordCtrl.dispose();

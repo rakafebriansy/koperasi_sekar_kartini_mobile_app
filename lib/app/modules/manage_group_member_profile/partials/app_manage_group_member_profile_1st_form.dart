@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/register/controllers/register_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/controllers/manage_group_member_profile_controller.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_link_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 
@@ -22,6 +21,8 @@ class AppManageGroupMemberProfile1stForm extends StatelessWidget {
   final ManageGroupMemberProfileController controller;
   @override
   Widget build(BuildContext context) {
+    final role = AuthController.find.currentUser!.role;
+
     return Form(
       key: controller.firstFormKey,
       child: Column(
@@ -29,6 +30,7 @@ class AppManageGroupMemberProfile1stForm extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AppTextFormGroup(
+            enabled: role == 'group_member',
             controller: controller.identityNumberCtrl,
             label: 'NIK',
             placeholder: 'Masukkan NIK',
@@ -38,6 +40,7 @@ class AppManageGroupMemberProfile1stForm extends StatelessWidget {
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
+            enabled: role == 'group_member',
             controller: controller.nameCtrl,
             label: 'Nama Lengkap',
             maxLines: 1,
@@ -52,12 +55,13 @@ class AppManageGroupMemberProfile1stForm extends StatelessWidget {
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
           ),
-          Obx(
-            () => DropdownSearch<String>(
+          Obx(() {
+            return DropdownSearch<String>(
               validator: (value) => value.isRequired('Wilayah Kerja'),
-              enabled:
-                  !controller.isFetchingWorkArea &&
-                  controller.workAreas != null,
+              enabled: role == 'group_member'
+                  ? (!controller.isFetchingWorkArea &&
+                        controller.workAreas != null)
+                  : false,
               selectedItem: controller.selectedWorkArea?.name,
               items: (filter, infiniteScrollProps) =>
                   controller.workAreas!.names,
@@ -82,35 +86,54 @@ class AppManageGroupMemberProfile1stForm extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          ),
+            );
+          }),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
             controller: controller.addressCtrl,
+            enabled: role == 'group_member',
             label: 'Alamat Lengkap',
             maxLines: 2,
             placeholder: 'Masukkan alamat',
             validator: (value) => value.isRequired('Alamat Lengkap'),
+          ),
+          SizedBox(height: 8.sp),
+          poppins(
+            'Tanggal Lahir',
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+          ),
+          AppDateInputField(
+            enabled: role == 'group_member',
+            controller: controller.birthDateCtrl,
+            placeholder: 'Masukkan tanggal lahir',
+            label: 'Tanggal Lahir',
+          ),
+          SizedBox(height: 8.sp),
+          AppTextFormGroup(
+            controller: controller.occupationCtrl,
+            enabled: role == 'group_member',
+            label: 'Pekerjaan',
+            placeholder: 'Masukkan pekerjaan',
+            maxLines: 1,
+            validator: (value) => value.isRequired('Pekerjaan'),
+          ),
+          SizedBox(height: 8.sp),
+          AppTextFormGroup(
+            controller: controller.phoneCtrl,
+            enabled: role == 'group_member',
+            label: 'Nomor Telepon',
+            keyboardType: TextInputType.number,
+            maxLines: 1,
+            placeholder: 'Masukkan no telp',
+            validator: (value) =>
+                value.isRequired('Nomor Telepon') ?? value.isPhoneNumber(),
           ),
           SizedBox(height: 18.sp),
           AppFilledButton(
             width: double.infinity,
             label: 'Lanjut',
             onTap: controller.submitButton,
-          ),
-          SizedBox(height: 12.sp),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              poppins('Sudah punya akun?', fontSize: 12.sp),
-              SizedBox(width: 6.sp),
-              AppLinkButton(
-                link: Routes.LOGIN,
-                label: 'Login',
-                isPath: true,
-                fontSize: 12.sp,
-              ),
-            ],
           ),
         ],
       ),

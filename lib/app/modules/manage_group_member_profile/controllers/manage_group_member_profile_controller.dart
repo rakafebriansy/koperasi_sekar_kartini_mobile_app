@@ -3,45 +3,48 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageGroupMemberProfileController extends GetxController {
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();
   final thirdFormKey = GlobalKey<FormState>();
-  final fourthFormKey = GlobalKey<FormState>();
-  final fifthFormKey = GlobalKey<FormState>();
 
   TextEditingController identityNumberCtrl = TextEditingController(
-    text: !kReleaseMode ? '1234567890123456' : '',
+    // text: !kReleaseMode ? '1234567890123456' : '',
   );
   TextEditingController nameCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
+    // text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
   );
   TextEditingController addressCtrl = TextEditingController(
-    text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
+    // text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
   );
   TextEditingController birthDateCtrl = TextEditingController(
-    text: !kReleaseMode ? '29/02/2004' : '',
+    // text: !kReleaseMode ? '29/02/2004' : '',
   );
   TextEditingController occupationCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Programmer' : '',
+    // text: !kReleaseMode ? 'Programmer' : '',
   );
   TextEditingController emailCtrl = TextEditingController(
-    text: !kReleaseMode ? 'raka@example.com' : '',
+    // text: !kReleaseMode ? 'raka@example.com' : '',
   );
   TextEditingController phoneCtrl = TextEditingController(
-    text: !kReleaseMode ? '08123456789' : '',
+    // text: !kReleaseMode ? '08123456789' : '',
   );
   TextEditingController passwordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Password123' : '',
+    // text: !kReleaseMode ? 'Password123' : '',
   );
   TextEditingController confirmPasswordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Password123' : '',
+    // text: !kReleaseMode ? 'Password123' : '',
   );
 
   final RxInt _selectedScreen = 0.obs;
@@ -65,10 +68,50 @@ class ManageGroupMemberProfileController extends GetxController {
   final Rx<WorkAreaModel?> _selectedWorkArea = Rxn();
   WorkAreaModel? get selectedWorkArea => _selectedWorkArea.value;
 
+  final Rx<UserModel?> _user= Rxn();
+  UserModel? get user=> _user.value;
+
+  final Rx<ActionType?> _action = Rxn();
+  ActionType? get action => _action.value;
+
   @override
   void onInit() {
+    final args = (Get.arguments as ArgsWrapper);
+    if (args.action == null) throw Exception('action is null');
+
+    _action.value = args.action;
+
+    if (args.action!.isUpdateAction) {
+      final user = args.data as UserModel;
+
+      _user.value = user;
+      identityNumberCtrl.text = user.identityNumber ?? '';
+      nameCtrl.text = user.name;
+      addressCtrl.text = user.address ?? '';
+      birthDateCtrl.text = DateFormat('dd/MM/yyyy').format(user.birthDate!);
+      occupationCtrl.text = user.occupation ?? '';
+      phoneCtrl.text = user.phoneNumber ?? '';
+      passwordCtrl.text = '';
+      confirmPasswordCtrl.text = '';
+      _selectedWorkArea.value = user.workArea;
+    }
+
     fetchListWorkArea();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    identityNumberCtrl.dispose();
+    nameCtrl.dispose();
+    addressCtrl.dispose();
+    birthDateCtrl.dispose();
+    occupationCtrl.dispose();
+    emailCtrl.dispose();
+    phoneCtrl.dispose();
+    passwordCtrl.dispose();
+    confirmPasswordCtrl.dispose();
+    super.dispose();
   }
 
   void nextScreen() {
@@ -153,32 +196,22 @@ class ManageGroupMemberProfileController extends GetxController {
   }
 
   Future<void> submitButton() async {
-    switch (selectedScreen) {
-      case 0:
-        if (firstFormKey.currentState!.validate()) {
-          nextScreen();
-        }
-        return;
-      case 1:
-        if (secondFormKey.currentState!.validate()) {
-          nextScreen();
-        }
-        return;
-      case 2:
-        if (thirdFormKey.currentState!.validate()) {
-          nextScreen();
-        }
-        return;
-      case 3:
-        if (fourthFormKey.currentState!.validate()) {
-          nextScreen();
-        }
-        return;
-      case 4:
-        if (fifthFormKey.currentState!.validate()) {
-          register();
-        }
-        return;
-    }
+    final role = AuthController.find.currentUser!.role;
+
+    final steps = role == 'group_member'
+        ? {
+            0: () =>
+                firstFormKey.currentState!.validate() ? nextScreen() : null,
+            1: () =>
+                secondFormKey.currentState!.validate() ? nextScreen() : null,
+            2: () => thirdFormKey.currentState!.validate() ? register() : null,
+          }
+        : {
+            0: () =>
+                firstFormKey.currentState!.validate() ? nextScreen() : null,
+            1: () => thirdFormKey.currentState!.validate() ? register() : null,
+          };
+
+    steps[selectedScreen]?.call();
   }
 }

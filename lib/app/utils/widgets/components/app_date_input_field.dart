@@ -8,10 +8,16 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/a
 
 class AppDateInputField extends StatefulWidget {
   @override
-  AppDateInputField({required this.controller, required this.placeholder, this.label});
+  AppDateInputField({
+    required this.controller,
+    required this.placeholder,
+    this.label,
+    this.enabled,
+  });
   final TextEditingController controller;
   final String placeholder;
   final String? label;
+  final bool? enabled;
 
   _AppDateInputFieldState createState() => _AppDateInputFieldState();
 }
@@ -38,6 +44,7 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
   @override
   Widget build(BuildContext context) {
     return AppTextFormField(
+      enabled: widget.enabled,
       controller: widget.controller,
       hintText: widget.placeholder,
       readOnly: true,
@@ -46,7 +53,8 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
         AppAsset.svgs.calendarSharpGray,
         height: 20.sp,
       ),
-      validator: (value) => value.isRequired(widget.label ?? widget.placeholder),
+      validator: (value) =>
+          value.isRequired(widget.label ?? widget.placeholder),
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 
 class AppManageGroupMemberProfile2ndForm extends StatelessWidget {
@@ -20,37 +19,84 @@ class AppManageGroupMemberProfile2ndForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          poppins(
-            'Tanggal Lahir',
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-          ),
-          AppDateInputField(
-            controller: controller.birthDateCtrl,
-            placeholder: 'Masukkan tanggal lahir',
-            label: 'Tanggal Lahir',
-          ),
-          SizedBox(height: 8.sp),
           AppTextFormGroup(
-            controller: controller.occupationCtrl,
-            label: 'Pekerjaan',
-            placeholder: 'Masukkan pekerjaan',
+            controller: controller.passwordCtrl,
+            label: 'Kata Sandi',
             maxLines: 1,
-            validator: (value) => value.isRequired('Pekerjaan'),
-          ),
-          SizedBox(height: 8.sp),
-          AppTextFormGroup(
-            controller: controller.phoneCtrl,
-            label: 'Nomor Telepon',
-            keyboardType: TextInputType.number,
-            maxLines: 1,
-            placeholder: 'Masukkan no telp',
+            obscureText: true,
             validator: (value) =>
-                value.isRequired('Nomor Telepon') ?? value.isPhoneNumber(),
+                value.isRequired('Kata Sandi') ??
+                value.minLength(8, 'Kata Sandi') ??
+                value.isPasswordStrong(),
+          ),
+          SizedBox(height: 8.sp),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 4.sp),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 8.sp,
+                    backgroundColor: AppColor.bg.gray,
+                    child: Icon(Icons.check, size: 10.sp),
+                  ),
+                  SizedBox(width: 8.sp),
+                  poppins(
+                    'Minimal 8 karakter',
+                    color: AppColor.bg.primary,
+                    fontSize: 12.sp,
+                  ),
+                ],
+              ),
+              SizedBox(height: 4.sp),
+              Row(
+                children: [
+                  CircleAvatar(
+                    child: Icon(Icons.check, size: 10.sp),
+                    radius: 8.sp,
+                    backgroundColor: AppColor.bg.gray,
+                  ),
+                  SizedBox(width: 8.sp),
+                  poppins(
+                    'Mengandung angka',
+                    color: AppColor.bg.primary,
+                    fontSize: 12.sp,
+                  ),
+                ],
+              ),
+              SizedBox(height: 4.sp),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 8.sp,
+                    backgroundColor: AppColor.bg.gray,
+                    child: Icon(Icons.check, size: 10.sp),
+                  ),
+                  SizedBox(width: 8.sp),
+                  poppins(
+                    'Mengandung karakter unik dan huruf besar',
+                    color: AppColor.bg.primary,
+                    fontSize: 12.sp,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 8.sp),
+          AppTextFormGroup(
+            controller: controller.confirmPasswordCtrl,
+            label: 'Konfirmasi Kata Sandi',
+            maxLines: 1,
+            obscureText: true,
+            validator: (value) =>
+                value.isRequired('Konfirmasi Kata Sandi') ??
+                value.confirmWith(controller.passwordCtrl.text),
           ),
           SizedBox(height: 18.sp),
           Row(
             spacing: 12.sp,
+
             children: [
               if (controller.selectedScreen > 0)
                 Material(

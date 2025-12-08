@@ -12,6 +12,7 @@ class AppTextFormGroup extends StatelessWidget {
     this.placeholder,
     this.obscureText = false,
     this.maxLines,
+    this.enabled,
     this.keyboardType,
     this.validator,
     this.suffixIcon,
@@ -23,6 +24,7 @@ class AppTextFormGroup extends StatelessWidget {
   final String label;
   final String? placeholder;
   final bool obscureText;
+  final bool? enabled;
   final int? maxLines;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
@@ -51,6 +53,7 @@ class AppTextFormGroup extends StatelessWidget {
           inputFormatters: inputFormatters,
           suffixIcon: suffixIcon,
           initialValue: initialValue,
+          enabled: enabled,
         ),
       ],
     );

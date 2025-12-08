@@ -380,7 +380,10 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> getUnlistedUsers({String? search}) async {
+  Future<dynamic> getUnlistedUsers({
+    required int workAreaId,
+    String? search,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'search': search};
     queryParameters.removeWhere((k, v) => v == null);
@@ -393,7 +396,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/unlisted-users',
+          '/work-areas/${workAreaId}/unlisted-users',
           queryParameters: queryParameters,
           data: _data,
         )

@@ -21,6 +21,7 @@ class AppTextFormField extends StatefulWidget {
     this.validator,
     this.inputFormatters,
     this.onChanged,
+    this.enabled,
     this.initialValue,
   });
 
@@ -32,6 +33,7 @@ class AppTextFormField extends StatefulWidget {
   final int? maxLines;
   final String? counterText;
   final bool readOnly;
+  final bool? enabled;
   final VoidCallback? onTap;
   final TextInputType? keyboardType;
   final FormFieldValidator<String>? validator;
@@ -57,6 +59,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
     return Stack(
       children: [
         TextFormField(
+          enabled: widget.enabled,
           initialValue: widget.initialValue,
           onChanged: widget.onChanged,
           style: GoogleFonts.poppins(fontSize: 14.sp),

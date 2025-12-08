@@ -53,7 +53,10 @@ class EmployeeGroupMemberDetailController extends GetxController {
 
     try {
       final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUnlistedUsers(search: search),
+        request: (api) => api.getUnlistedUsers(
+          search: search,
+          workAreaId: group!.workArea!.id,
+        ),
       );
 
       _members.value = data;

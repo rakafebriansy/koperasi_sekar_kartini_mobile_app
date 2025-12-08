@@ -1,140 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/controllers/manage_group_member_profile_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_big_edit_image_field.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_upload_image_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 
 class AppManageGroupMemberProfile3rdForm extends StatelessWidget {
-  const AppManageGroupMemberProfile3rdForm({super.key, required this.controller});
+  const AppManageGroupMemberProfile3rdForm({
+    super.key,
+    required this.controller,
+  });
 
   final ManageGroupMemberProfileController controller;
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: controller.thirdFormKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AppTextFormGroup(
-            controller: controller.passwordCtrl,
-            label: 'Kata Sandi',
-            maxLines: 1,
-            obscureText: true,
-            validator: (value) =>
-                value.isRequired('Kata Sandi') ??
-                value.minLength(8, 'Kata Sandi') ??
-                value.isPasswordStrong(),
-          ),
-          SizedBox(height: 8.sp),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 4.sp),
-              Row(
-                children: [
-                  CircleAvatar(
-                    child: Icon(Icons.check, size: 10.sp),
-                    radius: 8.sp,
-                    backgroundColor: AppColor.bg.gray,
-                  ),
-                  SizedBox(width: 8.sp),
-                  poppins(
-                    'Minimal 8 karakter',
-                    color: AppColor.bg.primary,
-                    fontSize: 12.sp,
-                  ),
-                ],
-              ),
-              SizedBox(height: 4.sp),
-              Row(
-                children: [
-                  CircleAvatar(
-                    child: Icon(Icons.check, size: 10.sp),
-                    radius: 8.sp,
-                    backgroundColor: AppColor.bg.gray,
-                  ),
-                  SizedBox(width: 8.sp),
-                  poppins(
-                    'Mengandung angka',
-                    color: AppColor.bg.primary,
-                    fontSize: 12.sp,
-                  ),
-                ],
-              ),
-              SizedBox(height: 4.sp),
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 8.sp,
-                    backgroundColor: AppColor.bg.gray,
-                    child: Icon(Icons.check, size: 10.sp),
-                  ),
-                  SizedBox(width: 8.sp),
-                  poppins(
-                    'Mengandung karakter unik dan huruf besar',
-                    color: AppColor.bg.primary,
-                    fontSize: 12.sp,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 8.sp),
-          AppTextFormGroup(
-            controller: controller.confirmPasswordCtrl,
-            label: 'Konfirmasi Kata Sandi',
-            maxLines: 1,
-            obscureText: true,
-            validator: (value) =>
-                value.isRequired('Konfirmasi Kata Sandi') ??
-                value.confirmWith(controller.passwordCtrl.text),
-          ),
-          SizedBox(height: 18.sp),
-          Row(
-            spacing: 12.sp,
+    final role = AuthController.find.currentUser!.role;
+    return Obx(
+      () => Form(
+        key: controller.thirdFormKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            poppins('Foto KTP', fontSize: 14.sp, fontWeight: FontWeight.w600),
+            SizedBox(height: 4.sp),
+            AppUploadImageFormField(
+              builder: (onPick) {
+                return AppBigEditImageField(
+                  onPick: onPick,
+                  readOnly: role != 'group_member',
+                  readOnlyValue: (role != 'group_member')
+                      ? controller.user!.identityCardPhoto
+                      : null,
+                );
+              },
+              onPick: (file) async {
+                controller.setIdCardImage(file);
+              },
+              validator: (value) => value.isRequired('Pas Foto'),
+            ),
+            SizedBox(height: 8.sp),
+            poppins('Foto Diri', fontSize: 14.sp, fontWeight: FontWeight.w600),
+            SizedBox(height: 4.sp),
+            AppUploadImageFormField(
+              builder: (onPick) {
+                return AppBigEditImageField(
+                  onPick: onPick,
+                  readOnly: role != 'group_member',
+                  readOnlyValue: (role != 'group_member')
+                      ? controller.user!.selfPhoto
+                      : null,
+                );
+              },
+              onPick: (file) async {
+                controller.setSelfImage(file);
+              },
+              validator: (value) => value.isRequired('Pas Foto'),
+            ),
+            SizedBox(height: 18.sp),
+            Row(
+              spacing: 12.sp,
 
-            children: [
-              if (controller.selectedScreen > 0)
-                Material(
-                  child: InkWell(
-                    onTap: () {
-                      controller.prevScreen();
-                    },
-                    child: Container(
-                      width: 48.sp,
-                      height: 48.sp,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColor.bg.primary,
-                          width: 2.sp,
+              children: [
+                if (controller.selectedScreen > 0)
+                  Material(
+                    child: InkWell(
+                      onTap: () {
+                        controller.prevScreen();
+                      },
+                      child: Container(
+                        width: 48.sp,
+                        height: 48.sp,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColor.bg.primary,
+                            width: 2.sp,
+                          ),
+                          borderRadius: BorderRadius.circular(99),
                         ),
-                        borderRadius: BorderRadius.circular(99),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.arrow_back_outlined,
-                          size: 24.sp,
-                          color: AppColor.bg.primary,
+                        child: Center(
+                          child: Icon(
+                            Icons.arrow_back_outlined,
+                            size: 24.sp,
+                            color: AppColor.bg.primary,
+                          ),
                         ),
                       ),
                     ),
                   ),
+                  if(AuthController.find.currentUser!.role == 'group_member')
+                Expanded(
+                  child: AppFilledButton(
+                    width: double.infinity,
+                    label: 'Daftar',
+                    onTap: controller.isSubmitted
+                        ? null
+                        : controller.submitButton,
+                  ),
                 ),
-              Expanded(
-                child: AppFilledButton(
-                  width: double.infinity,
-                  label: controller.selectedScreen == 4 ? 'Daftar' : 'Lanjut',
-                  onTap: controller.submitButton,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 12.sp),
-        ],
+              ],
+            ),
+            SizedBox(height: 12.sp),
+          ],
+        ),
       ),
     );
   }

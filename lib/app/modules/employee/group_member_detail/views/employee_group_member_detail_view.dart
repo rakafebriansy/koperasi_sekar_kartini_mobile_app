@@ -5,9 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_bottom_sheet.dart';
@@ -203,7 +203,10 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                               onTap: () async {
                                 final result = await Get.toNamed(
                                   Routes.MANAGE_GROUP_MEMBER_PROFILE,
-                                  arguments: ArgsWrapper(data: m),
+                                  arguments: ArgsWrapper(
+                                    data: m,
+                                    action: ActionType.update,
+                                  ),
                                 );
 
                                 if (result == true) {
