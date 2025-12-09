@@ -244,27 +244,7 @@ class EmployeeManageEmployeeController extends GetxController {
         if (secondFormKey.currentState!.validate()) {
           try {
             if (action != null) {
-              if (action!.isCreateAction) {
-                if (idCardImage == null || selfImage == null) {
-                  var error = await idCardImage.maxSize(
-                    maxInMB: 2,
-                    fieldName: 'Foto KTP',
-                  );
-                  if (error != null) {
-                    throw Exception(error);
-                  }
-
-                  var error2 = await selfImage.maxSize(
-                    maxInMB: 2,
-                    fieldName: 'Foto KTP',
-                  );
-
-                  if (error2 != null) {
-                    throw Exception(error2);
-                  }
-                }
-                createEmployee();
-              }
+              if (action!.isCreateAction) createEmployee();
               if (action!.isUpdateAction) updateEmployee();
             }
           } catch (e) {

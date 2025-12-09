@@ -202,29 +202,7 @@ class RegisterController extends GetxController {
         }
         return;
       case 4:
-        if (fifthFormKey.currentState!.validate()) {
-          try {
-            var error = await idCardImage.maxSize(
-              maxInMB: 2,
-              fieldName: 'Foto KTP',
-            );
-            if (error != null) {
-              throw Exception(error);
-            }
-
-            var error2 = await selfImage.maxSize(
-              maxInMB: 2,
-              fieldName: 'Foto KTP',
-            );
-            if (error2 != null) {
-              throw Exception(error2);
-            }
-
-            register();
-          } catch (e) {
-            ErrorHelper.handleError(e);
-          }
-        }
+        if (fifthFormKey.currentState!.validate()) register();
         return;
     }
   }

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
@@ -14,6 +15,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/a
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 import '../controllers/employee_main_tabs_home_controller.dart';
 
@@ -86,8 +88,17 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                         ),
                         borderRadiusCircularSize: 12.sp,
                       ),
-                      onPressed: () {
-                        Get.toNamed(Routes.MANAGE_EVENT);
+                      onPressed: () async {
+                        final result = await Get.toNamed(
+                          Routes.MANAGE_EVENT,
+                          arguments: ArgsWrapper(
+                            data: null,
+                            action: ActionType.create,
+                          ),
+                        );
+
+                        if(result == true) {
+                        }
                       },
                       label: poppins('Tambah', color: AppColor.bg.primary),
                       icon: Icon(Icons.add, color: AppColor.bg.primary),

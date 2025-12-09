@@ -3,13 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 
 class AppDatetimeInputField extends StatefulWidget {
-  AppDatetimeInputField({required this.controller, required this.hintText});
+  AppDatetimeInputField({
+    required this.controller,
+    required this.label,
+    required this.placeholder,
+  });
 
   final TextEditingController controller;
-  final String hintText;
+  final String placeholder;
+  final String? label;
 
   @override
   _AppDatetimeInputFieldState createState() => _AppDatetimeInputFieldState();
@@ -30,7 +36,10 @@ class _AppDatetimeInputFieldState extends State<AppDatetimeInputField> {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: selectedDateTime != null
-          ? TimeOfDay(hour: selectedDateTime!.hour, minute: selectedDateTime!.minute)
+          ? TimeOfDay(
+              hour: selectedDateTime!.hour,
+              minute: selectedDateTime!.minute,
+            )
           : const TimeOfDay(hour: 8, minute: 0),
     );
 
@@ -47,7 +56,9 @@ class _AppDatetimeInputFieldState extends State<AppDatetimeInputField> {
     setState(() {
       selectedDateTime = fullDateTime;
 
-      widget.controller.text = DateFormat('HH:mm dd/MM/yyyy').format(fullDateTime);
+      widget.controller.text = DateFormat(
+        'HH:mm dd/MM/yyyy',
+      ).format(fullDateTime);
     });
   }
 
@@ -55,13 +66,15 @@ class _AppDatetimeInputFieldState extends State<AppDatetimeInputField> {
   Widget build(BuildContext context) {
     return AppTextFormField(
       controller: widget.controller,
-      hintText: widget.hintText,
+      hintText: widget.placeholder,
       readOnly: true,
       onTap: () => _selectDateTime(context),
       suffixIcon: SvgPicture.asset(
         AppAsset.svgs.calendarSharpGray,
         height: 20.sp,
       ),
+      validator: (value) =>
+          value.isRequired(widget.label ?? widget.placeholder),
     );
   }
 }

@@ -6,8 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class AppEventCard extends StatelessWidget {
   const AppEventCard({super.key, required this.model, this.onTap});
@@ -40,8 +40,8 @@ class AppEventCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.sp),
                   child: !kReleaseMode
                       ? Image.asset(AppAsset.images.event)
-                      : (model.image != null
-                            ? Image.network(model.image!)
+                      : (model.photo != null
+                            ? Image.network(model.photo!)
                             : Image.asset(AppAsset.images.brokenImageIcon)),
                 ),
               ),
@@ -51,7 +51,7 @@ class AppEventCard extends StatelessWidget {
                 spacing: 2.sp,
                 children: [
                   poppins(
-                    model.title,
+                    model.name!,
                     fontWeight: FontWeight.bold,
                     fontSize: 14.sp,
                   ),
@@ -66,8 +66,7 @@ class AppEventCard extends StatelessWidget {
                         height: 12.sp,
                       ),
                       poppins(
-                        model.location,
-
+                        model.location!,
                         fontSize: 10.sp,
                         color: AppColor.bg.primary,
                       ),
@@ -84,7 +83,7 @@ class AppEventCard extends StatelessWidget {
                         height: 10.sp,
                       ),
                       poppins(
-                        model.dateTime.toIdDate(),
+                        model.datetime!.toIdDate(),
                         fontSize: 10.sp,
                         color: AppColor.bg.primary,
                       ),
@@ -101,7 +100,7 @@ class AppEventCard extends StatelessWidget {
                         height: 10.sp,
                       ),
                       poppins(
-                        model.dateTime.toDotSeparatedHour(),
+                        model.datetime!.toDotSeparatedHour(),
 
                         fontSize: 10.sp,
                         color: AppColor.bg.primary,

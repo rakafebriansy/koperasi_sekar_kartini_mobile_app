@@ -756,11 +756,7 @@ class _ApiClient implements ApiClient {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = FormData();
-    _data.fields.add(MapEntry(
-      '_method',
-      method,
-    ));
+    final _data = {'_method': method};
     final _options = _setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -1080,6 +1076,289 @@ class _ApiClient implements ApiClient {
         .compose(
           _dio.options,
           '/groups/${id}/update-fund-amount',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> getMeetings({
+    String? search,
+    int? groupId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'search': search,
+      r'group_id': groupId,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/meetings',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> getMeeting({required int id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/meetings/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> createMeeting({
+    String? name,
+    String? type,
+    String? datetime,
+    String? location,
+    String? description,
+    File? photo,
+    int? groupId,
+    int? userId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (name != null) {
+      _data.fields.add(MapEntry(
+        'name',
+        name,
+      ));
+    }
+    if (type != null) {
+      _data.fields.add(MapEntry(
+        'type',
+        type,
+      ));
+    }
+    if (datetime != null) {
+      _data.fields.add(MapEntry(
+        'datetime',
+        datetime,
+      ));
+    }
+    if (location != null) {
+      _data.fields.add(MapEntry(
+        'location',
+        location,
+      ));
+    }
+    if (description != null) {
+      _data.fields.add(MapEntry(
+        'description',
+        description,
+      ));
+    }
+    if (photo != null) {
+      if (photo != null) {
+        _data.files.add(MapEntry(
+          'photo',
+          MultipartFile.fromFileSync(
+            photo.path,
+            filename: photo.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    if (groupId != null) {
+      _data.fields.add(MapEntry(
+        'group_id',
+        groupId.toString(),
+      ));
+    }
+    if (userId != null) {
+      _data.fields.add(MapEntry(
+        'user_id',
+        userId.toString(),
+      ));
+    }
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+        .compose(
+          _dio.options,
+          '/meetings',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> updateMeeting({
+    required int id,
+    String method = "PUT",
+    String? name,
+    String? type,
+    String? datetime,
+    String? location,
+    String? description,
+    File? photo,
+    int? groupId,
+    int? userId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      '_method',
+      method,
+    ));
+    if (name != null) {
+      _data.fields.add(MapEntry(
+        'name',
+        name,
+      ));
+    }
+    if (type != null) {
+      _data.fields.add(MapEntry(
+        'type',
+        type,
+      ));
+    }
+    if (datetime != null) {
+      _data.fields.add(MapEntry(
+        'datetime',
+        datetime,
+      ));
+    }
+    if (location != null) {
+      _data.fields.add(MapEntry(
+        'location',
+        location,
+      ));
+    }
+    if (description != null) {
+      _data.fields.add(MapEntry(
+        'description',
+        description,
+      ));
+    }
+    if (photo != null) {
+      if (photo != null) {
+        _data.files.add(MapEntry(
+          'photo',
+          MultipartFile.fromFileSync(
+            photo.path,
+            filename: photo.path.split(Platform.pathSeparator).last,
+          ),
+        ));
+      }
+    }
+    if (groupId != null) {
+      _data.fields.add(MapEntry(
+        'group_id',
+        groupId.toString(),
+      ));
+    }
+    if (userId != null) {
+      _data.fields.add(MapEntry(
+        'user_id',
+        userId.toString(),
+      ));
+    }
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+        .compose(
+          _dio.options,
+          '/meetings/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> deleteMeeting({
+    String method = "DELETE",
+    required int id,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      '_method',
+      method,
+    ));
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/meetings/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

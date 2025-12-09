@@ -105,13 +105,11 @@ abstract class ApiClient {
   @GET("/unlisted-members")
   Future<dynamic> getUnlistedMembers({
     @Query('search') String? search,
-    @Query('work_area_id') int? workAreaId
+    @Query('work_area_id') int? workAreaId,
   });
 
   @GET("/inactive-members")
-  Future<dynamic> getInactiveMembers({
-    @Query('search') String? search,
-  });
+  Future<dynamic> getInactiveMembers({@Query('search') String? search});
 
   @POST("/users")
   @MultiPart()
@@ -152,7 +150,6 @@ abstract class ApiClient {
     @Part(name: "member_card_photo") File? memberCardPhoto,
   });
 
-  
   @POST("/users/{id}/activate")
   Future<dynamic> activateMember({
     @Path('id') required int id,
@@ -162,10 +159,9 @@ abstract class ApiClient {
     @Field("is_active") bool? isActive,
   });
 
-
   @POST("/users/{id}")
   Future<dynamic> deleteUser({
-    @Part(name: "_method") String method = "DELETE",
+    @Field("_method") String method = "DELETE",
 
     @Path('id') required int id,
   });
@@ -238,8 +234,55 @@ abstract class ApiClient {
     @Path('id') required int id,
 
     @Field("_method") String method = "PATCH",
-    
+
     @Field("fund_type") String? fundType,
     @Field("fund_amount") int? fundAmount,
+  });
+
+  // MEETING
+  @GET("/meetings")
+  Future<dynamic> getMeetings({
+    @Query('search') String? search,
+    @Query('group_id') int? groupId,
+  });
+
+  @GET("/meetings/{id}")
+  Future<dynamic> getMeeting({@Path('id') required int id});
+
+  @POST("/meetings")
+  @MultiPart()
+  Future<dynamic> createMeeting({
+    @Part(name: "name") String? name,
+    @Part(name: "type") String? type,
+    @Part(name: "datetime") String? datetime,
+    @Part(name: "location") String? location,
+    @Part(name: "description") String? description,
+    @Part(name: "photo") File? photo,
+    @Part(name: "group_id") int? groupId,
+    @Part(name: "user_id") int? userId,
+  });
+
+  @POST("/meetings/{id}")
+  @MultiPart()
+  Future<dynamic> updateMeeting({
+    @Path('id') required int id,
+
+    @Part(name: "_method") String method = "PUT",
+
+    @Part(name: "name") String? name,
+    @Part(name: "type") String? type,
+    @Part(name: "datetime") String? datetime,
+    @Part(name: "location") String? location,
+    @Part(name: "description") String? description,
+    @Part(name: "photo") File? photo,
+    @Part(name: "group_id") int? groupId,
+    @Part(name: "user_id") int? userId,
+  });
+
+  @POST("/meetings/{id}")
+  Future<dynamic> deleteMeeting({
+    @Part(name: "_method") String method = "DELETE",
+
+    @Path('id') required int id,
   });
 }

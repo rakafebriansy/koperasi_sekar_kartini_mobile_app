@@ -205,8 +205,8 @@ class DummyHelper {
   static final List<EventModel> events = [
     EventModel(
       id: 1,
-      title: 'Rapat Anggota Tahunan',
-      type: EventType.groupEvent,
+      name: 'Rapat Anggota Tahunan',
+      type: EventType.group.name,
       description: '''
     [
       {"insert": "Agenda Rapat:\\n", "attributes": {"bold": true}},
@@ -217,9 +217,9 @@ class DummyHelper {
       {"insert": " 09.00 WIB - Selesai\\n"}
     ]
     ''',
-      dateTime: DateTime(2025, 12, 5, 9, 0),
+      datetime: DateTime(2025, 12, 5, 9, 0),
       location: 'Aula Koperasi Sekar Kartini',
-      image: 'https://example.com/images/event_rapat_tahunan.jpg',
+      photo: 'https://example.com/images/event_rapat_tahunan.jpg',
       user: users[0],
       group: groups[0],
       createdAt: DateTime.now(),
@@ -227,8 +227,8 @@ class DummyHelper {
     ),
     EventModel(
       id: 2,
-      title: 'Pelatihan Keuangan Pribadi',
-      type: EventType.coopEvent,
+      name: 'Pelatihan Keuangan Pribadi',
+      type: EventType.coop.name,
       description: '''
     [
       {"insert": "Materi Pelatihan:\\n", "attributes": {"bold": true}},
@@ -237,9 +237,9 @@ class DummyHelper {
       {"insert": " Ibu Ratna Sari, S.E. (Konsultan Keuangan)\\n"}
     ]
     ''',
-      dateTime: DateTime(2025, 11, 20, 13, 30),
+      datetime: DateTime(2025, 11, 20, 13, 30),
       location: 'Ruang Serbaguna Lt. 2',
-      image: 'https://example.com/images/event_pelatihan_keuangan.jpg',
+      photo: 'https://example.com/images/event_pelatihan_keuangan.jpg',
       user: users[1],
       group: groups[1],
       createdAt: DateTime.now(),
@@ -247,8 +247,8 @@ class DummyHelper {
     ),
     EventModel(
       id: 3,
-      title: 'Bakti Sosial Akhir Tahun',
-      type: EventType.coopEvent,
+      name: 'Bakti Sosial Akhir Tahun',
+      type: EventType.coop.name,
       description: '''
     [
       {"insert": "Kegiatan Bakti Sosial:\\n", "attributes": {"bold": true}},
@@ -259,9 +259,9 @@ class DummyHelper {
       {"insert": " 08.00 WIB\\n"}
     ]
     ''',
-      dateTime: DateTime(2025, 12, 28, 8, 0),
+      datetime: DateTime(2025, 12, 28, 8, 0),
       location: 'Kantor Desa Karanganyar',
-      image: 'https://example.com/images/event_baksos.jpg',
+      photo: 'https://example.com/images/event_baksos.jpg',
       user: users[2],
       group: groups[2],
       createdAt: DateTime.now(),
@@ -269,8 +269,8 @@ class DummyHelper {
     ),
     EventModel(
       id: 4,
-      title: 'Workshop Digital Marketing',
-      type: EventType.coopEvent,
+      name: 'Workshop Digital Marketing',
+      type: EventType.coop.name,
       description: '''
     [
       {"insert": "Rundown Workshop:\\n", "attributes": {"bold": true}},
@@ -279,9 +279,9 @@ class DummyHelper {
       {"insert": " Bapak Agus Santoso, M.M. (Digital Strategist)\\n"}
     ]
     ''',
-      dateTime: DateTime(2026, 1, 10, 10, 0),
+      datetime: DateTime(2026, 1, 10, 10, 0),
       location: 'Balai Pertemuan Kota',
-      image: 'https://example.com/images/event_workshop_digital.jpg',
+      photo: 'https://example.com/images/event_workshop_digital.jpg',
       user: users[3],
       group: groups[3],
       createdAt: DateTime.now(),
@@ -289,8 +289,8 @@ class DummyHelper {
     ),
     EventModel(
       id: 5,
-      title: 'Family Gathering Koperasi',
-      type: EventType.coopEvent,
+      name: 'Family Gathering Koperasi',
+      type: EventType.coop.name,
       description: '''
     [
       {"insert": "Susunan Acara:\\n", "attributes": {"bold": true}},
@@ -301,9 +301,9 @@ class DummyHelper {
       {"insert": " Kaos Putih & Celana Jeans\\n"}
     ]
     ''',
-      dateTime: DateTime(2026, 2, 14, 7, 30),
+      datetime: DateTime(2026, 2, 14, 7, 30),
       location: 'Taman Wisata Alam Sumber Ria',
-      image: 'https://example.com/images/event_family_gathering.jpg',
+      photo: 'https://example.com/images/event_family_gathering.jpg',
       user: users[4],
       group: groups[4],
       createdAt: DateTime.now(),
@@ -311,8 +311,8 @@ class DummyHelper {
     ),
     EventModel(
       id: 6,
-      title: 'Syukuran Rumah Baru Bu Nurul',
-      type: EventType.groupEvent,
+      name: 'Syukuran Rumah Baru Bu Nurul',
+      type: EventType.group.name,
       description: '''
       [
         { "insert": "Rundown:\\n", "attributes": { "bold": true } },
@@ -322,7 +322,7 @@ class DummyHelper {
         { "insert": " Rumah Bu Nurul\\n" }
       ]
     ''',
-      dateTime: DateTime(2025, 11, 8, 20, 0, 0),
+      datetime: DateTime(2025, 11, 8, 20, 0, 0),
       location: 'Jl. Melati no.05, Kec. Patrang, Kab. Jember',
       user: users[4],
       group: groups[4],
