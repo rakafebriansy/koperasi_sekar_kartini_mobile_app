@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
@@ -111,51 +112,81 @@ class EmployeeMainTabsProfileView
                 ),
               );
             }),
-            // Column(
-            //   mainAxisSize: MainAxisSize.min,
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: [
-            //     poppins('Keanggotaan', fontSize: 16.sp),
-            //     SizedBox(height: 8.sp),
-            //     Container(
-            //       width: double.infinity,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(14.sp),
-            //         border: Border.all(width: 1.sp, color: AppColor.bg.gray),
-            //       ),
-            //       child: ClipRRect(
-            //         borderRadius: BorderRadius.circular(14.sp),
-            //         child: Column(
-            //           mainAxisSize: MainAxisSize.min,
-            //           children: [
-            //             _AppSettingMenuItem(
-            //               label: 'Sisa Hasil Usaha',
-            //               iconPath: AppAsset.svgs.dollarCoinLightGray,
-            //             ),
-            //             Divider(
-            //               height: 1.sp,
-            //               thickness: 1.sp,
-            //               color: AppColor.bg.gray,
-            //             ),
-            //             _AppSettingMenuItem(
-            //               label: 'Ubah Profil',
-            //               iconPath: AppAsset.svgs.profileGray,
-            //             ),
-            //             Divider(
-            //               height: 1.sp,
-            //               thickness: 1.sp,
-            //               color: AppColor.bg.gray,
-            //             ),
-            //             _AppSettingMenuItem(
-            //               label: 'Wilayah Kerja',
-            //               iconPath: AppAsset.svgs.pinLocationGray,
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                poppins('Keanggotaan', fontSize: 16.sp),
+                SizedBox(height: 8.sp),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14.sp),
+                    border: Border.all(width: 1.sp, color: AppColor.bg.gray),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(14.sp),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _AppSettingMenuItem(
+                          label: 'Simpanan',
+                          icon: Icon(
+                            Icons.arrow_downward_rounded,
+                            color: AppColor.border.gray,
+                          ),
+                          onTap: () {
+                            Get.toNamed(Routes.SAVINGS_LIST);
+                          },
+                        ),
+                        Divider(
+                          height: 1.sp,
+                          thickness: 1.sp,
+                          color: AppColor.bg.gray,
+                        ),
+                        _AppSettingMenuItem(
+                          label: 'Pinjaman',
+                          icon: Icon(
+                            Icons.arrow_upward_rounded,
+                            color: AppColor.border.gray,
+                          ),
+                          onTap: () {
+                            Get.toNamed(Routes.LOAN_LIST);
+                          },
+                        ),
+                        // Divider(
+                        //   height: 1.sp,
+                        //   thickness: 1.sp,
+                        //   color: AppColor.bg.gray,
+                        // ),
+                        // _AppSettingMenuItem(
+                        //   label: 'Sisa Hasil Usaha',
+                        //   icon: SvgPicture.asset(AppAsset.svgs.dollarCoinLightGray)
+                        // ),
+                        // Divider(
+                        //   height: 1.sp,
+                        //   thickness: 1.sp,
+                        //   color: AppColor.bg.gray,
+                        // ),
+                        // _AppSettingMenuItem(
+                        //   label: 'Ubah Profil',
+                        //   icon: SvgPicture.asset(AppAsset.svgs.profileGray)
+                        // ),
+                        // Divider(
+                        //   height: 1.sp,
+                        //   thickness: 1.sp,
+                        //   color: AppColor.bg.gray,
+                        // ),
+                        // _AppSettingMenuItem(
+                        //   label: 'Wilayah Kerja',
+                        //   icon: SvgPicture.asset(AppAsset.svgs.pinLocationGray)
+                        // ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,7 +206,7 @@ class EmployeeMainTabsProfileView
                       children: [
                         // _AppSettingMenuItem(
                         //   label: 'Laporan',
-                        //   iconPath: AppAsset.svgs.reportGray,
+                        // icon: SvgPicture.asset(AppAsset.svgs.reportGray)
                         // ),
                         // Divider(
                         //   height: 1.sp,
@@ -184,7 +215,7 @@ class EmployeeMainTabsProfileView
                         // ),
                         _AppSettingMenuItem(
                           label: 'Notifikasi',
-                          iconPath: AppAsset.svgs.bellLightGray,
+                          icon: SvgPicture.asset(AppAsset.svgs.bellLightGray),
                         ),
                         Divider(
                           height: 1.sp,
@@ -193,7 +224,7 @@ class EmployeeMainTabsProfileView
                         ),
                         _AppSettingMenuItem(
                           label: 'Ubah Kata Sandi',
-                          iconPath: AppAsset.svgs.lockLightGray,
+                          icon: SvgPicture.asset(AppAsset.svgs.lockLightGray),
                         ),
                       ],
                     ),
@@ -215,7 +246,7 @@ class EmployeeMainTabsProfileView
                   },
                   label: 'Keluar',
                   textColor: Colors.white,
-                  iconPath: AppAsset.svgs.logoutWhite,
+                  icon: SvgPicture.asset(AppAsset.svgs.logoutWhite),
                 ),
               ),
             ),
@@ -259,13 +290,13 @@ class _ProfileCell extends StatelessWidget {
 class _AppSettingMenuItem extends StatelessWidget {
   const _AppSettingMenuItem({
     required this.label,
-    required this.iconPath,
+    required this.icon,
     this.onTap,
     this.textColor,
   });
 
   final String label;
-  final String iconPath;
+  final Widget icon;
   final Color? textColor;
   final VoidCallback? onTap;
 
@@ -284,7 +315,7 @@ class _AppSettingMenuItem extends StatelessWidget {
               SizedBox(
                 height: 20.sp,
                 width: 20.sp,
-                child: Center(child: SvgPicture.asset(iconPath)),
+                child: Center(child: icon),
               ),
               SizedBox(width: 10.sp),
               Expanded(

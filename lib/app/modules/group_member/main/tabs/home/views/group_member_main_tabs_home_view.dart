@@ -9,7 +9,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_event_card.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_notification_bar.dart';
@@ -36,14 +35,14 @@ class GroupMemberMainTabsHomeView
                   child: _InfoCard(
                     title: 'Simpanan',
                     amount: 1_124_500,
-                    route: Routes.GROUP_MEMBER_SAVINGS_LIST,
+                    route: Routes.SAVINGS_LIST,
                   ),
                 ),
                 Expanded(
                   child: _InfoCard(
                     title: 'Pinjaman',
                     amount: 724_500,
-                    route: Routes.GROUP_MEMBER_LOAN_LIST,
+                    route: Routes.LOAN_LIST,
                   ),
                 ),
               ],

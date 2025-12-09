@@ -7,15 +7,15 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 
-import '../controllers/group_member_savings_list_controller.dart';
+import '../controllers/savings_list_controller.dart';
 
-class GroupMemberSavingsListView
-    extends GetView<GroupMemberSavingsListController> {
-  const GroupMemberSavingsListView({super.key});
+class SavingsListView extends GetView<SavingsListController> {
+  const SavingsListView({super.key});
   @override
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
@@ -32,43 +32,50 @@ class GroupMemberSavingsListView
               spacing: 10.sp,
               children: [
                 Expanded(
-                  child: AppTextFormField(
-                    controller: controller.searchCtrl,
-                    hintText: 'Cari',
+                  // child: AppTextFormField(
+                  //   controller: controller.searchCtrl,
+                  //   hintText: 'Cari',
+                  //   prefixIcon: SvgPicture.asset(
+                  //     AppAsset.svgs.searchGray,
+                  //     height: 16.sp,
+                  //   ),
+                  // ),
+                  child: AppDateInputField(
                     prefixIcon: SvgPicture.asset(
                       AppAsset.svgs.searchGray,
                       height: 16.sp,
                     ),
+                    controller: controller.searchCtrl,
+                    placeholder: 'Cari...',
                   ),
                 ),
-                Material(
-                  borderRadius: BorderRadius.circular(12.sp),
-                  color: Colors.white,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(12.sp),
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1.sp,
-                          color: AppColor.border.lightGray,
-                        ),
-                        borderRadius: BorderRadius.circular(12.sp),
-                      ),
-                      padding: EdgeInsets.all(16.sp),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          AppAsset.svgs.calendarPrimary,
-                          height: 16.sp,
-                          width: 16.sp,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Material(
+                //   borderRadius: BorderRadius.circular(12.sp),
+                //   color: Colors.white,
+                //   child: InkWell(
+                //     borderRadius: BorderRadius.circular(12.sp),
+                //     onTap: () {},
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //         border: Border.all(
+                //           width: 1.sp,
+                //           color: AppColor.border.lightGray,
+                //         ),
+                //         borderRadius: BorderRadius.circular(12.sp),
+                //       ),
+                //       padding: EdgeInsets.all(16.sp),
+                //       child: Center(
+                //         child: SvgPicture.asset(
+                //           AppAsset.svgs.calendarPrimary,
+                //           height: 16.sp,
+                //           width: 16.sp,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
-            Divider(height: 1, color: AppColor.border.lightGray),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

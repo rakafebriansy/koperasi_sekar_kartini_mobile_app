@@ -162,7 +162,7 @@ class _GroupedGroupListView extends StatelessWidget {
                                   padding: EdgeInsets.all(3.sp),
                                   child: Icon(
                                     Icons.arrow_forward_ios_rounded,
-                                    color: AppColor.border.gray,
+                                    color: AppColor.border.darkGray,
                                   ),
                                 ),
                               ),

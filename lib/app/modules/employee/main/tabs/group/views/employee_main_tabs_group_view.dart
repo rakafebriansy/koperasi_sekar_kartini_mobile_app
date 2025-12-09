@@ -16,7 +16,6 @@ class EmployeeMainTabsGroupView
     extends GetView<EmployeeMainTabsGroupController> {
   const EmployeeMainTabsGroupView({super.key});
   @override
-
   Widget build(BuildContext context) {
     return AppHomeWrapper(
       withPadding: false,
@@ -30,7 +29,11 @@ class EmployeeMainTabsGroupView
               onChanged: (val) => controller.changeSearchText(val),
               controller: controller.searchCtrl,
               hintText: controller.searchPlaceholder,
-              prefixIcon: Icon(Icons.search, size: 20.sp, color: AppColor.border.gray,),
+              prefixIcon: Icon(
+                Icons.search,
+                size: 20.sp,
+                color: AppColor.border.darkGray,
+              ),
             ),
           ),
         ),

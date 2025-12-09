@@ -22,8 +22,8 @@ import '../modules/group_detail/bindings/group_detail_binding.dart';
 import '../modules/group_detail/views/group_detail_view.dart';
 import '../modules/group_member/fund_list/bindings/group_member_fund_list_binding.dart';
 import '../modules/group_member/fund_list/views/group_member_fund_list_view.dart';
-import '../modules/group_member/loan_list/bindings/group_member_loan_list_binding.dart';
-import '../modules/group_member/loan_list/views/group_member_loan_list_view.dart';
+import '../modules/loan_list/bindings/loan_list_binding.dart';
+import '../modules/loan_list/views/loan_list_view.dart';
 import '../modules/group_member/main/bindings/group_member_main_binding.dart';
 import '../modules/group_member/main/tabs/group/bindings/group_member_main_tabs_group_binding.dart';
 import '../modules/group_member/main/tabs/group/views/group_member_main_tabs_group_view.dart';
@@ -34,8 +34,8 @@ import '../modules/group_member/main/tabs/profile/views/group_member_main_tabs_p
 import '../modules/group_member/main/views/group_member_main_view.dart';
 import '../modules/group_member/register/bindings/register_binding.dart';
 import '../modules/group_member/register/views/register_view.dart';
-import '../modules/group_member/savings_list/bindings/group_member_savings_list_binding.dart';
-import '../modules/group_member/savings_list/views/group_member_savings_list_view.dart';
+import '../modules/savings_list/bindings/savings_list_binding.dart';
+import '../modules/savings_list/views/savings_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manage_event/bindings/manage_event_binding.dart';
@@ -127,14 +127,14 @@ class AppPages {
       binding: RegisterBinding(),
     ),
     GetPage(
-      name: _Paths.GROUP_MEMBER_SAVINGS_LIST,
-      page: () => const GroupMemberSavingsListView(),
-      binding: GroupMemberSavingsListBinding(),
+      name: _Paths.SAVINGS_LIST,
+      page: () => const SavingsListView(),
+      binding: SavingsListBinding(),
     ),
     GetPage(
-      name: _Paths.GROUP_MEMBER_LOAN_LIST,
-      page: () => const GroupMemberLoanListView(),
-      binding: GroupMemberLoanListBinding(),
+      name: _Paths.LOAN_LIST,
+      page: () => const LoanListView(),
+      binding: LoanListBinding(),
     ),
     GetPage(
       name: _Paths.EMPLOYEE_MANAGE_EMPLOYEE,

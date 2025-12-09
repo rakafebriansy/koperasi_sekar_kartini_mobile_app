@@ -12,11 +12,13 @@ class AppDateInputField extends StatefulWidget {
     required this.controller,
     required this.placeholder,
     this.label,
+    this.prefixIcon,
     this.enabled,
   });
   final TextEditingController controller;
   final String placeholder;
   final String? label;
+  final Widget? prefixIcon;
   final bool? enabled;
 
   _AppDateInputFieldState createState() => _AppDateInputFieldState();
@@ -47,6 +49,7 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
       enabled: widget.enabled,
       controller: widget.controller,
       hintText: widget.placeholder,
+      prefixIcon: widget.prefixIcon,
       readOnly: true,
       onTap: () => _selectDate(context),
       suffixIcon: SvgPicture.asset(

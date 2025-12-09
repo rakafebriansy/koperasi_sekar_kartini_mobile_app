@@ -13,8 +13,8 @@ abstract class Routes {
   static const GROUP_MEMBER_MAIN_TABS_GROUP =
       _Paths.GROUP_MEMBER_MAIN_TABS_GROUP;
   static const GROUP_MEMBER_REGISTER = _Paths.GROUP_MEMBER_REGISTER;
-  static const GROUP_MEMBER_SAVINGS_LIST = _Paths.GROUP_MEMBER_SAVINGS_LIST;
-  static const GROUP_MEMBER_LOAN_LIST = _Paths.GROUP_MEMBER_LOAN_LIST;
+  static const SAVINGS_LIST = _Paths.SAVINGS_LIST;
+  static const LOAN_LIST = _Paths.LOAN_LIST;
   static const EMPLOYEE_MAIN = _Paths.EMPLOYEE_MAIN;
   static const EMPLOYEE_MAIN_TABS_HOME = _Paths.EMPLOYEE_MAIN_TABS_HOME;
   static const EMPLOYEE_MAIN_TABS_GROUP = _Paths.EMPLOYEE_MAIN_TABS_GROUP;
@@ -42,9 +42,9 @@ abstract class _Paths {
   static const GROUP_MEMBER_MAIN_TABS_HOME = '/group-member-main-home';
   static const GROUP_MEMBER_MAIN_TABS_PROFILE = '/group-member-main-profile';
   static const GROUP_MEMBER_MAIN_TABS_GROUP = '/group-member-main-group';
-  static const GROUP_MEMBER_LOAN_LIST = '/group-member-loan-list';
+  static const LOAN_LIST = '/loan-list';
   static const GROUP_MEMBER_REGISTER = '/group-member-register';
-  static const GROUP_MEMBER_SAVINGS_LIST = '/group-member-savings-list';
+  static const SAVINGS_LIST = '/savings-list';
   static const EMPLOYEE_MAIN = '/employee-main';
   static const EMPLOYEE_MAIN_TABS_HOME = '/employee-main-home';
   static const EMPLOYEE_MAIN_TABS_GROUP = '/employee-main-group';

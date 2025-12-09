@@ -6,14 +6,15 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 
-import '../controllers/group_member_loan_list_controller.dart';
+import '../controllers/loan_list_controller.dart';
 
-class GroupMemberLoanListView extends GetView<GroupMemberLoanListController> {
-  const GroupMemberLoanListView();
+class LoanListView extends GetView<LoanListController> {
+  const LoanListView();
   @override
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
@@ -32,67 +33,73 @@ class GroupMemberLoanListView extends GetView<GroupMemberLoanListController> {
                   spacing: 10.sp,
                   children: [
                     Expanded(
-                      child: AppTextFormField(
-                        controller: controller.searchCtrl,
-                        hintText: 'Cari',
+                      // child: AppTextFormField(
+                      //   controller: controller.searchCtrl,
+                      //   hintText: 'Cari',
+                      //   prefixIcon: SvgPicture.asset(
+                      //     AppAsset.svgs.searchGray,
+                      //     height: 16.sp,
+                      //   ),
+                      // ),
+                      child: AppDateInputField(
                         prefixIcon: SvgPicture.asset(
                           AppAsset.svgs.searchGray,
                           height: 16.sp,
                         ),
+                        controller: controller.searchCtrl,
+                        placeholder: 'Cari...',
                       ),
                     ),
-                    Material(
-                      borderRadius: BorderRadius.circular(12.sp),
-                      color: Colors.white,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(12.sp),
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1.sp,
-                              color: AppColor.border.lightGray,
-                            ),
-                            borderRadius: BorderRadius.circular(12.sp),
-                          ),
-                          padding: EdgeInsets.all(16.sp),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              AppAsset.svgs.calendarPrimary,
-                              height: 16.sp,
-                              width: 16.sp,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Material(
+                    //   borderRadius: BorderRadius.circular(12.sp),
+                    //   color: Colors.white,
+                    //   child: InkWell(
+                    //     borderRadius: BorderRadius.circular(12.sp),
+                    //     onTap: () {},
+                    //     child: Container(
+                    //       decoration: BoxDecoration(
+                    //         border: Border.all(
+                    //           width: 1.sp,
+                    //           color: AppColor.border.lightGray,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(12.sp),
+                    //       ),
+                    //       padding: EdgeInsets.all(16.sp),
+                    //       child: Center(
+                    //         child: SvgPicture.asset(
+                    //           AppAsset.svgs.calendarPrimary,
+                    //           height: 16.sp,
+                    //           width: 16.sp,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  poppins(
-                    'Filter:',
-                    color: AppColor.text.disabled,
-                    fontSize: 12.sp,
-                  ),
-                  _TabFilter(
-                    title: 'Belum disetujui',
-                    onTap: () {},
-                    isActive: true,
-                  ),
-                  _TabFilter(title: 'Disetujui', onTap: () {}, isActive: false),
-                  _TabFilter(
-                    title: 'Tidak disetujui',
-                    onTap: () {},
-                    isActive: false,
-                  ),
-                ],
-              ),
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     poppins(
+            //       'Filter:',
+            //       color: AppColor.text.disabled,
+            //       fontSize: 12.sp,
+            //     ),
+            //     _TabFilter(
+            //       title: 'Belum disetujui',
+            //       onTap: () {},
+            //       isActive: true,
+            //     ),
+            //     _TabFilter(title: 'Disetujui', onTap: () {}, isActive: false),
+            //     _TabFilter(
+            //       title: 'Tidak disetujui',
+            //       onTap: () {},
+            //       isActive: false,
+            //     ),
+            //   ],
+            // ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -170,7 +177,7 @@ class _LoanCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _TabFilter(title: 'Belum disetujui', isActive: false),
+              _TabFilter(title: 'Belum lunas', isActive: false),
               poppins('30/10/2019', color: AppColor.text.gray),
             ],
           ),

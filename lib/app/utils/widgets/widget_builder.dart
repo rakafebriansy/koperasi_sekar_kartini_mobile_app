@@ -60,7 +60,7 @@ InputDecoration buildAppTextInputDecoration({
           hintText,
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          color: AppColor.border.gray,
+          color: AppColor.border.darkGray,
         ),
       ],
     ),
