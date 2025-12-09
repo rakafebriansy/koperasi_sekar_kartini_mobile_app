@@ -27,26 +27,26 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
           spacing: 16.sp,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              spacing: 16.sp,
-              children: [
-                Expanded(
-                  child: _InfoCard(
-                    title: 'Simpanan',
-                    amount: 1_124_500,
-                    route: Routes.GROUP_MEMBER_SAVINGS_LIST,
-                  ),
-                ),
-                Expanded(
-                  child: _InfoCard(
-                    title: 'Pinjaman',
-                    amount: 724_500,
-                    route: Routes.GROUP_MEMBER_LOAN_LIST,
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   spacing: 16.sp,
+            //   children: [
+            //     Expanded(
+            //       child: _InfoCard(
+            //         title: 'Simpanan',
+            //         amount: 1_124_500,
+            //         route: Routes.GROUP_MEMBER_SAVINGS_LIST,
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: _InfoCard(
+            //         title: 'Pinjaman',
+            //         amount: 724_500,
+            //         route: Routes.GROUP_MEMBER_LOAN_LIST,
+            //       ),
+            //     ),
+            //   ],
+            // ),
             MemberLineChart(),
             Container(
               height: 360.sp,

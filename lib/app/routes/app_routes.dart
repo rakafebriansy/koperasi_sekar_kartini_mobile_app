@@ -27,8 +27,6 @@ abstract class Routes {
   static const GROUP_DETAIL = _Paths.GROUP_DETAIL;
   static const GROUP_MEMBER_FUND_LIST = _Paths.GROUP_MEMBER_FUND_LIST;
   static const MANAGE_GROUP = _Paths.MANAGE_GROUP;
-  static const EMPLOYEE_GROUP_MEMBER_DETAIL =
-      _Paths.EMPLOYEE_GROUP_MEMBER_DETAIL;
   static const EMPLOYEE_MANAGE_REPORT = _Paths.EMPLOYEE_MANAGE_REPORT;
   static const EMPLOYEE_MANAGE_GROUP_MEMBER_PROFILE =
       _Paths.EMPLOYEE_MANAGE_GROUP_MEMBER_PROFILE;
@@ -59,7 +57,6 @@ abstract class _Paths {
   static const GROUP_DETAIL = '/group-detail';
   static const GROUP_MEMBER_FUND_LIST = '/fund-list';
   static const MANAGE_GROUP = '/manage-group';
-  static const EMPLOYEE_GROUP_MEMBER_DETAIL = '/group-member-detail';
   static const EMPLOYEE_MANAGE_REPORT = '/manage-report';
   static const EMPLOYEE_MANAGE_GROUP_MEMBER_PROFILE =
       '/manage-group-member-profile';

@@ -19,8 +19,9 @@ extension ListExtension<T> on List<T> {
 
     for (int i = 0; i < length; i++) {
       if ((a?.call(i, this[i]) ?? this[i]) !=
-          (b?.call(i, other[i]) ?? other[i]))
+          (b?.call(i, other[i]) ?? other[i])) {
         return false;
+      }
     }
 
     return true;
@@ -44,11 +45,20 @@ extension ListExtension<T> on List<T> {
 }
 
 extension WorkAreaListExtension on List<WorkAreaModel> {
-  List<String> get names => map((region) => region.name).toList();
+  List<String> get names => map((workArea) => workArea.name).toList();
 
   WorkAreaModel? findByName(String? name) {
     if (name == null) return null;
     return firstWhere((item) => item.name == name);
+  }
+}
+
+extension FundTypeListExtension on List<FundType> {
+  List<String> get displayNames => map((fundType) => fundType.displayName).toList();
+
+  FundType? findByName(String? displayName) {
+    if (displayName == null) return null;
+    return firstWhere((item) => item.displayName == displayName);
   }
 }
 

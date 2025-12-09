@@ -15,10 +15,6 @@ class GroupModel with _$GroupModel {
         int? sharedLiabilityFundAmount,
     @JsonKey(name: 'group_fund_amount') int? groupFundAmount,
     @JsonKey(name: 'social_fund_amount') int? socialFundAmount,
-    @JsonKey(name: 'total_shared_liability_fund')
-        int? totalSharedLiabilityFund,
-    @JsonKey(name: 'total_group_fund') int? totalGroupFund,
-    @JsonKey(name: 'total_social_fund') int? totalSocialFund,
     @JsonKey(name: 'is_active') bool? isActive,
     @JsonKey(name: 'work_area') WorkAreaModel? workArea,
     @JsonKey(name: 'chairman') UserModel? chairman,

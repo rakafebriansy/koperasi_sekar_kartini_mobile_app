@@ -232,4 +232,14 @@ abstract class ApiClient {
 
     @Field("_method") String method = "PATCH",
   });
+
+  @POST("/groups/{id}/update-fund-amount")
+  Future<dynamic> updateFundAmount({
+    @Path('id') required int id,
+
+    @Field("_method") String method = "PATCH",
+    
+    @Field("fund_type") String? fundType,
+    @Field("fund_amount") int? fundAmount,
+  });
 }

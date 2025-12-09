@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 
-import '../modules/employee/group_member_detail/bindings/employee_group_member_detail_binding.dart';
-import '../modules/employee/group_member_detail/views/employee_group_member_detail_view.dart';
 import '../modules/employee/main/bindings/employee_main_binding.dart';
 import '../modules/employee/main/tabs/employee/bindings/employee_main_tabs_employee_binding.dart';
 import '../modules/employee/main/tabs/employee/views/employee_main_tabs_employee_view.dart';
@@ -172,11 +170,6 @@ class AppPages {
       name: _Paths.MANAGE_GROUP,
       page: () => const ManageGroupView(),
       binding: ManageGroupBinding(),
-    ),
-    GetPage(
-      name: _Paths.EMPLOYEE_GROUP_MEMBER_DETAIL,
-      page: () => const EmployeeGroupMemberDetailView(),
-      binding: EmployeeGroupMemberDetailBinding(),
     ),
     GetPage(
       name: _Paths.EMPLOYEE_MANAGE_REPORT,

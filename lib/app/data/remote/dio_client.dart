@@ -22,15 +22,15 @@ abstract class DioClient {
     dio.options.headers.addAll(baseHeaders);
     dio.options.headers.addAll(headers);
   
-    // dio.interceptors.add(
-    //   PrettyDioLogger(
-    //     requestHeader: true,
-    //     requestBody: true,
-    //     responseHeader: true,
-    //     enabled: !kReleaseMode,
-    //     filter: (options, args) => !([].contains(options.path) || options.responseType == ResponseType.bytes),
-    //   ),
-    // );
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        enabled: !kReleaseMode,
+        filter: (options, args) => !([].contains(options.path) || options.responseType == ResponseType.bytes),
+      ),
+    );
 
     return dio;
   }

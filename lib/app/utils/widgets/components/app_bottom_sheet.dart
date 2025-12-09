@@ -35,17 +35,19 @@ class AppBottomSheet extends StatelessWidget {
         : _buildBottomSheetChildren(),
   );
 
-  Column _buildBottomSheetChildren() {
-    return Column(
-      spacing: spacing ?? 12.sp,
-      crossAxisAlignment: crossAxisAlignment,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (titleText != null) titleText!,
-        if (subtitleText != null) subtitleText!,
-        if (children != null) SizedBox(height: 16.sp),
-        ...children ?? [],
-      ],
+  Widget _buildBottomSheetChildren() {
+    return SingleChildScrollView(
+      child: Column(
+        spacing: spacing ?? 12.sp,
+        crossAxisAlignment: crossAxisAlignment,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (titleText != null) titleText!,
+          if (subtitleText != null) subtitleText!,
+          if (children != null) SizedBox(height: 16.sp),
+          ...children ?? [],
+        ],
+      ),
     );
   }
 }

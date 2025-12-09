@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
@@ -10,8 +11,14 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrappe
 class GroupDetailController extends GetxController {
   TextEditingController searchCtrl = TextEditingController();
 
+  TextEditingController fundAmountCtrl = TextEditingController(
+    text: !kReleaseMode ? '50000' : '',
+  );
+
+  final addMemberFormKey = GlobalKey<FormState>();
   final chairmanFormKey = GlobalKey<FormState>();
   final facilitatorFormKey = GlobalKey<FormState>();
+  final changeFundAmountFormKey = GlobalKey<FormState>();
 
   final Rx<UserModel?> _selectedChairman = Rxn();
   UserModel? get selectedChairman => _selectedChairman.value;
@@ -19,11 +26,24 @@ class GroupDetailController extends GetxController {
   final Rx<UserModel?> _selectedFacilitator = Rxn();
   UserModel? get selectedFacilitator => _selectedFacilitator.value;
 
+  final Rx<FundType?> _selectedFundType = Rxn();
+  FundType? get selectedFundType => _selectedFundType.value;
+
   final Rx<ActionType?> _action = Rxn();
   ActionType? get action => _action.value;
 
+  final Rx<int?> _id = Rxn();
+  int? get id => _id.value;
+
   final Rx<GroupModel?> _group = Rxn();
   GroupModel? get group => _group.value;
+
+  final RxList<FundType> _fundTypes = RxList([
+    FundType.sharedLiabilityFund,
+    // FundType.groupFund,
+    // FundType.socialFund,
+  ]);
+  List<FundType> get fundTypes => _fundTypes;
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
@@ -34,11 +54,26 @@ class GroupDetailController extends GetxController {
   final RxBool _isFetchingMember = false.obs;
   bool get isFetchingMember => _isFetchingMember.value;
 
+  final RxBool _isFetchingUnlistedMembers = false.obs;
+  bool get isFetchingUnlistedMembers => _isFetchingUnlistedMembers.value;
+
   final RxBool _isFetchingGroup = false.obs;
   bool get isFetchingGroup => _isFetchingGroup.value;
 
+  final RxBool _isFetchingGroupMember = false.obs;
+  bool get isFetchingGroupMember => _isFetchingGroupMember.value;
+
   bool get isLoading =>
-      isFetchingEmployee || isFetchingMember || isFetchingGroup;
+      isFetchingEmployee ||
+      isFetchingMember ||
+      isFetchingGroup ||
+      isFetchingUnlistedMembers;
+
+  final Rx<UserModel?> _selectedMember = Rxn();
+  UserModel? get selectedMember => _selectedMember.value;
+
+  final RxList<UserModel> _groupMembers = RxList();
+  List<UserModel> get groupMembers => _groupMembers;
 
   final RxList<UserModel> _employees = RxList();
   List<UserModel> get employees => _employees;
@@ -46,13 +81,19 @@ class GroupDetailController extends GetxController {
   final RxList<UserModel> _members = RxList();
   List<UserModel> get members => _members;
 
+  final RxList<UserModel> _unlistedMembers = RxList();
+  List<UserModel> get unlistedMembers => _unlistedMembers;
+
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
     _action.value = args.action;
     var group = args.data as GroupModel;
+    _id.value = group.id;
     fetchListEmployee();
     fetchGroupById(group.id);
+    fetchUnlistedMembers(group.id);
+    fetchListGroupMember(group.id);
     super.onInit();
   }
 
@@ -69,6 +110,22 @@ class GroupDetailController extends GetxController {
 
     _selectedChairman.value = _members.firstWhere(
       (item) => item.name.toLowerCase() == name.toLowerCase(),
+    );
+  }
+
+  void selectMember(String? name) {
+    if (name == null) return;
+
+    _selectedMember.value = _members.firstWhere(
+      (item) => item.name.toLowerCase() == name.toLowerCase(),
+    );
+  }
+
+  void selectFundType(String? name) {
+    if (name == null) return;
+
+    _selectedFundType.value = fundTypes.firstWhere(
+      (item) => item.displayName.toLowerCase() == name.toLowerCase(),
     );
   }
 
@@ -100,6 +157,43 @@ class GroupDetailController extends GetxController {
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingGroup.value = false;
+    }
+  }
+
+  Future<void> fetchUnlistedMembers(int groupId, {String? search}) async {
+    _isFetchingUnlistedMembers.value = true;
+
+    try {
+      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
+        request: (api) =>
+            api.getUnlistedMembers(search: search, workAreaId: groupId),
+      );
+
+      _unlistedMembers.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingUnlistedMembers.value = false;
+    }
+  }
+
+  Future<void> fetchListGroupMember(int groupId, {String? search}) async {
+    _isFetchingGroupMember.value = true;
+
+    try {
+      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(
+          search: search,
+          role: 'group_member',
+          groupId: groupId,
+        ),
+      );
+
+      _groupMembers.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingGroupMember.value = false;
     }
   }
 
@@ -147,6 +241,60 @@ class GroupDetailController extends GetxController {
 
         Get.back();
         Get.snackbar('INFO', 'Berhasil memperbarui informasi PJK!');
+      } catch (e) {
+        debugPrint(e.toString());
+        ErrorHelper.handleError(e, canUseNavigator: false);
+      } finally {
+        fetchGroupById(group!.id);
+        _isSubmitted.value = false;
+      }
+    }
+  }
+
+  Future<void> addMember() async {
+    if (addMemberFormKey.currentState!.validate()) {
+      _isSubmitted.value = true;
+
+      try {
+        if (group == null) throw Exception('group is null');
+        if (selectedMember == null) throw Exception('member is null');
+
+        await ApiHelper.fetchNonReturnable(
+          request: (api) =>
+              api.addGroupMember(id: selectedMember!.id, groupId: group!.id),
+        );
+
+        Get.back();
+        Get.snackbar('INFO', 'Berhasil mengubah informasi kas!');
+      } catch (e) {
+        debugPrint(e.toString());
+        ErrorHelper.handleError(e, canUseNavigator: false);
+      } finally {
+        fetchListGroupMember(group!.id);
+        _isSubmitted.value = false;
+      }
+    }
+  }
+
+  Future<void> changeFundAmount() async {
+    if (changeFundAmountFormKey.currentState!.validate()) {
+      _isSubmitted.value = true;
+
+      try {
+        if (group == null) throw Exception('group is null');
+        if (selectedFundType == null) throw Exception('fund type is null');
+
+        await ApiHelper.fetchNonReturnable(
+          request: (api) => api.updateFundAmount(
+            id: group!.id,
+
+            fundAmount: int.parse(fundAmountCtrl.text),
+            fundType: selectedFundType?.name,
+          ),
+        );
+
+        Get.back();
+        Get.snackbar('INFO', 'Berhasil menambah anggota!');
       } catch (e) {
         debugPrint(e.toString());
         ErrorHelper.handleError(e, canUseNavigator: false);

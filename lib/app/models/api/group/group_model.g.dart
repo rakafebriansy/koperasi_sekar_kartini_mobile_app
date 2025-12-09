@@ -15,10 +15,6 @@ _$GroupModelImpl _$$GroupModelImplFromJson(Map<String, dynamic> json) =>
           (json['shared_liability_fund_amount'] as num?)?.toInt(),
       groupFundAmount: (json['group_fund_amount'] as num?)?.toInt(),
       socialFundAmount: (json['social_fund_amount'] as num?)?.toInt(),
-      totalSharedLiabilityFund:
-          (json['total_shared_liability_fund'] as num?)?.toInt(),
-      totalGroupFund: (json['total_group_fund'] as num?)?.toInt(),
-      totalSocialFund: (json['total_social_fund'] as num?)?.toInt(),
       isActive: json['is_active'] as bool?,
       workArea: json['work_area'] == null
           ? null
@@ -45,9 +41,6 @@ Map<String, dynamic> _$$GroupModelImplToJson(_$GroupModelImpl instance) =>
       'shared_liability_fund_amount': instance.sharedLiabilityFundAmount,
       'group_fund_amount': instance.groupFundAmount,
       'social_fund_amount': instance.socialFundAmount,
-      'total_shared_liability_fund': instance.totalSharedLiabilityFund,
-      'total_group_fund': instance.totalGroupFund,
-      'total_social_fund': instance.totalSocialFund,
       'is_active': instance.isActive,
       'work_area': instance.workArea,
       'chairman': instance.chairman,
