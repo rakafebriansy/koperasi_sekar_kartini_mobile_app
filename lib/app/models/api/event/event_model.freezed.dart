@@ -20,7 +20,7 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EventModel {
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'type')
   String? get type => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $EventModelCopyWith<$Res> {
       _$EventModelCopyWithImpl<$Res, EventModel>;
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       String name,
       @JsonKey(name: 'type') String? type,
       DateTime datetime,
@@ -83,7 +83,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? name = null,
     Object? type = freezed,
     Object? datetime = null,
@@ -96,10 +96,10 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ abstract class _$$EventModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       String name,
       @JsonKey(name: 'type') String? type,
       DateTime datetime,
@@ -208,7 +208,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? name = null,
     Object? type = freezed,
     Object? datetime = null,
@@ -221,10 +221,10 @@ class __$$EventModelImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$EventModelImpl(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -273,7 +273,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$EventModelImpl implements _EventModel {
   const _$EventModelImpl(
-      {this.id,
+      {required this.id,
       required this.name,
       @JsonKey(name: 'type') this.type,
       required this.datetime,
@@ -289,7 +289,7 @@ class _$EventModelImpl implements _EventModel {
       _$$EventModelImplFromJson(json);
 
   @override
-  final int? id;
+  final int id;
   @override
   final String name;
   @override
@@ -365,7 +365,7 @@ class _$EventModelImpl implements _EventModel {
 
 abstract class _EventModel implements EventModel {
   const factory _EventModel(
-          {final int? id,
+          {required final int id,
           required final String name,
           @JsonKey(name: 'type') final String? type,
           required final DateTime datetime,
@@ -382,7 +382,7 @@ abstract class _EventModel implements EventModel {
       _$EventModelImpl.fromJson;
 
   @override
-  int? get id;
+  int get id;
   @override
   String get name;
   @override

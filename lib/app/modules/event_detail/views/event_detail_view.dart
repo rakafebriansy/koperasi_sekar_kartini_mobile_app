@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_bottom_sheet.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_outlined_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
@@ -18,6 +22,75 @@ class EventDetailView extends GetView<EventDetailController> {
   @override
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
+      actions: [
+        if (AuthController.find.currentUser?.role == 'admin' ||
+            AuthController.find.currentUser?.id == controller.event!.id)
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                Get.bottomSheet(
+                  AppBottomSheet(
+                    titleText: poppins(
+                      'Hapus Kegiatan',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.sp,
+                    ),
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          spacing: 18.sp,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: AppColor.bg.danger,
+                              radius: 44.sp,
+                              child: SvgPicture.asset(
+                                AppAsset.svgs.cautionWhite,
+                                width: 32.sp,
+                                height: 32.sp,
+                              ),
+                            ),
+                            poppins(
+                              'Yakin menghapus kegiatan?',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.sp,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12.sp),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        spacing: 12.sp,
+                        children: [
+                          Expanded(
+                            child: AppOutlinedButton(
+                              label: 'Batal',
+                              onTap: () => Get.back(),
+                            ),
+                          ),
+                          Expanded(
+                            child: AppFilledButton(
+                              label: 'Hapus',
+                              onTap: () {
+                                controller.deleteMeeting();
+                                Get.back();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Icon(Icons.delete, color: AppColor.bg.danger),
+            ),
+          ),
+      ],
       title: poppins('Detail Pertemuan', fontWeight: FontWeight.w600),
       child: Obx(
         () => controller.event != null

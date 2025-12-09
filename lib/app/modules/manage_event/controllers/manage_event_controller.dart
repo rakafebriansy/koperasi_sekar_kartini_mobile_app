@@ -65,10 +65,10 @@ class ManageEventController extends GetxController {
       final event = args.data as EventModel;
 
       _id.value = event.id;
-      nameCtrl.text = event.name!;
+      nameCtrl.text = event.name;
       dateTimeCtrl.text =
-          '${event.datetime!.toDotSeparatedHour()} ${event.datetime!.toSlashSeparatedDate()}';
-      locationCtrl.text = event.location!;
+          '${event.datetime.toDotSeparatedHour()} ${event.datetime.toSlashSeparatedDate()}';
+      locationCtrl.text = event.location;
       descCtrl.text = event.description ?? '';
     }
     super.onInit();
@@ -149,28 +149,6 @@ class ManageEventController extends GetxController {
 
       Get.back(result: true);
       Get.snackbar('INFO', 'Berhasil memperbarui kegiatan!');
-    } catch (e) {
-      debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
-    } finally {
-      _isSubmitted.value = false;
-    }
-  }
-
-  Future<void> deleteEmployee() async {
-    _isSubmitted.value = true;
-
-    if (id == null) {
-      throw Exception('id is null');
-    }
-
-    try {
-      await ApiHelper.fetchNonReturnable(
-        request: (api) => api.deleteUser(id: id!),
-      );
-
-      Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil menghapus kegiatan!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e, canUseNavigator: false);

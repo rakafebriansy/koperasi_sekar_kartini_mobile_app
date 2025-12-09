@@ -8,7 +8,7 @@ part 'event_model.g.dart';
 @freezed
 class EventModel with _$EventModel {
   const factory EventModel({
-    int? id,
+    required int id,
     required String name,
     @JsonKey(name: 'type') String? type,
     required DateTime datetime,
