@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/controllers/employee_main_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/group/controllers/employee_main_tabs_group_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
@@ -12,7 +12,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 class AppGroupList extends StatelessWidget {
   const AppGroupList({super.key, required this.controller});
 
-  final EmployeeMainController controller;
+  final EmployeeMainTabsGroupController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class AppGroupList extends StatelessWidget {
 }
 
 class _GroupedGroupListView extends StatelessWidget {
-  final EmployeeMainController controller;
+  final EmployeeMainTabsGroupController controller;
 
   const _GroupedGroupListView({required this.controller});
 
