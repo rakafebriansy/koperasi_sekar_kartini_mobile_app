@@ -45,10 +45,10 @@ class AppAssetSvg {
 class AppAssetImages {
   static const String _imagesPath = 'assets/images/';
   static const String _ext1 = '.png';
-  // static String _ext2 = '.jpg';
+  static const String _ext2 = '.jpg';
 
   String bgCity = '${_imagesPath}bg_city$_ext1';
-  String brokenImageIcon = '${_imagesPath}broken_image_icon$_ext1';
+  String brokenImageIcon = '${_imagesPath}broken_image_icon$_ext2';
   String event = '${_imagesPath}event$_ext1';
   String growMoneyIllustration = '${_imagesPath}grow_money_illustration$_ext1';
   String illustrationFailedDialog =

@@ -9,7 +9,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_event_card.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
@@ -97,7 +96,8 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                           ),
                         );
 
-                        if(result == true) {
+                        if (result == true) {
+                          controller.fetchListEvent();
                         }
                       },
                       label: poppins('Tambah', color: AppColor.bg.primary),
@@ -128,22 +128,42 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                 ),
               ],
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 10.sp,
-              children: [
-                ...DummyHelper.events
-                    .map(
-                      (event) => AppEventCard(
-                        model: event,
-                        onTap: () {
-                          Get.toNamed(Routes.EVENT_DETAIL);
-                        },
+            Obx(
+              () => controller.isFetchingEvents
+                  ? SizedBox(
+                      height: 64.sp,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(),
                       ),
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: 10.sp,
+                      children: [
+                        ...controller.events.map(
+                          (event) => AppEventCard(
+                            model: event,
+                            onTap: () async {
+                              final result = await Get.toNamed(
+                                Routes.EVENT_DETAIL,
+                                arguments: ArgsWrapper(
+                                  data: null,
+                                  action: ActionType.create,
+                                ),
+                              );
+
+                              if (result == true) {
+                                controller.fetchListEvent();
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 10.sp),
+                      ],
                     ),
-                SizedBox(height: 10.sp),
-              ],
             ),
+            SizedBox(height: 10.sp),
           ],
         ),
       ),

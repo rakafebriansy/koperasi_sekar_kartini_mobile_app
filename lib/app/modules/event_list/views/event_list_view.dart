@@ -76,22 +76,22 @@ class EventListView extends GetView<EventListController> {
                 child: Column(
                   spacing: 16.sp,
                   children: [
-                    ...DummyHelper.events
-                        .map(
-                          (event) => AppEventCard(
-                            model: event,
-                            onTap: () {
-                              Get.toNamed(
-                                Routes.EVENT_DETAIL,
-                                arguments: ArgsWrapper(
-                                  action: ActionType.create,
-                                  data: event,
-                                ),
-                              );
-                            },
-                          ),
-                        )
-                        .toList(),
+                    // ...DummyHelper.events
+                    //     .map(
+                    //       (event) => AppEventCard(
+                    //         model: event,
+                    //         onTap: () {
+                    //           Get.toNamed(
+                    //             Routes.EVENT_DETAIL,
+                    //             arguments: ArgsWrapper(
+                    //               action: ActionType.create,
+                    //               data: event,
+                    //             ),
+                    //           );
+                    //         },
+                    //       ),
+                    //     )
+                    //     .toList(),
                     SizedBox(height: 10.sp),
                   ],
                 ),

@@ -105,8 +105,7 @@ class GroupMemberMainTabsHomeView
                           ),
                         );
 
-                        if(result == true) {
-                        }
+                        if (result == true) {}
                       },
                       label: poppins('Tambah', color: AppColor.bg.primary),
                       icon: Icon(Icons.add, color: AppColor.bg.primary),
@@ -136,23 +135,29 @@ class GroupMemberMainTabsHomeView
                 ),
               ],
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 10.sp,
-              children: [
-                ...DummyHelper.events
-                    .map(
-                      (event) => AppEventCard(
-                        model: event,
-                        onTap: () {
-                          Get.toNamed(Routes.EVENT_DETAIL);
-                        },
+            controller.isFetchingEvents
+                ? SizedBox(
+                    height: 64.sp,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 10.sp,
+                    children: [
+                      ...controller.events.map(
+                        (event) => AppEventCard(
+                          model: event,
+                          onTap: () {
+                            Get.toNamed(Routes.EVENT_DETAIL);
+                          },
+                        ),
                       ),
-                    )
-                    .toList(),
-                SizedBox(height: 10.sp),
-              ],
-            ),
+                      SizedBox(height: 10.sp),
+                    ],
+                  ),
           ],
         ),
       ),

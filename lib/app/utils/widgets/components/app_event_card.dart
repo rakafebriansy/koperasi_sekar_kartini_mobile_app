@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
@@ -38,11 +40,12 @@ class AppEventCard extends StatelessWidget {
                 height: 64.sp,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.sp),
-                  child: !kReleaseMode
-                      ? Image.asset(AppAsset.images.event)
-                      : (model.photo != null
-                            ? Image.network(model.photo!)
-                            : Image.asset(AppAsset.images.brokenImageIcon)),
+                  child: (model.photo != null
+                      ? CachedNetworkImage(
+                          imageUrl:
+                              '${Environments.apiUrl}/file/${model.photo!}',
+                        )
+                      : Image.asset(AppAsset.images.brokenImageIcon)),
                 ),
               ),
               Column(
