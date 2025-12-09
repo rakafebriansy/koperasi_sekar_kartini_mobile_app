@@ -9,14 +9,14 @@ part 'event_model.g.dart';
 class EventModel with _$EventModel {
   const factory EventModel({
     int? id,
-    String? name,
+    required String name,
     @JsonKey(name: 'type') String? type,
-    DateTime? datetime,
-    String? location,
+    required DateTime datetime,
+    required String location,
     String? photo,
     String? description,
     GroupModel? group,
-    UserModel? user,
+    required UserModel user,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _EventModel;

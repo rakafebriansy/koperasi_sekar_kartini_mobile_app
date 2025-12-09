@@ -8,8 +8,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 class AppTextFormField extends StatefulWidget {
   const AppTextFormField({
     super.key,
-    required this.controller,
-    required this.hintText,
+    this.controller,
+    this.hintText,
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
@@ -25,9 +25,9 @@ class AppTextFormField extends StatefulWidget {
     this.initialValue,
   });
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool obscureText;
-  final String hintText;
+  final String? hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final int? maxLines;
@@ -66,7 +66,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           obscureText: isHidden,
           controller: widget.controller,
           decoration: buildAppTextInputDecoration(
-            hintText: widget.hintText,
+            hintText: widget.hintText ?? '',
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.obscureText
                 ? Center(

@@ -21,15 +21,15 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EventModel {
   int? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'type')
   String? get type => throw _privateConstructorUsedError;
-  DateTime? get datetime => throw _privateConstructorUsedError;
-  String? get location => throw _privateConstructorUsedError;
+  DateTime get datetime => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   GroupModel? get group => throw _privateConstructorUsedError;
-  UserModel? get user => throw _privateConstructorUsedError;
+  UserModel get user => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -53,19 +53,19 @@ abstract class $EventModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String? name,
+      String name,
       @JsonKey(name: 'type') String? type,
-      DateTime? datetime,
-      String? location,
+      DateTime datetime,
+      String location,
       String? photo,
       String? description,
       GroupModel? group,
-      UserModel? user,
+      UserModel user,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   $GroupModelCopyWith<$Res>? get group;
-  $UserModelCopyWith<$Res>? get user;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -84,14 +84,14 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? name = null,
     Object? type = freezed,
-    Object? datetime = freezed,
-    Object? location = freezed,
+    Object? datetime = null,
+    Object? location = null,
     Object? photo = freezed,
     Object? description = freezed,
     Object? group = freezed,
-    Object? user = freezed,
+    Object? user = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -100,22 +100,22 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      datetime: freezed == datetime
+      datetime: null == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      location: freezed == location
+              as DateTime,
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
@@ -128,10 +128,10 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
               as GroupModel?,
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
+              as UserModel,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -161,12 +161,8 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $UserModelCopyWith<$Res>(_value.user!, (value) {
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -182,21 +178,21 @@ abstract class _$$EventModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      String? name,
+      String name,
       @JsonKey(name: 'type') String? type,
-      DateTime? datetime,
-      String? location,
+      DateTime datetime,
+      String location,
       String? photo,
       String? description,
       GroupModel? group,
-      UserModel? user,
+      UserModel user,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   @override
   $GroupModelCopyWith<$Res>? get group;
   @override
-  $UserModelCopyWith<$Res>? get user;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -213,14 +209,14 @@ class __$$EventModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? name = null,
     Object? type = freezed,
-    Object? datetime = freezed,
-    Object? location = freezed,
+    Object? datetime = null,
+    Object? location = null,
     Object? photo = freezed,
     Object? description = freezed,
     Object? group = freezed,
-    Object? user = freezed,
+    Object? user = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -229,22 +225,22 @@ class __$$EventModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      datetime: freezed == datetime
+      datetime: null == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      location: freezed == location
+              as DateTime,
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
@@ -257,10 +253,10 @@ class __$$EventModelImplCopyWithImpl<$Res>
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
               as GroupModel?,
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
+              as UserModel,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -278,14 +274,14 @@ class __$$EventModelImplCopyWithImpl<$Res>
 class _$EventModelImpl implements _EventModel {
   const _$EventModelImpl(
       {this.id,
-      this.name,
+      required this.name,
       @JsonKey(name: 'type') this.type,
-      this.datetime,
-      this.location,
+      required this.datetime,
+      required this.location,
       this.photo,
       this.description,
       this.group,
-      this.user,
+      required this.user,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
@@ -295,14 +291,14 @@ class _$EventModelImpl implements _EventModel {
   @override
   final int? id;
   @override
-  final String? name;
+  final String name;
   @override
   @JsonKey(name: 'type')
   final String? type;
   @override
-  final DateTime? datetime;
+  final DateTime datetime;
   @override
-  final String? location;
+  final String location;
   @override
   final String? photo;
   @override
@@ -310,7 +306,7 @@ class _$EventModelImpl implements _EventModel {
   @override
   final GroupModel? group;
   @override
-  final UserModel? user;
+  final UserModel user;
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -370,14 +366,14 @@ class _$EventModelImpl implements _EventModel {
 abstract class _EventModel implements EventModel {
   const factory _EventModel(
           {final int? id,
-          final String? name,
+          required final String name,
           @JsonKey(name: 'type') final String? type,
-          final DateTime? datetime,
-          final String? location,
+          required final DateTime datetime,
+          required final String location,
           final String? photo,
           final String? description,
           final GroupModel? group,
-          final UserModel? user,
+          required final UserModel user,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$EventModelImpl;
@@ -388,14 +384,14 @@ abstract class _EventModel implements EventModel {
   @override
   int? get id;
   @override
-  String? get name;
+  String get name;
   @override
   @JsonKey(name: 'type')
   String? get type;
   @override
-  DateTime? get datetime;
+  DateTime get datetime;
   @override
-  String? get location;
+  String get location;
   @override
   String? get photo;
   @override
@@ -403,7 +399,7 @@ abstract class _EventModel implements EventModel {
   @override
   GroupModel? get group;
   @override
-  UserModel? get user;
+  UserModel get user;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

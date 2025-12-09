@@ -111,7 +111,6 @@ class ManageEventController extends GetxController {
           description: descCtrl.text.nullIfEmpty,
           groupId: user.role == 'group_member' ? user.group?.id : null,
           photo: hintPhoto,
-          userId: user.id,
         ),
       );
 

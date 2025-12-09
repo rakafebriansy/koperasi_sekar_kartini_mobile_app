@@ -148,8 +148,7 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                               final result = await Get.toNamed(
                                 Routes.EVENT_DETAIL,
                                 arguments: ArgsWrapper(
-                                  data: null,
-                                  action: ActionType.create,
+                                  data: event,
                                 ),
                               );
 
