@@ -1093,11 +1093,13 @@ class _ApiClient implements ApiClient {
   Future<dynamic> getMeetings({
     String? search,
     int? groupId,
+    int? limit,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'search': search,
       r'group_id': groupId,
+      r'limit': limit,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

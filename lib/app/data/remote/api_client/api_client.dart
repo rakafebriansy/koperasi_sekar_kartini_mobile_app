@@ -244,6 +244,7 @@ abstract class ApiClient {
   Future<dynamic> getMeetings({
     @Query('search') String? search,
     @Query('group_id') int? groupId,
+    @Query('limit') int? limit,
   });
 
   @GET("/meetings/{id}")

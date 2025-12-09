@@ -8,7 +8,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_event_card.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -41,59 +40,73 @@ class EventListView extends GetView<EventListController> {
                       AppAsset.svgs.searchGray,
                       height: 16.sp,
                     ),
+                    onChanged: (value) => controller.onSearchChanged(value),
                   ),
                 ),
-                Material(
-                  borderRadius: BorderRadius.circular(12.sp),
-                  color: Colors.white,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(12.sp),
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1.sp,
-                          color: AppColor.border.lightGray,
-                        ),
-                        borderRadius: BorderRadius.circular(12.sp),
-                      ),
-                      padding: EdgeInsets.all(16.sp),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          AppAsset.svgs.calendarPrimary,
-                          height: 16.sp,
-                          width: 16.sp,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Material(
+                //   borderRadius: BorderRadius.circular(12.sp),
+                //   color: Colors.white,
+                //   child: InkWell(
+                //     borderRadius: BorderRadius.circular(12.sp),
+                //     onTap: () {},
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //         border: Border.all(
+                //           width: 1.sp,
+                //           color: AppColor.border.lightGray,
+                //         ),
+                //         borderRadius: BorderRadius.circular(12.sp),
+                //       ),
+                //       padding: EdgeInsets.all(16.sp),
+                //       child: Center(
+                //         child: SvgPicture.asset(
+                //           AppAsset.svgs.calendarPrimary,
+                //           height: 16.sp,
+                //           width: 16.sp,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             Divider(height: 1, color: AppColor.border.lightGray),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  spacing: 16.sp,
-                  children: [
-                    // ...DummyHelper.events
-                    //     .map(
-                    //       (event) => AppEventCard(
-                    //         model: event,
-                    //         onTap: () {
-                    //           Get.toNamed(
-                    //             Routes.EVENT_DETAIL,
-                    //             arguments: ArgsWrapper(
-                    //               action: ActionType.create,
-                    //               data: event,
-                    //             ),
-                    //           );
-                    //         },
-                    //       ),
-                    //     )
-                    //     .toList(),
-                    SizedBox(height: 10.sp),
-                  ],
+              child: Obx(
+                () => SingleChildScrollView(
+                  child: controller.isFetchingEvents
+                      ? SizedBox(
+                          height: getScreenHeight(context, scale: 0.7),
+                          child: Center(child: CircularProgressIndicator()),
+                        )
+                      : controller.events.isEmpty
+                      ? SizedBox(
+                          height: getScreenHeight(context, scale: 0.7),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: poppins('Tidak ada data.'),
+                          ),
+                        )
+                      : Column(
+                          spacing: 16.sp,
+                          children: [
+                            ...controller.events.map(
+                              (event) => AppEventCard(
+                                model: event,
+                                onTap: () {
+                                  Get.toNamed(
+                                    Routes.EVENT_DETAIL,
+                                    arguments: ArgsWrapper(
+                                      action: ActionType.create,
+                                      data: event,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 10.sp),
+                          ],
+                        ),
                 ),
               ),
             ),

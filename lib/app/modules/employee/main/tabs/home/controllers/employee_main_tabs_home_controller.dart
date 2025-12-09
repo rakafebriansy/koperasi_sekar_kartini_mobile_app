@@ -23,7 +23,7 @@ class EmployeeMainTabsHomeController extends GetxController {
 
     try {
       final List<EventModel> data = await ApiHelper.fetchList<EventModel>(
-        request: (api) => api.getMeetings(search: search),
+        request: (api) => api.getMeetings(search: search,limit: 5),
       );
 
       _events.value = data;

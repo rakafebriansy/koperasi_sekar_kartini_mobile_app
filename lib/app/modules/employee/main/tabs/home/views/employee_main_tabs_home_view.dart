@@ -70,8 +70,8 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 poppins(
-                  'Kegiatan',
-                  fontSize: 20.sp,
+                  'Kegiatan Terbaru',
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
                 Row(
@@ -137,6 +137,14 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                         child: CircularProgressIndicator(),
                       ),
                     )
+                  : controller.events.isEmpty
+                  ? SizedBox(
+                      height: 64.sp,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: poppins('Tidak ada data.'),
+                      ),
+                    )
                   : Column(
                       mainAxisSize: MainAxisSize.min,
                       spacing: 10.sp,
@@ -147,9 +155,7 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                             onTap: () async {
                               final result = await Get.toNamed(
                                 Routes.EVENT_DETAIL,
-                                arguments: ArgsWrapper(
-                                  data: event,
-                                ),
+                                arguments: ArgsWrapper(data: event),
                               );
 
                               if (result == true) {
