@@ -14,12 +14,14 @@ class AppDateInputField extends StatefulWidget {
     this.label,
     this.prefixIcon,
     this.enabled,
+    this.type = 'date',
   });
   final TextEditingController controller;
   final String placeholder;
   final String? label;
   final Widget? prefixIcon;
   final bool? enabled;
+  final String type;
 
   _AppDateInputFieldState createState() => _AppDateInputFieldState();
 }
@@ -43,6 +45,88 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
     }
   }
 
+  Future<void> _selectMonthYear(BuildContext context) async {
+    int selectedYear = selectedDate?.year ?? DateTime.now().year;
+    int selectedMonth = selectedDate?.month ?? DateTime.now().month;
+
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              title: Text("Pilih Bulan & Tahun"),
+              content: SizedBox(
+                height: 300,
+                width: 300,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: YearPicker(
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                        initialDate: DateTime(selectedYear),
+                        selectedDate: DateTime(selectedYear),
+                        onChanged: (date) {
+                          setDialogState(() {
+                            selectedYear = date.year;
+                          });
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 12),
+
+                    SizedBox(
+                      height: 120,
+                      child: GridView.count(
+                        crossAxisCount: 3,
+                        childAspectRatio: 2.5,
+                        children: List.generate(12, (index) {
+                          final month = index + 1;
+
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedMonth = month;
+                                selectedDate = DateTime(selectedYear, month);
+                                widget.controller.text =
+                                    "${NumberFormat('00').format(month)}/$selectedYear";
+                              });
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(4),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: selectedMonth == month
+                                    ? Colors.teal
+                                    : Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                DateFormat('MMM').format(DateTime(0, month)),
+                                style: TextStyle(
+                                  color: selectedMonth == month
+                                      ? Colors.white
+                                      : Colors.black87,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppTextFormField(
@@ -51,7 +135,15 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
       hintText: widget.placeholder,
       prefixIcon: widget.prefixIcon,
       readOnly: true,
-      onTap: () => _selectDate(context),
+      onTap: () {
+        switch (widget.type) {
+          case 'month-year':
+            _selectMonthYear(context);
+          case 'date':
+          default:
+            _selectDate(context);
+        }
+      },
       suffixIcon: SvgPicture.asset(
         AppAsset.svgs.calendarSharpGray,
         height: 20.sp,

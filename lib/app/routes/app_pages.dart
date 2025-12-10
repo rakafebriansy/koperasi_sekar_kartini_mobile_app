@@ -22,8 +22,6 @@ import '../modules/group_detail/bindings/group_detail_binding.dart';
 import '../modules/group_detail/views/group_detail_view.dart';
 import '../modules/group_member/fund_list/bindings/group_member_fund_list_binding.dart';
 import '../modules/group_member/fund_list/views/group_member_fund_list_view.dart';
-import '../modules/loan_list/bindings/loan_list_binding.dart';
-import '../modules/loan_list/views/loan_list_view.dart';
 import '../modules/group_member/main/bindings/group_member_main_binding.dart';
 import '../modules/group_member/main/tabs/group/bindings/group_member_main_tabs_group_binding.dart';
 import '../modules/group_member/main/tabs/group/views/group_member_main_tabs_group_view.dart';
@@ -34,8 +32,8 @@ import '../modules/group_member/main/tabs/profile/views/group_member_main_tabs_p
 import '../modules/group_member/main/views/group_member_main_view.dart';
 import '../modules/group_member/register/bindings/register_binding.dart';
 import '../modules/group_member/register/views/register_view.dart';
-import '../modules/savings_list/bindings/savings_list_binding.dart';
-import '../modules/savings_list/views/savings_list_view.dart';
+import '../modules/loan_list/bindings/loan_list_binding.dart';
+import '../modules/loan_list/views/loan_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manage_event/bindings/manage_event_binding.dart';
@@ -44,10 +42,14 @@ import '../modules/manage_group/bindings/manage_group_binding.dart';
 import '../modules/manage_group/views/manage_group_view.dart';
 import '../modules/manage_group_member_profile/bindings/manage_group_member_profile_binding.dart';
 import '../modules/manage_group_member_profile/views/manage_group_member_profile_view.dart';
+import '../modules/manage_loan/bindings/manage_loan_binding.dart';
+import '../modules/manage_loan/views/manage_loan_view.dart';
 import '../modules/report_detail/bindings/report_detail_binding.dart';
 import '../modules/report_detail/views/report_detail_view.dart';
 import '../modules/report_list/bindings/report_list_binding.dart';
 import '../modules/report_list/views/report_list_view.dart';
+import '../modules/savings_list/bindings/savings_list_binding.dart';
+import '../modules/savings_list/views/savings_list_view.dart';
 
 part 'app_routes.dart';
 
@@ -180,6 +182,11 @@ class AppPages {
       name: _Paths.MANAGE_GROUP_MEMBER_PROFILE,
       page: () => const ManageGroupMemberProfileView(),
       binding: ManageGroupMemberProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_LOAN,
+      page: () => const ManageLoanView(),
+      binding: ManageLoanBinding(),
     ),
   ];
 }

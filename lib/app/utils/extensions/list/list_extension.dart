@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group_report/group_report_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
@@ -99,8 +101,8 @@ extension GroupListExtension on List<GroupModel> {
     final copy = [...this];
 
     copy.sort((a, b) {
-      final aDistrict = a.workArea!.name.toLowerCase();
-      final bDistrict = b.workArea!.name.toLowerCase();
+      final aDistrict = a.workArea.name.toLowerCase();
+      final bDistrict = b.workArea.name.toLowerCase();
 
       return desc
           ? bDistrict.compareTo(aDistrict)
@@ -133,6 +135,14 @@ extension GroupListExtension on List<GroupModel> {
 extension EventTypeListExtension on List<EventType> {
   List<String> get names => map((event) => event.displayName).toList();
 }
+
+extension LoanTypeListExtension on List<LoanType> {
+  List<String> get names => map((event) => event.displayName).toList();
+}
+
+// extension SavingsTypeListExtension on List<SavingsType> {
+//   List<String> get names => map((event) => event.displayName).toList();
+// }
 
 extension GroupReportListExtension on List<GroupReportModel> {
   List<String> get labels => map((g) => g.label).toList();

@@ -12,13 +12,11 @@ _$GroupModelImpl _$$GroupModelImplFromJson(Map<String, dynamic> json) =>
       number: (json['number'] as num).toInt(),
       description: json['description'] as String?,
       sharedLiabilityFundAmount:
-          (json['shared_liability_fund_amount'] as num?)?.toInt(),
-      groupFundAmount: (json['group_fund_amount'] as num?)?.toInt(),
-      socialFundAmount: (json['social_fund_amount'] as num?)?.toInt(),
-      isActive: json['is_active'] as bool?,
-      workArea: json['work_area'] == null
-          ? null
-          : WorkAreaModel.fromJson(json['work_area'] as Map<String, dynamic>),
+          (json['shared_liability_fund_amount'] as num).toInt(),
+      groupFundAmount: (json['group_fund_amount'] as num).toInt(),
+      socialFundAmount: (json['social_fund_amount'] as num).toInt(),
+      workArea:
+          WorkAreaModel.fromJson(json['work_area'] as Map<String, dynamic>),
       chairman: json['chairman'] == null
           ? null
           : UserModel.fromJson(json['chairman'] as Map<String, dynamic>),
@@ -41,7 +39,6 @@ Map<String, dynamic> _$$GroupModelImplToJson(_$GroupModelImpl instance) =>
       'shared_liability_fund_amount': instance.sharedLiabilityFundAmount,
       'group_fund_amount': instance.groupFundAmount,
       'social_fund_amount': instance.socialFundAmount,
-      'is_active': instance.isActive,
       'work_area': instance.workArea,
       'chairman': instance.chairman,
       'facilitator': instance.facilitator,

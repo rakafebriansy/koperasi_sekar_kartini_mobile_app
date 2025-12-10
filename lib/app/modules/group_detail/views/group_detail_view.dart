@@ -9,8 +9,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/num/num_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_bottom_sheet.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
@@ -246,25 +246,19 @@ class _GroupInfoCard extends StatelessWidget {
               AppGroupInfoCell(
                 icon: Icon(Icons.person, color: AppColor.bg.primary),
                 field: 'Kas Tanggung Renteng',
-                value: controller.group!.sharedLiabilityFundAmount != null
-                    ? poppins(
-                        controller.group!.sharedLiabilityFundAmount!.toIdr(),
-                      )
-                    : poppins('-'),
+                value: poppins(
+                  controller.group!.sharedLiabilityFundAmount.toIdr(),
+                ),
               ),
               AppGroupInfoCell(
                 icon: Icon(Icons.person, color: AppColor.bg.primary),
                 field: 'Kas Kelompok',
-                value: controller.group!.groupFundAmount != null
-                    ? poppins(controller.group!.groupFundAmount!.toIdr())
-                    : poppins('-'),
+                value: poppins(controller.group!.groupFundAmount.toIdr()),
               ),
               AppGroupInfoCell(
                 icon: Icon(Icons.person, color: AppColor.bg.primary),
                 field: 'Dana Sosial',
-                value: controller.group!.socialFundAmount != null
-                    ? poppins(controller.group!.socialFundAmount!.toIdr())
-                    : poppins('-'),
+                value: poppins(controller.group!.socialFundAmount.toIdr()),
               ),
               AppGroupInfoCell(
                 icon: Icon(Icons.person, color: AppColor.bg.primary),

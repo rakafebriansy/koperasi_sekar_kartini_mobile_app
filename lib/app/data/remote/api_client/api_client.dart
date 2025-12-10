@@ -208,7 +208,7 @@ abstract class ApiClient {
 
   @POST("/groups/{id}")
   Future<dynamic> deleteGroup({
-    @Part(name: "_method") String method = "DELETE",
+    @Field("_method") String method = "DELETE",
 
     @Path('id') required int id,
   });
@@ -282,7 +282,83 @@ abstract class ApiClient {
 
   @POST("/meetings/{id}")
   Future<dynamic> deleteMeeting({
-    @Part(name: "_method") String method = "DELETE",
+    @Field("_method") String method = "DELETE",
+
+    @Path('id') required int id,
+  });
+  
+  // LOAN
+  @GET("/loans")
+  Future<dynamic> getLoans({
+    @Query('search') String? search,
+  });
+
+  @GET("/loans/{id}")
+  Future<dynamic> getLoan({@Path('id') required int id});
+
+  @POST("/loans")
+  Future<dynamic> createLoan({
+    @Field("type") String? type,
+    @Field("nominal") int? nominal,
+    @Field("year") int? year,
+    @Field("month") int? month,
+    @Field("user_id") int? userId,
+  });
+
+  @POST("/loans/{id}")
+  Future<dynamic> updateLoan({
+    @Path('id') required int id,
+
+    @Field("_method") String method = "PUT",
+
+    @Field("type") String? type,
+    @Field("nominal") int? nominal,
+    @Field("year") int? year,
+    @Field("month") int? month,
+    @Field("user_id") int? userId,
+  });
+
+  @POST("/loans/{id}")
+  Future<dynamic> deleteLoan({
+    @Field("_method") String method = "DELETE",
+
+    @Path('id') required int id,
+  });
+  
+  // savings
+  @GET("/savings")
+  Future<dynamic> getSavings({
+    @Query('search') String? search,
+  });
+
+  @GET("/savings/{id}")
+  Future<dynamic> getSingleSavings({@Path('id') required int id});
+
+  @POST("/savings")
+  Future<dynamic> createSavings({
+    @Field("type") String? type,
+    @Field("nominal") int? nominal,
+    @Field("year") int? year,
+    @Field("month") int? month,
+    @Field("user_id") int? userId,
+  });
+
+  @POST("/savings/{id}")
+  Future<dynamic> updateSavings({
+    @Path('id') required int id,
+
+    @Field("_method") String method = "PUT",
+
+    @Field("type") String? type,
+    @Field("nominal") int? nominal,
+    @Field("year") int? year,
+    @Field("month") int? month,
+    @Field("user_id") int? userId,
+  });
+
+  @POST("/savings/{id}")
+  Future<dynamic> deleteSavings({
+    @Field("_method") String method = "DELETE",
 
     @Path('id') required int id,
   });

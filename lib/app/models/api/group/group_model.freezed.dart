@@ -24,15 +24,13 @@ mixin _$GroupModel {
   int get number => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'shared_liability_fund_amount')
-  int? get sharedLiabilityFundAmount => throw _privateConstructorUsedError;
+  int get sharedLiabilityFundAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_fund_amount')
-  int? get groupFundAmount => throw _privateConstructorUsedError;
+  int get groupFundAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'social_fund_amount')
-  int? get socialFundAmount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_active')
-  bool? get isActive => throw _privateConstructorUsedError;
+  int get socialFundAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'work_area')
-  WorkAreaModel? get workArea => throw _privateConstructorUsedError;
+  WorkAreaModel get workArea => throw _privateConstructorUsedError;
   @JsonKey(name: 'chairman')
   UserModel? get chairman => throw _privateConstructorUsedError;
   @JsonKey(name: 'facilitator')
@@ -63,17 +61,16 @@ abstract class $GroupModelCopyWith<$Res> {
       int number,
       String? description,
       @JsonKey(name: 'shared_liability_fund_amount')
-      int? sharedLiabilityFundAmount,
-      @JsonKey(name: 'group_fund_amount') int? groupFundAmount,
-      @JsonKey(name: 'social_fund_amount') int? socialFundAmount,
-      @JsonKey(name: 'is_active') bool? isActive,
-      @JsonKey(name: 'work_area') WorkAreaModel? workArea,
+      int sharedLiabilityFundAmount,
+      @JsonKey(name: 'group_fund_amount') int groupFundAmount,
+      @JsonKey(name: 'social_fund_amount') int socialFundAmount,
+      @JsonKey(name: 'work_area') WorkAreaModel workArea,
       @JsonKey(name: 'chairman') UserModel? chairman,
       @JsonKey(name: 'facilitator') UserModel? facilitator,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
-  $WorkAreaModelCopyWith<$Res>? get workArea;
+  $WorkAreaModelCopyWith<$Res> get workArea;
   $UserModelCopyWith<$Res>? get chairman;
   $UserModelCopyWith<$Res>? get facilitator;
 }
@@ -96,11 +93,10 @@ class _$GroupModelCopyWithImpl<$Res, $Val extends GroupModel>
     Object? id = null,
     Object? number = null,
     Object? description = freezed,
-    Object? sharedLiabilityFundAmount = freezed,
-    Object? groupFundAmount = freezed,
-    Object? socialFundAmount = freezed,
-    Object? isActive = freezed,
-    Object? workArea = freezed,
+    Object? sharedLiabilityFundAmount = null,
+    Object? groupFundAmount = null,
+    Object? socialFundAmount = null,
+    Object? workArea = null,
     Object? chairman = freezed,
     Object? facilitator = freezed,
     Object? createdAt = freezed,
@@ -119,26 +115,22 @@ class _$GroupModelCopyWithImpl<$Res, $Val extends GroupModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      sharedLiabilityFundAmount: freezed == sharedLiabilityFundAmount
+      sharedLiabilityFundAmount: null == sharedLiabilityFundAmount
           ? _value.sharedLiabilityFundAmount
           : sharedLiabilityFundAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      groupFundAmount: freezed == groupFundAmount
+              as int,
+      groupFundAmount: null == groupFundAmount
           ? _value.groupFundAmount
           : groupFundAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      socialFundAmount: freezed == socialFundAmount
+              as int,
+      socialFundAmount: null == socialFundAmount
           ? _value.socialFundAmount
           : socialFundAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      workArea: freezed == workArea
+              as int,
+      workArea: null == workArea
           ? _value.workArea
           : workArea // ignore: cast_nullable_to_non_nullable
-              as WorkAreaModel?,
+              as WorkAreaModel,
       chairman: freezed == chairman
           ? _value.chairman
           : chairman // ignore: cast_nullable_to_non_nullable
@@ -162,12 +154,8 @@ class _$GroupModelCopyWithImpl<$Res, $Val extends GroupModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $WorkAreaModelCopyWith<$Res>? get workArea {
-    if (_value.workArea == null) {
-      return null;
-    }
-
-    return $WorkAreaModelCopyWith<$Res>(_value.workArea!, (value) {
+  $WorkAreaModelCopyWith<$Res> get workArea {
+    return $WorkAreaModelCopyWith<$Res>(_value.workArea, (value) {
       return _then(_value.copyWith(workArea: value) as $Val);
     });
   }
@@ -214,18 +202,17 @@ abstract class _$$GroupModelImplCopyWith<$Res>
       int number,
       String? description,
       @JsonKey(name: 'shared_liability_fund_amount')
-      int? sharedLiabilityFundAmount,
-      @JsonKey(name: 'group_fund_amount') int? groupFundAmount,
-      @JsonKey(name: 'social_fund_amount') int? socialFundAmount,
-      @JsonKey(name: 'is_active') bool? isActive,
-      @JsonKey(name: 'work_area') WorkAreaModel? workArea,
+      int sharedLiabilityFundAmount,
+      @JsonKey(name: 'group_fund_amount') int groupFundAmount,
+      @JsonKey(name: 'social_fund_amount') int socialFundAmount,
+      @JsonKey(name: 'work_area') WorkAreaModel workArea,
       @JsonKey(name: 'chairman') UserModel? chairman,
       @JsonKey(name: 'facilitator') UserModel? facilitator,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   @override
-  $WorkAreaModelCopyWith<$Res>? get workArea;
+  $WorkAreaModelCopyWith<$Res> get workArea;
   @override
   $UserModelCopyWith<$Res>? get chairman;
   @override
@@ -248,11 +235,10 @@ class __$$GroupModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? number = null,
     Object? description = freezed,
-    Object? sharedLiabilityFundAmount = freezed,
-    Object? groupFundAmount = freezed,
-    Object? socialFundAmount = freezed,
-    Object? isActive = freezed,
-    Object? workArea = freezed,
+    Object? sharedLiabilityFundAmount = null,
+    Object? groupFundAmount = null,
+    Object? socialFundAmount = null,
+    Object? workArea = null,
     Object? chairman = freezed,
     Object? facilitator = freezed,
     Object? createdAt = freezed,
@@ -271,26 +257,22 @@ class __$$GroupModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      sharedLiabilityFundAmount: freezed == sharedLiabilityFundAmount
+      sharedLiabilityFundAmount: null == sharedLiabilityFundAmount
           ? _value.sharedLiabilityFundAmount
           : sharedLiabilityFundAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      groupFundAmount: freezed == groupFundAmount
+              as int,
+      groupFundAmount: null == groupFundAmount
           ? _value.groupFundAmount
           : groupFundAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      socialFundAmount: freezed == socialFundAmount
+              as int,
+      socialFundAmount: null == socialFundAmount
           ? _value.socialFundAmount
           : socialFundAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      workArea: freezed == workArea
+              as int,
+      workArea: null == workArea
           ? _value.workArea
           : workArea // ignore: cast_nullable_to_non_nullable
-              as WorkAreaModel?,
+              as WorkAreaModel,
       chairman: freezed == chairman
           ? _value.chairman
           : chairman // ignore: cast_nullable_to_non_nullable
@@ -319,11 +301,10 @@ class _$GroupModelImpl implements _GroupModel {
       required this.number,
       this.description,
       @JsonKey(name: 'shared_liability_fund_amount')
-      this.sharedLiabilityFundAmount,
-      @JsonKey(name: 'group_fund_amount') this.groupFundAmount,
-      @JsonKey(name: 'social_fund_amount') this.socialFundAmount,
-      @JsonKey(name: 'is_active') this.isActive,
-      @JsonKey(name: 'work_area') this.workArea,
+      required this.sharedLiabilityFundAmount,
+      @JsonKey(name: 'group_fund_amount') required this.groupFundAmount,
+      @JsonKey(name: 'social_fund_amount') required this.socialFundAmount,
+      @JsonKey(name: 'work_area') required this.workArea,
       @JsonKey(name: 'chairman') this.chairman,
       @JsonKey(name: 'facilitator') this.facilitator,
       @JsonKey(name: 'created_at') this.createdAt,
@@ -340,19 +321,16 @@ class _$GroupModelImpl implements _GroupModel {
   final String? description;
   @override
   @JsonKey(name: 'shared_liability_fund_amount')
-  final int? sharedLiabilityFundAmount;
+  final int sharedLiabilityFundAmount;
   @override
   @JsonKey(name: 'group_fund_amount')
-  final int? groupFundAmount;
+  final int groupFundAmount;
   @override
   @JsonKey(name: 'social_fund_amount')
-  final int? socialFundAmount;
-  @override
-  @JsonKey(name: 'is_active')
-  final bool? isActive;
+  final int socialFundAmount;
   @override
   @JsonKey(name: 'work_area')
-  final WorkAreaModel? workArea;
+  final WorkAreaModel workArea;
   @override
   @JsonKey(name: 'chairman')
   final UserModel? chairman;
@@ -368,7 +346,7 @@ class _$GroupModelImpl implements _GroupModel {
 
   @override
   String toString() {
-    return 'GroupModel(id: $id, number: $number, description: $description, sharedLiabilityFundAmount: $sharedLiabilityFundAmount, groupFundAmount: $groupFundAmount, socialFundAmount: $socialFundAmount, isActive: $isActive, workArea: $workArea, chairman: $chairman, facilitator: $facilitator, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'GroupModel(id: $id, number: $number, description: $description, sharedLiabilityFundAmount: $sharedLiabilityFundAmount, groupFundAmount: $groupFundAmount, socialFundAmount: $socialFundAmount, workArea: $workArea, chairman: $chairman, facilitator: $facilitator, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -387,8 +365,6 @@ class _$GroupModelImpl implements _GroupModel {
                 other.groupFundAmount == groupFundAmount) &&
             (identical(other.socialFundAmount, socialFundAmount) ||
                 other.socialFundAmount == socialFundAmount) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive) &&
             (identical(other.workArea, workArea) ||
                 other.workArea == workArea) &&
             (identical(other.chairman, chairman) ||
@@ -411,7 +387,6 @@ class _$GroupModelImpl implements _GroupModel {
       sharedLiabilityFundAmount,
       groupFundAmount,
       socialFundAmount,
-      isActive,
       workArea,
       chairman,
       facilitator,
@@ -436,20 +411,19 @@ class _$GroupModelImpl implements _GroupModel {
 
 abstract class _GroupModel implements GroupModel {
   const factory _GroupModel(
-          {required final int id,
-          required final int number,
-          final String? description,
-          @JsonKey(name: 'shared_liability_fund_amount')
-          final int? sharedLiabilityFundAmount,
-          @JsonKey(name: 'group_fund_amount') final int? groupFundAmount,
-          @JsonKey(name: 'social_fund_amount') final int? socialFundAmount,
-          @JsonKey(name: 'is_active') final bool? isActive,
-          @JsonKey(name: 'work_area') final WorkAreaModel? workArea,
-          @JsonKey(name: 'chairman') final UserModel? chairman,
-          @JsonKey(name: 'facilitator') final UserModel? facilitator,
-          @JsonKey(name: 'created_at') final DateTime? createdAt,
-          @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
-      _$GroupModelImpl;
+      {required final int id,
+      required final int number,
+      final String? description,
+      @JsonKey(name: 'shared_liability_fund_amount')
+      required final int sharedLiabilityFundAmount,
+      @JsonKey(name: 'group_fund_amount') required final int groupFundAmount,
+      @JsonKey(name: 'social_fund_amount') required final int socialFundAmount,
+      @JsonKey(name: 'work_area') required final WorkAreaModel workArea,
+      @JsonKey(name: 'chairman') final UserModel? chairman,
+      @JsonKey(name: 'facilitator') final UserModel? facilitator,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at')
+      final DateTime? updatedAt}) = _$GroupModelImpl;
 
   factory _GroupModel.fromJson(Map<String, dynamic> json) =
       _$GroupModelImpl.fromJson;
@@ -462,19 +436,16 @@ abstract class _GroupModel implements GroupModel {
   String? get description;
   @override
   @JsonKey(name: 'shared_liability_fund_amount')
-  int? get sharedLiabilityFundAmount;
+  int get sharedLiabilityFundAmount;
   @override
   @JsonKey(name: 'group_fund_amount')
-  int? get groupFundAmount;
+  int get groupFundAmount;
   @override
   @JsonKey(name: 'social_fund_amount')
-  int? get socialFundAmount;
-  @override
-  @JsonKey(name: 'is_active')
-  bool? get isActive;
+  int get socialFundAmount;
   @override
   @JsonKey(name: 'work_area')
-  WorkAreaModel? get workArea;
+  WorkAreaModel get workArea;
   @override
   @JsonKey(name: 'chairman')
   UserModel? get chairman;

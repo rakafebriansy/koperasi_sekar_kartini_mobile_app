@@ -72,8 +72,6 @@ class ManageGroupController extends GetxController {
   final Rx<int?> _id = Rxn();
   int? get id => _id.value;
 
-  ScrollController scrollController = ScrollController();
-
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
@@ -86,7 +84,6 @@ class ManageGroupController extends GetxController {
       _id.value = group.id;
       descCtrl.text = group.description ?? '';
       numberCtrl.text = group.number.toString();
-      _isActive.value = group.isActive;
       _selectedWorkArea.value = group.workArea;
       _selectedChairman.value = group.chairman;
       _selectedFacilitator.value = group.facilitator;
@@ -102,7 +99,6 @@ class ManageGroupController extends GetxController {
   void dispose() {
     numberCtrl.dispose();
     descCtrl.dispose();
-    scrollController.dispose();
     super.dispose();
   }
 

@@ -25,11 +25,11 @@ mixin _$UserModel {
   @JsonKey(name: 'member_number')
   String? get memberNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'identity_number')
-  String? get identityNumber => throw _privateConstructorUsedError;
+  String get identityNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'birth_date')
-  DateTime? get birthDate => throw _privateConstructorUsedError;
+  DateTime get birthDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'phone_number')
-  String? get phoneNumber => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get occupation => throw _privateConstructorUsedError;
   @JsonKey(name: 'identity_card_photo')
@@ -70,9 +70,9 @@ abstract class $UserModelCopyWith<$Res> {
       {int id,
       String name,
       @JsonKey(name: 'member_number') String? memberNumber,
-      @JsonKey(name: 'identity_number') String? identityNumber,
-      @JsonKey(name: 'birth_date') DateTime? birthDate,
-      @JsonKey(name: 'phone_number') String? phoneNumber,
+      @JsonKey(name: 'identity_number') String identityNumber,
+      @JsonKey(name: 'birth_date') DateTime birthDate,
+      @JsonKey(name: 'phone_number') String phoneNumber,
       String? address,
       String? occupation,
       @JsonKey(name: 'identity_card_photo') String? identityCardPhoto,
@@ -108,9 +108,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = null,
     Object? name = null,
     Object? memberNumber = freezed,
-    Object? identityNumber = freezed,
-    Object? birthDate = freezed,
-    Object? phoneNumber = freezed,
+    Object? identityNumber = null,
+    Object? birthDate = null,
+    Object? phoneNumber = null,
     Object? address = freezed,
     Object? occupation = freezed,
     Object? identityCardPhoto = freezed,
@@ -137,18 +137,18 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.memberNumber
           : memberNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      identityNumber: freezed == identityNumber
+      identityNumber: null == identityNumber
           ? _value.identityNumber
           : identityNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      birthDate: freezed == birthDate
+              as String,
+      birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      phoneNumber: freezed == phoneNumber
+              as DateTime,
+      phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -241,9 +241,9 @@ abstract class _$$UserModelImplCopyWith<$Res>
       {int id,
       String name,
       @JsonKey(name: 'member_number') String? memberNumber,
-      @JsonKey(name: 'identity_number') String? identityNumber,
-      @JsonKey(name: 'birth_date') DateTime? birthDate,
-      @JsonKey(name: 'phone_number') String? phoneNumber,
+      @JsonKey(name: 'identity_number') String identityNumber,
+      @JsonKey(name: 'birth_date') DateTime birthDate,
+      @JsonKey(name: 'phone_number') String phoneNumber,
       String? address,
       String? occupation,
       @JsonKey(name: 'identity_card_photo') String? identityCardPhoto,
@@ -279,9 +279,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? memberNumber = freezed,
-    Object? identityNumber = freezed,
-    Object? birthDate = freezed,
-    Object? phoneNumber = freezed,
+    Object? identityNumber = null,
+    Object? birthDate = null,
+    Object? phoneNumber = null,
     Object? address = freezed,
     Object? occupation = freezed,
     Object? identityCardPhoto = freezed,
@@ -308,18 +308,18 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.memberNumber
           : memberNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      identityNumber: freezed == identityNumber
+      identityNumber: null == identityNumber
           ? _value.identityNumber
           : identityNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      birthDate: freezed == birthDate
+              as String,
+      birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      phoneNumber: freezed == phoneNumber
+              as DateTime,
+      phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -379,9 +379,9 @@ class _$UserModelImpl implements _UserModel {
       {required this.id,
       required this.name,
       @JsonKey(name: 'member_number') this.memberNumber,
-      @JsonKey(name: 'identity_number') this.identityNumber,
-      @JsonKey(name: 'birth_date') this.birthDate,
-      @JsonKey(name: 'phone_number') this.phoneNumber,
+      @JsonKey(name: 'identity_number') required this.identityNumber,
+      @JsonKey(name: 'birth_date') required this.birthDate,
+      @JsonKey(name: 'phone_number') required this.phoneNumber,
       this.address,
       this.occupation,
       @JsonKey(name: 'identity_card_photo') this.identityCardPhoto,
@@ -407,13 +407,13 @@ class _$UserModelImpl implements _UserModel {
   final String? memberNumber;
   @override
   @JsonKey(name: 'identity_number')
-  final String? identityNumber;
+  final String identityNumber;
   @override
   @JsonKey(name: 'birth_date')
-  final DateTime? birthDate;
+  final DateTime birthDate;
   @override
   @JsonKey(name: 'phone_number')
-  final String? phoneNumber;
+  final String phoneNumber;
   @override
   final String? address;
   @override
@@ -531,25 +531,25 @@ class _$UserModelImpl implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-          {required final int id,
-          required final String name,
-          @JsonKey(name: 'member_number') final String? memberNumber,
-          @JsonKey(name: 'identity_number') final String? identityNumber,
-          @JsonKey(name: 'birth_date') final DateTime? birthDate,
-          @JsonKey(name: 'phone_number') final String? phoneNumber,
-          final String? address,
-          final String? occupation,
-          @JsonKey(name: 'identity_card_photo') final String? identityCardPhoto,
-          @JsonKey(name: 'self_photo') final String? selfPhoto,
-          @JsonKey(name: 'member_card_photo') final String? memberCardPhoto,
-          @JsonKey(name: 'email_verified_at') final DateTime? emailVerifiedAt,
-          required final String role,
-          @JsonKey(name: 'is_active') required final bool isActive,
-          @JsonKey(name: 'work_area') final WorkAreaModel? workArea,
-          final GroupModel? group,
-          @JsonKey(name: 'created_at') final DateTime? createdAt,
-          @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
-      _$UserModelImpl;
+      {required final int id,
+      required final String name,
+      @JsonKey(name: 'member_number') final String? memberNumber,
+      @JsonKey(name: 'identity_number') required final String identityNumber,
+      @JsonKey(name: 'birth_date') required final DateTime birthDate,
+      @JsonKey(name: 'phone_number') required final String phoneNumber,
+      final String? address,
+      final String? occupation,
+      @JsonKey(name: 'identity_card_photo') final String? identityCardPhoto,
+      @JsonKey(name: 'self_photo') final String? selfPhoto,
+      @JsonKey(name: 'member_card_photo') final String? memberCardPhoto,
+      @JsonKey(name: 'email_verified_at') final DateTime? emailVerifiedAt,
+      required final String role,
+      @JsonKey(name: 'is_active') required final bool isActive,
+      @JsonKey(name: 'work_area') final WorkAreaModel? workArea,
+      final GroupModel? group,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at')
+      final DateTime? updatedAt}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -563,13 +563,13 @@ abstract class _UserModel implements UserModel {
   String? get memberNumber;
   @override
   @JsonKey(name: 'identity_number')
-  String? get identityNumber;
+  String get identityNumber;
   @override
   @JsonKey(name: 'birth_date')
-  DateTime? get birthDate;
+  DateTime get birthDate;
   @override
   @JsonKey(name: 'phone_number')
-  String? get phoneNumber;
+  String get phoneNumber;
   @override
   String? get address;
   @override

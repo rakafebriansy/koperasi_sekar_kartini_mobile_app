@@ -59,7 +59,6 @@ class EmployeeMainTabsGroupController extends GetxController {
       if (tabIndex == 2) fetchListInactiveMember(search: val);
     }, time: const Duration(milliseconds: 500));
     super.onInit();
-    super.onInit();
   }
 
   void changeSearchText(String text) {

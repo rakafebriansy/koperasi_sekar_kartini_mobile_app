@@ -22,8 +22,7 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) {
 mixin _$EventModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type')
-  String? get type => throw _privateConstructorUsedError;
+  EventType get type => throw _privateConstructorUsedError;
   DateTime get datetime => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
@@ -54,7 +53,7 @@ abstract class $EventModelCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      @JsonKey(name: 'type') String? type,
+      EventType type,
       DateTime datetime,
       String location,
       String? photo,
@@ -85,7 +84,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = freezed,
+    Object? type = null,
     Object? datetime = null,
     Object? location = null,
     Object? photo = freezed,
@@ -104,10 +103,10 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: freezed == type
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as EventType,
       datetime: null == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
@@ -179,7 +178,7 @@ abstract class _$$EventModelImplCopyWith<$Res>
   $Res call(
       {int id,
       String name,
-      @JsonKey(name: 'type') String? type,
+      EventType type,
       DateTime datetime,
       String location,
       String? photo,
@@ -210,7 +209,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = freezed,
+    Object? type = null,
     Object? datetime = null,
     Object? location = null,
     Object? photo = freezed,
@@ -229,10 +228,10 @@ class __$$EventModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: freezed == type
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as EventType,
       datetime: null == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
@@ -275,7 +274,7 @@ class _$EventModelImpl implements _EventModel {
   const _$EventModelImpl(
       {required this.id,
       required this.name,
-      @JsonKey(name: 'type') this.type,
+      required this.type,
       required this.datetime,
       required this.location,
       this.photo,
@@ -293,8 +292,7 @@ class _$EventModelImpl implements _EventModel {
   @override
   final String name;
   @override
-  @JsonKey(name: 'type')
-  final String? type;
+  final EventType type;
   @override
   final DateTime datetime;
   @override
@@ -367,7 +365,7 @@ abstract class _EventModel implements EventModel {
   const factory _EventModel(
           {required final int id,
           required final String name,
-          @JsonKey(name: 'type') final String? type,
+          required final EventType type,
           required final DateTime datetime,
           required final String location,
           final String? photo,
@@ -386,8 +384,7 @@ abstract class _EventModel implements EventModel {
   @override
   String get name;
   @override
-  @JsonKey(name: 'type')
-  String? get type;
+  EventType get type;
   @override
   DateTime get datetime;
   @override

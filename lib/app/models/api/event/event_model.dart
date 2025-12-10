@@ -5,12 +5,23 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model
 part 'event_model.freezed.dart';
 part 'event_model.g.dart';
 
+enum EventType {
+  @JsonValue('group')
+  group('Kelompok'),
+
+  @JsonValue('coop')
+  coop('Koperasi');
+
+  final String displayName;
+  const EventType(this.displayName);
+}
+
 @freezed
 class EventModel with _$EventModel {
   const factory EventModel({
     required int id,
     required String name,
-    @JsonKey(name: 'type') String? type,
+    required EventType type,
     required DateTime datetime,
     required String location,
     String? photo,

@@ -10,7 +10,7 @@ _$EventModelImpl _$$EventModelImplFromJson(Map<String, dynamic> json) =>
     _$EventModelImpl(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      type: json['type'] as String?,
+      type: $enumDecode(_$EventTypeEnumMap, json['type']),
       datetime: DateTime.parse(json['datetime'] as String),
       location: json['location'] as String,
       photo: json['photo'] as String?,
@@ -31,7 +31,7 @@ Map<String, dynamic> _$$EventModelImplToJson(_$EventModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'type': instance.type,
+      'type': _$EventTypeEnumMap[instance.type]!,
       'datetime': instance.datetime.toIso8601String(),
       'location': instance.location,
       'photo': instance.photo,
@@ -41,3 +41,8 @@ Map<String, dynamic> _$$EventModelImplToJson(_$EventModelImpl instance) =>
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
+
+const _$EventTypeEnumMap = {
+  EventType.group: 'group',
+  EventType.coop: 'coop',
+};

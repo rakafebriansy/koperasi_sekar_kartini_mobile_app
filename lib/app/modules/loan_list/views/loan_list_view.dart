@@ -3,18 +3,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/int/int_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/num/num_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 import '../controllers/loan_list_controller.dart';
 
 class LoanListView extends GetView<LoanListController> {
-  const LoanListView();
+  const LoanListView({super.key});
   @override
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
@@ -50,31 +54,43 @@ class LoanListView extends GetView<LoanListController> {
                         placeholder: 'Cari...',
                       ),
                     ),
-                    // Material(
-                    //   borderRadius: BorderRadius.circular(12.sp),
-                    //   color: Colors.white,
-                    //   child: InkWell(
-                    //     borderRadius: BorderRadius.circular(12.sp),
-                    //     onTap: () {},
-                    //     child: Container(
-                    //       decoration: BoxDecoration(
-                    //         border: Border.all(
-                    //           width: 1.sp,
-                    //           color: AppColor.border.lightGray,
-                    //         ),
-                    //         borderRadius: BorderRadius.circular(12.sp),
-                    //       ),
-                    //       padding: EdgeInsets.all(16.sp),
-                    //       child: Center(
-                    //         child: SvgPicture.asset(
-                    //           AppAsset.svgs.calendarPrimary,
-                    //           height: 16.sp,
-                    //           width: 16.sp,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    Material(
+                      borderRadius: BorderRadius.circular(12.sp),
+                      color: Colors.white,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(12.sp),
+                        onTap: () async {
+                          final result = await Get.toNamed(
+                            Routes.MANAGE_LOAN,
+                            arguments: ArgsWrapper(
+                              data: null,
+                              action: ActionType.create,
+                            ),
+                          );
+
+                          if (result == true) {
+                            controller.fetchListLoan();
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.sp,
+                              color: AppColor.border.lightGray,
+                            ),
+                            borderRadius: BorderRadius.circular(12.sp),
+                          ),
+                          padding: EdgeInsets.all(10.sp),
+                          child: Center(
+                            child: Icon(
+                              Icons.add,
+                              size: 28.sp,
+                              color: AppColor.border.gray,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -102,9 +118,31 @@ class LoanListView extends GetView<LoanListController> {
             // ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  spacing: 16.sp,
-                  children: List.generate(6, (context) => _LoanCard()),
+                child: Obx(
+                  () => controller.isFetching
+                      ? SizedBox(
+                          height: getScreenHeight(context, scale: 0.7),
+                          child: Center(child: CircularProgressIndicator()),
+                        )
+                      : controller.loans.isEmpty
+                      ? SizedBox(
+                          height: getScreenHeight(context, scale: 0.6),
+                          child: Center(child: poppins('Tidak ada data')),
+                        )
+                      : Column(
+                          spacing: 16.sp,
+                          children: List.generate(
+                            controller.loans.length,
+                            (index) => Material(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(12.sp),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(12.sp),
+                                child: _LoanCard(loan: controller.loans[index]),
+                              ),
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ),
@@ -116,7 +154,9 @@ class LoanListView extends GetView<LoanListController> {
 }
 
 class _LoanCard extends StatelessWidget {
-  const _LoanCard();
+  const _LoanCard({required this.loan});
+
+  final LoanModel loan;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +182,7 @@ class _LoanCard extends StatelessWidget {
                 padding: EdgeInsets.all(8.sp),
                 child: Icon(Icons.arrow_upward_rounded),
               ),
-              poppins('Pinjaman Biasa', fontWeight: FontWeight.w600),
+              poppins(loan.type.displayName, fontWeight: FontWeight.w600),
             ],
           ),
           Column(
@@ -151,34 +191,37 @@ class _LoanCard extends StatelessWidget {
               _ProfileCell(
                 icon: SvgPicture.asset(AppAsset.svgs.calendarPrimary),
                 field: 'Bulan',
-                value: poppins('Oktober'),
+                value: poppins('${loan.month.toMonthName} ${loan.year}'),
               ),
               _ProfileCell(
                 icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
                 field: 'Total Pinjaman',
                 value: poppins(
-                  300000.toIdr(decimalDigits: 2),
+                  loan.nominal.toIdr(decimalDigits: 2),
                   fontWeight: FontWeight.bold,
                   color: AppColor.bg.primary,
                 ),
               ),
-              _ProfileCell(
-                icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
-                field: 'Sisa Belum Terbayar',
-                value: poppins(
-                  40000.toIdr(),
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.bg.danger,
-                ),
-              ),
+              // _ProfileCell(
+              //   icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
+              //   field: 'Sisa Belum Terbayar',
+              //   value: poppins(
+              //     40000.toIdr(),
+              //     fontWeight: FontWeight.bold,
+              //     color: AppColor.bg.danger,
+              //   ),
+              // ),
             ],
           ),
           Divider(color: AppColor.border.lightGray, height: 1.sp),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _TabFilter(title: 'Belum lunas', isActive: false),
-              poppins('30/10/2019', color: AppColor.text.gray),
+              _TabFilter(title: loan.status.displayName, isActive: false),
+              poppins(
+                loan.updatedAt!.toSlashSeparatedDate(),
+                color: AppColor.text.gray,
+              ),
             ],
           ),
         ],
@@ -218,7 +261,6 @@ class _TabFilter extends StatelessWidget {
 
 class _ProfileCell extends StatelessWidget {
   const _ProfileCell({
-    super.key,
     required this.icon,
     required this.field,
     required this.value,
