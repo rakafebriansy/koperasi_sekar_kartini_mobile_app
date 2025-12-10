@@ -44,6 +44,8 @@ import '../modules/manage_group_member_profile/bindings/manage_group_member_prof
 import '../modules/manage_group_member_profile/views/manage_group_member_profile_view.dart';
 import '../modules/manage_loan/bindings/manage_loan_binding.dart';
 import '../modules/manage_loan/views/manage_loan_view.dart';
+import '../modules/manage_savings/bindings/manage_savings_binding.dart';
+import '../modules/manage_savings/views/manage_savings_view.dart';
 import '../modules/report_detail/bindings/report_detail_binding.dart';
 import '../modules/report_detail/views/report_detail_view.dart';
 import '../modules/report_list/bindings/report_list_binding.dart';
@@ -187,6 +189,11 @@ class AppPages {
       name: _Paths.MANAGE_LOAN,
       page: () => const ManageLoanView(),
       binding: ManageLoanBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_SAVINGS,
+      page: () => const ManageSavingsView(),
+      binding: ManageSavingsBinding(),
     ),
   ];
 }

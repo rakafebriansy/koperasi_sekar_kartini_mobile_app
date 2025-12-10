@@ -21,12 +21,12 @@ SavingsModel _$SavingsModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SavingsModel {
   int get id => throw _privateConstructorUsedError;
-  SavingType get type => throw _privateConstructorUsedError;
+  SavingsType get type => throw _privateConstructorUsedError;
   int get nominal => throw _privateConstructorUsedError;
   int get year => throw _privateConstructorUsedError;
   int get month => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
-  int get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user')
+  UserModel get user => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -50,13 +50,15 @@ abstract class $SavingsModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      SavingType type,
+      SavingsType type,
       int nominal,
       int year,
       int month,
-      @JsonKey(name: 'user_id') int userId,
+      @JsonKey(name: 'user') UserModel user,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
+
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -79,7 +81,7 @@ class _$SavingsModelCopyWithImpl<$Res, $Val extends SavingsModel>
     Object? nominal = null,
     Object? year = null,
     Object? month = null,
-    Object? userId = null,
+    Object? user = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -91,7 +93,7 @@ class _$SavingsModelCopyWithImpl<$Res, $Val extends SavingsModel>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as SavingType,
+              as SavingsType,
       nominal: null == nominal
           ? _value.nominal
           : nominal // ignore: cast_nullable_to_non_nullable
@@ -104,10 +106,10 @@ class _$SavingsModelCopyWithImpl<$Res, $Val extends SavingsModel>
           ? _value.month
           : month // ignore: cast_nullable_to_non_nullable
               as int,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -117,6 +119,16 @@ class _$SavingsModelCopyWithImpl<$Res, $Val extends SavingsModel>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
+  }
+
+  /// Create a copy of SavingsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -130,13 +142,16 @@ abstract class _$$SavingsModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      SavingType type,
+      SavingsType type,
       int nominal,
       int year,
       int month,
-      @JsonKey(name: 'user_id') int userId,
+      @JsonKey(name: 'user') UserModel user,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
+
+  @override
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -157,7 +172,7 @@ class __$$SavingsModelImplCopyWithImpl<$Res>
     Object? nominal = null,
     Object? year = null,
     Object? month = null,
-    Object? userId = null,
+    Object? user = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -169,7 +184,7 @@ class __$$SavingsModelImplCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as SavingType,
+              as SavingsType,
       nominal: null == nominal
           ? _value.nominal
           : nominal // ignore: cast_nullable_to_non_nullable
@@ -182,10 +197,10 @@ class __$$SavingsModelImplCopyWithImpl<$Res>
           ? _value.month
           : month // ignore: cast_nullable_to_non_nullable
               as int,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -207,7 +222,7 @@ class _$SavingsModelImpl extends _SavingsModel {
       required this.nominal,
       required this.year,
       required this.month,
-      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'user') required this.user,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt})
       : super._();
@@ -218,7 +233,7 @@ class _$SavingsModelImpl extends _SavingsModel {
   @override
   final int id;
   @override
-  final SavingType type;
+  final SavingsType type;
   @override
   final int nominal;
   @override
@@ -226,8 +241,8 @@ class _$SavingsModelImpl extends _SavingsModel {
   @override
   final int month;
   @override
-  @JsonKey(name: 'user_id')
-  final int userId;
+  @JsonKey(name: 'user')
+  final UserModel user;
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -237,7 +252,7 @@ class _$SavingsModelImpl extends _SavingsModel {
 
   @override
   String toString() {
-    return 'SavingsModel(id: $id, type: $type, nominal: $nominal, year: $year, month: $month, userId: $userId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'SavingsModel(id: $id, type: $type, nominal: $nominal, year: $year, month: $month, user: $user, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -250,7 +265,7 @@ class _$SavingsModelImpl extends _SavingsModel {
             (identical(other.nominal, nominal) || other.nominal == nominal) &&
             (identical(other.year, year) || other.year == year) &&
             (identical(other.month, month) || other.month == month) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -259,8 +274,8 @@ class _$SavingsModelImpl extends _SavingsModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, type, nominal, year, month,
-      userId, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, type, nominal, year, month, user, createdAt, updatedAt);
 
   /// Create a copy of SavingsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -281,11 +296,11 @@ class _$SavingsModelImpl extends _SavingsModel {
 abstract class _SavingsModel extends SavingsModel {
   const factory _SavingsModel(
           {required final int id,
-          required final SavingType type,
+          required final SavingsType type,
           required final int nominal,
           required final int year,
           required final int month,
-          @JsonKey(name: 'user_id') required final int userId,
+          @JsonKey(name: 'user') required final UserModel user,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$SavingsModelImpl;
@@ -297,7 +312,7 @@ abstract class _SavingsModel extends SavingsModel {
   @override
   int get id;
   @override
-  SavingType get type;
+  SavingsType get type;
   @override
   int get nominal;
   @override
@@ -305,8 +320,8 @@ abstract class _SavingsModel extends SavingsModel {
   @override
   int get month;
   @override
-  @JsonKey(name: 'user_id')
-  int get userId;
+  @JsonKey(name: 'user')
+  UserModel get user;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

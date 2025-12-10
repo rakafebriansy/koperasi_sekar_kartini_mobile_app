@@ -1,9 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 
 part 'savings_model.freezed.dart';
 part 'savings_model.g.dart';
 
-enum SavingType {
+enum SavingsType {
   @JsonValue('simpanan_pokok')
   simpananPokok('Simpanan Pokok'),
 
@@ -32,27 +33,27 @@ enum SavingType {
   simpananRekreasi('Simpanan Rekreasi');
 
   final String displayName;
-  const SavingType(this.displayName);
+  const SavingsType(this.displayName);
 
   String get snakeCase {
     switch (this) {
-      case SavingType.simpananPokok:
+      case SavingsType.simpananPokok:
         return 'simpanan_pokok';
-      case SavingType.simpananWajib:
+      case SavingsType.simpananWajib:
         return 'simpanan_wajib';
-      case SavingType.simpananWajibKhusus:
+      case SavingsType.simpananWajibKhusus:
         return 'simpanan_wajib_khusus';
-      case SavingType.simpananSukarela:
+      case SavingsType.simpananSukarela:
         return 'simpanan_sukarela';
-      case SavingType.simpananBersama:
+      case SavingsType.simpananBersama:
         return 'simpanan_bersama';
-      case SavingType.simpananBerjangka:
+      case SavingsType.simpananBerjangka:
         return 'simpanan_berjangka';
-      case SavingType.simpananHariRaya:
+      case SavingsType.simpananHariRaya:
         return 'simpanan_hari_raya';
-      case SavingType.simpananHariTua:
+      case SavingsType.simpananHariTua:
         return 'simpanan_hari_tua';
-      case SavingType.simpananRekreasi:
+      case SavingsType.simpananRekreasi:
         return 'simpanan_rekreasi';
     }
   }
@@ -64,11 +65,11 @@ class SavingsModel with _$SavingsModel {
 
   const factory SavingsModel({
     required int id,
-    required SavingType type,
+    required SavingsType type,
     required int nominal,
     required int year,
     required int month,
-    @JsonKey(name: 'user_id') required int userId,
+    @JsonKey(name: 'user') required UserModel user,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _SavingsModel;

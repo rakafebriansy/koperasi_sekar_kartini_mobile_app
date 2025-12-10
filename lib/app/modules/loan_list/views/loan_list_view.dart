@@ -38,14 +38,6 @@ class LoanListView extends GetView<LoanListController> {
                   spacing: 10.sp,
                   children: [
                     Expanded(
-                      // child: AppTextFormField(
-                      //   controller: controller.searchCtrl,
-                      //   hintText: 'Cari',
-                      //   prefixIcon: SvgPicture.asset(
-                      //     AppAsset.svgs.searchGray,
-                      //     height: 16.sp,
-                      //   ),
-                      // ),
                       child: AppDateInputField(
                         prefixIcon: SvgPicture.asset(
                           AppAsset.svgs.searchGray,
@@ -57,43 +49,44 @@ class LoanListView extends GetView<LoanListController> {
                         onChanged: (value) => controller.onSearchChanged(value),
                       ),
                     ),
-                    Material(
-                      borderRadius: BorderRadius.circular(12.sp),
-                      color: Colors.white,
-                      child: InkWell(
+                    if (AuthController.find.currentUser!.role != 'group_member')
+                      Material(
                         borderRadius: BorderRadius.circular(12.sp),
-                        onTap: () async {
-                          final result = await Get.toNamed(
-                            Routes.MANAGE_LOAN,
-                            arguments: ArgsWrapper(
-                              data: null,
-                              action: ActionType.create,
-                            ),
-                          );
+                        color: Colors.white,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(12.sp),
+                          onTap: () async {
+                            final result = await Get.toNamed(
+                              Routes.MANAGE_LOAN,
+                              arguments: ArgsWrapper(
+                                data: null,
+                                action: ActionType.create,
+                              ),
+                            );
 
-                          if (result == true) {
-                            controller.fetchListLoan();
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1.sp,
-                              color: AppColor.border.lightGray,
+                            if (result == true) {
+                              controller.fetchListLoan();
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1.sp,
+                                color: AppColor.border.lightGray,
+                              ),
+                              borderRadius: BorderRadius.circular(12.sp),
                             ),
-                            borderRadius: BorderRadius.circular(12.sp),
-                          ),
-                          padding: EdgeInsets.all(10.sp),
-                          child: Center(
-                            child: Icon(
-                              Icons.add,
-                              size: 28.sp,
-                              color: AppColor.border.gray,
+                            padding: EdgeInsets.all(10.sp),
+                            child: Center(
+                              child: Icon(
+                                Icons.add,
+                                size: 28.sp,
+                                color: AppColor.border.gray,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ],
@@ -222,15 +215,6 @@ class _LoanCard extends StatelessWidget {
                   color: AppColor.bg.primary,
                 ),
               ),
-              // _ProfileCell(
-              //   icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
-              //   field: 'Sisa Belum Terbayar',
-              //   value: poppins(
-              //     40000.toIdr(),
-              //     fontWeight: FontWeight.bold,
-              //     color: AppColor.bg.danger,
-              //   ),
-              // ),
             ],
           ),
           Divider(color: AppColor.border.lightGray, height: 1.sp),

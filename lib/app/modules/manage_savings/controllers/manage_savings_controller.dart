@@ -1,23 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
-class ManageLoanController extends GetxController {
+class ManageSavingsController extends GetxController {
   final formKey = GlobalKey<FormState>();
 
   final Rx<ActionType?> _action = Rxn();
   ActionType? get action => _action.value;
 
-  final Rx<LoanModel?> _loan = Rxn();
-  LoanModel? get loan => _loan.value;
+  final Rx<SavingsModel?> _savings = Rxn();
+  SavingsModel? get savings => _savings.value;
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
@@ -36,21 +35,22 @@ class ManageLoanController extends GetxController {
   final Rx<UserModel?> _selectedMember = Rxn();
   UserModel? get selectedMember => _selectedMember.value;
 
-  final Rx<LoanType?> _selectedLoanType = Rxn();
-  LoanType? get selectedLoanType => _selectedLoanType.value;
+  final Rx<SavingsType?> _selectedSavingsType = Rxn();
+  SavingsType? get selectedSavingsType => _selectedSavingsType.value;
 
   final RxList<UserModel> _members = RxList();
   List<UserModel> get members => _members;
 
-  final List<LoanType> loanTypes = [
-    LoanType.pinjamanBiasa,
-    LoanType.pinjamanPengadaanBarang,
-    LoanType.pinjamanBbm,
-    LoanType.pinjamanBahanPokok,
-    LoanType.pinjamanBarangDagangan,
-    LoanType.pinjamanLebaran,
-    LoanType.pinjamanRekreasi,
-    LoanType.pinjamanSpesial,
+  final List<SavingsType> savingsTypes = [
+    SavingsType.simpananBerjangka,
+    SavingsType.simpananBersama,
+    SavingsType.simpananHariRaya,
+    SavingsType.simpananHariTua,
+    SavingsType.simpananPokok,
+    SavingsType.simpananRekreasi,
+    SavingsType.simpananSukarela,
+    SavingsType.simpananWajib,
+    SavingsType.simpananWajibKhusus,
   ];
 
   @override
@@ -59,12 +59,12 @@ class ManageLoanController extends GetxController {
     if (args.action != null) _action.value = args.action;
 
     if (args.data != null) {
-      final loan = args.data as LoanModel;
-      _loan.value = loan;
-      amountCtrl.text = loan.nominal.toString();
-      dateCtrl.text = '${loan.month}/${loan.year}';
-      _selectedMember.value = loan.user;
-      _selectedLoanType.value = loan.type;
+      final savings = args.data as SavingsModel;
+      _savings.value = savings;
+      amountCtrl.text = savings.nominal.toString();
+      dateCtrl.text = '${savings.month}/${savings.year}';
+      _selectedMember.value = savings.user;
+      _selectedSavingsType.value = savings.type;
     }
 
     fetchListGroupMember();
@@ -72,10 +72,10 @@ class ManageLoanController extends GetxController {
     super.onInit();
   }
 
-  void selectLoanType(String? name) {
+  void selectSavingsType(String? name) {
     if (name == null) return;
 
-    _selectedLoanType.value = loanTypes.firstWhere(
+    _selectedSavingsType.value = savingsTypes.firstWhere(
       (item) => item.displayName.toLowerCase() == name.toLowerCase(),
     );
   }
@@ -104,18 +104,18 @@ class ManageLoanController extends GetxController {
     }
   }
 
-  Future<void> createLoan() async {
+  Future<void> createSavings() async {
     _isSubmitted.value = true;
 
     try {
-      if (selectedLoanType == null) throw Exception('loan type is null');
+      if (selectedSavingsType == null) throw Exception('savings type is null');
       if (selectedMember == null) throw Exception('member is null');
 
       final dt = dateCtrl.text.toMonthYearDate();
 
       await ApiHelper.fetchNonReturnable(
-        request: (api) => api.createLoan(
-          type: selectedLoanType!.snakeCase,
+        request: (api) => api.createSavings(
+          type: selectedSavingsType!.snakeCase,
           nominal: int.parse(amountCtrl.text),
           year: dt.year,
           month: dt.month,
@@ -133,39 +133,16 @@ class ManageLoanController extends GetxController {
     }
   }
 
-  Future<void> updateStatus() async {
+  Future<void> deleteSavings() async {
     _isSubmitted.value = true;
 
-    try {
-      if (loan == null) throw Exception('loan is null');
-      if (selectedLoanType == null) throw Exception('loan type is null');
-      if (selectedMember == null) throw Exception('member is null');
-
-      await ApiHelper.fetchNonReturnable(
-        request: (api) =>
-            api.updateLoan(id: loan!.id, status: LoanStatus.paid.name),
-      );
-
-      Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil memperbarui pinjaman!');
-    } catch (e) {
-      debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
-    } finally {
-      _isSubmitted.value = false;
-    }
-  }
-
-  Future<void> deleteLoan() async {
-    _isSubmitted.value = true;
-
-    if (loan == null) {
-      throw Exception('loan is null');
+    if (savings == null) {
+      throw Exception('savings is null');
     }
 
     try {
       await ApiHelper.fetchNonReturnable(
-        request: (api) => api.deleteLoan(id: loan!.id),
+        request: (api) => api.deleteSavings(id: savings!.id),
       );
 
       Get.back(result: true);
@@ -175,17 +152,6 @@ class ManageLoanController extends GetxController {
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
       _isSubmitted.value = false;
-    }
-  }
-
-  Future<void> submitButton() async {
-    if (formKey.currentState!.validate()) {
-      if (action != null) {
-        if (action!.isCreateAction) {
-          createLoan();
-        }
-        if (action!.isUpdateAction) updateStatus();
-      }
     }
   }
 }
