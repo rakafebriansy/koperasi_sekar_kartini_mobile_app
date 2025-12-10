@@ -14,6 +14,7 @@ class AppDateInputField extends StatefulWidget {
     this.label,
     this.prefixIcon,
     this.enabled,
+    this.onChanged,
     this.type = 'date',
   });
   final TextEditingController controller;
@@ -21,6 +22,7 @@ class AppDateInputField extends StatefulWidget {
   final String? label;
   final Widget? prefixIcon;
   final bool? enabled;
+  final Function(String)? onChanged;
   final String type;
 
   _AppDateInputFieldState createState() => _AppDateInputFieldState();
@@ -41,6 +43,8 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
       setState(() {
         selectedDate = picked;
         widget.controller.text = DateFormat('dd/MM/yyyy').format(picked);
+
+        widget.onChanged?.call(widget.controller.text);
       });
     }
   }
@@ -93,6 +97,7 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
                                 widget.controller.text =
                                     "${NumberFormat('00').format(month)}/$selectedYear";
                               });
+                              widget.onChanged?.call(widget.controller.text);
                               Navigator.pop(context);
                             },
                             child: Container(

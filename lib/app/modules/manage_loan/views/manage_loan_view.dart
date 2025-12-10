@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
@@ -114,12 +115,13 @@ class ManageLoanView extends GetView<ManageLoanController> {
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
-                SizedBox(height: 4.sp,),
+                SizedBox(height: 4.sp),
                 Obx(
                   () => DropdownSearch<String>(
                     onChanged: (value) => controller.selectLoanType(value),
                     selectedItem:
-                        controller.selectedLoanType?.displayName ?? 'Pilih Jenis Pinjaman',
+                        controller.selectedLoanType?.displayName ??
+                        'Pilih Jenis Pinjaman',
                     items: (filter, infiniteScrollProps) =>
                         controller.loanTypes.names,
                     decoratorProps: DropDownDecoratorProps(
@@ -133,16 +135,17 @@ class ManageLoanView extends GetView<ManageLoanController> {
                     popupProps: PopupProps.menu(
                       fit: FlexFit.loose,
                       constraints: BoxConstraints(maxHeight: 200.sp),
-                      itemBuilder: (context, item, isSelected, onTap) => InkWell(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12.sp,
-                            vertical: 12.sp,
+                      itemBuilder: (context, item, isSelected, onTap) =>
+                          InkWell(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12.sp,
+                                vertical: 12.sp,
+                              ),
+                              child: poppins(item, fontSize: 14.sp),
+                            ),
                           ),
-                          child: poppins(item, fontSize: 14.sp),
-                        ),
-                      ),
                     ),
                   ),
                 ),
@@ -152,7 +155,7 @@ class ManageLoanView extends GetView<ManageLoanController> {
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
-                SizedBox(height: 4.sp,),
+                SizedBox(height: 4.sp),
                 Obx(
                   () => DropdownSearch<String>(
                     enabled: !controller.isFetchingMember,
@@ -172,25 +175,22 @@ class ManageLoanView extends GetView<ManageLoanController> {
                     popupProps: PopupProps.menu(
                       fit: FlexFit.loose,
                       constraints: BoxConstraints(maxHeight: 200.sp),
-                      itemBuilder: (context, item, isSelected, onTap) => InkWell(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12.sp,
-                            vertical: 12.sp,
+                      itemBuilder: (context, item, isSelected, onTap) =>
+                          InkWell(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12.sp,
+                                vertical: 12.sp,
+                              ),
+                              child: poppins(item, fontSize: 14.sp),
+                            ),
                           ),
-                          child: poppins(item, fontSize: 14.sp),
-                        ),
-                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: 8.sp),
-                poppins(
-                  'Bulan',
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                poppins('Bulan', fontSize: 14.sp, fontWeight: FontWeight.w600),
                 AppDateInputField(
                   controller: controller.dateCtrl,
                   placeholder: 'Masukkan bulan',
@@ -209,16 +209,21 @@ class ManageLoanView extends GetView<ManageLoanController> {
                 ),
 
                 SizedBox(height: 18.sp),
-                SizedBox(
-                  width: double.infinity,
-                  child: AppFilledButton(
-                    label: 'Simpan',
-                    onTap: controller.isFetchingMember || controller.isSubmitted
-                        ? null
-                        : controller.submitButton,
+                if (!(controller.loan != null &&
+                    controller.loan!.status == LoanStatus.paid))
+                  SizedBox(
                     width: double.infinity,
+                    child: AppFilledButton(
+                      label: controller.action!.isUpdateAction
+                          ? 'Tandai Dibayar'
+                          : 'Simpan',
+                      onTap:
+                          controller.isFetchingMember || controller.isSubmitted
+                          ? null
+                          : controller.submitButton,
+                      width: double.infinity,
+                    ),
                   ),
-                ),
                 SizedBox(height: 12.sp),
               ],
             ),

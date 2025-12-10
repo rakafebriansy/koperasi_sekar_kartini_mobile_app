@@ -7,7 +7,7 @@ extension DateTimeExtension on DateTime {
   }
 
   String toSlashSeparatedDate() {
-    final formatter = DateFormat('dd/mm/yyyy', 'id_ID');
+    final formatter = DateFormat('dd/MM/yyyy', 'id_ID');
     return formatter.format(this);
   }
 

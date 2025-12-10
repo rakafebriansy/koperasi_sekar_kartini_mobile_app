@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
@@ -52,6 +53,8 @@ class LoanListView extends GetView<LoanListController> {
                         ),
                         controller: controller.searchCtrl,
                         placeholder: 'Cari...',
+                        type: 'month-year',
+                        onChanged: (value) => controller.onSearchChanged(value),
                       ),
                     ),
                     Material(
@@ -137,6 +140,23 @@ class LoanListView extends GetView<LoanListController> {
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(12.sp),
                               child: InkWell(
+                                onTap:
+                                    AuthController.find.currentUser!.role ==
+                                        'group_member'
+                                    ? null
+                                    : () async {
+                                        final result = await Get.toNamed(
+                                          Routes.MANAGE_LOAN,
+                                          arguments: ArgsWrapper(
+                                            data: controller.loans[index],
+                                            action: ActionType.update,
+                                          ),
+                                        );
+
+                                        if (result == true) {
+                                          controller.fetchListLoan();
+                                        }
+                                      },
                                 borderRadius: BorderRadius.circular(12.sp),
                                 child: _LoanCard(loan: controller.loans[index]),
                               ),

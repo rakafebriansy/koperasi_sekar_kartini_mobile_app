@@ -311,6 +311,7 @@ abstract class ApiClient {
 
     @Field("_method") String method = "PUT",
 
+    @Field("status") String? status,
     @Field("type") String? type,
     @Field("nominal") int? nominal,
     @Field("year") int? year,

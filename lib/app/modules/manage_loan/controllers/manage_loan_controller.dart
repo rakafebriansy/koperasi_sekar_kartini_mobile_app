@@ -16,8 +16,8 @@ class ManageLoanController extends GetxController {
   final Rx<ActionType?> _action = Rxn();
   ActionType? get action => _action.value;
 
-  final Rx<int?> _id = Rxn();
-  int? get id => _id.value;
+  final Rx<LoanModel?> _loan = Rxn();
+  LoanModel? get loan => _loan.value;
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
@@ -56,13 +56,15 @@ class ManageLoanController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
-    if (args.action == null) throw Exception('action is null');
-
     _action.value = args.action;
 
-    if (args.action!.isUpdateAction) {
-      final group = args.data as LoanModel;
-      _id.value = group.id;
+    if (args.data != null) {
+      final loan = args.data as LoanModel;
+      _loan.value = loan;
+      amountCtrl.text = loan.nominal.toString();
+      dateCtrl.text = '${loan.month}/${loan.year}';
+      _selectedMember.value = loan.user;
+      _selectedLoanType.value = loan.type;
     }
 
     fetchListGroupMember();
@@ -117,7 +119,7 @@ class ManageLoanController extends GetxController {
           nominal: int.parse(amountCtrl.text),
           year: dt.year,
           month: dt.month,
-          userId: selectedMember!.id
+          userId: selectedMember!.id,
         ),
       );
 
@@ -131,25 +133,17 @@ class ManageLoanController extends GetxController {
     }
   }
 
-  Future<void> updateLoan() async {
+  Future<void> updateStatus() async {
     _isSubmitted.value = true;
 
     try {
-      if (id == null) throw Exception('id is null');
+      if (loan == null) throw Exception('loan is null');
       if (selectedLoanType == null) throw Exception('loan type is null');
       if (selectedMember == null) throw Exception('member is null');
 
-      final dt = dateCtrl.text.toMonthYearDate();
-
       await ApiHelper.fetchNonReturnable(
-        request: (api) => api.updateLoan(
-          id: id!,
-          type: selectedLoanType!.snakeCase,
-          nominal: int.parse(amountCtrl.text),
-          year: dt.year,
-          month: dt.month,
-          userId: selectedMember!.id
-        ),
+        request: (api) =>
+            api.updateLoan(id: loan!.id, status: LoanStatus.paid.name),
       );
 
       Get.back(result: true);
@@ -165,13 +159,13 @@ class ManageLoanController extends GetxController {
   Future<void> deleteLoan() async {
     _isSubmitted.value = true;
 
-    if (id == null) {
-      throw Exception('id is null');
+    if (loan == null) {
+      throw Exception('loan is null');
     }
 
     try {
       await ApiHelper.fetchNonReturnable(
-        request: (api) => api.deleteLoan(id: id!),
+        request: (api) => api.deleteLoan(id: loan!.id),
       );
 
       Get.back(result: true);
@@ -191,7 +185,7 @@ class ManageLoanController extends GetxController {
           if (action!.isCreateAction) {
             createLoan();
           }
-          if (action!.isUpdateAction) updateLoan();
+          if (action!.isUpdateAction) updateStatus();
         }
       } catch (e) {
         ErrorHelper.handleError(e);

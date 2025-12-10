@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
@@ -16,10 +18,21 @@ class LoanListController extends GetxController {
   final RxList<LoanModel> _loans = RxList();
   List<LoanModel> get loans => _loans;
 
+  Timer? _debounce;
+
   @override
   void onInit() {
     super.onInit();
     fetchListLoan();
+  }
+
+  void onSearchChanged(String value) {
+    print('object');
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(seconds: 1), () {
+      fetchListLoan(search: value);
+    });
   }
 
   Future<void> fetchListLoan({String? search}) async {

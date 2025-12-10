@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://172.20.10.4:8000';
+    baseUrl ??= 'http://192.168.1.3:8000';
   }
 
   final Dio _dio;
@@ -1466,6 +1466,7 @@ class _ApiClient implements ApiClient {
   Future<dynamic> updateLoan({
     required int id,
     String method = "PUT",
+    String? status,
     String? type,
     int? nominal,
     int? year,
@@ -1478,6 +1479,7 @@ class _ApiClient implements ApiClient {
     final _headers = <String, dynamic>{};
     final _data = {
       '_method': method,
+      'status': status,
       'type': type,
       'nominal': nominal,
       'year': year,
