@@ -1,3 +1,4 @@
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group_report/group_report_model.dart';
 
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
@@ -384,6 +385,48 @@ class DummyHelper {
       combinedScorePercentage: 75,
       criteria: 4,
       group: groups[5],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
+
+  static final List<EventModel> dummyEvents = [
+    EventModel(
+      id: 1,
+      name: 'Rapat Kelompok A',
+      type: EventType.group,
+      datetime: DateTime(2025, 12, 15, 10, 0),
+      location: 'Ruang A',
+      photo: null,
+      description: 'Rapat rutin anggota kelompok A',
+      group: groups[0],
+      user: users[0],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    EventModel(
+      id: 2,
+      name: 'Rapat Koperasi',
+      type: EventType.coop,
+      datetime: DateTime(2025, 12, 16, 14, 0),
+      location: 'Kantor Koperasi',
+      photo: null,
+      description: 'Rapat tahunan koperasi',
+      group: null,
+      user: users[0],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    EventModel(
+      id: 3,
+      name: 'Pelatihan Anggota',
+      type: EventType.group,
+      datetime: DateTime(2025, 12, 20, 9, 0),
+      location: 'Ruang Pelatihan',
+      photo: null,
+      description: 'Pelatihan untuk anggota baru',
+      group: groups[0],
+      user: users[0],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),

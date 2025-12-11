@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
@@ -10,7 +11,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/num/num_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
@@ -24,131 +24,151 @@ class GroupMemberMainTabsGroupView
   Widget build(BuildContext context) {
     return AppHomeWrapper(
       withPadding: false,
-      child: SingleChildScrollView(
-        child: Column(
-          spacing: 16.sp,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 8.sp),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 12.sp,
-              children: [
-                _RoundIconButton(
-                  Icon(Icons.api_rounded, color: AppColor.bg.primary),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColor.bg.primary,
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  padding: EdgeInsets.all(12.sp),
-                  child: Row(
-                    spacing: 12.sp,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 40.sp,
-                        height: 40.sp,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(999),
+      child: Obx(
+        () => AuthController.find.currentUser!.groupId == null
+            ? SizedBox(
+                height: getScreenHeight(context, scale: 0.8),
+                child: Center(child: poppins('Tidak tergabung kelompok.')),
+              )
+            : controller.isLoading
+            ? SizedBox(
+                height: getScreenHeight(context, scale: 0.8),
+                child: Center(child: CircularProgressIndicator()),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  spacing: 16.sp,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 8.sp),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 12.sp,
+                      children: [
+                        _RoundIconButton(
+                          Icon(Icons.api_rounded, color: AppColor.bg.primary),
                         ),
-                        child: Center(
-                          child: poppins(
-                            '1',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.sp,
+                        Container(
+                          decoration: BoxDecoration(
+                            color: AppColor.bg.primary,
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          padding: EdgeInsets.all(12.sp),
+                          child: Row(
+                            spacing: 12.sp,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 40.sp,
+                                height: 40.sp,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                                child: Center(
+                                  child: poppins(
+                                    controller.group!.number.toString(),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.sp,
+                                  ),
+                                ),
+                              ),
+                              poppins(
+                                'Kelompok ${controller.group!.number.toString()}',
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp,
+                              ),
+                              SizedBox(width: 4.sp),
+                            ],
                           ),
                         ),
-                      ),
-                      poppins(
-                        'Kelompok 1',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.sp,
-                      ),
-                      SizedBox(width: 4.sp),
-                    ],
-                  ),
-                ),
-                _RoundIconButton(
-                  // SvgPicture.asset(
-                  //   AppAsset.svgs.editPrimary,
-                  //   width: 16.sp,
-                  //   height: 16.sp,
-                  // ),
-                  Icon(Icons.api_rounded, color: AppColor.bg.primary),
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(16.sp, 6.sp, 16.sp, 0),
-              child: Row(
-                spacing: 12.sp,
-                children: [
-                  Expanded(
-                    child: _InfoCard(
-                      title: 'Kas Tanggung Renteng',
-                      amount: 72_000,
+                        _RoundIconButton(
+                          Icon(Icons.api_rounded, color: AppColor.bg.primary),
+                        ),
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    child: _InfoCard(title: 'Kas Kelompok', amount: 12_000),
-                  ),
-                  Expanded(
-                    child: _InfoCard(title: 'Dana Sosial', amount: 42_000),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.sp),
-              width: getScreenWidth(context, scale: 0.88),
-              child: poppins(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  poppins(
-                    'Anggota',
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  AppFilledButton(
-                    height: 32.sp,
-                    label: 'Cek Rapor',
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    borderRadiusSize: 6.sp,
-                    onTap: () {
-                      Get.toNamed(Routes.REPORT_DETAIL);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: AppTextFormField(
-                controller: controller.searchCtrl,
-                hintText: 'Cari',
-                prefixIcon: SvgPicture.asset(
-                  AppAsset.svgs.searchGray,
-                  height: 16.sp,
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(16.sp, 6.sp, 16.sp, 0),
+                      child: Row(
+                        spacing: 12.sp,
+                        children: [
+                          Expanded(
+                            child: _InfoCard(
+                              title: 'Kas Tanggung Renteng',
+                              amount:
+                                  controller.group!.sharedLiabilityFundAmount,
+                            ),
+                          ),
+                          Expanded(
+                            child: _InfoCard(
+                              title: 'Kas Kelompok',
+                              amount: controller.group!.groupFundAmount,
+                            ),
+                          ),
+                          Expanded(
+                            child: _InfoCard(
+                              title: 'Dana Sosial',
+                              amount: controller.group!.socialFundAmount,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                      width: getScreenWidth(context, scale: 0.88),
+                      child: poppins(
+                        controller.group!.description ?? '',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          poppins(
+                            'Anggota',
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          AppFilledButton(
+                            height: 32.sp,
+                            label: 'Cek Rapor',
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            borderRadiusSize: 6.sp,
+                            onTap: () {
+                              Get.toNamed(Routes.REPORT_DETAIL);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                      child: AppTextFormField(
+                        controller: controller.searchCtrl,
+                        hintText: 'Cari',
+                        prefixIcon: SvgPicture.asset(
+                          AppAsset.svgs.searchGray,
+                          height: 16.sp,
+                        ),
+                      ),
+                    ),
+                    controller.groupMembers.isEmpty
+                        ? SizedBox(
+                            height: getScreenHeight(context, scale: 0.28),
+                            child: Center(child: poppins('Tidak ada data')),
+                          )
+                        : _GroupedMemberListView(
+                            groupedMembers:
+                                controller.groupMembers.groupedByFirstLetter,
+                          ),
+                  ],
                 ),
               ),
-            ),
-            _GroupedMemberListView(
-              groupedMembers: DummyHelper.users.groupedByFirstLetter,
-            ),
-          ],
-        ),
       ),
     );
   }

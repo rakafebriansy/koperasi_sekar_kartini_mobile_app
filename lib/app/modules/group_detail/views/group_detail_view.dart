@@ -92,8 +92,21 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                     ],
                                   ),
                                 ),
-                                _GroupedGroupMemberListView(
-                                  controller: controller,
+                                Obx(
+                                  () => controller.groupMembers.isNotEmpty
+                                      ? _GroupedGroupMemberListView(
+                                          controller: controller,
+                                        )
+                                      : SizedBox(
+                                          height: getScreenHeight(
+                                            context,
+                                            scale: 0.54,
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: poppins('Tidak ada data.'),
+                                          ),
+                                        ),
                                 ),
                               ],
                             ),
@@ -564,116 +577,98 @@ class _GroupedGroupMemberListView extends StatelessWidget {
     final groupedMembers = controller.groupMembers.groupedByFirstLetter;
     final letters = groupedMembers.keys.toList()..sort();
 
-    return groupedMembers.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(letters.length, (index) {
-              final letter = letters[index];
-              final members = groupedMembers[letter]!;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: List.generate(letters.length, (index) {
+        final letter = letters[index];
+        final members = groupedMembers[letter]!;
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(color: AppColor.bg.lightGray),
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 18.sp,
-                      vertical: 4.sp,
-                    ),
-                    child: poppins(
-                      letter,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColor.text.gray,
-                    ),
-                  ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(color: AppColor.bg.lightGray),
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 18.sp, vertical: 4.sp),
+              child: poppins(
+                letter,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColor.text.gray,
+              ),
+            ),
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.sp,
-                      vertical: 8.sp,
-                    ),
-                    child: Column(
-                      children: List.generate(members.length, (idx) {
-                        final m = members[idx];
-                        return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4.sp),
-                          child: Material(
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+              child: Column(
+                children: List.generate(members.length, (idx) {
+                  final m = members[idx];
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4.sp),
+                    child: Material(
+                      borderRadius: BorderRadius.circular(14.sp),
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(14.sp),
+                        onTap: () async {
+                          final result = await Get.toNamed(
+                            Routes.MANAGE_GROUP_MEMBER_PROFILE,
+                            arguments: ArgsWrapper(
+                              data: m,
+                              action: ActionType.update,
+                            ),
+                          );
+
+                          if (result == true) {
+                            controller.fetchListGroupMember(controller.id!);
+                            controller.fetchUnlistedMembers(
+                              controller.group!.id,
+                            );
+                          }
+                        },
+                        child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 8.sp,
+                            vertical: 1.sp,
+                          ),
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14.sp),
-                            color: Colors.transparent,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(14.sp),
-                              onTap: () async {
-                                final result = await Get.toNamed(
-                                  Routes.MANAGE_GROUP_MEMBER_PROFILE,
-                                  arguments: ArgsWrapper(
-                                    data: m,
-                                    action: ActionType.update,
-                                  ),
-                                );
-
-                                if (result == true) {
-                                  controller.fetchListGroupMember(
-                                    controller.id!,
-                                  );
-                                  controller.fetchUnlistedMembers(
-                                    controller.group!.id,
-                                  );
-                                }
-                              },
-                              child: ListTile(
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 8.sp,
-                                  vertical: 1.sp,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(14.sp),
-                                  side: BorderSide(
-                                    width: 1.sp,
-                                    color: AppColor.bg.gray,
-                                  ),
-                                ),
-                                leading: CircleAvatar(child: Text(m.name[0])),
-                                title: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  spacing: 8.sp,
-                                  children: [
-                                    Text(m.name),
-                                    Icon(
-                                      Icons.circle,
-                                      color: m.isActive
-                                          ? Colors.green
-                                          : Colors.red,
-                                      size: 8.sp,
-                                    ),
-                                  ],
-                                ),
-                                subtitle: Text('#${m.id}'),
-                                trailing: Container(
-                                  padding: EdgeInsets.all(3.sp),
-                                  child: Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: AppColor.border.darkGray,
-                                  ),
-                                ),
-                              ),
+                            side: BorderSide(
+                              width: 1.sp,
+                              color: AppColor.bg.gray,
                             ),
                           ),
-                        );
-                      }),
+                          leading: CircleAvatar(child: Text(m.name[0])),
+                          title: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            spacing: 8.sp,
+                            children: [
+                              Text(m.name),
+                              Icon(
+                                Icons.circle,
+                                color: m.isActive ? Colors.green : Colors.red,
+                                size: 8.sp,
+                              ),
+                            ],
+                          ),
+                          subtitle: Text('#${m.id}'),
+                          trailing: Container(
+                            padding: EdgeInsets.all(3.sp),
+                            child: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: AppColor.border.darkGray,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }),
-          )
-        : SizedBox(
-            height: getScreenHeight(context, scale: 0.54),
-            child: Align(
-              alignment: Alignment.center,
-              child: poppins('Tidak ada data.'),
+                  );
+                }),
+              ),
             ),
-          );
+          ],
+        );
+      }),
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
@@ -60,7 +61,9 @@ class GroupMemberMainTabsHomeController extends GetxController {
 
       _countLoan.value = data;
     } catch (e) {
-      rethrow;
+      if (e is DioException) {
+        if (e.response?.statusCode == 404) return;
+      }
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingLoan.value = false;
@@ -80,8 +83,9 @@ class GroupMemberMainTabsHomeController extends GetxController {
 
       _countSavings.value = data;
     } catch (e) {
-      rethrow;
-
+      if (e is DioException) {
+        if (e.response?.statusCode == 404) return;
+      }
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingSavings.value = false;
