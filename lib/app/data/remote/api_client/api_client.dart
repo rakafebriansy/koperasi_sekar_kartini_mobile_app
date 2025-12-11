@@ -247,6 +247,9 @@ abstract class ApiClient {
     @Query('limit') int? limit,
   });
 
+  @GET("/meetings/upcoming")
+  Future<dynamic> getUpcomingMeeting();
+
   @GET("/meetings/{id}")
   Future<dynamic> getMeeting({@Path('id') required int id});
 

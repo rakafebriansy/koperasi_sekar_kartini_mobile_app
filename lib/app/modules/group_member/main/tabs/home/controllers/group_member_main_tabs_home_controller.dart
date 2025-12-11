@@ -8,13 +8,16 @@ class GroupMemberMainTabsHomeController extends GetxController {
   final RxBool _isFetchingEvents = false.obs;
   bool get isFetchingEvents => _isFetchingEvents.value;
 
-  bool get isLoading => isFetchingEvents;
+  bool get isLoading => isFetchingEvents || isFetchingUpcomingEvents;
 
   final RxBool _isFetchingLoan = false.obs;
   bool get isFetchingLoan => _isFetchingLoan.value;
 
   final RxBool _isFetchingSavings = false.obs;
   bool get isFetchingSavings => _isFetchingSavings.value;
+
+  final RxBool _isFetchingUpcomingEvents = false.obs;
+  bool get isFetchingUpcomingEvents => _isFetchingUpcomingEvents.value;
 
   final RxList<EventModel> _events = RxList();
   List<EventModel> get events => _events;
@@ -25,9 +28,13 @@ class GroupMemberMainTabsHomeController extends GetxController {
   final RxInt _countSavings = RxInt(0);
   int get countSavings => _countSavings.value;
 
+  final RxList<EventModel> _upcomingEvents = RxList();
+  List<EventModel> get upcomingEvents => _upcomingEvents;
+
   @override
   void onInit() {
     fetchListEvent();
+    fetchUpcomingEvents();
     fetchLoanSumByMonth();
     fetchSavingsSumByMonth();
     super.onInit();
@@ -89,6 +96,22 @@ class GroupMemberMainTabsHomeController extends GetxController {
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingSavings.value = false;
+    }
+  }
+
+  Future<void> fetchUpcomingEvents() async {
+    _isFetchingUpcomingEvents.value = true;
+
+    try {
+      final List<EventModel> data = await ApiHelper.fetchList<EventModel>(
+        request: (api) => api.getUpcomingMeeting(),
+      );
+
+      _upcomingEvents.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingUpcomingEvents.value = false;
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
@@ -52,29 +53,24 @@ class GroupMemberMainTabsHomeView
             Align(
               alignment: Alignment.centerLeft,
               child: poppins(
-                'Notifikasi',
-                fontSize: 20.sp,
+                'Pemberitahuan',
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 10.sp,
-              children: [
-                AppNotificationBar(
-                  message: 'Anda terlambat 3 hari dalam membayar kas!',
-                  dateTime: DateTime.now(),
-                  type: NotificationBarType.danger,
-                  onTap: () {},
-                ),
-                AppNotificationBar(
-                  message:
-                      'Reminder : 1 hari  menuju Pertemuan Rutin bulan Oktober 2025',
-                  dateTime: DateTime.now(),
-                  type: NotificationBarType.info,
-                  onTap: () {},
-                ),
-              ],
+            Obx(
+              () => controller.events.isEmpty
+                  ? SizedBox(
+                      height: 42.sp,
+                      child: Center(child: poppins('Tidak ada Pemberitahuan')),
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: 10.sp,
+                      children: controller.events
+                          .map((event) => _buildUpcomingEventBar(event))
+                          .toList(),
+                    ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -183,6 +179,19 @@ class GroupMemberMainTabsHomeView
       ),
     );
   }
+
+  AppNotificationBar _buildUpcomingEventBar(EventModel event) {
+    final delta = event.datetime.difference(DateTime.now());
+
+    return AppNotificationBar(
+      message: 'Reminder: ${delta.inHours} jam menuju ${event.name}!',
+      dateTime: DateTime.now(),
+      type: NotificationBarType.info,
+      onTap: () {
+        //
+      },
+    );
+  }
 }
 
 class _InfoCard extends StatelessWidget {
@@ -190,13 +199,11 @@ class _InfoCard extends StatelessWidget {
     required this.title,
     required this.amount,
     required this.route,
-    this.navigationCallback,
   });
 
   final String title;
   final int amount;
   final String route;
-  final Function? navigationCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -235,7 +242,6 @@ class _InfoCard extends StatelessWidget {
             label: 'Lihat Detail',
             onTap: () async {
               await Get.toNamed(route);
-              if (navigationCallback != null) navigationCallback!();
             },
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,

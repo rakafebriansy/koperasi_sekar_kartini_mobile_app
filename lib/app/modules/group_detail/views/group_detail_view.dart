@@ -247,7 +247,7 @@ class _GroupInfoCard extends StatelessWidget {
               ),
               SizedBox(height: 2.sp),
               poppins(
-                controller.group!.workArea!.name,
+                controller.group!.workArea.name,
                 color: AppColor.text.gray,
               ),
             ],
