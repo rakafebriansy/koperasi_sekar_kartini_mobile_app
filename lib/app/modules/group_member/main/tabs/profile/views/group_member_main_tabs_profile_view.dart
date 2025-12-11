@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
@@ -43,20 +44,23 @@ class GroupMemberMainTabsProfileView
                         children: [
                           CircleAvatar(
                             radius: 44.sp,
-                            child: poppins(user == null ? '-' : 
-                              user.name[0],
+                            child: poppins(
+                              user == null ? '-' : user.name[0],
                               fontSize: 40.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(height: 6.sp),
-                          poppins(user == null ? '-' : 
-                            user.name,
+                          poppins(
+                            user == null ? '-' : user.name,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                           ),
                           SizedBox(height: 2.sp),
-                          poppins(user == null ? '-' : user.role, color: AppColor.text.gray),
+                          poppins(
+                            user == null ? '-' : user.role,
+                            color: AppColor.text.gray,
+                          ),
                         ],
                       ),
                       Column(
@@ -108,42 +112,6 @@ class GroupMemberMainTabsProfileView
                 ),
               );
             }),
-            // Column(
-            //   mainAxisSize: MainAxisSize.min,
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: [
-            //     poppins('Keanggotaan', fontSize: 16.sp),
-            //     SizedBox(height: 8.sp),
-            //     Container(
-            //       width: double.infinity,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(14.sp),
-            //         border: Border.all(width: 1.sp, color: AppColor.bg.gray),
-            //       ),
-            //       child: ClipRRect(
-            //         borderRadius: BorderRadius.circular(14.sp),
-            //         child: Column(
-            //           mainAxisSize: MainAxisSize.min,
-            //           children: [
-            //             _AppSettingMenuItem(
-            //               label: 'Sisa Hasil Usaha',
-            //               iconPath: AppAsset.svgs.dollarCoinLightGray,
-            //             ),
-            //             Divider(
-            //               height: 1.sp,
-            //               thickness: 1.sp,
-            //               color: AppColor.bg.gray,
-            //             ),
-            //             _AppSettingMenuItem(
-            //               label: 'Ubah Profil',
-            //               iconPath: AppAsset.svgs.userPrimary,
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,6 +141,9 @@ class GroupMemberMainTabsProfileView
                         _AppSettingMenuItem(
                           label: 'Ubah Kata Sandi',
                           iconPath: AppAsset.svgs.lockLightGray,
+                          onTap: () async {
+                            await Get.toNamed(Routes.MANAGE_PASSWORD);
+                          },
                         ),
                       ],
                     ),

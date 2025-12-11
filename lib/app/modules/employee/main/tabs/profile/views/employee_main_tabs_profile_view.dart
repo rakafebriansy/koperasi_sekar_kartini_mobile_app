@@ -190,6 +190,9 @@ class EmployeeMainTabsProfileView
                         _AppSettingMenuItem(
                           label: 'Ubah Kata Sandi',
                           icon: SvgPicture.asset(AppAsset.svgs.lockLightGray),
+                          onTap: () async {
+                            await Get.toNamed(Routes.MANAGE_PASSWORD);
+                          },
                         ),
                       ],
                     ),

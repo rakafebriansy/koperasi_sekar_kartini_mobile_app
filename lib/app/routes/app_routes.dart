@@ -33,6 +33,7 @@ abstract class Routes {
   static const MANAGE_GROUP_MEMBER_PROFILE = _Paths.MANAGE_GROUP_MEMBER_PROFILE;
   static const MANAGE_LOAN = _Paths.MANAGE_LOAN;
   static const MANAGE_SAVINGS = _Paths.MANAGE_SAVINGS;
+  static const MANAGE_PASSWORD = _Paths.MANAGE_PASSWORD;
 }
 
 abstract class _Paths {
@@ -65,4 +66,5 @@ abstract class _Paths {
   static const MANAGE_GROUP_MEMBER_PROFILE = '/manage-group-member-profile';
   static const MANAGE_LOAN = '/manage-loan';
   static const MANAGE_SAVINGS = '/manage-savings';
+  static const MANAGE_PASSWORD = '/manage-password';
 }

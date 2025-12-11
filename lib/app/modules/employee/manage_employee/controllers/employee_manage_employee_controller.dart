@@ -10,7 +10,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_ty
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class EmployeeManageEmployeeController extends GetxController {
@@ -77,13 +76,11 @@ class EmployeeManageEmployeeController extends GetxController {
       if (args.action!.isUpdateAction) {
         final user = args.data as UserModel;
         _id.value = user.id;
-        birthDateCtrl.text = user.birthDate == null
-            ? ''
-            : DateFormat('dd/MM/yyyy').format(user.birthDate!);
-        identityNumberCtrl.text = user.identityNumber ?? '';
+        birthDateCtrl.text = DateFormat('dd/MM/yyyy').format(user.birthDate);
+        identityNumberCtrl.text = user.identityNumber;
         memberNumberCtrl.text = user.memberNumber ?? '';
         nameCtrl.text = user.name;
-        phoneCtrl.text = user.phoneNumber ?? '';
+        phoneCtrl.text = user.phoneNumber;
         addressCtrl.text = user.address ?? '';
         occupationCtrl.text = user.occupation ?? '';
       }

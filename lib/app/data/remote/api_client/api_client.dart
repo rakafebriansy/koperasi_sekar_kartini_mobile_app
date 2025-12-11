@@ -67,6 +67,14 @@ abstract class ApiClient {
   @GET("/refresh")
   Future<dynamic> refreshToken();
 
+  @POST("/change-password")
+  Future<dynamic> changePassword({
+    @Field("_method") String method = "PATCH",
+
+    @Field('password') required String password,
+    @Field('new_password') required String newPassword,
+  });
+
   @POST("/logout")
   Future<dynamic> logout();
 

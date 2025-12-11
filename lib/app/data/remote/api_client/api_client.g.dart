@@ -194,6 +194,41 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<dynamic> changePassword({
+    String method = "PATCH",
+    required String password,
+    required String newPassword,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      '_method': method,
+      'password': password,
+      'new_password': newPassword,
+    };
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/change-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
   Future<dynamic> logout() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
