@@ -25,6 +25,9 @@ class ApiHelper {
     final raw = await request(apiClient);
 
     final response = ResponseParser.parse<T>(raw, (dataObj) {
+      if (T == int || T == double || T == String || T == bool) {
+        return dataObj as T;
+      }
       return ModelRegistry.fromJson<T>(dataObj);
     });
 
@@ -59,10 +62,18 @@ class ApiHelper {
 
     final raw = await request(apiClient);
 
-    final response = ResponseParser.parse<List<T>>(raw, (dataObj) {
-      return dataObj.map((e) => ModelRegistry.fromJson<T>(e)).toList().cast<T>()
-          as List<T>;
-    });
+    final response = ResponseParser.parse<List<T>>(
+      raw,
+       (dataObj) {
+        if (T == int || T == double || T == String || T == bool) {
+          return (dataObj as List).cast<T>();
+        }
+        return dataObj
+            .map((e) => ModelRegistry.fromJson<T>(e))
+            .toList()
+            .cast<T>();
+      },
+    );
 
     if (response.success == false) {
       throw Exception("API returned false");

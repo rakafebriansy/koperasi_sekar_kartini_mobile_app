@@ -136,7 +136,11 @@ class _GroupedGroupMemberListView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                subtitle: Text('#${m.id}'),
+                                subtitle: Text(
+                                  m.groupNumber != null
+                                      ? 'Kelompok ${m.groupNumber}'
+                                      : 'ID: ${m.id}',
+                                ),
                                 trailing: Container(
                                   padding: EdgeInsets.all(3.sp),
                                   child: Icon(

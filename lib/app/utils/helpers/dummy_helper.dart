@@ -5,7 +5,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_mod
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 
 class DummyHelper {
-  //WORK AREAS
+  //WORK AREA
   static final List<WorkAreaModel> workAreas = [
     WorkAreaModel(id: 1, name: "Kantor Pusat", createdAt: DateTime(2023, 1, 1)),
     WorkAreaModel(id: 2, name: "Cabang Jakarta Selatan"),
@@ -41,7 +41,6 @@ class DummyHelper {
       emailVerifiedAt: DateTime(2023, 3, 10),
       role: "member",
       workArea: wa(2),
-      group: null,
       isActive: true,
       createdAt: DateTime(2023, 3, 1),
       updatedAt: DateTime(2023, 3, 1),
@@ -60,7 +59,6 @@ class DummyHelper {
       emailVerifiedAt: DateTime(2023, 5, 20),
       role: "member",
       workArea: wa(4),
-      group: null,
       isActive: true,
       createdAt: DateTime(2023, 5, 10),
       updatedAt: DateTime(2023, 5, 10),
@@ -79,7 +77,6 @@ class DummyHelper {
       emailVerifiedAt: null,
       role: "member",
       workArea: wa(9),
-      group: null,
       isActive: true,
       createdAt: DateTime(2023, 6, 14),
       updatedAt: DateTime(2023, 6, 14),
@@ -98,7 +95,6 @@ class DummyHelper {
       emailVerifiedAt: DateTime(2024, 1, 8),
       role: "member",
       workArea: wa(5),
-      group: null,
       isActive: true,
       createdAt: DateTime(2024, 1, 5),
       updatedAt: DateTime(2024, 1, 5),
@@ -117,7 +113,6 @@ class DummyHelper {
       emailVerifiedAt: null,
       role: "admin",
       workArea: wa(8),
-      group: null,
       isActive: true,
       createdAt: DateTime(2024, 3, 2),
       updatedAt: DateTime(2024, 3, 2),

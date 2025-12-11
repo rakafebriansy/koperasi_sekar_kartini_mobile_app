@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.1.3:8000';
+    baseUrl ??= 'http://192.168.0.106:8000';
   }
 
   final Dio _dio;
@@ -1422,6 +1422,39 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<dynamic> getLoanSumByMonth({
+    required int month,
+    required int year,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'month': month,
+      'year': year,
+    };
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/loans/sum-by-month',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
   Future<dynamic> createLoan({
     String? type,
     int? nominal,
@@ -1580,6 +1613,39 @@ class _ApiClient implements ApiClient {
         .compose(
           _dio.options,
           '/savings/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> getSavingsSumByMonth({
+    required int month,
+    required int year,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'month': month,
+      'year': year,
+    };
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/savings/sum-by-month',
           queryParameters: queryParameters,
           data: _data,
         )

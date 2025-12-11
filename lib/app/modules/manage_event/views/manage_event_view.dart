@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
@@ -51,7 +52,9 @@ class ManageEventView extends GetView<ManageEventController> {
                         ? controller.selectedEventType?.displayName
                         : 'Pilih Jenis Kegiatan',
                     items: (filter, infiniteScrollProps) =>
-                        controller.eventTypes.names,
+                        AuthController.find.currentUser!.role != 'group_member'
+                        ? controller.eventTypes.names
+                        : [controller.eventTypes.names.first],
                     decoratorProps: DropDownDecoratorProps(
                       baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
                       decoration: buildAppTextInputDecoration(hintText: ''),

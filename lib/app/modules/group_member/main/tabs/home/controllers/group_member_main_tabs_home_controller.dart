@@ -9,12 +9,26 @@ class GroupMemberMainTabsHomeController extends GetxController {
 
   bool get isLoading => isFetchingEvents;
 
+  final RxBool _isFetchingLoan = false.obs;
+  bool get isFetchingLoan => _isFetchingLoan.value;
+
+  final RxBool _isFetchingSavings = false.obs;
+  bool get isFetchingSavings => _isFetchingSavings.value;
+
   final RxList<EventModel> _events = RxList();
   List<EventModel> get events => _events;
+
+  final RxInt _countLoan = RxInt(0);
+  int get countLoan => _countLoan.value;
+
+  final RxInt _countSavings = RxInt(0);
+  int get countSavings => _countSavings.value;
 
   @override
   void onInit() {
     fetchListEvent();
+    fetchLoanSumByMonth();
+    fetchSavingsSumByMonth();
     super.onInit();
   }
 
@@ -26,13 +40,51 @@ class GroupMemberMainTabsHomeController extends GetxController {
         request: (api) => api.getMeetings(search: search),
       );
 
-      print(data);
-
       _events.value = data;
     } catch (e) {
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingEvents.value = false;
+    }
+  }
+
+  Future<void> fetchLoanSumByMonth() async {
+    _isFetchingLoan.value = true;
+
+    final dt = DateTime.now();
+
+    try {
+      final int data = await ApiHelper.fetch<int>(
+        request: (api) => api.getLoanSumByMonth(month: dt.month, year: dt.year),
+      );
+
+      _countLoan.value = data;
+    } catch (e) {
+      rethrow;
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingLoan.value = false;
+    }
+  }
+
+  Future<void> fetchSavingsSumByMonth() async {
+    _isFetchingSavings.value = true;
+
+    final dt = DateTime.now();
+
+    try {
+      final int data = await ApiHelper.fetch<int>(
+        request: (api) =>
+            api.getSavingsSumByMonth(month: dt.month, year: dt.year),
+      );
+
+      _countSavings.value = data;
+    } catch (e) {
+      rethrow;
+
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingSavings.value = false;
     }
   }
 }

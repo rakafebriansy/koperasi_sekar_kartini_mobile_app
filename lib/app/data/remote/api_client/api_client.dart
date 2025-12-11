@@ -286,15 +286,19 @@ abstract class ApiClient {
 
     @Path('id') required int id,
   });
-  
+
   // LOAN
   @GET("/loans")
-  Future<dynamic> getLoans({
-    @Query('search') String? search,
-  });
+  Future<dynamic> getLoans({@Query('search') String? search});
 
   @GET("/loans/{id}")
   Future<dynamic> getLoan({@Path('id') required int id});
+
+  @GET("/loans/sum-by-month")
+  Future<dynamic> getLoanSumByMonth({
+    @Field('month') required int month,
+    @Field('year') required int year,
+  });
 
   @POST("/loans")
   Future<dynamic> createLoan({
@@ -325,15 +329,19 @@ abstract class ApiClient {
 
     @Path('id') required int id,
   });
-  
+
   // savings
   @GET("/savings")
-  Future<dynamic> getSavings({
-    @Query('search') String? search,
-  });
+  Future<dynamic> getSavings({@Query('search') String? search});
 
   @GET("/savings/{id}")
   Future<dynamic> getSingleSavings({@Path('id') required int id});
+
+  @GET("/savings/sum-by-month")
+  Future<dynamic> getSavingsSumByMonth({
+    @Field('month') required int month,
+    @Field('year') required int year,
+  });
 
   @POST("/savings")
   Future<dynamic> createSavings({

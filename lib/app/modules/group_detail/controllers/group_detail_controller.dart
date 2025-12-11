@@ -92,7 +92,7 @@ class GroupDetailController extends GetxController {
     _id.value = group.id;
     fetchListEmployee();
     fetchGroupById(group.id);
-    fetchUnlistedMembers(group.id);
+    fetchUnlistedMembers(group.workArea.id);
     fetchListGroupMember(group.id);
     super.onInit();
   }
@@ -160,13 +160,13 @@ class GroupDetailController extends GetxController {
     }
   }
 
-  Future<void> fetchUnlistedMembers(int groupId, {String? search}) async {
+  Future<void> fetchUnlistedMembers(int workAreaId) async {
     _isFetchingUnlistedMembers.value = true;
 
     try {
       final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
         request: (api) =>
-            api.getUnlistedMembers(search: search, workAreaId: groupId),
+            api.getUnlistedMembers(workAreaId: workAreaId),
       );
 
       _unlistedMembers.value = data;

@@ -45,7 +45,10 @@ mixin _$UserModel {
   bool get isActive => throw _privateConstructorUsedError;
   @JsonKey(name: 'work_area')
   WorkAreaModel? get workArea => throw _privateConstructorUsedError;
-  GroupModel? get group => throw _privateConstructorUsedError;
+  @JsonKey(name: 'group_id')
+  int? get groupId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'group_number')
+  int? get groupNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -82,12 +85,12 @@ abstract class $UserModelCopyWith<$Res> {
       String role,
       @JsonKey(name: 'is_active') bool isActive,
       @JsonKey(name: 'work_area') WorkAreaModel? workArea,
-      GroupModel? group,
+      @JsonKey(name: 'group_id') int? groupId,
+      @JsonKey(name: 'group_number') int? groupNumber,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   $WorkAreaModelCopyWith<$Res>? get workArea;
-  $GroupModelCopyWith<$Res>? get group;
 }
 
 /// @nodoc
@@ -120,7 +123,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? role = null,
     Object? isActive = null,
     Object? workArea = freezed,
-    Object? group = freezed,
+    Object? groupId = freezed,
+    Object? groupNumber = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -185,10 +189,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.workArea
           : workArea // ignore: cast_nullable_to_non_nullable
               as WorkAreaModel?,
-      group: freezed == group
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as GroupModel?,
+      groupId: freezed == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      groupNumber: freezed == groupNumber
+          ? _value.groupNumber
+          : groupNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -211,20 +219,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
 
     return $WorkAreaModelCopyWith<$Res>(_value.workArea!, (value) {
       return _then(_value.copyWith(workArea: value) as $Val);
-    });
-  }
-
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $GroupModelCopyWith<$Res>? get group {
-    if (_value.group == null) {
-      return null;
-    }
-
-    return $GroupModelCopyWith<$Res>(_value.group!, (value) {
-      return _then(_value.copyWith(group: value) as $Val);
     });
   }
 }
@@ -253,14 +247,13 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String role,
       @JsonKey(name: 'is_active') bool isActive,
       @JsonKey(name: 'work_area') WorkAreaModel? workArea,
-      GroupModel? group,
+      @JsonKey(name: 'group_id') int? groupId,
+      @JsonKey(name: 'group_number') int? groupNumber,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   @override
   $WorkAreaModelCopyWith<$Res>? get workArea;
-  @override
-  $GroupModelCopyWith<$Res>? get group;
 }
 
 /// @nodoc
@@ -291,7 +284,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? role = null,
     Object? isActive = null,
     Object? workArea = freezed,
-    Object? group = freezed,
+    Object? groupId = freezed,
+    Object? groupNumber = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -356,10 +350,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.workArea
           : workArea // ignore: cast_nullable_to_non_nullable
               as WorkAreaModel?,
-      group: freezed == group
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as GroupModel?,
+      groupId: freezed == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      groupNumber: freezed == groupNumber
+          ? _value.groupNumber
+          : groupNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -391,7 +389,8 @@ class _$UserModelImpl implements _UserModel {
       required this.role,
       @JsonKey(name: 'is_active') required this.isActive,
       @JsonKey(name: 'work_area') this.workArea,
-      this.group,
+      @JsonKey(name: 'group_id') this.groupId,
+      @JsonKey(name: 'group_number') this.groupNumber,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
@@ -439,7 +438,11 @@ class _$UserModelImpl implements _UserModel {
   @JsonKey(name: 'work_area')
   final WorkAreaModel? workArea;
   @override
-  final GroupModel? group;
+  @JsonKey(name: 'group_id')
+  final int? groupId;
+  @override
+  @JsonKey(name: 'group_number')
+  final int? groupNumber;
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -449,7 +452,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, memberNumber: $memberNumber, identityNumber: $identityNumber, birthDate: $birthDate, phoneNumber: $phoneNumber, address: $address, occupation: $occupation, identityCardPhoto: $identityCardPhoto, selfPhoto: $selfPhoto, memberCardPhoto: $memberCardPhoto, emailVerifiedAt: $emailVerifiedAt, role: $role, isActive: $isActive, workArea: $workArea, group: $group, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, name: $name, memberNumber: $memberNumber, identityNumber: $identityNumber, birthDate: $birthDate, phoneNumber: $phoneNumber, address: $address, occupation: $occupation, identityCardPhoto: $identityCardPhoto, selfPhoto: $selfPhoto, memberCardPhoto: $memberCardPhoto, emailVerifiedAt: $emailVerifiedAt, role: $role, isActive: $isActive, workArea: $workArea, groupId: $groupId, groupNumber: $groupNumber, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -483,7 +486,9 @@ class _$UserModelImpl implements _UserModel {
                 other.isActive == isActive) &&
             (identical(other.workArea, workArea) ||
                 other.workArea == workArea) &&
-            (identical(other.group, group) || other.group == group) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
+            (identical(other.groupNumber, groupNumber) ||
+                other.groupNumber == groupNumber) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -492,26 +497,28 @@ class _$UserModelImpl implements _UserModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      memberNumber,
-      identityNumber,
-      birthDate,
-      phoneNumber,
-      address,
-      occupation,
-      identityCardPhoto,
-      selfPhoto,
-      memberCardPhoto,
-      emailVerifiedAt,
-      role,
-      isActive,
-      workArea,
-      group,
-      createdAt,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        name,
+        memberNumber,
+        identityNumber,
+        birthDate,
+        phoneNumber,
+        address,
+        occupation,
+        identityCardPhoto,
+        selfPhoto,
+        memberCardPhoto,
+        emailVerifiedAt,
+        role,
+        isActive,
+        workArea,
+        groupId,
+        groupNumber,
+        createdAt,
+        updatedAt
+      ]);
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -546,7 +553,8 @@ abstract class _UserModel implements UserModel {
       required final String role,
       @JsonKey(name: 'is_active') required final bool isActive,
       @JsonKey(name: 'work_area') final WorkAreaModel? workArea,
-      final GroupModel? group,
+      @JsonKey(name: 'group_id') final int? groupId,
+      @JsonKey(name: 'group_number') final int? groupNumber,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'updated_at')
       final DateTime? updatedAt}) = _$UserModelImpl;
@@ -595,7 +603,11 @@ abstract class _UserModel implements UserModel {
   @JsonKey(name: 'work_area')
   WorkAreaModel? get workArea;
   @override
-  GroupModel? get group;
+  @JsonKey(name: 'group_id')
+  int? get groupId;
+  @override
+  @JsonKey(name: 'group_number')
+  int? get groupNumber;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

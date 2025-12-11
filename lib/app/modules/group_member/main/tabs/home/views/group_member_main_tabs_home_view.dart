@@ -27,25 +27,27 @@ class GroupMemberMainTabsHomeView
         child: Column(
           spacing: 16.sp,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              spacing: 16.sp,
-              children: [
-                Expanded(
-                  child: _InfoCard(
-                    title: 'Simpanan',
-                    amount: 1_124_500,
-                    route: Routes.SAVINGS_LIST,
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                spacing: 16.sp,
+                children: [
+                  Expanded(
+                    child: _InfoCard(
+                      title: 'Simpanan',
+                      amount: controller.countSavings,
+                      route: Routes.SAVINGS_LIST,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: _InfoCard(
-                    title: 'Pinjaman',
-                    amount: 724_500,
-                    route: Routes.LOAN_LIST,
+                  Expanded(
+                    child: _InfoCard(
+                      title: 'Pinjaman',
+                      amount: controller.countLoan,
+                      route: Routes.LOAN_LIST,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -78,8 +80,8 @@ class GroupMemberMainTabsHomeView
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 poppins(
-                  'Kegiatan',
-                  fontSize: 20.sp,
+                  'Kegiatan Terbaru',
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
                 Row(
@@ -104,7 +106,9 @@ class GroupMemberMainTabsHomeView
                           ),
                         );
 
-                        if (result == true) {}
+                        if (result == true) {
+                          controller.fetchListEvent();
+                        }
                       },
                       label: poppins('Tambah', color: AppColor.bg.primary),
                       icon: Icon(Icons.add, color: AppColor.bg.primary),
@@ -134,29 +138,46 @@ class GroupMemberMainTabsHomeView
                 ),
               ],
             ),
-            controller.isFetchingEvents
-                ? SizedBox(
-                    height: 64.sp,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
-                : Column(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 10.sp,
-                    children: [
-                      ...controller.events.map(
-                        (event) => AppEventCard(
-                          model: event,
-                          onTap: () {
-                            Get.toNamed(Routes.EVENT_DETAIL);
-                          },
-                        ),
+            Obx(
+              () => controller.isFetchingEvents
+                  ? SizedBox(
+                      height: 172.sp,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(),
                       ),
-                      SizedBox(height: 10.sp),
-                    ],
-                  ),
+                    )
+                  : controller.events.isEmpty
+                  ? SizedBox(
+                      height: 172.sp,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: poppins('Tidak ada data.'),
+                      ),
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: 10.sp,
+                      children: [
+                        ...controller.events.map(
+                          (event) => AppEventCard(
+                            model: event,
+                            onTap: () async {
+                              final result = await Get.toNamed(
+                                Routes.EVENT_DETAIL,
+                                arguments: ArgsWrapper(data: event),
+                              );
+
+                              if (result == true) {
+                                controller.fetchListEvent();
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 10.sp),
+                      ],
+                    ),
+            ),
           ],
         ),
       ),

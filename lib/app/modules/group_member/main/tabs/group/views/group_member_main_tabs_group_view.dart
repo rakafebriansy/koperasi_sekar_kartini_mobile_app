@@ -35,11 +35,6 @@ class GroupMemberMainTabsGroupView
               spacing: 12.sp,
               children: [
                 _RoundIconButton(
-                  // SvgPicture.asset(
-                  //   AppAsset.svgs.exclamationMarkPrimary,
-                  //   width: 20.sp,
-                  //   height: 20.sp,
-                  // ),
                   Icon(Icons.api_rounded, color: AppColor.bg.primary),
                 ),
                 Container(
@@ -107,7 +102,8 @@ class GroupMemberMainTabsGroupView
                 ],
               ),
             ),
-            SizedBox(
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8.sp),
               width: getScreenWidth(context, scale: 0.88),
               child: poppins(
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
@@ -117,59 +113,24 @@ class GroupMemberMainTabsGroupView
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.sp),
               child: Row(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 10.sp,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: AppFilledButton(
-                      height: 28.sp,
-                      label: 'Cek Rapor',
-                      fontSize: 11.sp,
-                      fontWeight: FontWeight.w400,
-                      borderRadiusSize: 6.sp,
-                      onTap: () {
-                        Get.toNamed(Routes.REPORT_DETAIL);
-                      },
-                    ),
+                  poppins(
+                    'Anggota',
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
                   ),
-                  Expanded(
-                    child: AppFilledButton(
-                      height: 28.sp,
-                      label: 'Pertemuan',
-                      fontSize: 11.sp,
-                      fontWeight: FontWeight.w400,
-                      borderRadiusSize: 6.sp,
-                      onTap: () {
-                        Get.toNamed(Routes.EVENT_LIST);
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: AppFilledButton(
-                      padding: EdgeInsets.zero,
-                      height: 28.sp,
-                      label: 'Pembayaran',
-                      fontSize: 11.sp,
-                      fontWeight: FontWeight.w400,
-                      borderRadiusSize: 6.sp,
-                      onTap: () {
-                        Get.toNamed(Routes.GROUP_MEMBER_FUND_LIST);
-                      },
-                    ),
+                  AppFilledButton(
+                    height: 32.sp,
+                    label: 'Cek Rapor',
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    borderRadiusSize: 6.sp,
+                    onTap: () {
+                      Get.toNamed(Routes.REPORT_DETAIL);
+                    },
                   ),
                 ],
-              ),
-            ),
-            SizedBox.shrink(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: poppins(
-                  'Anggota',
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
-                ),
               ),
             ),
             Padding(

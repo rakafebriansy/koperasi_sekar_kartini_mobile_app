@@ -7,6 +7,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
@@ -25,8 +26,6 @@ class EmployeeMainTabsProfileView
           children: [
             Obx(() {
               var user = AuthController.find.currentUser;
-
-              if (user == null) return SizedBox.shrink();
 
               return Padding(
                 padding: EdgeInsets.only(bottom: 8.sp),
@@ -47,19 +46,22 @@ class EmployeeMainTabsProfileView
                           CircleAvatar(
                             radius: 44.sp,
                             child: poppins(
-                              user.name[0],
+                              user == null ? '-' : user.name[0],
                               fontSize: 40.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(height: 6.sp),
                           poppins(
-                            user.name,
+                            user == null ? '-' : user.name,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                           ),
                           SizedBox(height: 2.sp),
-                          poppins(user.role, color: AppColor.text.gray),
+                          poppins(
+                            user == null ? '-' : user.role,
+                            color: AppColor.text.gray,
+                          ),
                         ],
                       ),
                       Column(
@@ -71,31 +73,30 @@ class EmployeeMainTabsProfileView
                               AppAsset.svgs.calendarPrimary,
                             ),
                             field: 'Tanggal Lahir',
-                            value: '17 Juli 1977',
+                            value: user == null
+                                ? '-'
+                                : user.birthDate.toIdDate(),
                           ),
                           _ProfileCell(
                             icon: SvgPicture.asset(
                               AppAsset.svgs.suitcasePrimary,
                             ),
                             field: 'Pekerjaan',
-                            value: 'Karyawan Swasta',
-                          ),
-                          _ProfileCell(
-                            icon: SvgPicture.asset(
-                              AppAsset.svgs.calendarPrimary,
-                            ),
-                            field: 'Tanggal Masuk',
-                            value: '18 November 2001',
+                            value: user == null ? '-' : user.occupation!,
                           ),
                           _ProfileCell(
                             icon: SvgPicture.asset(AppAsset.svgs.userPrimary),
                             field: 'No. Anggota',
-                            value: '1079',
+                            value: user != null && user.memberNumber != null
+                                ? user.memberNumber!
+                                : '-',
                           ),
                           _ProfileCell(
                             icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
                             field: 'Kelompok',
-                            value: '7',
+                            value: user != null && user.groupNumber != null
+                                ? user.groupNumber.toString()
+                                : '-',
                           ),
                         ],
                       ),
@@ -154,33 +155,6 @@ class EmployeeMainTabsProfileView
                             Get.toNamed(Routes.LOAN_LIST);
                           },
                         ),
-                        // Divider(
-                        //   height: 1.sp,
-                        //   thickness: 1.sp,
-                        //   color: AppColor.bg.gray,
-                        // ),
-                        // _AppSettingMenuItem(
-                        //   label: 'Sisa Hasil Usaha',
-                        //   icon: SvgPicture.asset(AppAsset.svgs.dollarCoinLightGray)
-                        // ),
-                        // Divider(
-                        //   height: 1.sp,
-                        //   thickness: 1.sp,
-                        //   color: AppColor.bg.gray,
-                        // ),
-                        // _AppSettingMenuItem(
-                        //   label: 'Ubah Profil',
-                        //   icon: SvgPicture.asset(AppAsset.svgs.profileGray)
-                        // ),
-                        // Divider(
-                        //   height: 1.sp,
-                        //   thickness: 1.sp,
-                        //   color: AppColor.bg.gray,
-                        // ),
-                        // _AppSettingMenuItem(
-                        //   label: 'Wilayah Kerja',
-                        //   icon: SvgPicture.asset(AppAsset.svgs.pinLocationGray)
-                        // ),
                       ],
                     ),
                   ),
@@ -204,15 +178,6 @@ class EmployeeMainTabsProfileView
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // _AppSettingMenuItem(
-                        //   label: 'Laporan',
-                        // icon: SvgPicture.asset(AppAsset.svgs.reportGray)
-                        // ),
-                        // Divider(
-                        //   height: 1.sp,
-                        //   thickness: 1.sp,
-                        //   color: AppColor.bg.gray,
-                        // ),
                         _AppSettingMenuItem(
                           label: 'Notifikasi',
                           icon: SvgPicture.asset(AppAsset.svgs.bellLightGray),
@@ -250,6 +215,7 @@ class EmployeeMainTabsProfileView
                 ),
               ),
             ),
+            SizedBox(height: 8.sp),
           ],
         ),
       ),

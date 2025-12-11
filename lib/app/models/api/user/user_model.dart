@@ -23,7 +23,8 @@ class UserModel with _$UserModel {
     required String role,
     @JsonKey(name: 'is_active') required bool isActive,
     @JsonKey(name: 'work_area') WorkAreaModel? workArea,
-    GroupModel? group,
+    @JsonKey(name: 'group_id') int? groupId,
+    @JsonKey(name: 'group_number') int? groupNumber,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _UserModel;

@@ -18,6 +18,7 @@ void main() async {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           scaffoldMessengerKey: rootScaffoldMessengerKey,
           title: "Application",
           initialRoute: AppPages.INITIAL,

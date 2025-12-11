@@ -7,8 +7,6 @@ class EmployeeMainTabsHomeController extends GetxController {
   final RxBool _isFetchingEvents = false.obs;
   bool get isFetchingEvents => _isFetchingEvents.value;
 
-  bool get isLoading => isFetchingEvents;
-
   final RxList<EventModel> _events = RxList();
   List<EventModel> get events => _events;
 
@@ -23,7 +21,7 @@ class EmployeeMainTabsHomeController extends GetxController {
 
     try {
       final List<EventModel> data = await ApiHelper.fetchList<EventModel>(
-        request: (api) => api.getMeetings(search: search,limit: 5),
+        request: (api) => api.getMeetings(search: search, limit: 5),
       );
 
       _events.value = data;

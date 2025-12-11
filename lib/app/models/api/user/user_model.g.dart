@@ -27,9 +27,8 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       workArea: json['work_area'] == null
           ? null
           : WorkAreaModel.fromJson(json['work_area'] as Map<String, dynamic>),
-      group: json['group'] == null
-          ? null
-          : GroupModel.fromJson(json['group'] as Map<String, dynamic>),
+      groupId: (json['group_id'] as num?)?.toInt(),
+      groupNumber: (json['group_number'] as num?)?.toInt(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -55,7 +54,8 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'role': instance.role,
       'is_active': instance.isActive,
       'work_area': instance.workArea,
-      'group': instance.group,
+      'group_id': instance.groupId,
+      'group_number': instance.groupNumber,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };

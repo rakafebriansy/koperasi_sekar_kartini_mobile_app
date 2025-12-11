@@ -109,7 +109,7 @@ class ManageEventController extends GetxController {
           datetime: dt,
           location: locationCtrl.text.nullIfEmpty,
           description: descCtrl.text.nullIfEmpty,
-          groupId: user.role == 'group_member' ? user.group?.id : null,
+          groupId: user.role == 'group_member' ? user.groupId : null,
           photo: hintPhoto,
         ),
       );
@@ -142,7 +142,7 @@ class ManageEventController extends GetxController {
               : dateTimeCtrl.text.toIsoDateString(),
           location: locationCtrl.text.nullIfEmpty,
           description: descCtrl.text.nullIfEmpty,
-          groupId: user.role == 'group_member' ? user.group?.id : null,
+          groupId: user.role == 'group_member' ? user.groupId : null,
           userId: user.id,
         ),
       );
