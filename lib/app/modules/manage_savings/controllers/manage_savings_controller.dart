@@ -92,9 +92,11 @@ class ManageSavingsController extends GetxController {
     _isFetchingMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUsers(search: search, role: 'group_member'),
-      );
+      final List<UserModel> data = await ApiHelper.instance
+          .fetchList<UserModel>(
+            request: (api) =>
+                api.getUsers(search: search, role: 'group_member'),
+          );
 
       _members.value = data;
     } catch (e) {
@@ -113,7 +115,7 @@ class ManageSavingsController extends GetxController {
 
       final dt = dateCtrl.text.toMonthYearDate();
 
-      await ApiHelper.fetchNonReturnable(
+      await ApiHelper.instance.fetchNonReturnable(
         request: (api) => api.createSavings(
           type: selectedSavingsType!.snakeCase,
           nominal: int.parse(amountCtrl.text),
@@ -141,7 +143,7 @@ class ManageSavingsController extends GetxController {
     }
 
     try {
-      await ApiHelper.fetchNonReturnable(
+      await ApiHelper.instance.fetchNonReturnable(
         request: (api) => api.deleteSavings(id: savings!.id),
       );
 

@@ -39,7 +39,11 @@ class AuthController extends GetxController {
         await refreshToken();
         break;
       case AuthState.authenticated:
-        Get.offAllNamed(currentUser?.role == 'group_member' ? Routes.GROUP_MEMBER_MAIN : Routes.EMPLOYEE_MAIN);
+        Get.offAllNamed(
+          currentUser?.role == 'group_member'
+              ? Routes.GROUP_MEMBER_MAIN
+              : Routes.EMPLOYEE_MAIN,
+        );
         break;
       default:
       //TODO: Loading screen
@@ -48,7 +52,7 @@ class AuthController extends GetxController {
 
   Future<void> refreshToken() async {
     try {
-      final user = await ApiHelper.fetch<UserModel>(
+      final user = await ApiHelper.instance.fetch<UserModel>(
         request: (api) => api.refreshToken(),
       );
       _currentUser.value = user;
@@ -78,7 +82,7 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       //TODO: Apakah anda yakin?
-      await ApiHelper.fetchNonReturnable(request: (api) => api.logout());
+      await ApiHelper.instance.fetchNonReturnable(request: (api) => api.logout());
       authState.value = AuthState.initial;
     } catch (e) {
       debugPrint(e.toString());

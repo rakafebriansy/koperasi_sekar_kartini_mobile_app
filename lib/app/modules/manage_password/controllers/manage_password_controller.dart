@@ -18,7 +18,7 @@ class ManagePasswordController extends GetxController {
       _isSubmitted.value = true;
 
       try {
-        await ApiHelper.fetchNonReturnable(
+        await ApiHelper.instance.fetchNonReturnable(
           request: (api) => api.changePassword(
             password: passwordCtrl.text,
             newPassword: newPasswordCtrl.text,

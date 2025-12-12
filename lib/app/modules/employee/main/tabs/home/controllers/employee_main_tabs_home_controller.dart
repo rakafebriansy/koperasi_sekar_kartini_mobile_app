@@ -4,6 +4,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class EmployeeMainTabsHomeController extends GetxController {
+  final ApiHelper apiHelper;
+  EmployeeMainTabsHomeController({required this.apiHelper});
+
   final RxBool _isFetchingEvents = false.obs;
   bool get isFetchingEvents => _isFetchingEvents.value;
 
@@ -20,7 +23,7 @@ class EmployeeMainTabsHomeController extends GetxController {
     _isFetchingEvents.value = true;
 
     try {
-      final List<EventModel> data = await ApiHelper.fetchList<EventModel>(
+      final List<EventModel> data = await apiHelper.fetchList<EventModel>(
         request: (api) => api.getMeetings(search: search, limit: 5),
       );
 

@@ -44,9 +44,10 @@ class GroupMemberMainTabsHomeController extends GetxController {
     _isFetchingEvents.value = true;
 
     try {
-      final List<EventModel> data = await ApiHelper.fetchList<EventModel>(
-        request: (api) => api.getMeetings(search: search),
-      );
+      final List<EventModel> data = await ApiHelper.instance
+          .fetchList<EventModel>(
+            request: (api) => api.getMeetings(search: search),
+          );
 
       _events.value = data;
     } catch (e) {
@@ -62,7 +63,7 @@ class GroupMemberMainTabsHomeController extends GetxController {
     final dt = DateTime.now();
 
     try {
-      final int data = await ApiHelper.fetch<int>(
+      final int data = await ApiHelper.instance.fetch<int>(
         request: (api) => api.getLoanSumByMonth(month: dt.month, year: dt.year),
       );
 
@@ -83,7 +84,7 @@ class GroupMemberMainTabsHomeController extends GetxController {
     final dt = DateTime.now();
 
     try {
-      final int data = await ApiHelper.fetch<int>(
+      final int data = await ApiHelper.instance.fetch<int>(
         request: (api) =>
             api.getSavingsSumByMonth(month: dt.month, year: dt.year),
       );
@@ -103,9 +104,8 @@ class GroupMemberMainTabsHomeController extends GetxController {
     _isFetchingUpcomingEvents.value = true;
 
     try {
-      final List<EventModel> data = await ApiHelper.fetchList<EventModel>(
-        request: (api) => api.getUpcomingMeeting(),
-      );
+      final List<EventModel> data = await ApiHelper.instance
+          .fetchList<EventModel>(request: (api) => api.getUpcomingMeeting());
 
       _upcomingEvents.value = data;
     } catch (e) {

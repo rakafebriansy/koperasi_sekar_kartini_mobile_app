@@ -36,7 +36,7 @@ class GroupMemberMainTabsGroupController extends GetxController {
   Future<void> fetchGroupById(int id, {String? search}) async {
     _isFetchingGroup.value = true;
     try {
-      final GroupModel data = await ApiHelper.fetch<GroupModel>(
+      final GroupModel data = await ApiHelper.instance.fetch<GroupModel>(
         request: (api) => api.getGroup(id: id),
       );
 
@@ -52,13 +52,14 @@ class GroupMemberMainTabsGroupController extends GetxController {
     _isFetchingGroupMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUsers(
-          search: search,
-          role: 'group_member',
-          groupId: groupId,
-        ),
-      );
+      final List<UserModel> data = await ApiHelper.instance
+          .fetchList<UserModel>(
+            request: (api) => api.getUsers(
+              search: search,
+              role: 'group_member',
+              groupId: groupId,
+            ),
+          );
 
       _groupMembers.value = data;
     } catch (e) {

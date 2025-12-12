@@ -121,6 +121,106 @@ class DummyHelper {
   ];
   static UserModel user(int id) => users.firstWhere((u) => u.id == id);
 
+  // INACTIVE USERS
+  static List<UserModel> inactiveUsers = [
+    UserModel(
+      id: 2,
+      name: "Aulia Rahman",
+      memberNumber: "MBR-2044",
+      identityNumber: "3275011502970002",
+      birthDate: DateTime(1997, 2, 15),
+      phoneNumber: "081212334455",
+      address: "Bandung",
+      occupation: "Staff Gudang",
+      identityCardPhoto: "",
+      selfPhoto: "",
+      emailVerifiedAt: DateTime(2023, 4, 12),
+      role: "member",
+      workArea: wa(3),
+      isActive: false,
+      createdAt: DateTime(2023, 4, 1),
+      updatedAt: DateTime(2023, 4, 1),
+    ),
+
+    UserModel(
+      id: 3,
+      name: "Dewi Lestari",
+      memberNumber: "MBR-3055",
+      identityNumber: "3275013009960003",
+      birthDate: DateTime(1996, 9, 30),
+      phoneNumber: "081298443322",
+      address: "Depok",
+      occupation: "Kasir Minimarket",
+      identityCardPhoto: "",
+      selfPhoto: "",
+      emailVerifiedAt: DateTime(2023, 5, 9),
+      role: "member",
+      workArea: wa(1),
+      isActive: false,
+      createdAt: DateTime(2023, 5, 2),
+      updatedAt: DateTime(2023, 5, 2),
+    ),
+
+    UserModel(
+      id: 4,
+      name: "Budi Santoso",
+      memberNumber: "MBR-4066",
+      identityNumber: "3275011111950004",
+      birthDate: DateTime(1995, 11, 11),
+      phoneNumber: "081234554433",
+      address: "Bogor",
+      occupation: "Driver Operasional",
+      identityCardPhoto: "",
+      selfPhoto: "",
+      emailVerifiedAt: DateTime(2023, 6, 20),
+      role: "member",
+      workArea: wa(4),
+      isActive: false,
+      createdAt: DateTime(2023, 6, 10),
+      updatedAt: DateTime(2023, 6, 10),
+    ),
+
+    UserModel(
+      id: 5,
+      name: "Citra Maharani",
+      memberNumber: "MBR-5077",
+      identityNumber: "3275010803960005",
+      birthDate: DateTime(1996, 3, 8),
+      phoneNumber: "081267889900",
+      address: "Cikarang",
+      occupation: "Operator Produksi",
+      identityCardPhoto: "",
+      selfPhoto: "",
+      emailVerifiedAt: DateTime(2023, 7, 5),
+      role: "member",
+      workArea: wa(2),
+      isActive: false,
+      createdAt: DateTime(2023, 7, 1),
+      updatedAt: DateTime(2023, 7, 1),
+    ),
+
+    UserModel(
+      id: 6,
+      name: "Thomas Wibowo",
+      memberNumber: "MBR-6088",
+      identityNumber: "3275012204940006",
+      birthDate: DateTime(1994, 4, 22),
+      phoneNumber: "081233221144",
+      address: "Tangerang",
+      occupation: "Security",
+      identityCardPhoto: "",
+      selfPhoto: "",
+      emailVerifiedAt: DateTime(2023, 8, 17),
+      role: "member",
+      workArea: wa(5),
+      isActive: false,
+      createdAt: DateTime(2023, 8, 10),
+      updatedAt: DateTime(2023, 8, 10),
+    ),
+  ];
+  static UserModel inuser(int id) => inactiveUsers.firstWhere((u) => u.id == id);
+
+
   // GROUPS
   static final List<GroupModel> groups = [
     GroupModel(
@@ -189,6 +289,7 @@ class DummyHelper {
       updatedAt: DateTime(2023, 9, 1),
     ),
   ];
+  static GroupModel group(int id) => groups.firstWhere((g) => g.id == id);
 
   static final List<GroupReportModel> groupReports = [
     GroupReportModel(
@@ -390,7 +491,7 @@ class DummyHelper {
     ),
   ];
 
-  static final List<EventModel> dummyEvents = [
+  static final List<EventModel> events = [
     EventModel(
       id: 1,
       name: 'Rapat Kelompok A',
@@ -431,4 +532,5 @@ class DummyHelper {
       updatedAt: DateTime.now(),
     ),
   ];
+  static EventModel ev(int id) => events.firstWhere((e) => e.id == id);
 }

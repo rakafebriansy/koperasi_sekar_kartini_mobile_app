@@ -38,9 +38,8 @@ class LoanListController extends GetxController {
     _isFetching.value = true;
 
     try {
-      final List<LoanModel> data = await ApiHelper.fetchList<LoanModel>(
-        request: (api) => api.getLoans(search: search),
-      );
+      final List<LoanModel> data = await ApiHelper.instance
+          .fetchList<LoanModel>(request: (api) => api.getLoans(search: search));
 
       _loans.value = data;
     } catch (e) {

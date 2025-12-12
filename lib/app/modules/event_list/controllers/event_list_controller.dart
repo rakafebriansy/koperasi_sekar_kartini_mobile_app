@@ -29,9 +29,10 @@ class EventListController extends GetxController {
     _isFetchingEvents.value = true;
 
     try {
-      final List<EventModel> data = await ApiHelper.fetchList<EventModel>(
-        request: (api) => api.getMeetings(search: search),
-      );
+      final List<EventModel> data = await ApiHelper.instance
+          .fetchList<EventModel>(
+            request: (api) => api.getMeetings(search: search),
+          );
 
       _events.value = data;
     } catch (e) {

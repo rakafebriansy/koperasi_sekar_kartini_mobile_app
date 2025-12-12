@@ -6,6 +6,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class EmployeeMainTabsGroupController extends GetxController {
+  final ApiHelper apiHelper;
+  EmployeeMainTabsGroupController({required this.apiHelper});
+
   TextEditingController searchCtrl = TextEditingController();
 
   final Rx<String> _searchText = ''.obs;
@@ -73,7 +76,7 @@ class EmployeeMainTabsGroupController extends GetxController {
     _isFetchingGroup.value = true;
 
     try {
-      final List<GroupModel> data = await ApiHelper.fetchList<GroupModel>(
+      final List<GroupModel> data = await apiHelper.fetchList<GroupModel>(
         request: (api) => api.getGroups(search: search),
       );
 
@@ -89,7 +92,7 @@ class EmployeeMainTabsGroupController extends GetxController {
     _isFetchingVerifiedMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
         request: (api) => api.getUsers(search: search, role: 'group_member'),
       );
 
@@ -105,7 +108,7 @@ class EmployeeMainTabsGroupController extends GetxController {
     _isFetchingInactiveMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
         request: (api) => api.getInactiveMembers(search: search),
       );
 

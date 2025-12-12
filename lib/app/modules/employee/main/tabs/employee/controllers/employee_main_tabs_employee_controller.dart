@@ -27,9 +27,10 @@ class EmployeeMainTabsEmployeeController extends GetxController {
     _isFetching.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUsers(search: search, role: 'employee'),
-      );
+      final List<UserModel> data = await ApiHelper.instance
+          .fetchList<UserModel>(
+            request: (api) => api.getUsers(search: search, role: 'employee'),
+          );
 
       _users.value = data;
     } catch (e) {

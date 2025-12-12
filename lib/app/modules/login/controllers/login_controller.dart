@@ -15,8 +15,7 @@ class LoginController extends GetxController {
 
   TextEditingController phoneCtrl = TextEditingController(
     text: !kReleaseMode
-        ? 
-        '081200000001'
+        ? '081200000001'
         // '081234560001'
         : '',
   );
@@ -40,7 +39,7 @@ class LoginController extends GetxController {
     try {
       if (!formKey.currentState!.validate()) return;
 
-      final user = await ApiHelper.fetch<UserModel>(
+      final user = await ApiHelper.instance.fetch<UserModel>(
         request: (api) =>
             api.login(phoneNumber: phoneCtrl.text, password: passwordCtrl.text),
       );

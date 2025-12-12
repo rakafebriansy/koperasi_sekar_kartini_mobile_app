@@ -41,10 +41,7 @@ class ManageEventController extends GetxController {
     text: !kReleaseMode ? 'Lorem ipsum dolor sit amet' : '',
   );
 
-  final List<EventType> eventTypes = [
-    EventType.group,
-    EventType.coop,
-  ];
+  final List<EventType> eventTypes = [EventType.group, EventType.coop];
 
   final Rx<EventType?> _selectedEventType = Rxn();
   EventType? get selectedEventType => _selectedEventType.value;
@@ -102,7 +99,7 @@ class ManageEventController extends GetxController {
         "HH:mm dd/MM/yyyy",
       ).parse(dateTimeCtrl.text).toIso8601String();
 
-      await ApiHelper.fetch<EventModel>(
+      await ApiHelper.instance.fetch<EventModel>(
         request: (api) => api.createMeeting(
           name: nameCtrl.text.nullIfEmpty,
           type: selectedEventType!.name,
@@ -132,7 +129,7 @@ class ManageEventController extends GetxController {
 
     final user = AuthController.find.currentUser!;
     try {
-      await ApiHelper.fetch<EventModel>(
+      await ApiHelper.instance.fetch<EventModel>(
         request: (api) => api.updateMeeting(
           id: id!,
           name: nameCtrl.text.nullIfEmpty,

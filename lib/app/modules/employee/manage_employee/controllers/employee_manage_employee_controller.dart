@@ -143,7 +143,7 @@ class EmployeeManageEmployeeController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.fetch<UserModel>(
+      await ApiHelper.instance.fetch<UserModel>(
         request: (api) => api.createUser(
           name: nameCtrl.text.nullIfEmpty,
           identityNumber: identityNumberCtrl.text.nullIfEmpty,
@@ -178,7 +178,7 @@ class EmployeeManageEmployeeController extends GetxController {
     if (id == null) throw Exception('id is null');
 
     try {
-      await ApiHelper.fetch<UserModel>(
+      await ApiHelper.instance.fetch<UserModel>(
         request: (api) => api.updateUser(
           id: id!,
           name: nameCtrl.text.nullIfEmpty,
@@ -216,7 +216,7 @@ class EmployeeManageEmployeeController extends GetxController {
     }
 
     try {
-      await ApiHelper.fetchNonReturnable(
+      await ApiHelper.instance.fetchNonReturnable(
         request: (api) => api.deleteUser(id: id!),
       );
 

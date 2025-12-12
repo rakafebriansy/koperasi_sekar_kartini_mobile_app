@@ -38,9 +38,10 @@ class SavingsListController extends GetxController {
     _isFetching.value = true;
 
     try {
-      final List<SavingsModel> data = await ApiHelper.fetchList<SavingsModel>(
-        request: (api) => api.getSavings(search: search),
-      );
+      final List<SavingsModel> data = await ApiHelper.instance
+          .fetchList<SavingsModel>(
+            request: (api) => api.getSavings(search: search),
+          );
 
       _savingsList.value = data;
     } catch (e) {

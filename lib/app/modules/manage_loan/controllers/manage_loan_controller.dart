@@ -92,9 +92,11 @@ class ManageLoanController extends GetxController {
     _isFetchingMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.fetchList<UserModel>(
-        request: (api) => api.getUsers(search: search, role: 'group_member'),
-      );
+      final List<UserModel> data = await ApiHelper.instance
+          .fetchList<UserModel>(
+            request: (api) =>
+                api.getUsers(search: search, role: 'group_member'),
+          );
 
       _members.value = data;
     } catch (e) {
@@ -113,7 +115,7 @@ class ManageLoanController extends GetxController {
 
       final dt = dateCtrl.text.toMonthYearDate();
 
-      await ApiHelper.fetchNonReturnable(
+      await ApiHelper.instance.fetchNonReturnable(
         request: (api) => api.createLoan(
           type: selectedLoanType!.snakeCase,
           nominal: int.parse(amountCtrl.text),
@@ -141,7 +143,7 @@ class ManageLoanController extends GetxController {
       if (selectedLoanType == null) throw Exception('loan type is null');
       if (selectedMember == null) throw Exception('member is null');
 
-      await ApiHelper.fetchNonReturnable(
+      await ApiHelper.instance.fetchNonReturnable(
         request: (api) =>
             api.updateLoan(id: loan!.id, status: LoanStatus.paid.name),
       );
@@ -164,7 +166,7 @@ class ManageLoanController extends GetxController {
     }
 
     try {
-      await ApiHelper.fetchNonReturnable(
+      await ApiHelper.instance.fetchNonReturnable(
         request: (api) => api.deleteLoan(id: loan!.id),
       );
 

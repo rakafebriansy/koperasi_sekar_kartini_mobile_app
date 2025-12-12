@@ -145,9 +145,10 @@ class ManageGroupMemberProfileController extends GetxController {
     _isFetchingWorkArea.value = true;
 
     try {
-      final List<WorkAreaModel> data = await ApiHelper.fetchList<WorkAreaModel>(
-        request: (api) => api.getWorkAreas(search: search),
-      );
+      final List<WorkAreaModel> data = await ApiHelper.instance
+          .fetchList<WorkAreaModel>(
+            request: (api) => api.getWorkAreas(search: search),
+          );
 
       _workAreas.value = data;
     } catch (e) {
@@ -163,7 +164,7 @@ class ManageGroupMemberProfileController extends GetxController {
     if (selectedWorkArea == null) throw Exception('Work Area is null');
 
     try {
-      await ApiHelper.fetch<UserModel>(
+      await ApiHelper.instance.fetch<UserModel>(
         request: (api) => api.register(
           name: nameCtrl.text,
           identityNumber: identityNumberCtrl.text,
@@ -193,7 +194,7 @@ class ManageGroupMemberProfileController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.fetch<UserModel>(
+      await ApiHelper.instance.fetch<UserModel>(
         request: (api) =>
             api.activateMember(id: user!.id, isActive: !(user!.isActive)),
       );

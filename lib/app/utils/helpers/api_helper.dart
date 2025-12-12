@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/download_client/download_client.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/model_registry.dart';
@@ -8,7 +9,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 
 class ApiHelper {
-  static Future<T> fetch<T>({
+  static ApiHelper instance = Get.find<ApiHelper>();
+
+  Future<T> fetch<T>({
     required Future<dynamic> Function(ApiClient api) request,
     Map<String, dynamic> headers = const {},
     int connectTimeout = 30000,
@@ -46,7 +49,7 @@ class ApiHelper {
     return response.data as T;
   }
 
-  static Future<List<T>> fetchList<T>({
+  Future<List<T>> fetchList<T>({
     required Future<dynamic> Function(ApiClient api) request,
     Map<String, dynamic> headers = const {},
     int connectTimeout = 30000,
@@ -90,7 +93,7 @@ class ApiHelper {
     return response.data as List<T>;
   }
 
-  static Future<void> fetchNonReturnable({
+  Future<void> fetchNonReturnable({
     required Future<dynamic> Function(ApiClient api) request,
     Map<String, dynamic> headers = const {},
     int connectTimeout = 30000,
@@ -115,7 +118,7 @@ class ApiHelper {
     }
   }
 
-  static Future<void> downloadFileAndroid(String filePath) async {
+  Future<void> downloadFileAndroid(String filePath) async {
     final downloader = await DownloadClient.create();
 
     final savedPath = await downloader?.downloadFile(filePath);

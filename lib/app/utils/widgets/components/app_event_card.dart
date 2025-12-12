@@ -1,6 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,7 +52,7 @@ class AppEventCard extends StatelessWidget {
                 spacing: 2.sp,
                 children: [
                   poppins(
-                    model.name!,
+                    model.name,
                     fontWeight: FontWeight.bold,
                     fontSize: 14.sp,
                   ),
@@ -69,7 +67,7 @@ class AppEventCard extends StatelessWidget {
                         height: 12.sp,
                       ),
                       poppins(
-                        model.location!,
+                        model.location,
                         fontSize: 10.sp,
                         color: AppColor.bg.primary,
                       ),
@@ -86,7 +84,7 @@ class AppEventCard extends StatelessWidget {
                         height: 10.sp,
                       ),
                       poppins(
-                        model.datetime!.toIdDate(),
+                        model.datetime.toIdDate(),
                         fontSize: 10.sp,
                         color: AppColor.bg.primary,
                       ),
@@ -103,7 +101,7 @@ class AppEventCard extends StatelessWidget {
                         height: 10.sp,
                       ),
                       poppins(
-                        model.datetime!.toDotSeparatedHour(),
+                        model.datetime.toDotSeparatedHour(),
 
                         fontSize: 10.sp,
                         color: AppColor.bg.primary,
