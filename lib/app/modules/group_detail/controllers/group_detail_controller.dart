@@ -218,7 +218,7 @@ class GroupDetailController extends GetxController {
         Get.snackbar('INFO', 'Berhasil memperbarui informasi PPK!');
       } catch (e) {
         debugPrint(e.toString());
-        ErrorHelper.handleError(e, canUseNavigator: false);
+        ErrorHelper.handleError(e);
       } finally {
         fetchGroupById(group!.id);
         _isSubmitted.value = false;
@@ -245,7 +245,7 @@ class GroupDetailController extends GetxController {
         Get.snackbar('INFO', 'Berhasil memperbarui informasi PJK!');
       } catch (e) {
         debugPrint(e.toString());
-        ErrorHelper.handleError(e, canUseNavigator: false);
+        ErrorHelper.handleError(e);
       } finally {
         fetchGroupById(group!.id);
         _isSubmitted.value = false;
@@ -270,7 +270,7 @@ class GroupDetailController extends GetxController {
         Get.snackbar('INFO', 'Berhasil mengubah informasi kas!');
       } catch (e) {
         debugPrint(e.toString());
-        ErrorHelper.handleError(e, canUseNavigator: false);
+        ErrorHelper.handleError(e);
       } finally {
         fetchListGroupMember(group!.id);
         _isSubmitted.value = false;
@@ -299,7 +299,7 @@ class GroupDetailController extends GetxController {
         Get.snackbar('INFO', 'Berhasil menambah anggota!');
       } catch (e) {
         debugPrint(e.toString());
-        ErrorHelper.handleError(e, canUseNavigator: false);
+        ErrorHelper.handleError(e);
       } finally {
         fetchGroupById(group!.id);
         _isSubmitted.value = false;

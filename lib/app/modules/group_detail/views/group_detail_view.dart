@@ -376,6 +376,7 @@ class _GroupInfoCard extends StatelessWidget {
                     onPressed: () async {
                       final result = await Get.toNamed(
                         Routes.EMPLOYEE_MANAGE_REPORT,
+                        arguments: ArgsWrapper(data: controller.group, action: ActionType.create)
                       );
                       if (result == true) {
                         controller.fetchGroupById(controller.group!.id);

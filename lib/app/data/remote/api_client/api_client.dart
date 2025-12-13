@@ -174,7 +174,7 @@ abstract class ApiClient {
     @Path('id') required int id,
   });
 
-  @POST("/users/{id}/group/{group_id}")
+  @POST("/users/{id}/groups/{group_id}")
   Future<dynamic> addGroupMember({
     @Path('id') required int id,
     @Path('group_id') required int groupId,
@@ -341,7 +341,7 @@ abstract class ApiClient {
     @Path('id') required int id,
   });
 
-  // savings
+  // SAVINGS
   @GET("/savings")
   Future<dynamic> getSavings({@Query('search') String? search});
 
@@ -381,5 +381,101 @@ abstract class ApiClient {
     @Field("_method") String method = "DELETE",
 
     @Path('id') required int id,
+  });
+
+  // REPORT
+  @GET("/groups/{group_id}/reports")
+  Future<dynamic> getReports({
+    @Path('group_id') required int groupId,
+
+    @Query('search') String? search,
+  });
+
+  @POST('/groups/{group_id}/reports')
+  Future<dynamic> createReport({
+    @Path('group_id') required int groupId,
+
+    @Field() required int quarter,
+    @Field() required int year,
+    @Field('member_growth_in') required int memberGrowthIn,
+    @Field('member_growth_in_percentage') int? memberGrowthInPercentage,
+    @Field('member_growth_out') required int memberGrowthOut,
+    @Field('member_growth_out_percentage') int? memberGrowthOutPercentage,
+    @Field('group_member_total') int? groupMemberTotal,
+    @Field('group_member_total_percentage') int? groupMemberTotalPercentage,
+    @Field('administrative_compliance_percentage')
+    required int administrativeCompliancePercentage,
+    @Field('deposit_compliance_percentage')
+    required int depositCompliancePercentage,
+    @Field('attendance_percentage') required int attendancePercentage,
+    @Field('organization_final_score_percentage')
+    required int organizationFinalScorePercentage,
+    @Field('loan_participation_pb') required int loanParticipationPb,
+    @Field('loan_participation_bbm') required int loanParticipationBbm,
+    @Field('loan_participation_store') required int loanParticipationStore,
+    @Field('cash_participation') required int cashParticipation,
+    @Field('cash_participation_percentage')
+    required int cashParticipationPercentage,
+    @Field('savings_participation') required int savingsParticipation,
+    @Field('savings_participation_percentage')
+    required int savingsParticipationPercentage,
+    @Field('meeting_deposit_percentage') required int meetingDepositPercentage,
+    @Field('loan_balance_pb') required int loanBalancePb,
+    @Field('loan_balance_bbm') required int loanBalanceBbm,
+    @Field('loan_balance_store') required int loanBalanceStore,
+    @Field('receivable_score') required int receivableScore,
+    @Field('financial_final_score_percentage')
+    required int financialFinalScorePercentage,
+    @Field('combined_final_score_percentage')
+    required int combinedFinalScorePercentage,
+    @Field('criteria') required String criteria,
+  });
+
+  @POST('/groups/{group_id}/reports/{id}')
+  Future<dynamic> updateReport({
+    @Path('id') required int id,
+    @Path('group_id') required int groupId,
+
+    @Field("_method") String method = "PUT",
+
+    @Field() required int quarter,
+    @Field() required int year,
+    @Field('member_growth_in') int? memberGrowthIn,
+    @Field('member_growth_in_percentage') int? memberGrowthInPercentage,
+    @Field('member_growth_out') int? memberGrowthOut,
+    @Field('member_growth_out_percentage') int? memberGrowthOutPercentage,
+    @Field('group_member_total') int? groupMemberTotal,
+    @Field('group_member_total_percentage') int? groupMemberTotalPercentage,
+    @Field('administrative_compliance_percentage')
+    int? administrativeCompliancePercentage,
+    @Field('deposit_compliance_percentage') int? depositCompliancePercentage,
+    @Field('attendance_percentage') int? attendancePercentage,
+    @Field('organization_final_score_percentage')
+    int? organizationFinalScorePercentage,
+    @Field('loan_participation_pb') int? loanParticipationPb,
+    @Field('loan_participation_bbm') int? loanParticipationBbm,
+    @Field('loan_participation_store') int? loanParticipationStore,
+    @Field('cash_participation') int? cashParticipation,
+    @Field('cash_participation_percentage') int? cashParticipationPercentage,
+    @Field('savings_participation') int? savingsParticipation,
+    @Field('savings_participation_percentage')
+    int? savingsParticipationPercentage,
+    @Field('meeting_deposit_percentage') int? meetingDepositPercentage,
+    @Field('loan_balance_pb') int? loanBalancePb,
+    @Field('loan_balance_bbm') int? loanBalanceBbm,
+    @Field('loan_balance_store') int? loanBalanceStore,
+    @Field('receivable_score') required int receivableScore,
+    @Field('financial_final_score_percentage')
+    int? financialFinalScorePercentage,
+    @Field('combined_final_score_percentage') int? combinedFinalScorePercentage,
+    @Field('criteria') String? criteria,
+  });
+
+  @POST("/groups/{group_id}/reports{id}")
+  Future<dynamic> deleteReport({
+    @Path('id') required int id,
+    @Path('group_id') required int groupId,
+
+    @Field("_method") String method = "DELETE",
   });
 }

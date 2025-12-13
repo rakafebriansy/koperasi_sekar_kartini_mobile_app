@@ -217,7 +217,7 @@ class ManageGroupController extends GetxController {
       Get.snackbar('INFO', 'Berhasil membuat grup!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -246,7 +246,7 @@ class ManageGroupController extends GetxController {
       Get.snackbar('INFO', 'Berhasil memperbarui grup!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -268,7 +268,7 @@ class ManageGroupController extends GetxController {
       Get.snackbar('INFO', 'Berhasil menghapus grup!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }

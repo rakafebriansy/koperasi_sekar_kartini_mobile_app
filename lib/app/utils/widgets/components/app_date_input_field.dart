@@ -6,6 +6,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 
+enum DateInputType { date, year, monthYear }
+
 class AppDateInputField extends StatefulWidget {
   @override
   AppDateInputField({
@@ -15,7 +17,7 @@ class AppDateInputField extends StatefulWidget {
     this.prefixIcon,
     this.enabled,
     this.onChanged,
-    this.type = 'date',
+    this.type = DateInputType.date,
   });
   final TextEditingController controller;
   final String placeholder;
@@ -23,7 +25,7 @@ class AppDateInputField extends StatefulWidget {
   final Widget? prefixIcon;
   final bool? enabled;
   final Function(String)? onChanged;
-  final String type;
+  final DateInputType type;
 
   _AppDateInputFieldState createState() => _AppDateInputFieldState();
 }
@@ -132,6 +134,39 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
     );
   }
 
+  Future<void> _selectYear(BuildContext context) async {
+    int selectedYear = selectedDate?.year ?? DateTime.now().year;
+
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Pilih Tahun"),
+          content: SizedBox(
+            height: 300,
+            width: 300,
+            child: YearPicker(
+              firstDate: DateTime(2000),
+              lastDate: DateTime(2100),
+              initialDate: DateTime(selectedYear),
+              selectedDate: DateTime(selectedYear),
+              onChanged: (date) {
+                setState(() {
+                  selectedYear = date.year;
+                  selectedDate = DateTime(selectedYear);
+                  widget.controller.text = selectedYear.toString();
+                });
+
+                widget.onChanged?.call(widget.controller.text);
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppTextFormField(
@@ -142,10 +177,11 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
       readOnly: true,
       onTap: () {
         switch (widget.type) {
-          case 'month-year':
+          case DateInputType.monthYear:
             _selectMonthYear(context);
-          case 'date':
-          default:
+          case DateInputType.year:
+            _selectYear(context);
+          case DateInputType.date:
             _selectDate(context);
         }
       },
@@ -153,8 +189,11 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
         AppAsset.svgs.calendarSharpGray,
         height: 20.sp,
       ),
-      validator: (value) =>
-          value.isRequired(widget.label ?? widget.placeholder),
+      validator: widget.type == DateInputType.year
+          ? (value) =>
+                value.isRequired(widget.label ?? widget.placeholder) ??
+                value.maxLength(4, widget.label ?? widget.placeholder)
+          : (value) => value.isRequired(widget.label ?? widget.placeholder),
     );
   }
 }

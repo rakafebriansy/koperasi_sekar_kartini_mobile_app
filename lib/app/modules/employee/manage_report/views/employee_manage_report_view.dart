@@ -5,8 +5,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_re
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_2nd_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_3rd_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_4th_form.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_5th_form.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_6th_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_form_wrapper.dart';
 
 import '../controllers/employee_manage_report_controller.dart';
@@ -20,7 +18,6 @@ class EmployeeManageReportView extends GetView<EmployeeManageReportController> {
       title: 'Detail Rapot',
       child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          controller: controller.scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,8 +29,6 @@ class EmployeeManageReportView extends GetView<EmployeeManageReportController> {
                     AppReport2ndForm(controller: controller),
                     AppReport3rdForm(controller: controller),
                     AppReport4thForm(controller: controller),
-                    AppReport5thForm(controller: controller),
-                    AppReport6thForm(controller: controller),
                   ],
                 ),
               ),

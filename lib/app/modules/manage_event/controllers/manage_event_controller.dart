@@ -115,7 +115,7 @@ class ManageEventController extends GetxController {
       Get.snackbar('INFO', 'Berhasil menambahkan kegiatan!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -148,7 +148,7 @@ class ManageEventController extends GetxController {
       Get.snackbar('INFO', 'Berhasil memperbarui kegiatan!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }

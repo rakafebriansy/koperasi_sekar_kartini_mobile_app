@@ -43,7 +43,7 @@ class SavingsListView extends GetView<SavingsListController> {
                     ),
                     controller: controller.searchCtrl,
                     placeholder: 'Cari...',
-                    type: 'month-year',
+                    type: DateInputType.monthYear,
                     onChanged: (value) => controller.onSearchChanged(value),
                   ),
                 ),

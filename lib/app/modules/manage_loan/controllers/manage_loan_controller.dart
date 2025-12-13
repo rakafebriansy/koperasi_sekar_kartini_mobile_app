@@ -129,7 +129,7 @@ class ManageLoanController extends GetxController {
       Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -152,7 +152,7 @@ class ManageLoanController extends GetxController {
       Get.snackbar('INFO', 'Berhasil memperbarui pinjaman!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -174,7 +174,7 @@ class ManageLoanController extends GetxController {
       Get.snackbar('INFO', 'Berhasil menghapus pinjaman!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }

@@ -3,6 +3,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_mod
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group_report/group_report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
@@ -57,7 +58,8 @@ extension WorkAreaListExtension on List<WorkAreaModel> {
 }
 
 extension FundTypeListExtension on List<FundType> {
-  List<String> get displayNames => map((fundType) => fundType.displayName).toList();
+  List<String> get displayNames =>
+      map((fundType) => fundType.displayName).toList();
 
   FundType? findByName(String? displayName) {
     if (displayName == null) return null;
@@ -131,6 +133,8 @@ extension GroupListExtension on List<GroupModel> {
   List<GroupModel> get sortedByDistrictDesc => sortByDistrictName(desc: true);
 
   Map<String, List<GroupModel>> get groupedByDistrict => groupByDistrict();
+
+  List<String> get names => map((g) => 'Kelompok ${g.number}').toList();
 }
 
 extension EventTypeListExtension on List<EventType> {
@@ -139,6 +143,14 @@ extension EventTypeListExtension on List<EventType> {
 
 extension LoanTypeListExtension on List<LoanType> {
   List<String> get names => map((event) => event.displayName).toList();
+}
+
+extension QuarterListExtension on List<Quarter> {
+  List<String> get names => map((q) => q.displayName).toList();
+}
+
+extension ReportCriteriaListExtension on List<ReportCriteria> {
+  List<String> get names => map((q) => q.displayName).toList();
 }
 
 extension SavingsTypeListExtension on List<SavingsType> {

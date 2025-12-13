@@ -51,6 +51,9 @@ class GroupMemberMainTabsHomeController extends GetxController {
 
       _events.value = data;
     } catch (e) {
+      if (e is DioException) {
+        if (e.response?.statusCode == 404) return;
+      }
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingEvents.value = false;

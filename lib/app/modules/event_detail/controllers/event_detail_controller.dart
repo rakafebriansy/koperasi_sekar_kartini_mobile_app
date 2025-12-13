@@ -33,7 +33,7 @@ class EventDetailController extends GetxController {
       Get.snackbar('INFO', 'Berhasil menghapus kegiatan!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }

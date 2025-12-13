@@ -166,7 +166,7 @@ class EmployeeManageEmployeeController extends GetxController {
       Get.snackbar('INFO', 'Berhasil membuat akun!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -202,7 +202,7 @@ class EmployeeManageEmployeeController extends GetxController {
       Get.snackbar('INFO', 'Berhasil memperbarui akun!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -224,7 +224,7 @@ class EmployeeManageEmployeeController extends GetxController {
       Get.snackbar('INFO', 'Berhasil menghapus akun!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }

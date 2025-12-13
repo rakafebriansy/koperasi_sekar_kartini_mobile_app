@@ -195,7 +195,7 @@ class ManageLoanView extends GetView<ManageLoanController> {
                   controller: controller.dateCtrl,
                   placeholder: 'Masukkan bulan',
                   label: 'Bulan',
-                  type: 'month-year',
+                  type: DateInputType.monthYear,
                 ),
                 SizedBox(height: 8.sp),
                 AppTextFormGroup(

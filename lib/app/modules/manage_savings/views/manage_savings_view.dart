@@ -195,7 +195,7 @@ class ManageSavingsView extends GetView<ManageSavingsController> {
                   controller: controller.dateCtrl,
                   placeholder: 'Masukkan bulan',
                   label: 'Bulan',
-                  type: 'month-year',
+                  type: DateInputType.monthYear,
                   enabled: controller.action != null,
                 ),
                 SizedBox(height: 8.sp),

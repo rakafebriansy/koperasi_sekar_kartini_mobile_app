@@ -183,7 +183,7 @@ class ManageGroupMemberProfileController extends GetxController {
       Get.snackbar('INFO', 'Berhasil membuat akun!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }
@@ -203,7 +203,7 @@ class ManageGroupMemberProfileController extends GetxController {
       Get.snackbar('INFO', 'Berhasil mengubah aktivasi akun!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e, canUseNavigator: false);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }

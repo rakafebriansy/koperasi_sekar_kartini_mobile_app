@@ -830,7 +830,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/users/${id}/group/${groupId}',
+          '/users/${id}/groups/${groupId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1823,6 +1823,245 @@ class _ApiClient implements ApiClient {
         .compose(
           _dio.options,
           '/savings/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> getReports({
+    required int groupId,
+    String? search,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': search};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/groups/${groupId}/reports',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> createReport({
+    required int groupId,
+    required int quarter,
+    required int year,
+    required int memberGrowthIn,
+    int? memberGrowthInPercentage,
+    required int memberGrowthOut,
+    int? memberGrowthOutPercentage,
+    int? groupMemberTotal,
+    int? groupMemberTotalPercentage,
+    required int administrativeCompliancePercentage,
+    required int depositCompliancePercentage,
+    required int attendancePercentage,
+    required int organizationFinalScorePercentage,
+    required int loanParticipationPb,
+    required int loanParticipationBbm,
+    required int loanParticipationStore,
+    required int cashParticipation,
+    required int cashParticipationPercentage,
+    required int savingsParticipation,
+    required int savingsParticipationPercentage,
+    required int meetingDepositPercentage,
+    required int loanBalancePb,
+    required int loanBalanceBbm,
+    required int loanBalanceStore,
+    required int receivableScore,
+    required int financialFinalScorePercentage,
+    required int combinedFinalScorePercentage,
+    required String criteria,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'quarter': quarter,
+      'year': year,
+      'member_growth_in': memberGrowthIn,
+      'member_growth_in_percentage': memberGrowthInPercentage,
+      'member_growth_out': memberGrowthOut,
+      'member_growth_out_percentage': memberGrowthOutPercentage,
+      'group_member_total': groupMemberTotal,
+      'group_member_total_percentage': groupMemberTotalPercentage,
+      'administrative_compliance_percentage':
+          administrativeCompliancePercentage,
+      'deposit_compliance_percentage': depositCompliancePercentage,
+      'attendance_percentage': attendancePercentage,
+      'organization_final_score_percentage': organizationFinalScorePercentage,
+      'loan_participation_pb': loanParticipationPb,
+      'loan_participation_bbm': loanParticipationBbm,
+      'loan_participation_store': loanParticipationStore,
+      'cash_participation': cashParticipation,
+      'cash_participation_percentage': cashParticipationPercentage,
+      'savings_participation': savingsParticipation,
+      'savings_participation_percentage': savingsParticipationPercentage,
+      'meeting_deposit_percentage': meetingDepositPercentage,
+      'loan_balance_pb': loanBalancePb,
+      'loan_balance_bbm': loanBalanceBbm,
+      'loan_balance_store': loanBalanceStore,
+      'receivable_score': receivableScore,
+      'financial_final_score_percentage': financialFinalScorePercentage,
+      'combined_final_score_percentage': combinedFinalScorePercentage,
+      'criteria': criteria,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/groups/${groupId}/reports',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> updateReport({
+    required int id,
+    required int groupId,
+    String method = "PUT",
+    required int quarter,
+    required int year,
+    int? memberGrowthIn,
+    int? memberGrowthInPercentage,
+    int? memberGrowthOut,
+    int? memberGrowthOutPercentage,
+    int? groupMemberTotal,
+    int? groupMemberTotalPercentage,
+    int? administrativeCompliancePercentage,
+    int? depositCompliancePercentage,
+    int? attendancePercentage,
+    int? organizationFinalScorePercentage,
+    int? loanParticipationPb,
+    int? loanParticipationBbm,
+    int? loanParticipationStore,
+    int? cashParticipation,
+    int? cashParticipationPercentage,
+    int? savingsParticipation,
+    int? savingsParticipationPercentage,
+    int? meetingDepositPercentage,
+    int? loanBalancePb,
+    int? loanBalanceBbm,
+    int? loanBalanceStore,
+    required int receivableScore,
+    int? financialFinalScorePercentage,
+    int? combinedFinalScorePercentage,
+    String? criteria,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      '_method': method,
+      'quarter': quarter,
+      'year': year,
+      'member_growth_in': memberGrowthIn,
+      'member_growth_in_percentage': memberGrowthInPercentage,
+      'member_growth_out': memberGrowthOut,
+      'member_growth_out_percentage': memberGrowthOutPercentage,
+      'group_member_total': groupMemberTotal,
+      'group_member_total_percentage': groupMemberTotalPercentage,
+      'administrative_compliance_percentage':
+          administrativeCompliancePercentage,
+      'deposit_compliance_percentage': depositCompliancePercentage,
+      'attendance_percentage': attendancePercentage,
+      'organization_final_score_percentage': organizationFinalScorePercentage,
+      'loan_participation_pb': loanParticipationPb,
+      'loan_participation_bbm': loanParticipationBbm,
+      'loan_participation_store': loanParticipationStore,
+      'cash_participation': cashParticipation,
+      'cash_participation_percentage': cashParticipationPercentage,
+      'savings_participation': savingsParticipation,
+      'savings_participation_percentage': savingsParticipationPercentage,
+      'meeting_deposit_percentage': meetingDepositPercentage,
+      'loan_balance_pb': loanBalancePb,
+      'loan_balance_bbm': loanBalanceBbm,
+      'loan_balance_store': loanBalanceStore,
+      'receivable_score': receivableScore,
+      'financial_final_score_percentage': financialFinalScorePercentage,
+      'combined_final_score_percentage': combinedFinalScorePercentage,
+      'criteria': criteria,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/groups/${groupId}/reports/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> deleteReport({
+    required int id,
+    required int groupId,
+    String method = "DELETE",
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'_method': method};
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/groups/${groupId}/reports${id}',
           queryParameters: queryParameters,
           data: _data,
         )
