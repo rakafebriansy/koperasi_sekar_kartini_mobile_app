@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class SavingsListController extends GetxController {
   TextEditingController searchCtrl = TextEditingController();
@@ -20,10 +22,17 @@ class SavingsListController extends GetxController {
 
   Timer? _debounce;
 
+  final Rx<UserModel?> _member = Rxn();
+  UserModel? get member => _member.value;
+
   @override
+ @override
   void onInit() {
+    final args = (Get.arguments as ArgsWrapper);
+    var user = args.data as UserModel;
+    _member.value = user;
+    fetchListSavings(memberId: user.id);
     super.onInit();
-    fetchListSavings();
   }
 
   void onSearchChanged(String value) {
@@ -34,13 +43,13 @@ class SavingsListController extends GetxController {
     });
   }
 
-  Future<void> fetchListSavings({String? search}) async {
+  Future<void> fetchListSavings({String? search, int? memberId}) async {
     _isFetching.value = true;
 
     try {
       final List<SavingsModel> data = await ApiHelper.instance
           .fetchList<SavingsModel>(
-            request: (api) => api.getSavings(search: search),
+            request: (api) => api.getSavings(search: search, memberId: memberId),
           );
 
       _savingsList.value = data;

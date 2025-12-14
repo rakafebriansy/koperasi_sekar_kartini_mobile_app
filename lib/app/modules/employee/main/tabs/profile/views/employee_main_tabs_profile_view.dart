@@ -137,7 +137,7 @@ class EmployeeMainTabsProfileView
                             color: AppColor.border.gray,
                           ),
                           onTap: () {
-                            Get.toNamed(Routes.SAVINGS_LIST);
+                            Get.toNamed(Routes.USER_SAVINGS_LIST);
                           },
                         ),
                         Divider(

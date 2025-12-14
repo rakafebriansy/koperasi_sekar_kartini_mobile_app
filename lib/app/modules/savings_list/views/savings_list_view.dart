@@ -57,13 +57,13 @@ class SavingsListView extends GetView<SavingsListController> {
                         final result = await Get.toNamed(
                           Routes.MANAGE_SAVINGS,
                           arguments: ArgsWrapper(
-                            data: null,
+                            data: controller.member,
                             action: ActionType.create,
                           ),
                         );
 
                         if (result == true) {
-                          controller.fetchListSavings();
+                          controller.fetchListSavings(memberId: controller.member!.id);
                         }
                       },
                       child: Container(
@@ -169,7 +169,7 @@ class _SavingsCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.sp),
                 ),
                 padding: EdgeInsets.all(8.sp),
-                child: Icon(Icons.arrow_upward_rounded),
+                child: Icon(Icons.arrow_downward_rounded),
               ),
               poppins(savings.type.displayName, fontWeight: FontWeight.w600),
             ],

@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
@@ -44,7 +43,7 @@ class ManageSavingsView extends GetView<ManageSavingsController> {
                 Get.bottomSheet(
                   AppBottomSheet(
                     titleText: poppins(
-                      'Hapus Pinjaman',
+                      'Hapus Simpanan',
                       fontWeight: FontWeight.bold,
                       fontSize: 20.sp,
                     ),
@@ -66,7 +65,7 @@ class ManageSavingsView extends GetView<ManageSavingsController> {
                               ),
                             ),
                             poppins(
-                              'Yakin menghapus pinjaman?',
+                              'Yakin menghapus simpanan?',
                               fontWeight: FontWeight.w600,
                               fontSize: 16.sp,
                             ),
@@ -133,48 +132,6 @@ class ManageSavingsView extends GetView<ManageSavingsController> {
                     validator: (value) => value.isDropdownRequired(
                       'Jenis Pinjaman',
                       controller.selectedSavingsType?.displayName,
-                    ),
-                    popupProps: PopupProps.menu(
-                      fit: FlexFit.loose,
-                      constraints: BoxConstraints(maxHeight: 200.sp),
-                      itemBuilder: (context, item, isSelected, onTap) =>
-                          InkWell(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12.sp,
-                                vertical: 12.sp,
-                              ),
-                              child: poppins(item, fontSize: 14.sp),
-                            ),
-                          ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8.sp),
-                poppins(
-                  'Anggota',
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                SizedBox(height: 4.sp),
-                Obx(
-                  () => DropdownSearch<String>(
-                    enabled:
-                        controller.action != null &&
-                        !controller.isFetchingMember,
-                    onChanged: (value) => controller.selectMember(value),
-                    selectedItem:
-                        controller.selectedMember?.name ?? 'Pilih Anggota',
-                    items: (filter, infiniteScrollProps) =>
-                        controller.members.names,
-                    decoratorProps: DropDownDecoratorProps(
-                      baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
-                      decoration: buildAppTextInputDecoration(hintText: ''),
-                    ),
-                    validator: (value) => value.isDropdownRequired(
-                      'Anggota',
-                      controller.selectedMember?.name,
                     ),
                     popupProps: PopupProps.menu(
                       fit: FlexFit.loose,

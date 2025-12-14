@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
@@ -32,14 +33,15 @@ class ManageSavingsController extends GetxController {
     text: !kReleaseMode ? '02/2024' : '',
   );
 
-  final Rx<UserModel?> _selectedMember = Rxn();
-  UserModel? get selectedMember => _selectedMember.value;
 
   final Rx<SavingsType?> _selectedSavingsType = Rxn();
   SavingsType? get selectedSavingsType => _selectedSavingsType.value;
 
   final RxList<UserModel> _members = RxList();
   List<UserModel> get members => _members;
+
+  final Rx<UserModel?> _user = Rxn();
+  UserModel? get user => _user.value;
 
   final List<SavingsType> savingsTypes = [
     SavingsType.simpananBerjangka,
@@ -56,14 +58,15 @@ class ManageSavingsController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
-    if (args.action != null) _action.value = args.action;
 
-    if (args.data != null) {
+    if (args.action != null && args.action!.isCreateAction) {
+      _action.value = args.action;
+      _user.value = args.data as UserModel;
+    } else if (args.data != null) {
       final savings = args.data as SavingsModel;
       _savings.value = savings;
       amountCtrl.text = savings.nominal.toString();
       dateCtrl.text = '${savings.month}/${savings.year}';
-      _selectedMember.value = savings.user;
       _selectedSavingsType.value = savings.type;
     }
 
@@ -77,14 +80,6 @@ class ManageSavingsController extends GetxController {
 
     _selectedSavingsType.value = savingsTypes.firstWhere(
       (item) => item.displayName.toLowerCase() == name.toLowerCase(),
-    );
-  }
-
-  void selectMember(String? name) {
-    if (name == null) return;
-
-    _selectedMember.value = _members.firstWhere(
-      (item) => item.name.toLowerCase() == name.toLowerCase(),
     );
   }
 
@@ -113,7 +108,7 @@ class ManageSavingsController extends GetxController {
       try {
         if (selectedSavingsType == null)
           throw Exception('savings type is null');
-        if (selectedMember == null) throw Exception('member is null');
+        if (user == null) throw Exception('user is null');
 
         final dt = dateCtrl.text.toMonthYearDate();
 
@@ -123,7 +118,7 @@ class ManageSavingsController extends GetxController {
             nominal: int.parse(amountCtrl.text),
             year: dt.year,
             month: dt.month,
-            userId: selectedMember!.id,
+            userId: user!.id,
           ),
         );
 

@@ -343,7 +343,10 @@ abstract class ApiClient {
 
   // SAVINGS
   @GET("/savings")
-  Future<dynamic> getSavings({@Query('search') String? search});
+  Future<dynamic> getSavings({
+    @Query('search') String? search,
+    @Query('member_id') int? memberId,
+    });
 
   @GET("/savings/{id}")
   Future<dynamic> getSingleSavings({@Path('id') required int id});
