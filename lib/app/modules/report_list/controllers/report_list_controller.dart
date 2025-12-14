@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
@@ -22,6 +24,8 @@ class ReportListController extends GetxController {
   final RxList<ReportModel> _reports = RxList();
   List<ReportModel> get reports => _reports;
 
+  Timer? _debounce;
+
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
@@ -31,14 +35,21 @@ class ReportListController extends GetxController {
     super.onInit();
   }
 
+  void onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(seconds: 1), () {
+      fetchListReport(group!.id, search: value);
+    });
+  }
+
   Future<void> fetchListReport(int groupId, {String? search}) async {
     _isFetching.value = true;
 
     try {
-      final List<ReportModel> data = await apiHelper
-          .fetchList<ReportModel>(
-            request: (api) => api.getReports(search: search, groupId: groupId),
-          );
+      final List<ReportModel> data = await apiHelper.fetchList<ReportModel>(
+        request: (api) => api.getReports(search: search, groupId: groupId),
+      );
 
       _reports.value = data;
     } catch (e) {

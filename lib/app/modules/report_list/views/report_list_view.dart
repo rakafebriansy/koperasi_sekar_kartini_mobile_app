@@ -9,6 +9,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
@@ -34,13 +35,15 @@ class ReportListView extends GetView<ReportListController> {
               spacing: 10.sp,
               children: [
                 Expanded(
-                  child: AppTextFormField(
-                    controller: controller.searchCtrl,
-                    hintText: 'Cari',
+                  child: AppDateInputField(
                     prefixIcon: SvgPicture.asset(
                       AppAsset.svgs.searchGray,
                       height: 16.sp,
                     ),
+                    controller: controller.searchCtrl,
+                    placeholder: 'Cari...',
+                    type: DateInputType.year,
+                    onChanged: (value) => controller.onSearchChanged(value),
                   ),
                 ),
                 if (AuthController.find.currentUser!.role != 'group_member')
