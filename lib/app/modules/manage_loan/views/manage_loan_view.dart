@@ -35,7 +35,7 @@ class ManageLoanView extends GetView<ManageLoanController> {
                 : 'Ubah Pinjaman')
           : 'Detail Pinjaman',
       actions: [
-        if (AuthController.find.currentUser?.role == 'admin')
+        if (controller.action == null && AuthController.find.currentUser?.role == 'admin')
           Material(
             color: Colors.transparent,
             child: InkWell(

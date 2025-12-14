@@ -152,6 +152,8 @@ class EmployeeManageReportController extends GetxController {
       if (args.action!.isUpdateAction) {
         final report = args.data as ReportModel;
         _report.value = report;
+        _selectedQuarter.value = report.quarter;
+        _selectedCriteria.value = report.criteria;
         yearCtrl.text = report.year.toString();
         memberGrowthInCtrl.text = report.memberGrowthIn.toString();
         memberGrowthOutCtrl.text = report.memberGrowthOut.toString();
@@ -300,9 +302,8 @@ class EmployeeManageReportController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat raport!');
+      Get.snackbar('INFO', 'Berhasil membuat rapot!');
     } catch (e) {
-      rethrow;
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
@@ -318,8 +319,6 @@ class EmployeeManageReportController extends GetxController {
         request: (api) => api.updateReport(
           id: report!.id,
           groupId: report!.groupId,
-          quarter: selectedQuarter!.toInt(),
-          year: int.parse(yearCtrl.text),
           memberGrowthIn: int.parse(memberGrowthInCtrl.text),
           memberGrowthOut: int.parse(memberGrowthOutCtrl.text),
           administrativeCompliancePercentage: int.parse(
@@ -361,7 +360,27 @@ class EmployeeManageReportController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat raport!');
+      Get.snackbar('INFO', 'Berhasil membuat rapot!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      _isSubmitted.value = false;
+    }
+  }
+
+  Future<void> deleteReport() async {
+    _isSubmitted.value = true;
+
+    if (report == null) throw Exception('report is null');
+
+    try {
+      await ApiHelper.instance.fetchNonReturnable(
+        request: (api) => api.deleteReport(groupId: report!.groupId, id: report!.id),
+      );
+
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil menghapus rapot!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

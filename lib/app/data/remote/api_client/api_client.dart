@@ -438,8 +438,6 @@ abstract class ApiClient {
 
     @Field("_method") String method = "PUT",
 
-    @Field() required int quarter,
-    @Field() required int year,
     @Field('member_growth_in') int? memberGrowthIn,
     @Field('member_growth_in_percentage') int? memberGrowthInPercentage,
     @Field('member_growth_out') int? memberGrowthOut,
@@ -471,7 +469,7 @@ abstract class ApiClient {
     @Field('criteria') String? criteria,
   });
 
-  @POST("/groups/{group_id}/reports{id}")
+  @POST("/groups/{group_id}/reports/{id}")
   Future<dynamic> deleteReport({
     @Path('id') required int id,
     @Path('group_id') required int groupId,

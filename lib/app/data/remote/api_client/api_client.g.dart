@@ -1959,8 +1959,6 @@ class _ApiClient implements ApiClient {
     required int id,
     required int groupId,
     String method = "PUT",
-    required int quarter,
-    required int year,
     int? memberGrowthIn,
     int? memberGrowthInPercentage,
     int? memberGrowthOut,
@@ -1993,8 +1991,6 @@ class _ApiClient implements ApiClient {
     final _headers = <String, dynamic>{};
     final _data = {
       '_method': method,
-      'quarter': quarter,
-      'year': year,
       'member_growth_in': memberGrowthIn,
       'member_growth_in_percentage': memberGrowthInPercentage,
       'member_growth_out': memberGrowthOut,
@@ -2061,7 +2057,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/groups/${groupId}/reports${id}',
+          '/groups/${groupId}/reports/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

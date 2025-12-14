@@ -3,11 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 import '../controllers/report_list_controller.dart';
 
@@ -38,14 +43,82 @@ class ReportListView extends GetView<ReportListController> {
                     ),
                   ),
                 ),
+                if (AuthController.find.currentUser!.role != 'group_member')
+                  Material(
+                    borderRadius: BorderRadius.circular(12.sp),
+                    color: Colors.white,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12.sp),
+                      onTap: () async {
+                        final result = await Get.toNamed(
+                          Routes.EMPLOYEE_MANAGE_REPORT,
+                          arguments: ArgsWrapper(
+                            data: controller.group,
+                            action: ActionType.create,
+                          ),
+                        );
+                        if (result == true) {
+                          controller.fetchListReport(controller.group!.id);
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1.sp,
+                            color: AppColor.border.lightGray,
+                          ),
+                          borderRadius: BorderRadius.circular(12.sp),
+                        ),
+                        padding: EdgeInsets.all(10.sp),
+                        child: Center(
+                          child: Icon(
+                            Icons.add,
+                            size: 28.sp,
+                            color: AppColor.border.gray,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
             Divider(height: 1, color: AppColor.border.lightGray),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  spacing: 16.sp,
-                  children: List.generate(6, (context) => _ReportCard()),
+                child: Obx(
+                  () => controller.isFetching
+                      ? SizedBox(
+                          height: getScreenHeight(context, scale: 0.7),
+                          child: Center(child: CircularProgressIndicator()),
+                        )
+                      : controller.reports.isEmpty
+                      ? SizedBox(
+                          height: getScreenHeight(context, scale: 0.6),
+                          child: Center(child: poppins('Tidak ada data')),
+                        )
+                      : Column(
+                          spacing: 16.sp,
+                          children: List.generate(
+                            controller.reports.length,
+                            (index) => _ReportCard(
+                              report: controller.reports[index],
+                              onTap: () async {
+                                final result = await Get.toNamed(
+                                  Routes.EMPLOYEE_MANAGE_REPORT,
+                                  arguments: ArgsWrapper(
+                                    data: controller.reports[index],
+                                    action: ActionType.update,
+                                  ),
+                                );
+                                if (result == true) {
+                                  controller.fetchListReport(
+                                    controller.group!.id,
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ),
@@ -57,7 +130,10 @@ class ReportListView extends GetView<ReportListController> {
 }
 
 class _ReportCard extends StatelessWidget {
-  const _ReportCard();
+  const _ReportCard({required this.report, required this.onTap});
+
+  final ReportModel report;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +176,12 @@ class _ReportCard extends StatelessWidget {
                           poppins(
                             'Laporan kondisi kelompok',
                             color: Colors.white,
+                            fontSize: 14.sp,
                           ),
                         ],
                       ),
                       poppins(
-                        'Triwulan III',
+                        'Triwulan ${report.quarter.toInt()}, ${report.year}',
                         fontSize: 20.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -115,7 +192,7 @@ class _ReportCard extends StatelessWidget {
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(99),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: onTap,
                       borderRadius: BorderRadius.circular(99),
                       child: Container(
                         padding: EdgeInsets.all(8.sp),

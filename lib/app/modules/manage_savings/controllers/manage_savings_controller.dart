@@ -107,31 +107,34 @@ class ManageSavingsController extends GetxController {
   }
 
   Future<void> createSavings() async {
-    _isSubmitted.value = true;
+    if (formKey.currentState!.validate()) {
+      _isSubmitted.value = true;
 
-    try {
-      if (selectedSavingsType == null) throw Exception('savings type is null');
-      if (selectedMember == null) throw Exception('member is null');
+      try {
+        if (selectedSavingsType == null)
+          throw Exception('savings type is null');
+        if (selectedMember == null) throw Exception('member is null');
 
-      final dt = dateCtrl.text.toMonthYearDate();
+        final dt = dateCtrl.text.toMonthYearDate();
 
-      await ApiHelper.instance.fetchNonReturnable(
-        request: (api) => api.createSavings(
-          type: selectedSavingsType!.snakeCase,
-          nominal: int.parse(amountCtrl.text),
-          year: dt.year,
-          month: dt.month,
-          userId: selectedMember!.id,
-        ),
-      );
+        await ApiHelper.instance.fetchNonReturnable(
+          request: (api) => api.createSavings(
+            type: selectedSavingsType!.snakeCase,
+            nominal: int.parse(amountCtrl.text),
+            year: dt.year,
+            month: dt.month,
+            userId: selectedMember!.id,
+          ),
+        );
 
-      Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
-    } catch (e) {
-      debugPrint(e.toString());
-      ErrorHelper.handleError(e,);
-    } finally {
-      _isSubmitted.value = false;
+        Get.back(result: true);
+        Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
+      } catch (e) {
+        debugPrint(e.toString());
+        ErrorHelper.handleError(e);
+      } finally {
+        _isSubmitted.value = false;
+      }
     }
   }
 
@@ -151,7 +154,7 @@ class ManageSavingsController extends GetxController {
       Get.snackbar('INFO', 'Berhasil menghapus pinjaman!');
     } catch (e) {
       debugPrint(e.toString());
-      ErrorHelper.handleError(e,);
+      ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
     }

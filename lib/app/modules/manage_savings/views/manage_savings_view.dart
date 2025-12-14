@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
@@ -34,7 +35,8 @@ class ManageSavingsView extends GetView<ManageSavingsController> {
                 : 'Ubah Simpanan')
           : 'Detail Simpanan',
       actions: [
-        if (AuthController.find.currentUser?.role == 'admin')
+        if (controller.action == null &&
+            AuthController.find.currentUser?.role == 'admin')
           Material(
             color: Colors.transparent,
             child: InkWell(
@@ -117,7 +119,7 @@ class ManageSavingsView extends GetView<ManageSavingsController> {
                 SizedBox(height: 4.sp),
                 Obx(
                   () => DropdownSearch<String>(
-                  enabled: controller.action != null,
+                    enabled: controller.action != null,
                     onChanged: (value) => controller.selectSavingsType(value),
                     selectedItem:
                         controller.selectedSavingsType?.displayName ??
@@ -158,7 +160,9 @@ class ManageSavingsView extends GetView<ManageSavingsController> {
                 SizedBox(height: 4.sp),
                 Obx(
                   () => DropdownSearch<String>(
-                    enabled: controller.action != null && !controller.isFetchingMember,
+                    enabled:
+                        controller.action != null &&
+                        !controller.isFetchingMember,
                     onChanged: (value) => controller.selectMember(value),
                     selectedItem:
                         controller.selectedMember?.name ?? 'Pilih Anggota',

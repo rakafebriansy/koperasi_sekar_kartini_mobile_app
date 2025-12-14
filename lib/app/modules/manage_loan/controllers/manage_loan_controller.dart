@@ -107,31 +107,33 @@ class ManageLoanController extends GetxController {
   }
 
   Future<void> createLoan() async {
-    _isSubmitted.value = true;
+    if (formKey.currentState!.validate()) {
+      _isSubmitted.value = true;
 
-    try {
-      if (selectedLoanType == null) throw Exception('loan type is null');
-      if (selectedMember == null) throw Exception('member is null');
+      try {
+        if (selectedLoanType == null) throw Exception('loan type is null');
+        if (selectedMember == null) throw Exception('member is null');
 
-      final dt = dateCtrl.text.toMonthYearDate();
+        final dt = dateCtrl.text.toMonthYearDate();
 
-      await ApiHelper.instance.fetchNonReturnable(
-        request: (api) => api.createLoan(
-          type: selectedLoanType!.snakeCase,
-          nominal: int.parse(amountCtrl.text),
-          year: dt.year,
-          month: dt.month,
-          userId: selectedMember!.id,
-        ),
-      );
+        await ApiHelper.instance.fetchNonReturnable(
+          request: (api) => api.createLoan(
+            type: selectedLoanType!.snakeCase,
+            nominal: int.parse(amountCtrl.text),
+            year: dt.year,
+            month: dt.month,
+            userId: selectedMember!.id,
+          ),
+        );
 
-      Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
-    } catch (e) {
-      debugPrint(e.toString());
-      ErrorHelper.handleError(e);
-    } finally {
-      _isSubmitted.value = false;
+        Get.back(result: true);
+        Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
+      } catch (e) {
+        debugPrint(e.toString());
+        ErrorHelper.handleError(e);
+      } finally {
+        _isSubmitted.value = false;
+      }
     }
   }
 
