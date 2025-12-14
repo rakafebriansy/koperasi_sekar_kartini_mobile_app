@@ -37,9 +37,6 @@ class ManageSavingsController extends GetxController {
   final Rx<SavingsType?> _selectedSavingsType = Rxn();
   SavingsType? get selectedSavingsType => _selectedSavingsType.value;
 
-  final RxList<UserModel> _members = RxList();
-  List<UserModel> get members => _members;
-
   final Rx<UserModel?> _user = Rxn();
   UserModel? get user => _user.value;
 
@@ -70,8 +67,6 @@ class ManageSavingsController extends GetxController {
       _selectedSavingsType.value = savings.type;
     }
 
-    fetchListGroupMember();
-
     super.onInit();
   }
 
@@ -83,23 +78,6 @@ class ManageSavingsController extends GetxController {
     );
   }
 
-  Future<void> fetchListGroupMember({String? search}) async {
-    _isFetchingMember.value = true;
-
-    try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) =>
-                api.getUsers(search: search, role: 'group_member'),
-          );
-
-      _members.value = data;
-    } catch (e) {
-      ErrorHelper.handleError(e);
-    } finally {
-      _isFetchingMember.value = false;
-    }
-  }
 
   Future<void> createSavings() async {
     if (formKey.currentState!.validate()) {

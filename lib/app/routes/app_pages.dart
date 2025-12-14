@@ -54,6 +54,8 @@ import '../modules/report_list/bindings/report_list_binding.dart';
 import '../modules/report_list/views/report_list_view.dart';
 import '../modules/savings_list/bindings/savings_list_binding.dart';
 import '../modules/savings_list/views/savings_list_view.dart';
+import '../modules/user_loan_list/bindings/user_loan_list_binding.dart';
+import '../modules/user_loan_list/views/user_loan_list_view.dart';
 import '../modules/user_savings_list/bindings/user_savings_list_binding.dart';
 import '../modules/user_savings_list/views/user_savings_list_view.dart';
 
@@ -208,6 +210,11 @@ class AppPages {
       name: _Paths.USER_SAVINGS_LIST,
       page: () => const UserSavingsListView(),
       binding: UserSavingsListBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_LOAN_LIST,
+      page: () => const UserLoanListView(),
+      binding: UserLoanListBinding(),
     ),
   ];
 }

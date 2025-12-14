@@ -33,14 +33,11 @@ class ManageLoanController extends GetxController {
     text: !kReleaseMode ? '02/2024' : '',
   );
 
-  final Rx<UserModel?> _selectedMember = Rxn();
-  UserModel? get selectedMember => _selectedMember.value;
-
   final Rx<LoanType?> _selectedLoanType = Rxn();
   LoanType? get selectedLoanType => _selectedLoanType.value;
 
-  final RxList<UserModel> _members = RxList();
-  List<UserModel> get members => _members;
+  final Rx<UserModel?> _user = Rxn();
+  UserModel? get user => _user.value;
 
   final List<LoanType> loanTypes = [
     LoanType.pinjamanBiasa,
@@ -56,18 +53,18 @@ class ManageLoanController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
-    if (args.action != null) _action.value = args.action;
 
-    if (args.data != null) {
+    if (args.action != null && args.action!.isCreateAction) {
+      _action.value = args.action;
+      _user.value = args.data as UserModel;
+    } else if (args.data != null) {
+      if (args.action != null) _action.value = args.action;
       final loan = args.data as LoanModel;
       _loan.value = loan;
       amountCtrl.text = loan.nominal.toString();
       dateCtrl.text = '${loan.month}/${loan.year}';
-      _selectedMember.value = loan.user;
       _selectedLoanType.value = loan.type;
     }
-
-    fetchListGroupMember();
 
     super.onInit();
   }
@@ -80,39 +77,13 @@ class ManageLoanController extends GetxController {
     );
   }
 
-  void selectMember(String? name) {
-    if (name == null) return;
-
-    _selectedMember.value = _members.firstWhere(
-      (item) => item.name.toLowerCase() == name.toLowerCase(),
-    );
-  }
-
-  Future<void> fetchListGroupMember({String? search}) async {
-    _isFetchingMember.value = true;
-
-    try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) =>
-                api.getUsers(search: search, role: 'group_member'),
-          );
-
-      _members.value = data;
-    } catch (e) {
-      ErrorHelper.handleError(e);
-    } finally {
-      _isFetchingMember.value = false;
-    }
-  }
-
   Future<void> createLoan() async {
     if (formKey.currentState!.validate()) {
       _isSubmitted.value = true;
 
       try {
         if (selectedLoanType == null) throw Exception('loan type is null');
-        if (selectedMember == null) throw Exception('member is null');
+        if (user == null) throw Exception('user is null');
 
         final dt = dateCtrl.text.toMonthYearDate();
 
@@ -122,7 +93,7 @@ class ManageLoanController extends GetxController {
             nominal: int.parse(amountCtrl.text),
             year: dt.year,
             month: dt.month,
-            userId: selectedMember!.id,
+            userId: user!.id,
           ),
         );
 
@@ -143,7 +114,6 @@ class ManageLoanController extends GetxController {
     try {
       if (loan == null) throw Exception('loan is null');
       if (selectedLoanType == null) throw Exception('loan type is null');
-      if (selectedMember == null) throw Exception('member is null');
 
       await ApiHelper.instance.fetchNonReturnable(
         request: (api) =>

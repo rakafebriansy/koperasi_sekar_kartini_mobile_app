@@ -1429,9 +1429,15 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> getLoans({String? search}) async {
+  Future<dynamic> getLoans({
+    String? search,
+    int? memberId,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'search': search};
+    final queryParameters = <String, dynamic>{
+      r'search': search,
+      r'member_id': memberId,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

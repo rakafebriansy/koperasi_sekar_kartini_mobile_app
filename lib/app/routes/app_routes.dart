@@ -35,6 +35,7 @@ abstract class Routes {
   static const MANAGE_SAVINGS = _Paths.MANAGE_SAVINGS;
   static const MANAGE_PASSWORD = _Paths.MANAGE_PASSWORD;
   static const USER_SAVINGS_LIST = _Paths.USER_SAVINGS_LIST;
+  static const USER_LOAN_LIST = _Paths.USER_LOAN_LIST;
 }
 
 abstract class _Paths {
@@ -69,4 +70,5 @@ abstract class _Paths {
   static const MANAGE_SAVINGS = '/manage-savings';
   static const MANAGE_PASSWORD = '/manage-password';
   static const USER_SAVINGS_LIST = '/user-savings-list';
+  static const USER_LOAN_LIST = '/user-loan-list';
 }

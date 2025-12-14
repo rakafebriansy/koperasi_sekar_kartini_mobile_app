@@ -152,7 +152,7 @@ class EmployeeMainTabsProfileView
                             color: AppColor.border.gray,
                           ),
                           onTap: () {
-                            Get.toNamed(Routes.LOAN_LIST);
+                            Get.toNamed(Routes.USER_LOAN_LIST);
                           },
                         ),
                       ],

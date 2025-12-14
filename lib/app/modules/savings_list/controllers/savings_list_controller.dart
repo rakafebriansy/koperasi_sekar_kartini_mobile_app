@@ -26,7 +26,6 @@ class SavingsListController extends GetxController {
   UserModel? get member => _member.value;
 
   @override
- @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
     var user = args.data as UserModel;

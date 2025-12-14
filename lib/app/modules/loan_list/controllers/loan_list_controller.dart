@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class LoanListController extends GetxController {
   TextEditingController searchCtrl = TextEditingController();
@@ -20,10 +22,16 @@ class LoanListController extends GetxController {
 
   Timer? _debounce;
 
+  final Rx<UserModel?> _member = Rxn();
+  UserModel? get member => _member.value;
+
   @override
   void onInit() {
+    final args = (Get.arguments as ArgsWrapper);
+    var user = args.data as UserModel;
+    _member.value = user;
+    fetchListLoan(memberId: user.id);
     super.onInit();
-    fetchListLoan();
   }
 
   void onSearchChanged(String value) {
@@ -34,12 +42,12 @@ class LoanListController extends GetxController {
     });
   }
 
-  Future<void> fetchListLoan({String? search}) async {
+  Future<void> fetchListLoan({String? search, int? memberId}) async {
     _isFetching.value = true;
 
     try {
       final List<LoanModel> data = await ApiHelper.instance
-          .fetchList<LoanModel>(request: (api) => api.getLoans(search: search));
+          .fetchList<LoanModel>(request: (api) => api.getLoans(search: search, memberId: memberId));
 
       _loans.value = data;
     } catch (e) {

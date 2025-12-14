@@ -300,7 +300,10 @@ abstract class ApiClient {
 
   // LOAN
   @GET("/loans")
-  Future<dynamic> getLoans({@Query('search') String? search});
+  Future<dynamic> getLoans({
+    @Query('search') String? search,
+    @Query('member_id') int? memberId,
+  });
 
   @GET("/loans/{id}")
   Future<dynamic> getLoan({@Path('id') required int id});
@@ -346,7 +349,7 @@ abstract class ApiClient {
   Future<dynamic> getSavings({
     @Query('search') String? search,
     @Query('member_id') int? memberId,
-    });
+  });
 
   @GET("/savings/{id}")
   Future<dynamic> getSingleSavings({@Path('id') required int id});

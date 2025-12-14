@@ -59,13 +59,15 @@ class LoanListView extends GetView<LoanListController> {
                             final result = await Get.toNamed(
                               Routes.MANAGE_LOAN,
                               arguments: ArgsWrapper(
-                                data: null,
+                                data: controller.member,
                                 action: ActionType.create,
                               ),
                             );
 
                             if (result == true) {
-                              controller.fetchListLoan();
+                              controller.fetchListLoan(
+                                memberId: controller.member!.id,
+                              );
                             }
                           },
                           child: Container(
@@ -147,7 +149,9 @@ class LoanListView extends GetView<LoanListController> {
                                         );
 
                                         if (result == true) {
-                                          controller.fetchListLoan();
+                                          controller.fetchListLoan(
+                                            memberId: controller.member!.id,
+                                          );
                                         }
                                       },
                                 borderRadius: BorderRadius.circular(12.sp),

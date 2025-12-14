@@ -10,6 +10,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
@@ -35,7 +36,8 @@ class ManageLoanView extends GetView<ManageLoanController> {
                 : 'Ubah Pinjaman')
           : 'Detail Pinjaman',
       actions: [
-        if (controller.action == null && AuthController.find.currentUser?.role == 'admin')
+        if (controller.action == null &&
+            AuthController.find.currentUser?.role == 'admin')
           Material(
             color: Colors.transparent,
             child: InkWell(
@@ -118,6 +120,7 @@ class ManageLoanView extends GetView<ManageLoanController> {
                 SizedBox(height: 4.sp),
                 Obx(
                   () => DropdownSearch<String>(
+                    enabled: controller.action == ActionType.create,
                     onChanged: (value) => controller.selectLoanType(value),
                     selectedItem:
                         controller.selectedLoanType?.displayName ??
@@ -150,48 +153,9 @@ class ManageLoanView extends GetView<ManageLoanController> {
                   ),
                 ),
                 SizedBox(height: 8.sp),
-                poppins(
-                  'Anggota',
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                SizedBox(height: 4.sp),
-                Obx(
-                  () => DropdownSearch<String>(
-                    enabled: !controller.isFetchingMember,
-                    onChanged: (value) => controller.selectMember(value),
-                    selectedItem:
-                        controller.selectedMember?.name ?? 'Pilih Anggota',
-                    items: (filter, infiniteScrollProps) =>
-                        controller.members.names,
-                    decoratorProps: DropDownDecoratorProps(
-                      baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
-                      decoration: buildAppTextInputDecoration(hintText: ''),
-                    ),
-                    validator: (value) => value.isDropdownRequired(
-                      'Anggota',
-                      controller.selectedMember?.name,
-                    ),
-                    popupProps: PopupProps.menu(
-                      fit: FlexFit.loose,
-                      constraints: BoxConstraints(maxHeight: 200.sp),
-                      itemBuilder: (context, item, isSelected, onTap) =>
-                          InkWell(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12.sp,
-                                vertical: 12.sp,
-                              ),
-                              child: poppins(item, fontSize: 14.sp),
-                            ),
-                          ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8.sp),
                 poppins('Bulan', fontSize: 14.sp, fontWeight: FontWeight.w600),
                 AppDateInputField(
+                  enabled: controller.action == ActionType.create,
                   controller: controller.dateCtrl,
                   placeholder: 'Masukkan bulan',
                   label: 'Bulan',
@@ -199,6 +163,7 @@ class ManageLoanView extends GetView<ManageLoanController> {
                 ),
                 SizedBox(height: 8.sp),
                 AppTextFormGroup(
+                  enabled: controller.action == ActionType.create,
                   controller: controller.amountCtrl,
                   label: 'Nominal',
                   maxLines: 1,
@@ -214,7 +179,9 @@ class ManageLoanView extends GetView<ManageLoanController> {
                   SizedBox(
                     width: double.infinity,
                     child: AppFilledButton(
-                      label: controller.action!.isUpdateAction
+                      label:
+                          controller.action != null &&
+                              controller.action!.isUpdateAction
                           ? 'Tandai Dibayar'
                           : 'Simpan',
                       onTap:
