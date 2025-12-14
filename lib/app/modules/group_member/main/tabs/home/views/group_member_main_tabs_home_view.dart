@@ -59,7 +59,7 @@ class GroupMemberMainTabsHomeView
               ),
             ),
             Obx(
-              () => controller.events.isEmpty
+              () => controller.upcomingEvents.isEmpty
                   ? SizedBox(
                       height: 42.sp,
                       child: Center(child: poppins('Tidak ada Pemberitahuan')),
@@ -67,7 +67,7 @@ class GroupMemberMainTabsHomeView
                   : Column(
                       mainAxisSize: MainAxisSize.min,
                       spacing: 10.sp,
-                      children: controller.events
+                      children: controller.upcomingEvents
                           .map((event) => _buildUpcomingEventBar(event))
                           .toList(),
                     ),
@@ -104,6 +104,7 @@ class GroupMemberMainTabsHomeView
 
                         if (result == true) {
                           controller.fetchListEvent();
+                          controller.fetchUpcomingEvents();
                         }
                       },
                       label: poppins('Tambah', color: AppColor.bg.primary),

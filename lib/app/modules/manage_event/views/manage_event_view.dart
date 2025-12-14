@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
@@ -44,6 +45,7 @@ class ManageEventView extends GetView<ManageEventController> {
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
+                SizedBox(height: 4.sp),
                 Obx(
                   () => DropdownSearch<String>(
                     enabled: controller.action != null,
@@ -80,6 +82,53 @@ class ManageEventView extends GetView<ManageEventController> {
                     ),
                   ),
                 ),
+                SizedBox(height: 8.sp),
+                if (AuthController.find.currentUser!.role !=
+                    'group_member') ...[
+                  poppins(
+                    'Kelompok',
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  SizedBox(height: 4.sp),
+                  Obx(
+                    () => DropdownSearch<String>(
+                      enabled:
+                          controller.action != null &&
+                          !controller.isFetching &&
+                          controller.selectedEventType == EventType.group,
+                      onChanged: (value) => controller.selectGroup(value),
+                      selectedItem: controller.selectedGroup != null
+                          ? 'Kelompok ${controller.selectedGroup?.number}'
+                          : 'Pilih Grup',
+                      items: (filter, infiniteScrollProps) =>
+                          controller.groups.names,
+                      decoratorProps: DropDownDecoratorProps(
+                        baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
+                        decoration: buildAppTextInputDecoration(hintText: ''),
+                      ),
+                      validator: (value) => value.isDropdownRequired(
+                        'Kelompok',
+                        controller.selectedGroup?.number.toString(),
+                      ),
+                      popupProps: PopupProps.menu(
+                        fit: FlexFit.loose,
+                        constraints: BoxConstraints(maxHeight: 200.sp),
+                        itemBuilder: (context, item, isSelected, onTap) =>
+                            InkWell(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 12.sp,
+                                  vertical: 12.sp,
+                                ),
+                                child: poppins(item, fontSize: 14.sp),
+                              ),
+                            ),
+                      ),
+                    ),
+                  ),
+                ],
                 SizedBox(height: 8.sp),
                 AppTextFormGroup(
                   controller: controller.nameCtrl,

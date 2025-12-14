@@ -31,14 +31,6 @@ class ManageGroupController extends GetxController {
   final Rx<UserModel?> _selectedFacilitator = Rxn();
   UserModel? get selectedFacilitator => _selectedFacilitator.value;
 
-  final Rx<bool?> _isActive = Rxn();
-  bool? get isActive => _isActive.value;
-  String? get isActiveString => isActive == null
-      ? null
-      : isActive!
-      ? 'Aktif'
-      : 'Tidak Aktif';
-
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
@@ -124,17 +116,6 @@ class ManageGroupController extends GetxController {
     _selectedChairman.value = _members.firstWhere(
       (item) => item.name.toLowerCase() == name.toLowerCase(),
     );
-  }
-
-  void selectStatus(String? value) {
-    if (value == null) return;
-
-    switch (value) {
-      case 'Aktif':
-        _isActive.value = true;
-      case 'Tidak Aktif':
-        _isActive.value = false;
-    }
   }
 
   void selectFacilitator(String? name) {

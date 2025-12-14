@@ -154,36 +154,6 @@ class ManageGroupView extends GetView<ManageGroupController> {
                   ),
                 ),
                 SizedBox(height: 8.sp),
-                poppins('Status', fontSize: 14.sp, fontWeight: FontWeight.w600),
-                DropdownSearch<String>(
-                  enabled: true,
-                  selectedItem: controller.isActiveString ?? 'Pilih Status',
-                  items: (filter, infiniteScrollProps) => [
-                    'Aktif',
-                    'Tidak Aktif',
-                  ],
-                  decoratorProps: DropDownDecoratorProps(
-                    baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
-                    decoration: buildAppTextInputDecoration(hintText: ''),
-                  ),
-                  onChanged: (value) => controller.selectStatus(value),
-                  validator: (value) => value.isDropdownRequired('Status', controller.isActiveString),
-                  popupProps: PopupProps.menu(
-                    fit: FlexFit.loose,
-                    constraints: BoxConstraints(maxHeight: 200.sp),
-                    itemBuilder: (context, item, isSelected, onTap) => InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.sp,
-                          vertical: 12.sp,
-                        ),
-                        child: poppins(item, fontSize: 14.sp),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8.sp),
                 poppins(
                   'Penanggung Jawab Kelompok',
                   fontSize: 14.sp,

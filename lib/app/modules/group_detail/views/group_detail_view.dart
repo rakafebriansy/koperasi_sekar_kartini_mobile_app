@@ -28,93 +28,86 @@ class GroupDetailView extends GetView<GroupDetailController> {
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
       ableToBack: true,
+      withPadding: false,
       title: poppins('Detail Kelompok', fontWeight: FontWeight.w600),
-      child: Obx(
-        () => controller.group != null && !controller.isLoading
-            ? SingleChildScrollView(
-                child: Column(
+      child: SingleChildScrollView(
+        child: Obx(
+          () =>
+              controller.isFetchingGroup ||
+                  controller.isFetchingEmployee ||
+                  controller.isFetchingGroupMember
+              ? SizedBox(
+                  height: getScreenHeight(context, scale: 0.8),
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              : Column(
                   spacing: 10.sp,
                   children: [
-                    _GroupInfoCard(controller: controller),
-                    Obx(
-                      () => controller.isLoading
-                          ? SizedBox(
-                              height: getScreenHeight(context, scale: 0.54),
-                              child: Center(child: CircularProgressIndicator()),
-                            )
-                          : Column(
-                              spacing: 8.sp,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 16.sp,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                          0,
-                                          2.sp,
-                                          0,
-                                          0,
-                                        ),
-                                        child: poppins(
-                                          'Anggota',
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                      if (AuthController
-                                              .find
-                                              .currentUser!
-                                              .role ==
-                                          'admin')
-                                        ElevatedButton.icon(
-                                          style: buildInkWellButtonStyle(
-                                            foregroundColor:
-                                                AppColor.bg.primary,
-                                            backgroundColor:
-                                                AppColor.bg.lightPrimary,
-                                            overlayColor: AppColor
-                                                .bg
-                                                .transparentPrimary
-                                                .withValues(alpha: 0.2),
-                                            borderRadiusCircularSize: 12.sp,
-                                          ),
-                                          icon: Icon(Icons.add),
-                                          label: poppins('Tambah'),
-                                          onPressed: _addMember,
-                                        ),
-                                    ],
-                                  ),
+                    if (controller.group != null)
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal:  16.sp),
+                        child: _GroupInfoCard(controller: controller),
+                      ),
+                    Column(
+                      spacing: 8.sp,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 2.sp, 0, 0),
+                                child: poppins(
+                                  'Anggota',
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w700,
                                 ),
+                              ),
+                              if (AuthController.find.currentUser!.role ==
+                                  'admin')
                                 Obx(
-                                  () => controller.groupMembers.isNotEmpty
-                                      ? _GroupedGroupMemberListView(
-                                          controller: controller,
-                                        )
-                                      : SizedBox(
-                                          height: getScreenHeight(
-                                            context,
-                                            scale: 0.54,
-                                          ),
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: poppins('Tidak ada data.'),
-                                          ),
-                                        ),
+                                  () => ElevatedButton.icon(
+                                    style: buildInkWellButtonStyle(
+                                      foregroundColor: AppColor.bg.primary,
+                                      backgroundColor: AppColor.bg.lightPrimary,
+                                      overlayColor: AppColor
+                                          .bg
+                                          .transparentPrimary
+                                          .withValues(alpha: 0.2),
+                                      borderRadiusCircularSize: 12.sp,
+                                    ),
+                                    icon: Icon(Icons.add),
+                                    label: poppins('Tambah'),
+                                    onPressed:
+                                        controller.isFetchingUnlistedMembers
+                                        ? null
+                                        : _addMember,
+                                  ),
                                 ),
-                              ],
-                            ),
+                            ],
+                          ),
+                        ),
+                        Obx(
+                          () => controller.groupMembers.isEmpty
+                              ? SizedBox(
+                                  height: getScreenHeight(context, scale: 0.54),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: poppins('Tidak ada data.'),
+                                  ),
+                                )
+                              : _GroupedGroupMemberListView(
+                                  controller: controller,
+                                ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              )
-            : Center(child: CircularProgressIndicator()),
+        ),
       ),
     );
   }
@@ -131,10 +124,11 @@ class GroupDetailView extends GetView<GroupDetailController> {
         children: [
           poppins('Anggota', fontSize: 14.sp, fontWeight: FontWeight.w600),
           DropdownSearch<String>(
-            enabled: !controller.isFetchingMember,
+            enabled: !controller.isFetchingUnlistedMembers,
             onChanged: (value) => controller.selectMember(value),
             selectedItem: controller.selectedMember?.name ?? 'Pilih Anggota',
-            items: (filter, infiniteScrollProps) => controller.members.names,
+            items: (filter, infiniteScrollProps) =>
+                controller.unlistedMembers.names,
             decoratorProps: DropDownDecoratorProps(
               baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
               decoration: buildAppTextInputDecoration(hintText: ''),
@@ -374,10 +368,9 @@ class _GroupInfoCard extends StatelessWidget {
                       borderRadiusCircularSize: 12.sp,
                     ),
                     onPressed: () async {
-
                       final result = await Get.toNamed(
                         Routes.REPORT_LIST,
-                        arguments: ArgsWrapper(data: controller.group)
+                        arguments: ArgsWrapper(data: controller.group),
                       );
                       if (result == true) {
                         controller.fetchGroupById(controller.group!.id);
@@ -471,10 +464,11 @@ class _GroupInfoCard extends StatelessWidget {
         children: [
           poppins('PJK', fontSize: 14.sp, fontWeight: FontWeight.w600),
           DropdownSearch<String>(
-            enabled: !controller.isFetchingMember,
+            enabled: !controller.isFetchingGroupMember,
             onChanged: (value) => controller.selectChairman(value),
             selectedItem: controller.selectedChairman?.name ?? 'Pilih Anggota',
-            items: (filter, infiniteScrollProps) => controller.members.names,
+            items: (filter, infiniteScrollProps) =>
+                controller.groupMembers.names,
             decoratorProps: DropDownDecoratorProps(
               baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
               decoration: buildAppTextInputDecoration(hintText: ''),

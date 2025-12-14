@@ -51,9 +51,6 @@ class GroupDetailController extends GetxController {
   final RxBool _isFetchingEmployee = false.obs;
   bool get isFetchingEmployee => _isFetchingEmployee.value;
 
-  final RxBool _isFetchingMember = false.obs;
-  bool get isFetchingMember => _isFetchingMember.value;
-
   final RxBool _isFetchingUnlistedMembers = false.obs;
   bool get isFetchingUnlistedMembers => _isFetchingUnlistedMembers.value;
 
@@ -63,12 +60,6 @@ class GroupDetailController extends GetxController {
   final RxBool _isFetchingGroupMember = false.obs;
   bool get isFetchingGroupMember => _isFetchingGroupMember.value;
 
-  bool get isLoading =>
-      isFetchingEmployee ||
-      isFetchingMember ||
-      isFetchingGroup ||
-      isFetchingUnlistedMembers;
-
   final Rx<UserModel?> _selectedMember = Rxn();
   UserModel? get selectedMember => _selectedMember.value;
 
@@ -77,9 +68,6 @@ class GroupDetailController extends GetxController {
 
   final RxList<UserModel> _employees = RxList();
   List<UserModel> get employees => _employees;
-
-  final RxList<UserModel> _members = RxList();
-  List<UserModel> get members => _members;
 
   final RxList<UserModel> _unlistedMembers = RxList();
   List<UserModel> get unlistedMembers => _unlistedMembers;
@@ -108,7 +96,7 @@ class GroupDetailController extends GetxController {
   void selectChairman(String? name) {
     if (name == null) return;
 
-    _selectedChairman.value = _members.firstWhere(
+    _selectedChairman.value = _groupMembers.firstWhere(
       (item) => item.name.toLowerCase() == name.toLowerCase(),
     );
   }
@@ -116,7 +104,7 @@ class GroupDetailController extends GetxController {
   void selectMember(String? name) {
     if (name == null) return;
 
-    _selectedMember.value = _members.firstWhere(
+    _selectedMember.value = _unlistedMembers.firstWhere(
       (item) => item.name.toLowerCase() == name.toLowerCase(),
     );
   }

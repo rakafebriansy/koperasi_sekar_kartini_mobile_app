@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
@@ -25,8 +26,14 @@ class ManageEventController extends GetxController {
   final Rx<int?> _id = Rxn();
   int? get id => _id.value;
 
+  final RxList<GroupModel> _groups = RxList();
+  List<GroupModel> get groups => _groups;
+
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
+
+  final RxBool _isFetching = false.obs;
+  bool get isFetching => _isFetching.value;
 
   TextEditingController nameCtrl = TextEditingController(
     text: !kReleaseMode ? 'Pertemuan 1' : '',
@@ -45,6 +52,9 @@ class ManageEventController extends GetxController {
 
   final Rx<EventType?> _selectedEventType = Rxn();
   EventType? get selectedEventType => _selectedEventType.value;
+
+  final Rx<GroupModel?> _selectedGroup = Rxn();
+  GroupModel? get selectedGroup => _selectedGroup.value;
 
   final Rx<File?> _hintPhoto = Rxn();
   File? get hintPhoto => _hintPhoto.value;
@@ -68,6 +78,8 @@ class ManageEventController extends GetxController {
       locationCtrl.text = event.location;
       descCtrl.text = event.description ?? '';
     }
+
+    fetchListGroup();
     super.onInit();
   }
 
@@ -88,6 +100,36 @@ class ManageEventController extends GetxController {
     );
   }
 
+  void selectGroup(String? name) {
+    if (name == null) return;
+
+    final match = RegExp(r'\d+').firstMatch(name);
+    if (match == null) return;
+
+    final number = int.parse(match.group(0)!);
+
+    _selectedGroup.value = groups.firstWhere(
+      (item) => item.number == number,
+    );
+  }
+
+  Future<void> fetchListGroup({String? search}) async {
+    _isFetching.value = true;
+
+    try {
+      final List<GroupModel> data = await ApiHelper.instance
+          .fetchList<GroupModel>(
+            request: (api) => api.getGroups(search: search),
+          );
+
+      _groups.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetching.value = false;
+    }
+  }
+
   Future<void> createMeeting() async {
     _isSubmitted.value = true;
 
@@ -106,7 +148,7 @@ class ManageEventController extends GetxController {
           datetime: dt,
           location: locationCtrl.text.nullIfEmpty,
           description: descCtrl.text.nullIfEmpty,
-          groupId: user.role == 'group_member' ? user.groupId : null,
+          groupId: user.role == 'group_member' ? user.groupId : selectedGroup?.id,
           photo: hintPhoto,
         ),
       );
@@ -139,7 +181,7 @@ class ManageEventController extends GetxController {
               : dateTimeCtrl.text.toIsoDateString(),
           location: locationCtrl.text.nullIfEmpty,
           description: descCtrl.text.nullIfEmpty,
-          groupId: user.role == 'group_member' ? user.groupId : null,
+          groupId: user.role == 'group_member' ? user.groupId : selectedGroup?.id,
           userId: user.id,
         ),
       );
