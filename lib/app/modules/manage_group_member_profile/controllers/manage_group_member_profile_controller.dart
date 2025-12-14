@@ -16,6 +16,7 @@ class ManageGroupMemberProfileController extends GetxController {
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();
   final thirdFormKey = GlobalKey<FormState>();
+  final fourthFormKey = GlobalKey<FormState>();
 
   TextEditingController identityNumberCtrl = TextEditingController(
     // text: !kReleaseMode ? '1234567890123456' : '',
@@ -84,7 +85,7 @@ class ManageGroupMemberProfileController extends GetxController {
     addressCtrl.text = user.address ?? '';
     birthDateCtrl.text = DateFormat('dd/MM/yyyy').format(user.birthDate!);
     occupationCtrl.text = user.occupation ?? '';
-    phoneCtrl.text = user.phoneNumber ?? '';
+    phoneCtrl.text = user.phoneNumber;
     passwordCtrl.text = '';
     confirmPasswordCtrl.text = '';
     _selectedWorkArea.value = user.workArea;
@@ -158,27 +159,10 @@ class ManageGroupMemberProfileController extends GetxController {
     }
   }
 
-  Future<void> register() async {
+  Future<void> updateProfile() async {
     _isSubmitted.value = true;
 
-    if (selectedWorkArea == null) throw Exception('Work Area is null');
-
     try {
-      await ApiHelper.instance.fetch<UserModel>(
-        request: (api) => api.register(
-          name: nameCtrl.text,
-          identityNumber: identityNumberCtrl.text,
-          birthDate: birthDateCtrl.text.toIsoDateString(),
-          phoneNumber: phoneCtrl.text,
-          address: addressCtrl.text,
-          occupation: occupationCtrl.text,
-          password: passwordCtrl.text,
-          workAreaId: selectedWorkArea!.id,
-          identityCardPhoto: idCardImage!,
-          selfPhoto: selfImage!,
-        ),
-      );
-
       Get.back(result: true);
       Get.snackbar('INFO', 'Berhasil membuat akun!');
     } catch (e) {
@@ -218,9 +202,12 @@ class ManageGroupMemberProfileController extends GetxController {
                 firstFormKey.currentState!.validate() ? nextScreen() : null,
             1: () =>
                 secondFormKey.currentState!.validate() ? nextScreen() : null,
-            2: () => thirdFormKey.currentState!.validate() ? register() : null,
+            2: () =>
+                thirdFormKey.currentState!.validate() ? nextScreen() : null,
+            3: () =>
+                thirdFormKey.currentState!.validate() ? updateProfile() : null,
           }
-        : {0: () => nextScreen(), 1: () => activateMember()};
+        : {0: () => nextScreen(), 1: () => nextScreen(), 2: () => activateMember()};
 
     steps[selectedScreen]?.call();
   }

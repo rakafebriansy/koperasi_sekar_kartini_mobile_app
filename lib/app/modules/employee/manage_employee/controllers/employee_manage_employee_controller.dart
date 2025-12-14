@@ -55,7 +55,7 @@ class EmployeeManageEmployeeController extends GetxController {
   File? get selfImage => _selfImage.value;
 
   final Rx<File?> _memberCardImage = Rxn();
-  File? get memberCardImage => _selfImage.value;
+  File? get memberCardImage => _memberCardImage.value;
 
   final RxInt _selectedScreen = 0.obs;
   int get selectedScreen => _selectedScreen.value;

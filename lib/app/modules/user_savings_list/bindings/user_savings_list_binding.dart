@@ -7,7 +7,7 @@ class UserSavingsListBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UserSavingsListController>(
-      () => UserSavingsListController(apiHelper: ApiHelper()),
+      () => UserSavingsListController(apiHelper: Get.find<ApiHelper>()),
     );
   }
 }

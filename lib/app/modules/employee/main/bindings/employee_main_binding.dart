@@ -17,7 +17,7 @@ class EmployeeMainBinding extends Bindings {
       () => EmployeeMainTabsHomeController(apiHelper: Get.find<ApiHelper>()),
     );
     Get.lazyPut<EmployeeMainTabsProfileController>(
-      () => EmployeeMainTabsProfileController(),
+      () => EmployeeMainTabsProfileController(apiHelper: Get.find<ApiHelper>()),
     );
     Get.lazyPut<EmployeeMainTabsGroupController>(
       () => EmployeeMainTabsGroupController(apiHelper: Get.find<ApiHelper>()),

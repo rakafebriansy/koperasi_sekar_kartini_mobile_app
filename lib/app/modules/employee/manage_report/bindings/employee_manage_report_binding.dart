@@ -7,7 +7,7 @@ class EmployeeManageReportBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<EmployeeManageReportController>(
-      () => EmployeeManageReportController(apiHelper: ApiHelper()),
+      () => EmployeeManageReportController(apiHelper: Get.find<ApiHelper>()),
     );
   }
 }

@@ -7,7 +7,7 @@ class UserLoanListBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UserLoanListController>(
-      () => UserLoanListController(apiHelper: ApiHelper()),
+      () => UserLoanListController(apiHelper: Get.find<ApiHelper>()),
     );
   }
 }

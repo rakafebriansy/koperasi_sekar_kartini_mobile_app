@@ -140,7 +140,7 @@ class GroupDetailView extends GetView<GroupDetailController> {
               decoration: buildAppTextInputDecoration(hintText: ''),
             ),
             validator: (value) => value.isDropdownRequired(
-              'PPK',
+              'Anggota',
               controller.selectedMember?.name,
             ),
             popupProps: PopupProps.menu(

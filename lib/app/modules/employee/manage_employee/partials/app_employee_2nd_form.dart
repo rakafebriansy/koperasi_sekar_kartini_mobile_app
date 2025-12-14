@@ -51,6 +51,7 @@ class AppEmployee2ndForm extends StatelessWidget {
           ),
           SizedBox(height: 8.sp),
           poppins('Foto Diri', fontSize: 14.sp, fontWeight: FontWeight.w600),
+          SizedBox(height: 4.sp),
           AppUploadImageFormField(
             builder: (onPick) {
               return AppStandardUploadImageField(
@@ -68,6 +69,7 @@ class AppEmployee2ndForm extends StatelessWidget {
           ),
           SizedBox(height: 8.sp),
           poppins('Foto Kartu Anggota', fontSize: 14.sp, fontWeight: FontWeight.w600),
+          SizedBox(height: 4.sp),
           AppUploadImageFormField(
             builder: (onPick) {
               return AppStandardUploadImageField(

@@ -1,14 +1,22 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time/date_time_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_bottom_sheet.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_standard_upload_image_field.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_upload_image_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
 
@@ -153,6 +161,116 @@ class EmployeeMainTabsProfileView
                           ),
                           onTap: () {
                             Get.toNamed(Routes.USER_LOAN_LIST);
+                          },
+                        ),
+                        Divider(
+                          height: 1.sp,
+                          thickness: 1.sp,
+                          color: AppColor.bg.gray,
+                        ),
+                        _AppSettingMenuItem(
+                          label: 'Unggah KTA',
+                          icon: Icon(
+                            Icons.add_photo_alternate,
+                            color: AppColor.border.gray,
+                          ),
+                          onTap: () {
+                            Get.bottomSheet(
+                              AppBottomSheet(
+                                formKey: controller.formKey,
+                                titleText: poppins(
+                                  'Unggah KTA',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.sp,
+                                ),
+                                children: [
+                                  poppins(
+                                    'Anggota',
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  Obx(
+                                    () => DropdownSearch<String>(
+                                      enabled: !controller.isFetchingMembers,
+                                      onChanged: (value) =>
+                                          controller.selectMember(value),
+                                      selectedItem:
+                                          controller.selectedMember?.name ??
+                                          'Pilih Anggota',
+                                      items: (filter, infiniteScrollProps) =>
+                                          controller.members.names,
+                                      decoratorProps: DropDownDecoratorProps(
+                                        baseStyle: GoogleFonts.poppins(
+                                          fontSize: 14.sp,
+                                        ),
+                                        decoration: buildAppTextInputDecoration(
+                                          hintText: '',
+                                        ),
+                                      ),
+                                      validator: (value) =>
+                                          value.isDropdownRequired(
+                                            'Anggota',
+                                            controller.selectedMember?.name,
+                                          ),
+                                      popupProps: PopupProps.menu(
+                                        fit: FlexFit.loose,
+                                        constraints: BoxConstraints(
+                                          maxHeight: 200.sp,
+                                        ),
+                                        itemBuilder:
+                                            (context, item, isSelected, onTap) =>
+                                                InkWell(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.symmetric(
+                                                      horizontal: 12.sp,
+                                                      vertical: 12.sp,
+                                                    ),
+                                                    child: poppins(
+                                                      item,
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 8.sp),
+                                  poppins(
+                                    'Foto Diri',
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  AppUploadImageFormField(
+                                    builder: (onPick) {
+                                      return AppStandardUploadImageField(
+                                        onPick: onPick,
+                                        textButton: 'Unggah',
+                                      );
+                                    },
+                                    onPick: (file) async {
+                                      controller.setMemberCardImage(file);
+                                    },
+                                    validator: (value) =>
+                                        value.isRequired('Foto KTA'),
+                                  ),
+                                  SizedBox(height: 8.sp),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Obx(
+                                      () => AppFilledButton(
+                                        label: 'Simpan',
+                                        onTap: controller.isSubmitted
+                                            ? null
+                                            : controller.updateMemberCardImage,
+                                        width: double.infinity,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
                           },
                         ),
                       ],

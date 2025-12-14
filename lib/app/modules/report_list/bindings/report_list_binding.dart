@@ -7,7 +7,7 @@ class ReportListBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<ReportListController>(
-      () => ReportListController(apiHelper: ApiHelper()),
+      () => ReportListController(apiHelper: Get.find<ApiHelper>()),
     );
   }
 }

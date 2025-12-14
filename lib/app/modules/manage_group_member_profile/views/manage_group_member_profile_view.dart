@@ -5,6 +5,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_1st_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_2nd_Form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_3rd_form.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_4th_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_form_wrapper.dart';
 
@@ -37,6 +38,9 @@ class ManageGroupMemberProfileView
                             controller: controller,
                           ),
                         AppManageGroupMemberProfile3rdForm(
+                          controller: controller,
+                        ),
+                        AppManageGroupMemberProfile4thForm(
                           controller: controller,
                         ),
                       ],

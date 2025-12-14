@@ -10,8 +10,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_inpu
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
-class AppManageGroupMemberProfile3rdForm extends StatelessWidget {
-  const AppManageGroupMemberProfile3rdForm({
+class AppManageGroupMemberProfile4thForm extends StatelessWidget {
+  const AppManageGroupMemberProfile4thForm({
     super.key,
     required this.controller,
   });
@@ -22,12 +22,12 @@ class AppManageGroupMemberProfile3rdForm extends StatelessWidget {
     final role = AuthController.find.currentUser!.role;
     return Obx(
       () => Form(
-        key: controller.thirdFormKey,
+        key: controller.fourthFormKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            poppins('Foto KTP', fontSize: 14.sp, fontWeight: FontWeight.w600),
+            poppins('Foto KTA', fontSize: 14.sp, fontWeight: FontWeight.w600),
             SizedBox(height: 4.sp),
             AppUploadImageFormField(
               builder: (onPick) {
@@ -35,32 +35,14 @@ class AppManageGroupMemberProfile3rdForm extends StatelessWidget {
                   onPick: onPick,
                   readOnly: role != 'group_member',
                   readOnlyValue: (role != 'group_member')
-                      ? controller.user!.identityCardPhoto
+                      ? controller.user!.memberCardPhoto
                       : null,
                 );
               },
               onPick: (file) async {
                 controller.setIdCardImage(file);
               },
-              validator: (value) => value.isRequired('Pas Foto'),
-            ),
-            SizedBox(height: 8.sp),
-            poppins('Foto Diri', fontSize: 14.sp, fontWeight: FontWeight.w600),
-            SizedBox(height: 4.sp),
-            AppUploadImageFormField(
-              builder: (onPick) {
-                return AppBigEditImageField(
-                  onPick: onPick,
-                  readOnly: role != 'group_member',
-                  readOnlyValue: (role != 'group_member')
-                      ? controller.user!.selfPhoto
-                      : null,
-                );
-              },
-              onPick: (file) async {
-                controller.setSelfImage(file);
-              },
-              validator: (value) => value.isRequired('Pas Foto'),
+              validator: (value) => value.isRequired('Foto KTA'),
             ),
             SizedBox(height: 18.sp),
             Row(
@@ -94,15 +76,27 @@ class AppManageGroupMemberProfile3rdForm extends StatelessWidget {
                     ),
                   ),
                 Expanded(
-                  child: AppFilledButton(
-                    width: double.infinity,
-                    label: 'Lanjut',
-                    onTap: controller.submitButton,
-                  ),
+                  child: AuthController.find.currentUser!.role == 'group_member'
+                      ? AppFilledButton(
+                          width: double.infinity,
+                          label: 'Daftar',
+                          onTap: controller.isSubmitted
+                              ? null
+                              : controller.submitButton,
+                        )
+                      : AppFilledButton(
+                          width: double.infinity,
+                          label: controller.user!.isActive
+                              ? 'Nonaktifkan'
+                              : 'Aktifkan',
+                          onTap: controller.isSubmitted
+                              ? null
+                              : controller.submitButton,
+                        ),
                 ),
-                SizedBox(height: 12.sp),
               ],
             ),
+            SizedBox(height: 12.sp),
           ],
         ),
       ),
