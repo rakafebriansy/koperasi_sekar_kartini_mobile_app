@@ -483,6 +483,13 @@ abstract class ApiClient {
     @Field("_method") String method = "DELETE",
   });
 
+  // CHARTS
   @GET("/member-growth")
   Future<dynamic> getMemberGrowth();
+
+  @GET("/savings-distribution-chart")
+  Future<dynamic> getSavingsDistribution();
+  
+  @GET("/loan-distribution-chart")
+  Future<dynamic> getLoanDistribution();
 }

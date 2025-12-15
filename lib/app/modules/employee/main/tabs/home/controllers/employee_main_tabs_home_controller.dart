@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan_distribution/loan_distribution_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/member_growth/member_growth_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings_distribution/savings_distribution_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
@@ -12,9 +14,20 @@ class EmployeeMainTabsHomeController extends GetxController {
   bool get isFetchingEvents => _isFetchingEvents.value;
 
   final RxBool _isFetchingMemberGrowth = false.obs;
-  bool get isFetchingMemberGrowth => _isFetchingEvents.value;
+  bool get isFetchingMemberGrowth => _isFetchingMemberGrowth.value;
 
-  bool get isLoading => isFetchingEvents || isFetchingMemberGrowth;
+  final RxBool _isFetchingSavingsDistribution = false.obs;
+  bool get isFetchingSavingsDistribution =>
+      _isFetchingSavingsDistribution.value;
+
+  final RxBool _isFetchingLoanDistribution = false.obs;
+  bool get isFetchingLoanDistribution => _isFetchingLoanDistribution.value;
+
+  bool get isLoading =>
+      isFetchingEvents ||
+      isFetchingMemberGrowth ||
+      isFetchingSavingsDistribution ||
+      isFetchingLoanDistribution;
 
   final RxList<EventModel> _events = RxList();
   List<EventModel> get events => _events;
@@ -22,10 +35,19 @@ class EmployeeMainTabsHomeController extends GetxController {
   final RxList<MemberGrowthModel> _memberGrowths = RxList();
   List<MemberGrowthModel> get memberGrowths => _memberGrowths;
 
+  final RxList<SavingsDistributionModel> _savingsDistribution = RxList();
+  List<SavingsDistributionModel> get savingsDistribution =>
+      _savingsDistribution;
+
+  final RxList<LoanDistributionModel> _loanDistribution = RxList();
+  List<LoanDistributionModel> get loanDistribution => _loanDistribution;
+
   @override
   void onInit() {
     fetchListEvent();
     fetchMemberGrowth();
+    fetchSavingsDistribution();
+    fetchLoanDistribution();
     super.onInit();
   }
 
@@ -59,6 +81,41 @@ class EmployeeMainTabsHomeController extends GetxController {
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingMemberGrowth.value = false;
+    }
+  }
+
+  Future<void> fetchSavingsDistribution({String? search}) async {
+    _isFetchingSavingsDistribution.value = true;
+
+    try {
+      final List<SavingsDistributionModel> data = await apiHelper
+          .fetchList<SavingsDistributionModel>(
+            request: (api) => api.getSavingsDistribution(),
+          );
+
+      _savingsDistribution.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingSavingsDistribution.value = false;
+    }
+  }
+
+  Future<void> fetchLoanDistribution({String? search}) async {
+    _isFetchingLoanDistribution.value = true;
+
+    try {
+      final List<LoanDistributionModel> data = await apiHelper
+          .fetchList<LoanDistributionModel>(
+            request: (api) => api.getLoanDistribution(),
+          );
+
+      _loanDistribution.value = data;
+    } catch (e) {
+      rethrow;
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingLoanDistribution.value = false;
     }
   }
 }

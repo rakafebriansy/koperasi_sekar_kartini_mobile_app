@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan_distribution/loan_distribution_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/member_growth/member_growth_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings_distribution/savings_distribution_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
@@ -32,9 +34,9 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     if (controller.memberGrowths.isNotEmpty)
-                      MemberLineChart(members: controller.memberGrowths),
+                      MemberLineChart(data: controller.memberGrowths),
                     Container(
-                      height: 360.sp,
+                      height: 380.sp,
                       padding: EdgeInsets.fromLTRB(16.sp, 12.sp, 16.sp, 12.sp),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -45,7 +47,10 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                         ),
                       ),
                       child: AppDefaultTabbar(
-                        views: [SimplePieChart(), SimplePieChart()],
+                        views: [
+                          SavingsPieChart(data: controller.savingsDistribution),
+                          LoanPieChart(data: controller.loanDistribution),
+                        ],
                         tabLabels: ['Simpanan', 'Pinjaman'],
                       ),
                     ),
@@ -156,15 +161,13 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
 }
 
 class MemberLineChart extends StatelessWidget {
-  const MemberLineChart({super.key, required this.members});
+  const MemberLineChart({super.key, required this.data});
 
-  final List<MemberGrowthModel> members;
+  final List<MemberGrowthModel> data;
 
   @override
   Widget build(BuildContext context) {
-    final spots = members
-        .map((e) => FlSpot(e.year.toDouble(), e.total))
-        .toList();
+    final spots = data.map((e) => FlSpot(e.year.toDouble(), e.total)).toList();
     return Container(
       padding: EdgeInsets.fromLTRB(16.sp, 12.sp, 24.sp, 12.sp),
       decoration: BoxDecoration(
@@ -263,59 +266,73 @@ class MemberLineChart extends StatelessWidget {
   }
 }
 
-class SimplePieChart extends StatefulWidget {
-  const SimplePieChart({super.key});
+class SavingsPieChart extends StatelessWidget {
+  final List<SavingsDistributionModel> data;
 
-  @override
-  State<SimplePieChart> createState() => _SimplePieChartState();
-}
-
-class _SimplePieChartState extends State<SimplePieChart> {
-  bool isSavingTab = true;
+  const SavingsPieChart({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 250.sp,
-            child: PieChart(
-              PieChartData(
-                sectionsSpace: 0,
-                centerSpaceRadius: 0,
-                sections: [
-                  PieChartSectionData(
-                    value: 50,
-                    color: const Color(0xFF007F67),
-                    radius: 110,
-                  ),
-                  PieChartSectionData(
-                    value: 30,
-                    color: const Color(0xFF5F8C6A),
-                    radius: 110,
-                  ),
-                  PieChartSectionData(
-                    value: 20,
-                    color: const Color(0xFFDFF3F0),
-                    radius: 110,
-                  ),
-                ],
-              ),
+    if (data.isEmpty) {
+      return const Center(child: Text("Tidak ada data"));
+    }
+
+    final sorted = List<SavingsDistributionModel>.from(data)
+      ..sort((a, b) => b.total.compareTo(a.total));
+
+    final topTwo = sorted.take(2).toList();
+    final othersTotal = sorted
+        .skip(2)
+        .fold<double>(0, (sum, item) => sum + item.total);
+
+    final chartData = [...topTwo];
+    if (othersTotal > 0) {
+      chartData.add(
+        SavingsDistributionModel(type: "Lainnya", total: othersTotal),
+      );
+    }
+
+    final colors = [
+      const Color(0xFF007F67),
+      const Color(0xFF5F8C6A),
+      const Color(0xFFDFF3F0),
+    ];
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 250.sp,
+          child: PieChart(
+            PieChartData(
+              sectionsSpace: 2,
+              centerSpaceRadius: 0,
+              sections: List.generate(chartData.length, (index) {
+                final item = chartData[index];
+                return PieChartSectionData(
+                  value: item.total,
+                  color: colors[index % colors.length],
+                  radius: 110,
+                  showTitle: false,
+                );
+              }),
             ),
           ),
+        ),
 
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 20,
-            children: [
-              _legendItem(const Color(0xFF007F67), "Simpanan A"),
-              _legendItem(const Color(0xFF5F8C6A), "Simpanan B"),
-              _legendItem(const Color(0xFFDFF3F0), "Lainnya"),
-            ],
-          ),
-        ],
-      ),
+        const SizedBox(height: 12),
+
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 16,
+          runSpacing: 8,
+          children: List.generate(chartData.length, (index) {
+            return _legendItem(
+              colors[index % colors.length],
+              _formatLabel(chartData[index].type),
+            );
+          }),
+        ),
+      ],
     );
   }
 
@@ -324,17 +341,115 @@ class _SimplePieChartState extends State<SimplePieChart> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 16,
-          height: 16,
+          width: 14,
+          height: 14,
           decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(3),
             color: color,
+            borderRadius: BorderRadius.circular(3),
           ),
         ),
-        const SizedBox(width: 8),
-        poppins(label),
+        const SizedBox(width: 6),
+        poppins(label.capitalize!, fontSize: 12),
       ],
     );
+  }
+
+  String _formatLabel(String type) {
+    return type
+        .replaceAll('_', ' ')
+        .replaceFirst(type[0], type[0].toUpperCase());
+  }
+}
+
+class LoanPieChart extends StatelessWidget {
+  final List<LoanDistributionModel> data;
+
+  const LoanPieChart({super.key, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    if (data.isEmpty) {
+      return const Center(child: Text("Tidak ada data"));
+    }
+
+    final sorted = List<LoanDistributionModel>.from(data)
+      ..sort((a, b) => b.total.compareTo(a.total));
+
+    final topTwo = sorted.take(2).toList();
+    final othersTotal = sorted
+        .skip(2)
+        .fold<double>(0, (sum, item) => sum + item.total);
+
+    final chartData = [...topTwo];
+    if (othersTotal > 0) {
+      chartData.add(LoanDistributionModel(type: "Lainnya", total: othersTotal));
+    }
+
+    final colors = [
+      const Color(0xFFE53935),
+      const Color(0xFFEF9A9A),
+      const Color(0xFFFFCDD2),
+    ];
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 250.sp,
+          child: PieChart(
+            PieChartData(
+              sectionsSpace: 2,
+              centerSpaceRadius: 0,
+              sections: List.generate(chartData.length, (index) {
+                final item = chartData[index];
+                return PieChartSectionData(
+                  value: item.total,
+                  color: colors[index % colors.length],
+                  radius: 110,
+                  showTitle: false,
+                );
+              }),
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 12),
+
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 16,
+          runSpacing: 8,
+          children: List.generate(chartData.length, (index) {
+            return _legendItem(
+              colors[index % colors.length],
+              _formatLabel(chartData[index].type),
+            );
+          }),
+        ),
+      ],
+    );
+  }
+
+  Widget _legendItem(Color color, String label) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(3),
+          ),
+        ),
+        const SizedBox(width: 6),
+        poppins(label.capitalize!, fontSize: 12),
+      ],
+    );
+  }
+
+  String _formatLabel(String type) {
+    return type
+        .replaceAll('_', ' ')
+        .replaceFirst(type[0], type[0].toUpperCase());
   }
 }
