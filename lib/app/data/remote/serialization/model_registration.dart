@@ -2,6 +2,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/member_growth/member_growth_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
@@ -39,6 +40,10 @@ void registerModels() {
   );
   ModelRegistry.register<ReportModel>(
     fromJson: (json) => ReportModel.fromJson(json),
+    toJson: (obj) => obj.toJson(),
+  );
+  ModelRegistry.register<MemberGrowthModel>(
+    fromJson: (json) => MemberGrowthModel.fromJson(json),
     toJson: (obj) => obj.toJson(),
   );
 }
