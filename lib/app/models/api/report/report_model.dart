@@ -83,31 +83,31 @@ class ReportModel with _$ReportModel {
     required int memberGrowthIn,
 
     @JsonKey(name: 'member_growth_in_percentage')
-    required int memberGrowthInPercentage,
+    required double memberGrowthInPercentage,
 
     @JsonKey(name: 'member_growth_out')
     required int memberGrowthOut,
 
     @JsonKey(name: 'member_growth_out_percentage')
-    required int memberGrowthOutPercentage,
+    required double memberGrowthOutPercentage,
 
     @JsonKey(name: 'group_member_total')
     required int groupMemberTotal,
 
     @JsonKey(name: 'group_member_total_percentage')
-    required int groupMemberTotalPercentage,
+    required double groupMemberTotalPercentage,
 
     @JsonKey(name: 'administrative_compliance_percentage')
-    required int administrativeCompliancePercentage,
+    required double administrativeCompliancePercentage,
 
     @JsonKey(name: 'deposit_compliance_percentage')
-    required int depositCompliancePercentage,
+    required double depositCompliancePercentage,
 
     @JsonKey(name: 'attendance_percentage')
-    required int attendancePercentage,
+    required double attendancePercentage,
 
     @JsonKey(name: 'organization_final_score_percentage')
-    required int organizationFinalScorePercentage,
+    required double organizationFinalScorePercentage,
 
     @JsonKey(name: 'loan_participation_pb')
     required int loanParticipationPb,
@@ -122,16 +122,16 @@ class ReportModel with _$ReportModel {
     required int cashParticipation,
 
     @JsonKey(name: 'cash_participation_percentage')
-    required int cashParticipationPercentage,
+    required double cashParticipationPercentage,
 
     @JsonKey(name: 'savings_participation')
     required int savingsParticipation,
 
     @JsonKey(name: 'savings_participation_percentage')
-    required int savingsParticipationPercentage,
+    required double savingsParticipationPercentage,
 
     @JsonKey(name: 'meeting_deposit_percentage')
-    required int meetingDepositPercentage,
+    required double meetingDepositPercentage,
 
     @JsonKey(name: 'loan_balance_pb')
     required int loanBalancePb,
@@ -143,13 +143,13 @@ class ReportModel with _$ReportModel {
     required int loanBalanceStore,
 
     @JsonKey(name: 'receivable_score')
-    required int receivableScore,
+    required double receivableScorePercentage,
 
     @JsonKey(name: 'financial_final_score_percentage')
-    required int financialFinalScorePercentage,
+    required double financialFinalScorePercentage,
 
     @JsonKey(name: 'combined_final_score_percentage')
-    required int combinedFinalScorePercentage,
+    required double combinedFinalScorePercentage,
 
     @JsonKey(name: 'criteria')
     required ReportCriteria criteria,

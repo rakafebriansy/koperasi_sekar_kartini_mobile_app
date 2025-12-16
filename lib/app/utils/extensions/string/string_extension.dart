@@ -54,3 +54,15 @@ extension MonthYearParsing on String {
     return DateTime(year, month + 1, 0);
   }
 }
+
+extension FloatToPercent on num {
+  String toPercent({int decimal = 1}) {
+    final formatted = toStringAsFixed(decimal);
+
+    if (formatted.endsWith('.0')) {
+      return '${formatted.replaceAll('.0', '').replaceAll('.', ',')}%';
+    }
+
+    return '${formatted.replaceAll('.', ',')}%';
+  }
+}

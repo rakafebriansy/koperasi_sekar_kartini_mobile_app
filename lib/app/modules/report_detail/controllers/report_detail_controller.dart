@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group_report/group_report_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ReportDetailController extends GetxController {
-  final RxList<GroupReportModel> groupReportModels = RxList(
-    DummyHelper.groupReports,
-  );
+  late final ReportModel report;
 
-  final Rx<GroupReportModel?> _selectedGroupReport = Rxn();
-  GroupReportModel? get selectedGroupReport => _selectedGroupReport.value;
+  void onInit() {
+    final args = (Get.arguments as ArgsWrapper);
+    report = args.data as ReportModel;
+    super.onInit();
+  }
 }

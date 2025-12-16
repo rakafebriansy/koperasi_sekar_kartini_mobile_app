@@ -1,14 +1,13 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/num/num_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
@@ -26,60 +25,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 10.sp,
           children: [
-            Row(
-              spacing: 10.sp,
-              children: [
-                Expanded(
-                  child: DropdownSearch<String>(
-                    enabled: controller.groupReportModels.isNotEmpty,
-                    selectedItem:
-                        controller.selectedGroupReport?.label ??
-                        controller.groupReportModels.labels.first,
-                    items: (filter, infiniteScrollProps) =>
-                        controller.groupReportModels.labels,
-                    decoratorProps: DropDownDecoratorProps(
-                      baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
-                      decoration: buildAppTextInputDecoration(hintText: ''),
-                    ),
-                    popupProps: PopupProps.menu(
-                      fit: FlexFit.loose,
-                      constraints: BoxConstraints(maxHeight: 200.sp),
-                      itemBuilder: (context, item, isSelected, onTap) =>
-                          InkWell(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12.sp,
-                                vertical: 12.sp,
-                              ),
-                              child: poppins(item, fontSize: 14.sp),
-                            ),
-                          ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(14.sp),
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(14.sp),
-                    child: Container(
-                      padding: EdgeInsets.all(12.sp),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14.sp),
-                        border: Border.all(
-                          width: 1.5.sp,
-                          color: AppColor.bg.gray,
-                        ),
-                      ),
-                      child: Icon(Icons.more_vert),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            _ReportCard(),
+            _ReportCard(report: controller.report),
             SizedBox(height: 16.sp),
             poppins(
               'Bidang Organisasi',
@@ -101,8 +47,9 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        point: 1,
-                        pointPercentage: 25,
+                        point: controller.report.memberGrowthIn,
+                        pointPercentage:
+                            controller.report.memberGrowthInPercentage,
                       ),
                     ),
                     Expanded(
@@ -113,8 +60,9 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        point: 1,
-                        pointPercentage: -25,
+                        point: controller.report.memberGrowthOut,
+                        pointPercentage:
+                            controller.report.memberGrowthOutPercentage,
                       ),
                     ),
                   ],
@@ -130,8 +78,9 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        point: 15,
-                        pointPercentage: 45,
+                        point: controller.report.groupMemberTotal,
+                        pointPercentage:
+                            controller.report.groupMemberTotalPercentage,
                       ),
                     ),
                     Expanded(
@@ -142,8 +91,9 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        point: 1,
-                        pointPercentage: 25,
+                        pointPercentage: controller
+                            .report
+                            .administrativeCompliancePercentage,
                       ),
                     ),
                   ],
@@ -159,7 +109,8 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        pointPercentage: 100,
+                        pointPercentage:
+                            controller.report.depositCompliancePercentage,
                       ),
                     ),
                     Expanded(
@@ -170,7 +121,7 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        pointPercentage: 80,
+                        pointPercentage: controller.report.attendancePercentage,
                       ),
                     ),
                   ],
@@ -198,7 +149,8 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        pointPercentage: 94.1,
+                        pointPercentage:
+                            controller.report.meetingDepositPercentage,
                       ),
                     ),
                     Expanded(
@@ -209,7 +161,8 @@ class ReportDetailView extends GetView<ReportDetailController> {
                           color: AppColor.bg.primary,
                           size: 18.sp,
                         ),
-                        pointPercentage: 100,
+                        pointPercentage:
+                            controller.report.receivableScorePercentage,
                       ),
                     ),
                   ],
@@ -235,7 +188,20 @@ class ReportDetailView extends GetView<ReportDetailController> {
                   SizedBox(
                     height: 96.sp,
                     child: AppDefaultTabbar(
-                      views: [_TabBarInfo(), _TabBarInfo(), _TabBarInfo()],
+                      views: [
+                        _TabBarInfo(
+                          label: 'PB',
+                          value: controller.report.loanParticipationPb,
+                        ),
+                        _TabBarInfo(
+                          label: 'BBM',
+                          value: controller.report.loanParticipationBbm,
+                        ),
+                        _TabBarInfo(
+                          label: 'Toko',
+                          value: controller.report.loanBalanceStore,
+                        ),
+                      ],
                       tabLabels: ['PB', 'BBM', 'Toko'],
                     ),
                   ),
@@ -261,7 +227,20 @@ class ReportDetailView extends GetView<ReportDetailController> {
                   SizedBox(
                     height: 96.sp,
                     child: AppDefaultTabbar(
-                      views: [_TabBarInfo(), _TabBarInfo(), _TabBarInfo()],
+                      views: [
+                        _TabBarInfo(
+                          label: 'PB',
+                          value: controller.report.loanBalancePb,
+                        ),
+                        _TabBarInfo(
+                          label: 'BBM',
+                          value: controller.report.loanBalanceBbm,
+                        ),
+                        _TabBarInfo(
+                          label: 'Toko',
+                          value: controller.report.loanBalanceStore,
+                        ),
+                      ],
                       tabLabels: ['PB', 'BBM', 'Toko'],
                     ),
                   ),
@@ -275,15 +254,15 @@ class ReportDetailView extends GetView<ReportDetailController> {
                 Icons.attach_money_rounded,
                 color: AppColor.bg.primary,
               ),
-              amount: 9_400_000,
-              percentage: 100,
+              amount: controller.report.cashParticipation,
+              percentage: controller.report.cashParticipationPercentage,
             ),
             _ProfileBigCell(
               title: 'Partisipasi Simpanan',
               subtitle: 'SSR',
               icon: Icon(Icons.savings, color: AppColor.bg.primary),
-              amount: 600_000,
-              percentage: 65,
+              amount: controller.report.savingsParticipation,
+              percentage: controller.report.savingsParticipationPercentage,
             ),
             SizedBox(height: 8.sp),
           ],
@@ -304,7 +283,7 @@ class _ProfileBigCell extends StatelessWidget {
 
   final String title;
   final String subtitle;
-  final double amount;
+  final int amount;
   final double? percentage;
   final Icon icon;
 
@@ -371,7 +350,10 @@ class _ProfileBigCell extends StatelessWidget {
 }
 
 class _TabBarInfo extends StatelessWidget {
-  const _TabBarInfo();
+  const _TabBarInfo({required this.label, required this.value});
+
+  final String label;
+  final int value;
 
   @override
   Widget build(BuildContext context) {
@@ -381,9 +363,9 @@ class _TabBarInfo extends StatelessWidget {
       spacing: 4.sp,
       children: [
         SizedBox(height: 4.sp),
-        poppins('PB'),
+        poppins(label),
         poppins(
-          10_000_000.toIdr(),
+          value.toIdr(),
           color: AppColor.bg.primary,
           fontWeight: FontWeight.bold,
         ),
@@ -402,7 +384,7 @@ class _ReportCell extends StatelessWidget {
 
   final String title;
   final Icon icon;
-  final double? point;
+  final int? point;
   final double pointPercentage;
 
   @override
@@ -467,7 +449,9 @@ class _ReportCell extends StatelessWidget {
 }
 
 class _ReportCard extends StatelessWidget {
-  const _ReportCard();
+  const _ReportCard({required this.report});
+
+  final ReportModel report;
 
   @override
   Widget build(BuildContext context) {
@@ -504,7 +488,7 @@ class _ReportCard extends StatelessWidget {
                             color: Colors.white,
                           ),
                           poppins(
-                            '81,4%',
+                            report.combinedFinalScorePercentage.toPercent(),
                             fontSize: 28.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -520,7 +504,7 @@ class _ReportCard extends StatelessWidget {
                           color: AppColor.bg.lightPrimary,
                           borderRadius: BorderRadius.circular(99),
                         ),
-                        child: poppins('Baik'),
+                        child: poppins(report.criteria.displayName),
                       ),
                     ],
                   ),
@@ -562,7 +546,10 @@ class _ReportCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         poppins('Nilai Organisasi'),
-                        poppins('90,4%', fontWeight: FontWeight.w600),
+                        poppins(
+                          report.organizationFinalScorePercentage.toPercent(),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ],
                     ),
                   ],
@@ -593,8 +580,11 @@ class _ReportCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        poppins('Nilai Organisasi'),
-                        poppins('90,4%', fontWeight: FontWeight.w600),
+                        poppins('Nilai Keuangan'),
+                        poppins(
+                          report.financialFinalScorePercentage.toPercent(),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ],
                     ),
                   ],

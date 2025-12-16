@@ -184,7 +184,7 @@ class EmployeeManageReportController extends GetxController {
         organizationFinalScorePercentageCtrl.text = report
             .organizationFinalScorePercentage
             .toString();
-        receivableScoreCtrl.text = report.receivableScore.toString();
+        receivableScoreCtrl.text = report.receivableScorePercentage.toString();
         financialFinalScorePercentageCtrl.text = report
             .financialFinalScorePercentage
             .toString();
@@ -263,38 +263,38 @@ class EmployeeManageReportController extends GetxController {
           year: int.parse(yearCtrl.text),
           memberGrowthIn: int.parse(memberGrowthInCtrl.text),
           memberGrowthOut: int.parse(memberGrowthOutCtrl.text),
-          administrativeCompliancePercentage: int.parse(
+          administrativeCompliancePercentage: double.parse(
             administrativeCompliancePercentageCtrl.text,
           ),
-          depositCompliancePercentage: int.parse(
+          depositCompliancePercentage: double.parse(
             depositCompliancePercentageCtrl.text,
           ),
-          attendancePercentage: int.parse(attendancePercentageCtrl.text),
-          organizationFinalScorePercentage: int.parse(
+          attendancePercentage: double.parse(attendancePercentageCtrl.text),
+          organizationFinalScorePercentage: double.parse(
             organizationFinalScorePercentageCtrl.text,
           ),
           loanParticipationPb: int.parse(loanParticipationPbCtrl.text),
           loanParticipationBbm: int.parse(loanParticipationBbmCtrl.text),
           loanParticipationStore: int.parse(loanParticipationStoreCtrl.text),
           cashParticipation: int.parse(cashParticipationCtrl.text),
-          cashParticipationPercentage: int.parse(
+          cashParticipationPercentage: double.parse(
             cashParticipationPercentageCtrl.text,
           ),
           savingsParticipation: int.parse(savingsParticipationCtrl.text),
-          savingsParticipationPercentage: int.parse(
+          savingsParticipationPercentage: double.parse(
             savingsParticipationPercentageCtrl.text,
           ),
-          meetingDepositPercentage: int.parse(
+          meetingDepositPercentage: double.parse(
             meetingDepositPercentageCtrl.text,
           ),
           loanBalancePb: int.parse(loanBalancePbCtrl.text),
           loanBalanceBbm: int.parse(loanBalanceBbmCtrl.text),
           loanBalanceStore: int.parse(loanBalanceStoreCtrl.text),
-          receivableScore: int.parse(receivableScoreCtrl.text),
-          financialFinalScorePercentage: int.parse(
+          receivableScorePercentage: double.parse(receivableScoreCtrl.text),
+          financialFinalScorePercentage: double.parse(
             financialFinalScorePercentageCtrl.text,
           ),
-          combinedFinalScorePercentage: int.parse(
+          combinedFinalScorePercentage: double.parse(
             combinedFinalScorePercentageCtrl.text,
           ),
           criteria: selectedCriteria!.snakeCase,

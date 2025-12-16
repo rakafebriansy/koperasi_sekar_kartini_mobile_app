@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group_report/group_report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
@@ -155,8 +154,4 @@ extension ReportCriteriaListExtension on List<ReportCriteria> {
 
 extension SavingsTypeListExtension on List<SavingsType> {
   List<String> get names => map((event) => event.displayName).toList();
-}
-
-extension GroupReportListExtension on List<GroupReportModel> {
-  List<String> get labels => map((g) => g.label).toList();
 }

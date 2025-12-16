@@ -20,8 +20,6 @@ import '../modules/event_list/bindings/event_list_binding.dart';
 import '../modules/event_list/views/event_list_view.dart';
 import '../modules/group_detail/bindings/group_detail_binding.dart';
 import '../modules/group_detail/views/group_detail_view.dart';
-import '../modules/group_member/fund_list/bindings/group_member_fund_list_binding.dart';
-import '../modules/group_member/fund_list/views/group_member_fund_list_view.dart';
 import '../modules/group_member/main/bindings/group_member_main_binding.dart';
 import '../modules/group_member/main/tabs/group/bindings/group_member_main_tabs_group_binding.dart';
 import '../modules/group_member/main/tabs/group/views/group_member_main_tabs_group_view.dart';
@@ -170,11 +168,6 @@ class AppPages {
       name: _Paths.GROUP_DETAIL,
       page: () => const GroupDetailView(),
       binding: GroupDetailBinding(),
-    ),
-    GetPage(
-      name: _Paths.GROUP_MEMBER_FUND_LIST,
-      page: () => const GroupMemberFundListView(),
-      binding: GroupMemberFundListBinding(),
     ),
     GetPage(
       name: _Paths.MANAGE_GROUP,

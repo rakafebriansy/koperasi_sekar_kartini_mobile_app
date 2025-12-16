@@ -29,24 +29,24 @@ mixin _$ReportModel {
   @JsonKey(name: 'member_growth_in')
   int get memberGrowthIn => throw _privateConstructorUsedError;
   @JsonKey(name: 'member_growth_in_percentage')
-  int get memberGrowthInPercentage => throw _privateConstructorUsedError;
+  double get memberGrowthInPercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'member_growth_out')
   int get memberGrowthOut => throw _privateConstructorUsedError;
   @JsonKey(name: 'member_growth_out_percentage')
-  int get memberGrowthOutPercentage => throw _privateConstructorUsedError;
+  double get memberGrowthOutPercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_member_total')
   int get groupMemberTotal => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_member_total_percentage')
-  int get groupMemberTotalPercentage => throw _privateConstructorUsedError;
+  double get groupMemberTotalPercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'administrative_compliance_percentage')
-  int get administrativeCompliancePercentage =>
+  double get administrativeCompliancePercentage =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'deposit_compliance_percentage')
-  int get depositCompliancePercentage => throw _privateConstructorUsedError;
+  double get depositCompliancePercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'attendance_percentage')
-  int get attendancePercentage => throw _privateConstructorUsedError;
+  double get attendancePercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'organization_final_score_percentage')
-  int get organizationFinalScorePercentage =>
+  double get organizationFinalScorePercentage =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'loan_participation_pb')
   int get loanParticipationPb => throw _privateConstructorUsedError;
@@ -57,13 +57,14 @@ mixin _$ReportModel {
   @JsonKey(name: 'cash_participation')
   int get cashParticipation => throw _privateConstructorUsedError;
   @JsonKey(name: 'cash_participation_percentage')
-  int get cashParticipationPercentage => throw _privateConstructorUsedError;
+  double get cashParticipationPercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'savings_participation')
   int get savingsParticipation => throw _privateConstructorUsedError;
   @JsonKey(name: 'savings_participation_percentage')
-  int get savingsParticipationPercentage => throw _privateConstructorUsedError;
+  double get savingsParticipationPercentage =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'meeting_deposit_percentage')
-  int get meetingDepositPercentage => throw _privateConstructorUsedError;
+  double get meetingDepositPercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'loan_balance_pb')
   int get loanBalancePb => throw _privateConstructorUsedError;
   @JsonKey(name: 'loan_balance_bbm')
@@ -71,11 +72,12 @@ mixin _$ReportModel {
   @JsonKey(name: 'loan_balance_store')
   int get loanBalanceStore => throw _privateConstructorUsedError;
   @JsonKey(name: 'receivable_score')
-  int get receivableScore => throw _privateConstructorUsedError;
+  double get receivableScorePercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'financial_final_score_percentage')
-  int get financialFinalScorePercentage => throw _privateConstructorUsedError;
+  double get financialFinalScorePercentage =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'combined_final_score_percentage')
-  int get combinedFinalScorePercentage => throw _privateConstructorUsedError;
+  double get combinedFinalScorePercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'criteria')
   ReportCriteria get criteria => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_id')
@@ -103,38 +105,39 @@ abstract class $ReportModelCopyWith<$Res> {
       @JsonKey(name: 'year') int year,
       @JsonKey(name: 'member_growth_in') int memberGrowthIn,
       @JsonKey(name: 'member_growth_in_percentage')
-      int memberGrowthInPercentage,
+      double memberGrowthInPercentage,
       @JsonKey(name: 'member_growth_out') int memberGrowthOut,
       @JsonKey(name: 'member_growth_out_percentage')
-      int memberGrowthOutPercentage,
+      double memberGrowthOutPercentage,
       @JsonKey(name: 'group_member_total') int groupMemberTotal,
       @JsonKey(name: 'group_member_total_percentage')
-      int groupMemberTotalPercentage,
+      double groupMemberTotalPercentage,
       @JsonKey(name: 'administrative_compliance_percentage')
-      int administrativeCompliancePercentage,
+      double administrativeCompliancePercentage,
       @JsonKey(name: 'deposit_compliance_percentage')
-      int depositCompliancePercentage,
-      @JsonKey(name: 'attendance_percentage') int attendancePercentage,
+      double depositCompliancePercentage,
+      @JsonKey(name: 'attendance_percentage') double attendancePercentage,
       @JsonKey(name: 'organization_final_score_percentage')
-      int organizationFinalScorePercentage,
+      double organizationFinalScorePercentage,
       @JsonKey(name: 'loan_participation_pb') int loanParticipationPb,
       @JsonKey(name: 'loan_participation_bbm') int loanParticipationBbm,
       @JsonKey(name: 'loan_participation_store') int loanParticipationStore,
       @JsonKey(name: 'cash_participation') int cashParticipation,
       @JsonKey(name: 'cash_participation_percentage')
-      int cashParticipationPercentage,
+      double cashParticipationPercentage,
       @JsonKey(name: 'savings_participation') int savingsParticipation,
       @JsonKey(name: 'savings_participation_percentage')
-      int savingsParticipationPercentage,
-      @JsonKey(name: 'meeting_deposit_percentage') int meetingDepositPercentage,
+      double savingsParticipationPercentage,
+      @JsonKey(name: 'meeting_deposit_percentage')
+      double meetingDepositPercentage,
       @JsonKey(name: 'loan_balance_pb') int loanBalancePb,
       @JsonKey(name: 'loan_balance_bbm') int loanBalanceBbm,
       @JsonKey(name: 'loan_balance_store') int loanBalanceStore,
-      @JsonKey(name: 'receivable_score') int receivableScore,
+      @JsonKey(name: 'receivable_score') double receivableScorePercentage,
       @JsonKey(name: 'financial_final_score_percentage')
-      int financialFinalScorePercentage,
+      double financialFinalScorePercentage,
       @JsonKey(name: 'combined_final_score_percentage')
-      int combinedFinalScorePercentage,
+      double combinedFinalScorePercentage,
       @JsonKey(name: 'criteria') ReportCriteria criteria,
       @JsonKey(name: 'group_id') int groupId});
 }
@@ -178,7 +181,7 @@ class _$ReportModelCopyWithImpl<$Res, $Val extends ReportModel>
     Object? loanBalancePb = null,
     Object? loanBalanceBbm = null,
     Object? loanBalanceStore = null,
-    Object? receivableScore = null,
+    Object? receivableScorePercentage = null,
     Object? financialFinalScorePercentage = null,
     Object? combinedFinalScorePercentage = null,
     Object? criteria = null,
@@ -204,7 +207,7 @@ class _$ReportModelCopyWithImpl<$Res, $Val extends ReportModel>
       memberGrowthInPercentage: null == memberGrowthInPercentage
           ? _value.memberGrowthInPercentage
           : memberGrowthInPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       memberGrowthOut: null == memberGrowthOut
           ? _value.memberGrowthOut
           : memberGrowthOut // ignore: cast_nullable_to_non_nullable
@@ -212,7 +215,7 @@ class _$ReportModelCopyWithImpl<$Res, $Val extends ReportModel>
       memberGrowthOutPercentage: null == memberGrowthOutPercentage
           ? _value.memberGrowthOutPercentage
           : memberGrowthOutPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       groupMemberTotal: null == groupMemberTotal
           ? _value.groupMemberTotal
           : groupMemberTotal // ignore: cast_nullable_to_non_nullable
@@ -220,24 +223,24 @@ class _$ReportModelCopyWithImpl<$Res, $Val extends ReportModel>
       groupMemberTotalPercentage: null == groupMemberTotalPercentage
           ? _value.groupMemberTotalPercentage
           : groupMemberTotalPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       administrativeCompliancePercentage: null ==
               administrativeCompliancePercentage
           ? _value.administrativeCompliancePercentage
           : administrativeCompliancePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       depositCompliancePercentage: null == depositCompliancePercentage
           ? _value.depositCompliancePercentage
           : depositCompliancePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       attendancePercentage: null == attendancePercentage
           ? _value.attendancePercentage
           : attendancePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       organizationFinalScorePercentage: null == organizationFinalScorePercentage
           ? _value.organizationFinalScorePercentage
           : organizationFinalScorePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       loanParticipationPb: null == loanParticipationPb
           ? _value.loanParticipationPb
           : loanParticipationPb // ignore: cast_nullable_to_non_nullable
@@ -257,7 +260,7 @@ class _$ReportModelCopyWithImpl<$Res, $Val extends ReportModel>
       cashParticipationPercentage: null == cashParticipationPercentage
           ? _value.cashParticipationPercentage
           : cashParticipationPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       savingsParticipation: null == savingsParticipation
           ? _value.savingsParticipation
           : savingsParticipation // ignore: cast_nullable_to_non_nullable
@@ -265,11 +268,11 @@ class _$ReportModelCopyWithImpl<$Res, $Val extends ReportModel>
       savingsParticipationPercentage: null == savingsParticipationPercentage
           ? _value.savingsParticipationPercentage
           : savingsParticipationPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       meetingDepositPercentage: null == meetingDepositPercentage
           ? _value.meetingDepositPercentage
           : meetingDepositPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       loanBalancePb: null == loanBalancePb
           ? _value.loanBalancePb
           : loanBalancePb // ignore: cast_nullable_to_non_nullable
@@ -282,18 +285,18 @@ class _$ReportModelCopyWithImpl<$Res, $Val extends ReportModel>
           ? _value.loanBalanceStore
           : loanBalanceStore // ignore: cast_nullable_to_non_nullable
               as int,
-      receivableScore: null == receivableScore
-          ? _value.receivableScore
-          : receivableScore // ignore: cast_nullable_to_non_nullable
-              as int,
+      receivableScorePercentage: null == receivableScorePercentage
+          ? _value.receivableScorePercentage
+          : receivableScorePercentage // ignore: cast_nullable_to_non_nullable
+              as double,
       financialFinalScorePercentage: null == financialFinalScorePercentage
           ? _value.financialFinalScorePercentage
           : financialFinalScorePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       combinedFinalScorePercentage: null == combinedFinalScorePercentage
           ? _value.combinedFinalScorePercentage
           : combinedFinalScorePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       criteria: null == criteria
           ? _value.criteria
           : criteria // ignore: cast_nullable_to_non_nullable
@@ -320,38 +323,39 @@ abstract class _$$ReportModelImplCopyWith<$Res>
       @JsonKey(name: 'year') int year,
       @JsonKey(name: 'member_growth_in') int memberGrowthIn,
       @JsonKey(name: 'member_growth_in_percentage')
-      int memberGrowthInPercentage,
+      double memberGrowthInPercentage,
       @JsonKey(name: 'member_growth_out') int memberGrowthOut,
       @JsonKey(name: 'member_growth_out_percentage')
-      int memberGrowthOutPercentage,
+      double memberGrowthOutPercentage,
       @JsonKey(name: 'group_member_total') int groupMemberTotal,
       @JsonKey(name: 'group_member_total_percentage')
-      int groupMemberTotalPercentage,
+      double groupMemberTotalPercentage,
       @JsonKey(name: 'administrative_compliance_percentage')
-      int administrativeCompliancePercentage,
+      double administrativeCompliancePercentage,
       @JsonKey(name: 'deposit_compliance_percentage')
-      int depositCompliancePercentage,
-      @JsonKey(name: 'attendance_percentage') int attendancePercentage,
+      double depositCompliancePercentage,
+      @JsonKey(name: 'attendance_percentage') double attendancePercentage,
       @JsonKey(name: 'organization_final_score_percentage')
-      int organizationFinalScorePercentage,
+      double organizationFinalScorePercentage,
       @JsonKey(name: 'loan_participation_pb') int loanParticipationPb,
       @JsonKey(name: 'loan_participation_bbm') int loanParticipationBbm,
       @JsonKey(name: 'loan_participation_store') int loanParticipationStore,
       @JsonKey(name: 'cash_participation') int cashParticipation,
       @JsonKey(name: 'cash_participation_percentage')
-      int cashParticipationPercentage,
+      double cashParticipationPercentage,
       @JsonKey(name: 'savings_participation') int savingsParticipation,
       @JsonKey(name: 'savings_participation_percentage')
-      int savingsParticipationPercentage,
-      @JsonKey(name: 'meeting_deposit_percentage') int meetingDepositPercentage,
+      double savingsParticipationPercentage,
+      @JsonKey(name: 'meeting_deposit_percentage')
+      double meetingDepositPercentage,
       @JsonKey(name: 'loan_balance_pb') int loanBalancePb,
       @JsonKey(name: 'loan_balance_bbm') int loanBalanceBbm,
       @JsonKey(name: 'loan_balance_store') int loanBalanceStore,
-      @JsonKey(name: 'receivable_score') int receivableScore,
+      @JsonKey(name: 'receivable_score') double receivableScorePercentage,
       @JsonKey(name: 'financial_final_score_percentage')
-      int financialFinalScorePercentage,
+      double financialFinalScorePercentage,
       @JsonKey(name: 'combined_final_score_percentage')
-      int combinedFinalScorePercentage,
+      double combinedFinalScorePercentage,
       @JsonKey(name: 'criteria') ReportCriteria criteria,
       @JsonKey(name: 'group_id') int groupId});
 }
@@ -393,7 +397,7 @@ class __$$ReportModelImplCopyWithImpl<$Res>
     Object? loanBalancePb = null,
     Object? loanBalanceBbm = null,
     Object? loanBalanceStore = null,
-    Object? receivableScore = null,
+    Object? receivableScorePercentage = null,
     Object? financialFinalScorePercentage = null,
     Object? combinedFinalScorePercentage = null,
     Object? criteria = null,
@@ -419,7 +423,7 @@ class __$$ReportModelImplCopyWithImpl<$Res>
       memberGrowthInPercentage: null == memberGrowthInPercentage
           ? _value.memberGrowthInPercentage
           : memberGrowthInPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       memberGrowthOut: null == memberGrowthOut
           ? _value.memberGrowthOut
           : memberGrowthOut // ignore: cast_nullable_to_non_nullable
@@ -427,7 +431,7 @@ class __$$ReportModelImplCopyWithImpl<$Res>
       memberGrowthOutPercentage: null == memberGrowthOutPercentage
           ? _value.memberGrowthOutPercentage
           : memberGrowthOutPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       groupMemberTotal: null == groupMemberTotal
           ? _value.groupMemberTotal
           : groupMemberTotal // ignore: cast_nullable_to_non_nullable
@@ -435,24 +439,24 @@ class __$$ReportModelImplCopyWithImpl<$Res>
       groupMemberTotalPercentage: null == groupMemberTotalPercentage
           ? _value.groupMemberTotalPercentage
           : groupMemberTotalPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       administrativeCompliancePercentage: null ==
               administrativeCompliancePercentage
           ? _value.administrativeCompliancePercentage
           : administrativeCompliancePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       depositCompliancePercentage: null == depositCompliancePercentage
           ? _value.depositCompliancePercentage
           : depositCompliancePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       attendancePercentage: null == attendancePercentage
           ? _value.attendancePercentage
           : attendancePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       organizationFinalScorePercentage: null == organizationFinalScorePercentage
           ? _value.organizationFinalScorePercentage
           : organizationFinalScorePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       loanParticipationPb: null == loanParticipationPb
           ? _value.loanParticipationPb
           : loanParticipationPb // ignore: cast_nullable_to_non_nullable
@@ -472,7 +476,7 @@ class __$$ReportModelImplCopyWithImpl<$Res>
       cashParticipationPercentage: null == cashParticipationPercentage
           ? _value.cashParticipationPercentage
           : cashParticipationPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       savingsParticipation: null == savingsParticipation
           ? _value.savingsParticipation
           : savingsParticipation // ignore: cast_nullable_to_non_nullable
@@ -480,11 +484,11 @@ class __$$ReportModelImplCopyWithImpl<$Res>
       savingsParticipationPercentage: null == savingsParticipationPercentage
           ? _value.savingsParticipationPercentage
           : savingsParticipationPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       meetingDepositPercentage: null == meetingDepositPercentage
           ? _value.meetingDepositPercentage
           : meetingDepositPercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       loanBalancePb: null == loanBalancePb
           ? _value.loanBalancePb
           : loanBalancePb // ignore: cast_nullable_to_non_nullable
@@ -497,18 +501,18 @@ class __$$ReportModelImplCopyWithImpl<$Res>
           ? _value.loanBalanceStore
           : loanBalanceStore // ignore: cast_nullable_to_non_nullable
               as int,
-      receivableScore: null == receivableScore
-          ? _value.receivableScore
-          : receivableScore // ignore: cast_nullable_to_non_nullable
-              as int,
+      receivableScorePercentage: null == receivableScorePercentage
+          ? _value.receivableScorePercentage
+          : receivableScorePercentage // ignore: cast_nullable_to_non_nullable
+              as double,
       financialFinalScorePercentage: null == financialFinalScorePercentage
           ? _value.financialFinalScorePercentage
           : financialFinalScorePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       combinedFinalScorePercentage: null == combinedFinalScorePercentage
           ? _value.combinedFinalScorePercentage
           : combinedFinalScorePercentage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       criteria: null == criteria
           ? _value.criteria
           : criteria // ignore: cast_nullable_to_non_nullable
@@ -562,7 +566,8 @@ class _$ReportModelImpl implements _ReportModel {
       @JsonKey(name: 'loan_balance_pb') required this.loanBalancePb,
       @JsonKey(name: 'loan_balance_bbm') required this.loanBalanceBbm,
       @JsonKey(name: 'loan_balance_store') required this.loanBalanceStore,
-      @JsonKey(name: 'receivable_score') required this.receivableScore,
+      @JsonKey(name: 'receivable_score')
+      required this.receivableScorePercentage,
       @JsonKey(name: 'financial_final_score_percentage')
       required this.financialFinalScorePercentage,
       @JsonKey(name: 'combined_final_score_percentage')
@@ -587,31 +592,31 @@ class _$ReportModelImpl implements _ReportModel {
   final int memberGrowthIn;
   @override
   @JsonKey(name: 'member_growth_in_percentage')
-  final int memberGrowthInPercentage;
+  final double memberGrowthInPercentage;
   @override
   @JsonKey(name: 'member_growth_out')
   final int memberGrowthOut;
   @override
   @JsonKey(name: 'member_growth_out_percentage')
-  final int memberGrowthOutPercentage;
+  final double memberGrowthOutPercentage;
   @override
   @JsonKey(name: 'group_member_total')
   final int groupMemberTotal;
   @override
   @JsonKey(name: 'group_member_total_percentage')
-  final int groupMemberTotalPercentage;
+  final double groupMemberTotalPercentage;
   @override
   @JsonKey(name: 'administrative_compliance_percentage')
-  final int administrativeCompliancePercentage;
+  final double administrativeCompliancePercentage;
   @override
   @JsonKey(name: 'deposit_compliance_percentage')
-  final int depositCompliancePercentage;
+  final double depositCompliancePercentage;
   @override
   @JsonKey(name: 'attendance_percentage')
-  final int attendancePercentage;
+  final double attendancePercentage;
   @override
   @JsonKey(name: 'organization_final_score_percentage')
-  final int organizationFinalScorePercentage;
+  final double organizationFinalScorePercentage;
   @override
   @JsonKey(name: 'loan_participation_pb')
   final int loanParticipationPb;
@@ -626,16 +631,16 @@ class _$ReportModelImpl implements _ReportModel {
   final int cashParticipation;
   @override
   @JsonKey(name: 'cash_participation_percentage')
-  final int cashParticipationPercentage;
+  final double cashParticipationPercentage;
   @override
   @JsonKey(name: 'savings_participation')
   final int savingsParticipation;
   @override
   @JsonKey(name: 'savings_participation_percentage')
-  final int savingsParticipationPercentage;
+  final double savingsParticipationPercentage;
   @override
   @JsonKey(name: 'meeting_deposit_percentage')
-  final int meetingDepositPercentage;
+  final double meetingDepositPercentage;
   @override
   @JsonKey(name: 'loan_balance_pb')
   final int loanBalancePb;
@@ -647,13 +652,13 @@ class _$ReportModelImpl implements _ReportModel {
   final int loanBalanceStore;
   @override
   @JsonKey(name: 'receivable_score')
-  final int receivableScore;
+  final double receivableScorePercentage;
   @override
   @JsonKey(name: 'financial_final_score_percentage')
-  final int financialFinalScorePercentage;
+  final double financialFinalScorePercentage;
   @override
   @JsonKey(name: 'combined_final_score_percentage')
-  final int combinedFinalScorePercentage;
+  final double combinedFinalScorePercentage;
   @override
   @JsonKey(name: 'criteria')
   final ReportCriteria criteria;
@@ -663,7 +668,7 @@ class _$ReportModelImpl implements _ReportModel {
 
   @override
   String toString() {
-    return 'ReportModel(id: $id, quarter: $quarter, year: $year, memberGrowthIn: $memberGrowthIn, memberGrowthInPercentage: $memberGrowthInPercentage, memberGrowthOut: $memberGrowthOut, memberGrowthOutPercentage: $memberGrowthOutPercentage, groupMemberTotal: $groupMemberTotal, groupMemberTotalPercentage: $groupMemberTotalPercentage, administrativeCompliancePercentage: $administrativeCompliancePercentage, depositCompliancePercentage: $depositCompliancePercentage, attendancePercentage: $attendancePercentage, organizationFinalScorePercentage: $organizationFinalScorePercentage, loanParticipationPb: $loanParticipationPb, loanParticipationBbm: $loanParticipationBbm, loanParticipationStore: $loanParticipationStore, cashParticipation: $cashParticipation, cashParticipationPercentage: $cashParticipationPercentage, savingsParticipation: $savingsParticipation, savingsParticipationPercentage: $savingsParticipationPercentage, meetingDepositPercentage: $meetingDepositPercentage, loanBalancePb: $loanBalancePb, loanBalanceBbm: $loanBalanceBbm, loanBalanceStore: $loanBalanceStore, receivableScore: $receivableScore, financialFinalScorePercentage: $financialFinalScorePercentage, combinedFinalScorePercentage: $combinedFinalScorePercentage, criteria: $criteria, groupId: $groupId)';
+    return 'ReportModel(id: $id, quarter: $quarter, year: $year, memberGrowthIn: $memberGrowthIn, memberGrowthInPercentage: $memberGrowthInPercentage, memberGrowthOut: $memberGrowthOut, memberGrowthOutPercentage: $memberGrowthOutPercentage, groupMemberTotal: $groupMemberTotal, groupMemberTotalPercentage: $groupMemberTotalPercentage, administrativeCompliancePercentage: $administrativeCompliancePercentage, depositCompliancePercentage: $depositCompliancePercentage, attendancePercentage: $attendancePercentage, organizationFinalScorePercentage: $organizationFinalScorePercentage, loanParticipationPb: $loanParticipationPb, loanParticipationBbm: $loanParticipationBbm, loanParticipationStore: $loanParticipationStore, cashParticipation: $cashParticipation, cashParticipationPercentage: $cashParticipationPercentage, savingsParticipation: $savingsParticipation, savingsParticipationPercentage: $savingsParticipationPercentage, meetingDepositPercentage: $meetingDepositPercentage, loanBalancePb: $loanBalancePb, loanBalanceBbm: $loanBalanceBbm, loanBalanceStore: $loanBalanceStore, receivableScorePercentage: $receivableScorePercentage, financialFinalScorePercentage: $financialFinalScorePercentage, combinedFinalScorePercentage: $combinedFinalScorePercentage, criteria: $criteria, groupId: $groupId)';
   }
 
   @override
@@ -717,7 +722,7 @@ class _$ReportModelImpl implements _ReportModel {
             (identical(other.loanBalancePb, loanBalancePb) || other.loanBalancePb == loanBalancePb) &&
             (identical(other.loanBalanceBbm, loanBalanceBbm) || other.loanBalanceBbm == loanBalanceBbm) &&
             (identical(other.loanBalanceStore, loanBalanceStore) || other.loanBalanceStore == loanBalanceStore) &&
-            (identical(other.receivableScore, receivableScore) || other.receivableScore == receivableScore) &&
+            (identical(other.receivableScorePercentage, receivableScorePercentage) || other.receivableScorePercentage == receivableScorePercentage) &&
             (identical(other.financialFinalScorePercentage, financialFinalScorePercentage) || other.financialFinalScorePercentage == financialFinalScorePercentage) &&
             (identical(other.combinedFinalScorePercentage, combinedFinalScorePercentage) || other.combinedFinalScorePercentage == combinedFinalScorePercentage) &&
             (identical(other.criteria, criteria) || other.criteria == criteria) &&
@@ -752,7 +757,7 @@ class _$ReportModelImpl implements _ReportModel {
         loanBalancePb,
         loanBalanceBbm,
         loanBalanceStore,
-        receivableScore,
+        receivableScorePercentage,
         financialFinalScorePercentage,
         combinedFinalScorePercentage,
         criteria,
@@ -782,21 +787,21 @@ abstract class _ReportModel implements ReportModel {
       @JsonKey(name: 'year') required final int year,
       @JsonKey(name: 'member_growth_in') required final int memberGrowthIn,
       @JsonKey(name: 'member_growth_in_percentage')
-      required final int memberGrowthInPercentage,
+      required final double memberGrowthInPercentage,
       @JsonKey(name: 'member_growth_out') required final int memberGrowthOut,
       @JsonKey(name: 'member_growth_out_percentage')
-      required final int memberGrowthOutPercentage,
+      required final double memberGrowthOutPercentage,
       @JsonKey(name: 'group_member_total') required final int groupMemberTotal,
       @JsonKey(name: 'group_member_total_percentage')
-      required final int groupMemberTotalPercentage,
+      required final double groupMemberTotalPercentage,
       @JsonKey(name: 'administrative_compliance_percentage')
-      required final int administrativeCompliancePercentage,
+      required final double administrativeCompliancePercentage,
       @JsonKey(name: 'deposit_compliance_percentage')
-      required final int depositCompliancePercentage,
+      required final double depositCompliancePercentage,
       @JsonKey(name: 'attendance_percentage')
-      required final int attendancePercentage,
+      required final double attendancePercentage,
       @JsonKey(name: 'organization_final_score_percentage')
-      required final int organizationFinalScorePercentage,
+      required final double organizationFinalScorePercentage,
       @JsonKey(name: 'loan_participation_pb')
       required final int loanParticipationPb,
       @JsonKey(name: 'loan_participation_bbm')
@@ -805,21 +810,22 @@ abstract class _ReportModel implements ReportModel {
       required final int loanParticipationStore,
       @JsonKey(name: 'cash_participation') required final int cashParticipation,
       @JsonKey(name: 'cash_participation_percentage')
-      required final int cashParticipationPercentage,
+      required final double cashParticipationPercentage,
       @JsonKey(name: 'savings_participation')
       required final int savingsParticipation,
       @JsonKey(name: 'savings_participation_percentage')
-      required final int savingsParticipationPercentage,
+      required final double savingsParticipationPercentage,
       @JsonKey(name: 'meeting_deposit_percentage')
-      required final int meetingDepositPercentage,
+      required final double meetingDepositPercentage,
       @JsonKey(name: 'loan_balance_pb') required final int loanBalancePb,
       @JsonKey(name: 'loan_balance_bbm') required final int loanBalanceBbm,
       @JsonKey(name: 'loan_balance_store') required final int loanBalanceStore,
-      @JsonKey(name: 'receivable_score') required final int receivableScore,
+      @JsonKey(name: 'receivable_score')
+      required final double receivableScorePercentage,
       @JsonKey(name: 'financial_final_score_percentage')
-      required final int financialFinalScorePercentage,
+      required final double financialFinalScorePercentage,
       @JsonKey(name: 'combined_final_score_percentage')
-      required final int combinedFinalScorePercentage,
+      required final double combinedFinalScorePercentage,
       @JsonKey(name: 'criteria') required final ReportCriteria criteria,
       @JsonKey(name: 'group_id')
       required final int groupId}) = _$ReportModelImpl;
@@ -841,31 +847,31 @@ abstract class _ReportModel implements ReportModel {
   int get memberGrowthIn;
   @override
   @JsonKey(name: 'member_growth_in_percentage')
-  int get memberGrowthInPercentage;
+  double get memberGrowthInPercentage;
   @override
   @JsonKey(name: 'member_growth_out')
   int get memberGrowthOut;
   @override
   @JsonKey(name: 'member_growth_out_percentage')
-  int get memberGrowthOutPercentage;
+  double get memberGrowthOutPercentage;
   @override
   @JsonKey(name: 'group_member_total')
   int get groupMemberTotal;
   @override
   @JsonKey(name: 'group_member_total_percentage')
-  int get groupMemberTotalPercentage;
+  double get groupMemberTotalPercentage;
   @override
   @JsonKey(name: 'administrative_compliance_percentage')
-  int get administrativeCompliancePercentage;
+  double get administrativeCompliancePercentage;
   @override
   @JsonKey(name: 'deposit_compliance_percentage')
-  int get depositCompliancePercentage;
+  double get depositCompliancePercentage;
   @override
   @JsonKey(name: 'attendance_percentage')
-  int get attendancePercentage;
+  double get attendancePercentage;
   @override
   @JsonKey(name: 'organization_final_score_percentage')
-  int get organizationFinalScorePercentage;
+  double get organizationFinalScorePercentage;
   @override
   @JsonKey(name: 'loan_participation_pb')
   int get loanParticipationPb;
@@ -880,16 +886,16 @@ abstract class _ReportModel implements ReportModel {
   int get cashParticipation;
   @override
   @JsonKey(name: 'cash_participation_percentage')
-  int get cashParticipationPercentage;
+  double get cashParticipationPercentage;
   @override
   @JsonKey(name: 'savings_participation')
   int get savingsParticipation;
   @override
   @JsonKey(name: 'savings_participation_percentage')
-  int get savingsParticipationPercentage;
+  double get savingsParticipationPercentage;
   @override
   @JsonKey(name: 'meeting_deposit_percentage')
-  int get meetingDepositPercentage;
+  double get meetingDepositPercentage;
   @override
   @JsonKey(name: 'loan_balance_pb')
   int get loanBalancePb;
@@ -901,13 +907,13 @@ abstract class _ReportModel implements ReportModel {
   int get loanBalanceStore;
   @override
   @JsonKey(name: 'receivable_score')
-  int get receivableScore;
+  double get receivableScorePercentage;
   @override
   @JsonKey(name: 'financial_final_score_percentage')
-  int get financialFinalScorePercentage;
+  double get financialFinalScorePercentage;
   @override
   @JsonKey(name: 'combined_final_score_percentage')
-  int get combinedFinalScorePercentage;
+  double get combinedFinalScorePercentage;
   @override
   @JsonKey(name: 'criteria')
   ReportCriteria get criteria;

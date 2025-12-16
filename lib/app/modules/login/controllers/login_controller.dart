@@ -16,8 +16,8 @@ class LoginController extends GetxController {
   TextEditingController phoneCtrl = TextEditingController(
     text: !kReleaseMode
         ? 
-        '081200000001'
-        // '081234560001'
+        // '081200000001'
+        '0812345778'
         : '',
   );
   TextEditingController passwordCtrl = TextEditingController(

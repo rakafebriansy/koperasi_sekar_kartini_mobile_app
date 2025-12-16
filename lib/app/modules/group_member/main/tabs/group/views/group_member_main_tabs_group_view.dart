@@ -14,6 +14,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 import '../controllers/group_member_main_tabs_group_controller.dart';
 
@@ -140,7 +141,10 @@ class GroupMemberMainTabsGroupView
                             fontWeight: FontWeight.w400,
                             borderRadiusSize: 6.sp,
                             onTap: () {
-                              Get.toNamed(Routes.REPORT_DETAIL);
+                              Get.toNamed(
+                                Routes.REPORT_LIST,
+                                arguments: ArgsWrapper(data: controller.group),
+                              );
                             },
                           ),
                         ],

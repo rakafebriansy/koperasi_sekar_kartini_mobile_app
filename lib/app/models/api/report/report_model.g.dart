@@ -13,39 +13,39 @@ _$ReportModelImpl _$$ReportModelImplFromJson(Map<String, dynamic> json) =>
       year: (json['year'] as num).toInt(),
       memberGrowthIn: (json['member_growth_in'] as num).toInt(),
       memberGrowthInPercentage:
-          (json['member_growth_in_percentage'] as num).toInt(),
+          (json['member_growth_in_percentage'] as num).toDouble(),
       memberGrowthOut: (json['member_growth_out'] as num).toInt(),
       memberGrowthOutPercentage:
-          (json['member_growth_out_percentage'] as num).toInt(),
+          (json['member_growth_out_percentage'] as num).toDouble(),
       groupMemberTotal: (json['group_member_total'] as num).toInt(),
       groupMemberTotalPercentage:
-          (json['group_member_total_percentage'] as num).toInt(),
+          (json['group_member_total_percentage'] as num).toDouble(),
       administrativeCompliancePercentage:
-          (json['administrative_compliance_percentage'] as num).toInt(),
+          (json['administrative_compliance_percentage'] as num).toDouble(),
       depositCompliancePercentage:
-          (json['deposit_compliance_percentage'] as num).toInt(),
-      attendancePercentage: (json['attendance_percentage'] as num).toInt(),
+          (json['deposit_compliance_percentage'] as num).toDouble(),
+      attendancePercentage: (json['attendance_percentage'] as num).toDouble(),
       organizationFinalScorePercentage:
-          (json['organization_final_score_percentage'] as num).toInt(),
+          (json['organization_final_score_percentage'] as num).toDouble(),
       loanParticipationPb: (json['loan_participation_pb'] as num).toInt(),
       loanParticipationBbm: (json['loan_participation_bbm'] as num).toInt(),
       loanParticipationStore: (json['loan_participation_store'] as num).toInt(),
       cashParticipation: (json['cash_participation'] as num).toInt(),
       cashParticipationPercentage:
-          (json['cash_participation_percentage'] as num).toInt(),
+          (json['cash_participation_percentage'] as num).toDouble(),
       savingsParticipation: (json['savings_participation'] as num).toInt(),
       savingsParticipationPercentage:
-          (json['savings_participation_percentage'] as num).toInt(),
+          (json['savings_participation_percentage'] as num).toDouble(),
       meetingDepositPercentage:
-          (json['meeting_deposit_percentage'] as num).toInt(),
+          (json['meeting_deposit_percentage'] as num).toDouble(),
       loanBalancePb: (json['loan_balance_pb'] as num).toInt(),
       loanBalanceBbm: (json['loan_balance_bbm'] as num).toInt(),
       loanBalanceStore: (json['loan_balance_store'] as num).toInt(),
-      receivableScore: (json['receivable_score'] as num).toInt(),
+      receivableScorePercentage: (json['receivable_score'] as num).toDouble(),
       financialFinalScorePercentage:
-          (json['financial_final_score_percentage'] as num).toInt(),
+          (json['financial_final_score_percentage'] as num).toDouble(),
       combinedFinalScorePercentage:
-          (json['combined_final_score_percentage'] as num).toInt(),
+          (json['combined_final_score_percentage'] as num).toDouble(),
       criteria: $enumDecode(_$ReportCriteriaEnumMap, json['criteria']),
       groupId: (json['group_id'] as num).toInt(),
     );
@@ -79,7 +79,7 @@ Map<String, dynamic> _$$ReportModelImplToJson(_$ReportModelImpl instance) =>
       'loan_balance_pb': instance.loanBalancePb,
       'loan_balance_bbm': instance.loanBalanceBbm,
       'loan_balance_store': instance.loanBalanceStore,
-      'receivable_score': instance.receivableScore,
+      'receivable_score': instance.receivableScorePercentage,
       'financial_final_score_percentage':
           instance.financialFinalScorePercentage,
       'combined_final_score_percentage': instance.combinedFinalScorePercentage,

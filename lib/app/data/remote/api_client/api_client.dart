@@ -404,36 +404,36 @@ abstract class ApiClient {
     @Field() required int quarter,
     @Field() required int year,
     @Field('member_growth_in') required int memberGrowthIn,
-    @Field('member_growth_in_percentage') int? memberGrowthInPercentage,
+    @Field('member_growth_in_percentage') double? memberGrowthInPercentage,
     @Field('member_growth_out') required int memberGrowthOut,
-    @Field('member_growth_out_percentage') int? memberGrowthOutPercentage,
+    @Field('member_growth_out_percentage') double? memberGrowthOutPercentage,
     @Field('group_member_total') int? groupMemberTotal,
-    @Field('group_member_total_percentage') int? groupMemberTotalPercentage,
+    @Field('group_member_total_percentage') double? groupMemberTotalPercentage,
     @Field('administrative_compliance_percentage')
-    required int administrativeCompliancePercentage,
+    required double administrativeCompliancePercentage,
     @Field('deposit_compliance_percentage')
-    required int depositCompliancePercentage,
-    @Field('attendance_percentage') required int attendancePercentage,
+    required double depositCompliancePercentage,
+    @Field('attendance_percentage') required double attendancePercentage,
     @Field('organization_final_score_percentage')
-    required int organizationFinalScorePercentage,
+    required double organizationFinalScorePercentage,
     @Field('loan_participation_pb') required int loanParticipationPb,
     @Field('loan_participation_bbm') required int loanParticipationBbm,
     @Field('loan_participation_store') required int loanParticipationStore,
     @Field('cash_participation') required int cashParticipation,
     @Field('cash_participation_percentage')
-    required int cashParticipationPercentage,
+    required double cashParticipationPercentage,
     @Field('savings_participation') required int savingsParticipation,
     @Field('savings_participation_percentage')
-    required int savingsParticipationPercentage,
-    @Field('meeting_deposit_percentage') required int meetingDepositPercentage,
+    required double savingsParticipationPercentage,
+    @Field('meeting_deposit_percentage') required double meetingDepositPercentage,
     @Field('loan_balance_pb') required int loanBalancePb,
     @Field('loan_balance_bbm') required int loanBalanceBbm,
     @Field('loan_balance_store') required int loanBalanceStore,
-    @Field('receivable_score') required int receivableScore,
+    @Field('receivable_score') required double receivableScorePercentage,
     @Field('financial_final_score_percentage')
-    required int financialFinalScorePercentage,
+    required double financialFinalScorePercentage,
     @Field('combined_final_score_percentage')
-    required int combinedFinalScorePercentage,
+    required double combinedFinalScorePercentage,
     @Field('criteria') required String criteria,
   });
 

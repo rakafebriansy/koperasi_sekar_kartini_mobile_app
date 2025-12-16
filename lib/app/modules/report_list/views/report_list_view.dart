@@ -10,7 +10,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_date_input_field.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_default_wrapper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
@@ -107,7 +106,10 @@ class ReportListView extends GetView<ReportListController> {
                               report: controller.reports[index],
                               onTap: () async {
                                 final result = await Get.toNamed(
-                                  Routes.EMPLOYEE_MANAGE_REPORT,
+                                  AuthController.find.currentUser!.role ==
+                                          'group_member'
+                                      ? Routes.REPORT_DETAIL
+                                      : Routes.EMPLOYEE_MANAGE_REPORT,
                                   arguments: ArgsWrapper(
                                     data: controller.reports[index],
                                     action: ActionType.update,
