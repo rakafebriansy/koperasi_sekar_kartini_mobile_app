@@ -1,4 +1,5 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/model_registry.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/dashboard_stats/dashboard_stats_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
@@ -54,6 +55,10 @@ void registerModels() {
   );
   ModelRegistry.register<LoanDistributionModel>(
     fromJson: (json) => LoanDistributionModel.fromJson(json),
+    toJson: (obj) => obj.toJson(),
+  );
+  ModelRegistry.register<DashboardStatsModel>(
+    fromJson: (json) => DashboardStatsModel.fromJson(json),
     toJson: (obj) => obj.toJson(),
   );
 }

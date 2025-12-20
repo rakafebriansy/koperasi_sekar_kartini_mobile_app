@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://10.132.0.70:8000';
+    baseUrl ??= 'http://172.18.192.1:8000';
   }
 
   final Dio _dio;
@@ -2070,6 +2070,33 @@ class _ApiClient implements ApiClient {
         .compose(
           _dio.options,
           '/groups/${groupId}/reports/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> getDashboardStats() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/dashboard-stats',
           queryParameters: queryParameters,
           data: _data,
         )

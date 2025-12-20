@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/dashboard_stats/dashboard_stats_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan_distribution/loan_distribution_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/member_growth/member_growth_model.dart';
@@ -23,11 +24,15 @@ class EmployeeMainTabsHomeController extends GetxController {
   final RxBool _isFetchingLoanDistribution = false.obs;
   bool get isFetchingLoanDistribution => _isFetchingLoanDistribution.value;
 
+  final RxBool _isFetchingDashboardStats = false.obs;
+  bool get isFetchingDashboardStats => _isFetchingDashboardStats.value;
+
   bool get isLoading =>
       isFetchingEvents ||
       isFetchingMemberGrowth ||
       isFetchingSavingsDistribution ||
-      isFetchingLoanDistribution;
+      isFetchingLoanDistribution ||
+      isFetchingDashboardStats;
 
   final RxList<EventModel> _events = RxList();
   List<EventModel> get events => _events;
@@ -42,12 +47,16 @@ class EmployeeMainTabsHomeController extends GetxController {
   final RxList<LoanDistributionModel> _loanDistribution = RxList();
   List<LoanDistributionModel> get loanDistribution => _loanDistribution;
 
+  final Rx<DashboardStatsModel?> _dashboardStats = Rxn();
+  DashboardStatsModel? get dashboardStats => _dashboardStats.value;
+
   @override
   void onInit() {
     fetchListEvent();
     fetchMemberGrowth();
     fetchSavingsDistribution();
     fetchLoanDistribution();
+    fetchDashboardStats();
     super.onInit();
   }
 
@@ -105,6 +114,23 @@ class EmployeeMainTabsHomeController extends GetxController {
     _isFetchingLoanDistribution.value = true;
 
     try {
+      final DashboardStatsModel data = await apiHelper
+          .fetch<DashboardStatsModel>(
+            request: (api) => api.getDashboardStats(),
+          );
+
+      _dashboardStats.value = data;
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _isFetchingLoanDistribution.value = false;
+    }
+  }
+
+  Future<void> fetchDashboardStats({String? search}) async {
+    _isFetchingDashboardStats.value = true;
+
+    try {
       final List<LoanDistributionModel> data = await apiHelper
           .fetchList<LoanDistributionModel>(
             request: (api) => api.getLoanDistribution(),
@@ -112,10 +138,9 @@ class EmployeeMainTabsHomeController extends GetxController {
 
       _loanDistribution.value = data;
     } catch (e) {
-      rethrow;
       ErrorHelper.handleError(e);
     } finally {
-      _isFetchingLoanDistribution.value = false;
+      _isFetchingDashboardStats.value = false;
     }
   }
 }

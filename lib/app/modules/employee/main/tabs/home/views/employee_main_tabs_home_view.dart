@@ -9,8 +9,11 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings_distrib
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/num/num_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_default_tabbar.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_event_card.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_mini_stat_card.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
@@ -33,11 +36,8 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                   spacing: 16.sp,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    if (controller.memberGrowths.isNotEmpty)
-                      MemberLineChart(data: controller.memberGrowths),
                     Container(
-                      height: 380.sp,
-                      padding: EdgeInsets.fromLTRB(16.sp, 12.sp, 16.sp, 12.sp),
+                      padding: EdgeInsets.all(12.sp),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20.sp),
@@ -46,12 +46,208 @@ class EmployeeMainTabsHomeView extends GetView<EmployeeMainTabsHomeController> {
                           color: AppColor.border.lightGray,
                         ),
                       ),
+                      height: 464.sp,
                       child: AppDefaultTabbar(
                         views: [
-                          SavingsPieChart(data: controller.savingsDistribution),
-                          LoanPieChart(data: controller.loanDistribution),
+                          Column(
+                            spacing: 12.sp,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox.shrink(),
+                              SavingsPieChart(
+                                data: controller.savingsDistribution,
+                              ),
+                              Row(
+                                spacing: 8.sp,
+                                children: [
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Total Simpanan',
+                                      icon: Icon(
+                                        Icons.savings,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      point: controller
+                                          .dashboardStats!
+                                          .savings
+                                          .totalSavingsThisQuarter
+                                          .toIdr(),
+                                      additionalPoint: controller
+                                          .dashboardStats!
+                                          .savings
+                                          .savingPercentage
+                                          .toPercent(),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Blm. Setor Simp.',
+                                      icon: Icon(
+                                        Icons.arrow_downward_rounded,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      point: '${controller
+                                          .dashboardStats!
+                                          .savings
+                                          .usersNotSavedThisQuarter
+                                          .toString()} Orang',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            spacing: 8.sp,
+                            children: [
+                              SizedBox.shrink(),
+                              LoanPieChart(data: controller.loanDistribution),
+                              Row(
+                                spacing: 8.sp,
+                                children: [
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Total Pinjaman',
+                                      icon: Icon(
+                                        Icons.attach_money,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      point: controller
+                                          .dashboardStats!
+                                          .loan
+                                          .totalUnpaidLoanThisQuarter
+                                          .toIdr(),
+                                      additionalPoint: controller
+                                          .dashboardStats!
+                                          .loan
+                                          .loanPercentage
+                                          .toPercent(),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Blm. Lunas Pinjaman',
+                                      icon: Icon(
+                                        Icons.arrow_upward_rounded,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      point: '${controller
+                                          .dashboardStats!
+                                          .loan
+                                          .usersUnpaidLoanThisQuarter
+                                          .toString()} Orang',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            spacing: 12.sp,
+                            children: [
+                              SizedBox.shrink(),
+                              if (controller.memberGrowths.isNotEmpty)
+                                MemberLineChart(data: controller.memberGrowths),
+                              poppins(
+                                'Anggota',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.sp,
+                              ),
+                              Row(
+                                spacing: 8.sp,
+                                children: [
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Agt. Masuk',
+                                      icon: Icon(
+                                        Icons.swap_horiz_rounded,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      point: controller
+                                          .dashboardStats!
+                                          .member
+                                          .joinedThisQuarter
+                                          .toString(),
+                                      additionalPoint: controller
+                                          .dashboardStats!
+                                          .member
+                                          .joinedPercentage
+                                          .toPercent(),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Agt. Keluar',
+                                      icon: Icon(
+                                        Icons.description,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      additionalPoint: controller
+                                          .dashboardStats!
+                                          .member
+                                          .leftPercentage
+                                          .toPercent(),
+                                      point: controller
+                                          .dashboardStats!
+                                          .member
+                                          .leftThisQuarter
+                                          .toString(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                spacing: 8.sp,
+                                children: [
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Agt. Aktif',
+                                      icon: Icon(
+                                        Icons.swap_horiz_rounded,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      point: controller
+                                          .dashboardStats!
+                                          .member
+                                          .totalActiveMembers
+                                          .toString(),
+                                      additionalPoint: controller
+                                          .dashboardStats!
+                                          .member
+                                          .totalActiveMembers
+                                          .toPercent(),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: AppMiniStatCard(
+                                      title: 'Agt. Nonaktif',
+                                      icon: Icon(
+                                        Icons.description,
+                                        color: AppColor.bg.primary,
+                                        size: 18.sp,
+                                      ),
+                                      point: controller
+                                          .dashboardStats!
+                                          .member
+                                          .totalInactiveMembers
+                                          .toString(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ],
-                        tabLabels: ['Simpanan', 'Pinjaman'],
+                        tabLabels: ['Simpanan', 'Pinjaman', 'Anggota'],
                       ),
                     ),
                     SizedBox.shrink(),
@@ -178,9 +374,8 @@ class MemberLineChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          poppins("Jumlah Anggota", fontSize: 18, fontWeight: FontWeight.bold),
-          SizedBox(height: 10.sp),
-
+          poppins("Jumlah Anggota", fontSize: 16),
+          SizedBox(height: 12.sp),
           SizedBox(
             height: 160.sp,
             child: LineChart(
