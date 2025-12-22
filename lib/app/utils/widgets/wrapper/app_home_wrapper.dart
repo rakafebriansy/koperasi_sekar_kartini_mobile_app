@@ -70,11 +70,11 @@ class AppHomeWrapper extends StatelessWidget {
                 child: child,
               )
             : child,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ApiHelper().fetchNonReturnable(request: (api) => api.testFcm());
-          },
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     ApiHelper().fetchNonReturnable(request: (api) => api.testFcm());
+        //   },
+        // ),
       ),
     );
   }
