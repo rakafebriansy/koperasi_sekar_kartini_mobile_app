@@ -25,7 +25,7 @@ class FcmService {
     await _requestPermission();
     await _setupHandlers();
     _listenLocalNotificationTap();
-    await _logToken();
+    // await _logToken();
     _listenTokenRefresh();
   }
 
@@ -35,6 +35,7 @@ class FcmService {
       badge: true,
       sound: true,
     );
+    debugPrint('Permission: ${settings.authorizationStatus}');
   }
 
   Future<void> _setupHandlers() async {
@@ -64,8 +65,6 @@ class FcmService {
 
   Future<void> sendToken() async {
     final token = await _messaging.getToken();
-      'auth token: ${await AuthController.find.tokenManager.getToken()}',
-    );
     if (token != null) {
       await apiHelper.fetchNonReturnable(
         request: (api) => api.sendFcmTokenToApi(fcmToken: token),
@@ -73,9 +72,10 @@ class FcmService {
     }
   }
 
-  Future<void> _logToken() async {
-    final token = await getToken();
-  }
+  // Future<void> _logToken() async {
+  //   final token = await getToken();
+  //   debugPrint('🔥 FCM TOKEN: $token');
+  // }
 
   Future<void> _handleNotificationNavigation(RemoteMessage message) async {
     await _handleNotificationData(message.data);
