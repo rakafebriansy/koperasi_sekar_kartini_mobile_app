@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://172.18.192.1:8000';
+    baseUrl ??= 'https://api.sekarkartiniapp.my.id';
   }
 
   final Dio _dio;
@@ -2189,6 +2189,31 @@ class _ApiClient implements ApiClient {
     final _result = await _dio.fetch(_options);
     final _value = _result.data;
     return _value;
+  }
+
+  @override
+  Future<void> sendFcmTokenToApi({required String fcmToken}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'fcm_token': fcmToken};
+    final _options = _setStreamType<void>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/fcm-refresh-token',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

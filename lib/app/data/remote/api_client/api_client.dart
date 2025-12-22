@@ -425,7 +425,8 @@ abstract class ApiClient {
     @Field('savings_participation') required int savingsParticipation,
     @Field('savings_participation_percentage')
     required double savingsParticipationPercentage,
-    @Field('meeting_deposit_percentage') required double meetingDepositPercentage,
+    @Field('meeting_deposit_percentage')
+    required double meetingDepositPercentage,
     @Field('loan_balance_pb') required int loanBalancePb,
     @Field('loan_balance_bbm') required int loanBalanceBbm,
     @Field('loan_balance_store') required int loanBalanceStore,
@@ -492,7 +493,12 @@ abstract class ApiClient {
 
   @GET("/savings-distribution-chart")
   Future<dynamic> getSavingsDistribution();
-  
+
   @GET("/loan-distribution-chart")
   Future<dynamic> getLoanDistribution();
+
+  @POST('/fcm-refresh-token')
+  Future<void> sendFcmTokenToApi({
+    @Field('fcm_token') required String fcmToken
+  });
 }
