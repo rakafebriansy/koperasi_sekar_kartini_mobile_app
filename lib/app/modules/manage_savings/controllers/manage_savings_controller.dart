@@ -26,11 +26,11 @@ class ManageSavingsController extends GetxController {
   bool get isFetchingMember => _isFetchingMember.value;
 
   TextEditingController amountCtrl = TextEditingController(
-    text: !kReleaseMode ? '40000' : '',
+    // text: !kReleaseMode ? '40000' : '',
   );
 
   TextEditingController dateCtrl = TextEditingController(
-    text: !kReleaseMode ? '02/2024' : '',
+    // text: !kReleaseMode ? '02/2024' : '',
   );
 
 

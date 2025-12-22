@@ -36,16 +36,16 @@ class ManageEventController extends GetxController {
   bool get isFetching => _isFetching.value;
 
   TextEditingController nameCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Pertemuan 1' : '',
+    // text: !kReleaseMode ? 'Pertemuan 1' : '',
   );
   TextEditingController dateTimeCtrl = TextEditingController(
-    text: !kReleaseMode ? '08:00 29/02/2004' : '',
+    // text: !kReleaseMode ? '08:00 29/02/2004' : '',
   );
   TextEditingController locationCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Jl. Mawar no.70, Kabupaten Jember' : '',
+    // text: !kReleaseMode ? 'Jl. Mawar no.70, Kabupaten Jember' : '',
   );
   TextEditingController descCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Lorem ipsum dolor sit amet' : '',
+    // text: !kReleaseMode ? 'Lorem ipsum dolor sit amet' : '',
   );
 
   final List<EventType> eventTypes = [EventType.group, EventType.coop];

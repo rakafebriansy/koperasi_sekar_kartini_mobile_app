@@ -15,11 +15,11 @@ class ManageGroupController extends GetxController {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController descCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Lorem ipsum dolor sit amet' : '',
+    // text: !kReleaseMode ? 'Lorem ipsum dolor sit amet' : '',
   );
 
   TextEditingController numberCtrl = TextEditingController(
-    text: !kReleaseMode ? '1' : '',
+    // text: !kReleaseMode ? '1' : '',
   );
 
   final Rx<WorkAreaModel?> _selectedWorkArea = Rxn();

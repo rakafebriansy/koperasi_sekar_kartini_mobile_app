@@ -17,28 +17,28 @@ class EmployeeManageEmployeeController extends GetxController {
   final secondFormKey = GlobalKey<FormState>();
 
   TextEditingController identityNumberCtrl = TextEditingController(
-    text: !kReleaseMode ? '1234567890123456' : '',
+    // text: !kReleaseMode ? '1234567890123456' : '',
   );
   TextEditingController memberNumberCtrl = TextEditingController(
-    text: !kReleaseMode ? '000001' : '',
+    // text: !kReleaseMode ? '000001' : '',
   );
   TextEditingController nameCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
+    // text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
   );
   TextEditingController phoneCtrl = TextEditingController(
-    text: !kReleaseMode ? '08123456789' : '',
+    // text: !kReleaseMode ? '08123456789' : '',
   );
   TextEditingController birthDateCtrl = TextEditingController(
-    text: !kReleaseMode ? '29/02/2004' : '',
+    // text: !kReleaseMode ? '29/02/2004' : '',
   );
   TextEditingController addressCtrl = TextEditingController(
-    text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
+    // text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
   );
   TextEditingController occupationCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Resepsionis' : '',
+    // text: !kReleaseMode ? 'Resepsionis' : '',
   );
   TextEditingController emailCtrl = TextEditingController(
-    text: !kReleaseMode ? 'raka@example.com' : '',
+    // text: !kReleaseMode ? 'raka@example.com' : '',
   );
   TextEditingController passwordCtrl = TextEditingController(text: 'password');
 

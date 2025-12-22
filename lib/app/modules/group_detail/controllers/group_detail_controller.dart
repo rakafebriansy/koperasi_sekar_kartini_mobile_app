@@ -12,7 +12,7 @@ class GroupDetailController extends GetxController {
   TextEditingController searchCtrl = TextEditingController();
 
   TextEditingController fundAmountCtrl = TextEditingController(
-    text: !kReleaseMode ? '50000' : '',
+    // text: !kReleaseMode ? '50000' : '',
   );
 
   final addMemberFormKey = GlobalKey<FormState>();

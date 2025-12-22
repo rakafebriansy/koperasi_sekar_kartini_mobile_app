@@ -21,28 +21,28 @@ class RegisterController extends GetxController {
   final fifthFormKey = GlobalKey<FormState>();
 
   TextEditingController identityNumberCtrl = TextEditingController(
-    text: !kReleaseMode ? '1234567890123456' : '',
+    // text: !kReleaseMode ? '1234567890123456' : '',
   );
   TextEditingController nameCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
+    // text: !kReleaseMode ? 'Raka Febrian Syahputra' : '',
   );
   TextEditingController addressCtrl = TextEditingController(
-    text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
+    // text: !kReleaseMode ? 'lorem ipsum dolor sit amet' : '',
   );
   TextEditingController birthDateCtrl = TextEditingController(
-    text: !kReleaseMode ? '29/02/2004' : '',
+    // text: !kReleaseMode ? '29/02/2004' : '',
   );
   TextEditingController occupationCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Programmer' : '',
+    // text: !kReleaseMode ? 'Programmer' : '',
   );
   TextEditingController phoneCtrl = TextEditingController(
-    text: !kReleaseMode ? '08123456789' : '',
+    // text: !kReleaseMode ? '08123456789' : '',
   );
   TextEditingController passwordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Password123' : '',
+    // text: !kReleaseMode ? 'Password123' : '',
   );
   TextEditingController confirmPasswordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'Password123' : '',
+    // text: !kReleaseMode ? 'Password123' : '',
   );
 
   final RxInt _selectedScreen = 0.obs;

@@ -14,14 +14,14 @@ class LoginController extends GetxController {
   bool get isSubmitted => _isSubmitted.value;
 
   TextEditingController phoneCtrl = TextEditingController(
-    text: !kReleaseMode
-        ? 
-        '081200000001'
-        // '0812345778'
-        : '',
+    // text: !kReleaseMode
+    //     ? 
+    //     '081200000001'
+    //     // '0812345778'
+    //     : '',
   );
   TextEditingController passwordCtrl = TextEditingController(
-    text: !kReleaseMode ? 'password' : '',
+    // text: !kReleaseMode ? 'password' : '',
   );
 
   ScrollController scrollController = ScrollController();

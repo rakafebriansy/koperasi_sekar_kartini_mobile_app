@@ -29,83 +29,93 @@ class EmployeeManageReportController extends GetxController {
   bool get isFetchingGroups => _isFetchingGroups.value;
 
   TextEditingController yearCtrl = TextEditingController(
-    text: !kReleaseMode ? '2025' : '',
+    // text: !kReleaseMode ? '2025' : '',
   );
 
   TextEditingController memberGrowthInCtrl = TextEditingController(
-    text: !kReleaseMode ? '1' : '',
+    // text: !kReleaseMode ? '1' : '',
   );
 
   TextEditingController memberGrowthOutCtrl = TextEditingController(
-    text: !kReleaseMode ? '1' : '',
+    // text: !kReleaseMode ? '1' : '',
   );
 
   TextEditingController administrativeCompliancePercentageCtrl =
-      TextEditingController(text: !kReleaseMode ? '100' : '');
+      TextEditingController(
+        // text: !kReleaseMode ? '100' : ''
+      );
 
   TextEditingController depositCompliancePercentageCtrl = TextEditingController(
-    text: !kReleaseMode ? '80' : '',
+    // text: !kReleaseMode ? '80' : '',
   );
 
   TextEditingController attendancePercentageCtrl = TextEditingController(
-    text: !kReleaseMode ? '70' : '',
+    // text: !kReleaseMode ? '70' : '',
   );
 
   TextEditingController loanParticipationPbCtrl = TextEditingController(
-    text: !kReleaseMode ? '7000000' : '',
+    // text: !kReleaseMode ? '7000000' : '',
   );
 
   TextEditingController loanParticipationBbmCtrl = TextEditingController(
-    text: !kReleaseMode ? '7000000' : '',
+    // text: !kReleaseMode ? '7000000' : '',
   );
 
   TextEditingController loanParticipationStoreCtrl = TextEditingController(
-    text: !kReleaseMode ? '8000000' : '',
+    // text: !kReleaseMode ? '8000000' : '',
   );
 
   TextEditingController loanBalancePbCtrl = TextEditingController(
-    text: !kReleaseMode ? '7000000' : '',
+    // text: !kReleaseMode ? '7000000' : '',
   );
 
   TextEditingController loanBalanceBbmCtrl = TextEditingController(
-    text: !kReleaseMode ? '7000000' : '',
+    // text: !kReleaseMode ? '7000000' : '',
   );
 
   TextEditingController loanBalanceStoreCtrl = TextEditingController(
-    text: !kReleaseMode ? '8000000' : '',
+    // text: !kReleaseMode ? '8000000' : '',
   );
 
   TextEditingController cashParticipationCtrl = TextEditingController(
-    text: !kReleaseMode ? '7000000' : '',
+    // text: !kReleaseMode ? '7000000' : '',
   );
 
   TextEditingController cashParticipationPercentageCtrl = TextEditingController(
-    text: !kReleaseMode ? '7000000' : '',
+    // text: !kReleaseMode ? '7000000' : '',
   );
 
   TextEditingController savingsParticipationCtrl = TextEditingController(
-    text: !kReleaseMode ? '8000000' : '',
+    // text: !kReleaseMode ? '8000000' : '',
   );
 
   TextEditingController savingsParticipationPercentageCtrl =
-      TextEditingController(text: !kReleaseMode ? '8000000' : '');
+      TextEditingController(
+        // text: !kReleaseMode ? '8000000' : ''
+      );
 
   TextEditingController meetingDepositPercentageCtrl = TextEditingController(
-    text: !kReleaseMode ? '80' : '',
+    // text: !kReleaseMode ? '80' : '',
   );
 
   TextEditingController organizationFinalScorePercentageCtrl =
-      TextEditingController(text: !kReleaseMode ? '100' : '');
+      TextEditingController(
+        // text: !kReleaseMode ? '100' : ''
+      );
 
   TextEditingController receivableScoreCtrl = TextEditingController(
-    text: !kReleaseMode ? '100' : '',
+    // text: !kReleaseMode ? '100' : '',
   );
 
   TextEditingController financialFinalScorePercentageCtrl =
-      TextEditingController(text: !kReleaseMode ? '100' : '');
+      TextEditingController(
+        // text: !kReleaseMode ? '100' : ''
+      );
 
   TextEditingController combinedFinalScorePercentageCtrl =
-      TextEditingController(text: !kReleaseMode ? '100' : '');
+      TextEditingController(
+        // text: !kReleaseMode ? '100' : ''
+      );
 
   final Rx<ActionType?> _action = Rxn();
   ActionType? get action => _action.value;
@@ -376,7 +386,8 @@ class EmployeeManageReportController extends GetxController {
 
     try {
       await ApiHelper.instance.fetchNonReturnable(
-        request: (api) => api.deleteReport(groupId: report!.groupId, id: report!.id),
+        request: (api) =>
+            api.deleteReport(groupId: report!.groupId, id: report!.id),
       );
 
       Get.back(result: true);
