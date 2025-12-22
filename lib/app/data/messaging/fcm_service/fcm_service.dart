@@ -41,6 +41,7 @@ class FcmService {
 
   Future<void> _setupHandlers() async {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      debugPrint('📱 Got FCM message: ${message.data}');
       LocalNotificationService.show(
         title: message.notification?.title,
         body: message.notification?.body,
@@ -69,7 +70,9 @@ class FcmService {
 
   Future<void> sendToken() async {
     final token = await _messaging.getToken();
-    debugPrint('auth token: ${await AuthController.find.tokenManager.getToken()}');
+    debugPrint(
+      'auth token: ${await AuthController.find.tokenManager.getToken()}',
+    );
     debugPrint('📱 FCM TOKEN: $token');
     debugPrint('sending fcm token...');
     if (token != null) {
@@ -138,14 +141,16 @@ class FcmService {
       throw NotificationException('Meeting ID missing');
     }
 
-    try {
-      final event = await apiHelper.fetch<EventModel>(
-        request: (api) => api.getMeeting(id: meetingId),
-      );
-      Get.offAllNamed(Routes.EVENT_DETAIL, arguments: ArgsWrapper(data: event));
-    } catch (e) {
-      throw NotificationException('Event is not found');
+    final event = await apiHelper.fetch<EventModel>(
+      request: (api) => api.getMeeting(id: int.parse(meetingId)),
+    );
+
+    if (event == null) {
+      debugPrint('Event not found for ID $meetingId');
+      return;
     }
+
+    Get.toNamed(Routes.EVENT_DETAIL, arguments: ArgsWrapper(data: event));
   }
 
   void _handleNotificationError(Object error, StackTrace stack) {

@@ -16,6 +16,8 @@ class EventDetailController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
+    print('args.data.toString()');
+    print(args.data.toString());
 
     _event.value = args.data as EventModel;
     super.onInit();

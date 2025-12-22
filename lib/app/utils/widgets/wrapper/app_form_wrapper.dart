@@ -32,7 +32,7 @@ class AppFormWrapper extends StatelessWidget {
           toolbarHeight: 64.sp,
           actionsPadding: EdgeInsets.all(12.sp),
           actions: actions,
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColor.bg.primary,
           elevation: 0,
           centerTitle: true,
           leadingWidth: 64.sp,

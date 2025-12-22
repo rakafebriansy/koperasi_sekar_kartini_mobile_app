@@ -26,15 +26,15 @@ class GroupMemberMainTabsGroupView
     return AppHomeWrapper(
       withPadding: false,
       child: Obx(
-        () => AuthController.find.currentUser!.groupId == null
-            ? SizedBox(
-                height: getScreenHeight(context, scale: 0.8),
-                child: Center(child: poppins('Tidak tergabung kelompok.')),
-              )
-            : controller.isLoading
+        () => controller.isLoading
             ? SizedBox(
                 height: getScreenHeight(context, scale: 0.8),
                 child: Center(child: CircularProgressIndicator()),
+              )
+            : AuthController.find.currentUser!.groupId == null || controller.group == null
+            ? SizedBox(
+                height: getScreenHeight(context, scale: 0.8),
+                child: Center(child: poppins('Tidak tergabung kelompok.')),
               )
             : SingleChildScrollView(
                 child: Column(

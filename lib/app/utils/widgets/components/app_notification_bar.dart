@@ -60,7 +60,7 @@ class AppNotificationBar extends StatelessWidget {
                   spacing: 4.sp,
                   children: [
                     poppins(
-                      '${dateTime.toIdFull()})',
+                      dateTime.toIdFull(),
                       fontSize: 10.sp,
                       color: Colors.grey,
                     ),
