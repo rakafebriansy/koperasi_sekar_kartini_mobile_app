@@ -35,13 +35,10 @@ class FcmService {
       badge: true,
       sound: true,
     );
-
-    debugPrint('🔔 Permission: ${settings.authorizationStatus}');
   }
 
   Future<void> _setupHandlers() async {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      debugPrint('📱 Got FCM message: ${message.data}');
       LocalNotificationService.show(
         title: message.notification?.title,
         body: message.notification?.body,
@@ -50,7 +47,6 @@ class FcmService {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      debugPrint('📲 Opened from notification');
       _handleNotificationNavigation(message);
     });
 
@@ -58,8 +54,6 @@ class FcmService {
         .getInitialMessage();
 
     if (initialMessage != null) {
-      debugPrint('🚀 Opened from terminated');
-      debugPrint('Data: ${initialMessage.data}');
       _handleNotificationNavigation(initialMessage);
     }
   }
@@ -70,11 +64,8 @@ class FcmService {
 
   Future<void> sendToken() async {
     final token = await _messaging.getToken();
-    debugPrint(
       'auth token: ${await AuthController.find.tokenManager.getToken()}',
     );
-    debugPrint('📱 FCM TOKEN: $token');
-    debugPrint('sending fcm token...');
     if (token != null) {
       await apiHelper.fetchNonReturnable(
         request: (api) => api.sendFcmTokenToApi(fcmToken: token),
@@ -84,7 +75,6 @@ class FcmService {
 
   Future<void> _logToken() async {
     final token = await getToken();
-    debugPrint('🔥 FCM TOKEN: $token');
   }
 
   Future<void> _handleNotificationNavigation(RemoteMessage message) async {
@@ -118,7 +108,6 @@ class FcmService {
 
   void _listenTokenRefresh() {
     _messaging.onTokenRefresh.listen((newToken) {
-      debugPrint('🔄 Token refreshed: $newToken');
       apiHelper.fetchNonReturnable(
         request: (api) => api.sendFcmTokenToApi(fcmToken: newToken),
       );
@@ -154,7 +143,7 @@ class FcmService {
   }
 
   void _handleNotificationError(Object error, StackTrace stack) {
-    debugPrint('❌ Notification error: $error');
+    debugPrint('Notification error: $error');
 
     if (!Get.isRegistered<AuthController>()) {
       Get.offAllNamed(Routes.LOGIN);

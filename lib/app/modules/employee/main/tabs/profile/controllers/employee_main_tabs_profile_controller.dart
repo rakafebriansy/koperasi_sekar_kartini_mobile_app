@@ -83,7 +83,6 @@ class EmployeeMainTabsProfileController extends GetxController {
         Get.back(result: true);
         Get.snackbar('INFO', 'Berhasil memperbarui KTA!');
       } catch (e) {
-        debugPrint(e.toString());
         ErrorHelper.handleError(e);
       } finally {
         _selectedMember.value = null;

@@ -52,18 +52,16 @@ class LocalNotificationService {
   }
 
   static void _onNotificationTap(NotificationResponse response) {
-    debugPrint('🔔 Notification tapped');
-    debugPrint('Payload: ${response.payload}');
+    debugPrint('Notification tapped');
 
     if (response.payload == null) return;
 
     try {
       final Map<String, dynamic> data = jsonDecode(response.payload!);
 
-      debugPrint('🔔 Notification tapped: $data');
       notificationTapNotifier.value = data;
     } catch (e) {
-      debugPrint('❌ Invalid payload: $e');
+      debugPrint('Invalid payload: $e');
     }
   }
 }
