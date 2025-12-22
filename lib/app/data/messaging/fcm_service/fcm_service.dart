@@ -11,7 +11,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrappe
 
 class FcmService {
   static final FcmService _instance = FcmService._internal(
-    apiHelper: ApiHelper(),
+    apiHelper: Get.find<ApiHelper>(),
   );
   factory FcmService() => _instance;
 
@@ -69,6 +69,9 @@ class FcmService {
 
   Future<void> sendToken() async {
     final token = await _messaging.getToken();
+    debugPrint('auth token: ${await AuthController.find.tokenManager.getToken()}');
+    debugPrint('📱 FCM TOKEN: $token');
+    debugPrint('sending fcm token...');
     if (token != null) {
       await apiHelper.fetchNonReturnable(
         request: (api) => api.sendFcmTokenToApi(fcmToken: token),
@@ -94,7 +97,7 @@ class FcmService {
       }
 
       switch (data['type']) {
-        case 'meeting-reminder':
+        case 'meeting_reminder':
           await _handleMeetingReminder(data);
           break;
 

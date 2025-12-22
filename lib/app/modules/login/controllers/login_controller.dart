@@ -2,20 +2,25 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/data/messaging/fcm_service/fcm_service.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class LoginController extends GetxController {
+  final ApiHelper apiHelper;
+
   final formKey = GlobalKey<FormState>();
+
+  LoginController({required this.apiHelper});
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
   TextEditingController phoneCtrl = TextEditingController(
     // text: !kReleaseMode
-    //     ? 
+    //     ?
     //     '081200000001'
     //     // '0812345778'
     //     : '',
@@ -40,12 +45,13 @@ class LoginController extends GetxController {
     try {
       if (!formKey.currentState!.validate()) return;
 
-      final user = await ApiHelper.instance.fetch<UserModel>(
+      final user = await apiHelper.fetch<UserModel>(
         request: (api) =>
             api.login(phoneNumber: phoneCtrl.text, password: passwordCtrl.text),
       );
 
       AuthController.find.saveUserData(user: user);
+      await FcmService().sendToken();
 
       if (user.role == 'group_member') {
         Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);

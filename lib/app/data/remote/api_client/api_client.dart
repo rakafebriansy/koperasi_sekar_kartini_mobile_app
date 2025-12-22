@@ -497,8 +497,12 @@ abstract class ApiClient {
   @GET("/loan-distribution-chart")
   Future<dynamic> getLoanDistribution();
 
-  @POST('/fcm-refresh-token')
+  @POST('/refresh-fcm-token')
   Future<void> sendFcmTokenToApi({
     @Field('fcm_token') required String fcmToken
   });
+
+  //TODO: remove while production
+  @GET('/test-fcm')
+  Future<void> testFcm();
 }

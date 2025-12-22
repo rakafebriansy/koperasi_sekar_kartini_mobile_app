@@ -12,10 +12,15 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 
 abstract class AppInitializer {
   static Future<void> initialize() async {
+    //global
+    Get.put(const FlutterSecureStorage());
+    Get.put(AuthController(), permanent: true);
+    Get.put(ApiHelper(), permanent: true);
+
     //firebase
     await Firebase.initializeApp();
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    
+
     //local notification
     await LocalNotificationService.init();
 
@@ -27,11 +32,6 @@ abstract class AppInitializer {
 
     //intl
     await initializeDateFormatting('id_ID', null);
-
-    //global
-    Get.put(const FlutterSecureStorage());
-    Get.put(AuthController(), permanent: true);
-    Get.put(ApiHelper(), permanent: true);
   }
 }
 
