@@ -19,7 +19,7 @@ class GroupMemberMainBinding extends Bindings {
       () => GroupMemberMainTabsGroupController(apiHelper: Get.find<ApiHelper>()),
     );
     Get.lazyPut<GroupMemberMainTabsProfileController>(
-      () => GroupMemberMainTabsProfileController(),
+      () => GroupMemberMainTabsProfileController(apiHelper: Get.find<ApiHelper>()),
     );
   }
 }
