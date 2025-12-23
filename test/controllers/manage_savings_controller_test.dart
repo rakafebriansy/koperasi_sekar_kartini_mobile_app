@@ -22,7 +22,6 @@ void main() {
     Get.reset();
     Get.testMode = true;
 
-
     dummyUser = DummyHelper.user(1);
     dummySavings = DummyHelper.sv(1);
 
@@ -36,10 +35,7 @@ void main() {
     test('selectSavingsType sets selectedSavingsType correctly', () {
       controller.selectSavingsType('Simpanan Wajib');
 
-      expect(
-        controller.selectedSavingsType,
-        SavingsType.simpananWajib,
-      );
+      expect(controller.selectedSavingsType, SavingsType.simpananWajib);
     });
 
     test('createSavings success', () async {
@@ -50,17 +46,17 @@ void main() {
 
       controller.userRx.value = dummyUser;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.createSavings();
 
       expect(controller.isSubmitted, false);
 
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('createSavings handles api error', () async {
@@ -71,40 +67,37 @@ void main() {
 
       controller.userRx.value = dummyUser;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenThrow(Exception('API error'));
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenThrow(Exception('API error'));
 
       await controller.createSavings();
 
       expect(controller.isSubmitted, false);
 
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('deleteSavings success', () async {
       controller.savingsRx.value = dummySavings;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.deleteSavings();
 
       expect(controller.isSubmitted, false);
 
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('deleteSavings throws when savings is null', () async {
-      expect(
-        () => controller.deleteSavings(),
-        throwsA(isA<Exception>()),
-      );
+      expect(() => controller.deleteSavings(), throwsA(isA<Exception>()));
     });
   });
 }

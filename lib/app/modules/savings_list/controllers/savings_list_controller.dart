@@ -31,6 +31,7 @@ class SavingsListController extends GetxController {
   Timer? _debounce;
 
   final Rx<UserModel?> _member = Rxn();
+  Rx<UserModel?> get memberRx => _member;
   UserModel? get member => _member.value;
 
   @override

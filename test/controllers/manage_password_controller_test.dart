@@ -24,17 +24,17 @@ void main() {
         ..newPasswordCtrl.text = 'newPassword123'
         ..confirmNewPasswordCtrl.text = 'newPassword123';
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.updatePassword();
 
       expect(controller.isSubmitted, false);
 
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('updatePassword handles api error', () async {
@@ -42,17 +42,17 @@ void main() {
         ..passwordCtrl.text = 'oldPassword'
         ..newPasswordCtrl.text = 'newPassword';
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenThrow(Exception('API error'));
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenThrow(Exception('API error'));
 
       await controller.updatePassword();
 
       expect(controller.isSubmitted, false);
 
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
   });
 }

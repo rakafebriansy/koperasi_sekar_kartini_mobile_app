@@ -24,10 +24,7 @@ void main() {
     Get.testMode = true;
 
     dummyGroup = DummyHelper.group(1);
-    dummyReports = [
-      DummyHelper.report(1),
-      DummyHelper.report(2),
-    ];
+    dummyReports = [DummyHelper.report(1), DummyHelper.report(2)];
 
     controller = ReportListController(
       apiHelper: mockApi,
@@ -39,63 +36,61 @@ void main() {
 
   group('ReportListController', () {
     test('fetchListReport success', () async {
-      when(() => mockApi.fetchList<ReportModel>(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async => dummyReports);
+      when(
+        () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => dummyReports);
 
       await controller.fetchListReport(dummyGroup.id);
 
       expect(controller.isFetching, false);
       expect(controller.reports.length, 2);
 
-      verify(() => mockApi.fetchList<ReportModel>(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('fetchListReport handles api error', () async {
-      when(() => mockApi.fetchList<ReportModel>(
-            request: any(named: 'request'),
-          )).thenThrow(Exception('API error'));
+      when(
+        () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+      ).thenThrow(Exception('API error'));
 
       await controller.fetchListReport(dummyGroup.id);
 
       expect(controller.isFetching, false);
       expect(controller.reports.isEmpty, true);
 
-      verify(() => mockApi.fetchList<ReportModel>(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('onSearchChanged triggers fetchListReport after debounce', () {
       fakeAsync((async) {
-        when(() => mockApi.fetchList<ReportModel>(
-              request: any(named: 'request'),
-            )).thenAnswer((_) async => dummyReports);
+        when(
+          () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+        ).thenAnswer((_) async => dummyReports);
 
         controller.onSearchChanged('laporan');
 
-        // belum lewat debounce → belum dipanggil
         async.elapse(const Duration(milliseconds: 500));
-        verifyNever(() => mockApi.fetchList<ReportModel>(
-              request: any(named: 'request'),
-            ));
+        verifyNever(
+          () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+        );
 
-        // lewat 1 detik → TERPANGGIL
         async.elapse(const Duration(seconds: 1));
 
-        verify(() => mockApi.fetchList<ReportModel>(
-              request: any(named: 'request'),
-            )).called(1);
+        verify(
+          () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+        ).called(1);
       });
     });
 
     test('onSearchChanged cancels previous debounce', () {
       fakeAsync((async) {
-        when(() => mockApi.fetchList<ReportModel>(
-              request: any(named: 'request'),
-            )).thenAnswer((_) async => dummyReports);
+        when(
+          () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+        ).thenAnswer((_) async => dummyReports);
 
         controller.onSearchChanged('lap');
         async.elapse(const Duration(milliseconds: 500));
@@ -104,9 +99,9 @@ void main() {
 
         async.elapse(const Duration(seconds: 1));
 
-        verify(() => mockApi.fetchList<ReportModel>(
-              request: any(named: 'request'),
-            )).called(1);
+        verify(
+          () => mockApi.fetchList<ReportModel>(request: any(named: 'request')),
+        ).called(1);
       });
     });
   });

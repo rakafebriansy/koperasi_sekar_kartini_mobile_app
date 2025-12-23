@@ -26,15 +26,18 @@ void main() {
 
   group('RegisterController', () {
     test('fetchListWorkArea updates workAreas list', () async {
-      when(() => mockApi.fetchList<WorkAreaModel>(request: any(named: 'request')))
-          .thenAnswer((_) async => [dummyWorkArea]);
+      when(
+        () => mockApi.fetchList<WorkAreaModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => [dummyWorkArea]);
 
       await controller.fetchListWorkArea();
 
       expect(controller.isFetchingWorkArea, false);
       expect(controller.workAreas.length, 1);
       expect(controller.workAreas.first.name, dummyWorkArea.name);
-      verify(() => mockApi.fetchList<WorkAreaModel>(request: any(named: 'request'))).called(1);
+      verify(
+        () => mockApi.fetchList<WorkAreaModel>(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('selectMember sets selectedWorkArea correctly', () async {
@@ -69,13 +72,16 @@ void main() {
       controller.idCardImageRx.value = File('id_card.png');
       controller.selfImageRx.value = File('self.png');
 
-      when(() => mockApi.fetch<UserModel>(request: any(named: 'request')))
-          .thenAnswer((_) async => dummyUser);
+      when(
+        () => mockApi.fetch<UserModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => dummyUser);
 
       await controller.register();
 
       expect(controller.isSubmitted, false);
-      verify(() => mockApi.fetch<UserModel>(request: any(named: 'request'))).called(1);
+      verify(
+        () => mockApi.fetch<UserModel>(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('nextScreen and prevScreen update selectedScreen', () {

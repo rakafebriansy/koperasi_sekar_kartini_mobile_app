@@ -31,32 +31,28 @@ void main() {
 
   group('ManageGroupController', () {
     test('fetchListWorkArea success', () async {
-      final workAreas = [
-        WorkAreaModel(id: 1, name: 'Jakarta'),
-      ];
+      final workAreas = [WorkAreaModel(id: 1, name: 'Jakarta')];
 
-      when(() => mockApi.fetchList<WorkAreaModel>(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async => workAreas);
+      when(
+        () => mockApi.fetchList<WorkAreaModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => workAreas);
 
       await controller.fetchListWorkArea();
 
       expect(controller.isFetchingWorkArea, false);
       expect(controller.workAreas, workAreas);
 
-      verify(() => mockApi.fetchList<WorkAreaModel>(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchList<WorkAreaModel>(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('fetchListEmployee success', () async {
-      final employees = [
-        DummyHelper.user(1)
-      ];
+      final employees = [DummyHelper.user(1)];
 
-      when(() => mockApi.fetchList<UserModel>(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async => employees);
+      when(
+        () => mockApi.fetchList<UserModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => employees);
 
       await controller.fetchListEmployee();
 
@@ -65,13 +61,11 @@ void main() {
     });
 
     test('fetchListGroupMember success', () async {
-      final members = [
-        DummyHelper.user(1)
-      ];
+      final members = [DummyHelper.user(1)];
 
-      when(() => mockApi.fetchList<UserModel>(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async => members);
+      when(
+        () => mockApi.fetchList<UserModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => members);
 
       await controller.fetchListGroupMember();
 
@@ -80,9 +74,9 @@ void main() {
     });
 
     test('createGroup success', () async {
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       controller.numberCtrl.text = '1';
       controller.descCtrl.text = 'Kelompok A';
@@ -90,9 +84,9 @@ void main() {
       await controller.createGroup();
 
       expect(controller.isSubmitted, false);
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('updateGroup success', () async {
@@ -101,9 +95,9 @@ void main() {
         ..descCtrl.text = 'Update'
         ..idRx.value = 1;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.updateGroup();
 
@@ -113,9 +107,9 @@ void main() {
     test('deleteGroup success', () async {
       controller.idRx.value = 1;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.deleteGroup();
 

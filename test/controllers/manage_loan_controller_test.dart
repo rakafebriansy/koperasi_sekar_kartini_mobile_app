@@ -23,7 +23,6 @@ void main() {
     Get.reset();
     Get.testMode = true;
 
-
     dummyUser = DummyHelper.user(1);
 
     dummyLoan = DummyHelper.lo(1);
@@ -49,16 +48,16 @@ void main() {
         ..selectLoanType('Pinjaman Biasa')
         ..userRx.value = dummyUser;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.createLoan();
 
       expect(controller.isSubmitted, false);
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('createLoan fails when loan type is null', () async {
@@ -77,31 +76,31 @@ void main() {
         ..loanRx.value = dummyLoan
         ..selectLoanType('Pinjaman Biasa');
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.updateStatus();
 
       expect(controller.isSubmitted, false);
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('deleteLoan success', () async {
       controller.loanRx.value = dummyLoan;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.deleteLoan();
 
       expect(controller.isSubmitted, false);
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('submitButton triggers createLoan when action is create', () async {
@@ -112,15 +111,15 @@ void main() {
         ..selectLoanType('Pinjaman Biasa')
         ..userRx.value = dummyUser;
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.submitButton();
 
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('submitButton triggers updateStatus when action is update', () async {
@@ -129,15 +128,15 @@ void main() {
         ..loanRx.value = dummyLoan
         ..selectLoanType('Pinjaman Biasa');
 
-      when(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).thenAnswer((_) async {});
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {});
 
       await controller.submitButton();
 
-      verify(() => mockApi.fetchNonReturnable(
-            request: any(named: 'request'),
-          )).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
   });
 }

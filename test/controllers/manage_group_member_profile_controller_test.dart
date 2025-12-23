@@ -30,7 +30,6 @@ void main() {
       apiHelper: mockApi,
       authController: fakeAuth,
     );
-
   });
 
   tearDown(() {
@@ -38,7 +37,6 @@ void main() {
   });
 
   group('ManageGroupMemberProfileController', () {
-
     test('fetchListWorkArea success', () async {
       final workAreas = [
         WorkAreaModel(id: 1, name: 'Jakarta'),

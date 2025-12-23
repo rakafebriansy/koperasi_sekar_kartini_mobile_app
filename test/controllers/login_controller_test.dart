@@ -12,7 +12,6 @@ import '../fakes/fake_auth_controller.dart';
 import '../mocks/mock_api_client.dart';
 import '../mocks/mock_api_helper.dart';
 
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
