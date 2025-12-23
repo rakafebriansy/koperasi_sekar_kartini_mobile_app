@@ -16,9 +16,10 @@ void main() {
   });
 
   setUp(() {
+    Get.reset();
+    Get.testMode = true;
     mockApi = MockApiHelper();
 
-    Get.testMode = true;
     controller = EventDetailController(apiHelper: mockApi);
 
     controller.eventRx.value = DummyHelper.ev(1);
@@ -26,13 +27,16 @@ void main() {
 
   group('EventDetailController', () {
     test('deleteMeeting calls apiHelper.fetchNonReturnable', () async {
-      when(() => mockApi.fetchNonReturnable(request: any(named: 'request')))
-          .thenAnswer((_) async => Future<void>.value());
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async => Future<void>.value());
 
       await controller.deleteMeeting();
 
       expect(controller.isSubmitted, false);
-      verify(() => mockApi.fetchNonReturnable(request: any(named: 'request'))).called(1);
+      verify(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).called(1);
     });
   });
 }

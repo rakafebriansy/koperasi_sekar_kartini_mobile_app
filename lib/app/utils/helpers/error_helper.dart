@@ -103,8 +103,9 @@ abstract class ErrorHelper {
               'Internal Server Error',
             );
           default:
-            if (e.error != null)
+            if (e.error != null) {
               return DialogHelper.showFailedDialog(e.error.toString());
+            }
         }
       }
     }

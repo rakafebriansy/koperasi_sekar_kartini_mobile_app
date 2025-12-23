@@ -7,7 +7,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class EventListController extends GetxController {
-    final ApiHelper apiHelper;
+  final ApiHelper apiHelper;
 
   EventListController({required this.apiHelper});
 
