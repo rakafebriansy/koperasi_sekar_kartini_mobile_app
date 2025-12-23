@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
@@ -20,12 +19,6 @@ class ManageLoanController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
 
-  final Rx<ActionType?> _action = Rxn();
-  ActionType? get action => _action.value;
-
-  final Rx<LoanModel?> _loan = Rxn();
-  LoanModel? get loan => _loan.value;
-
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
@@ -43,7 +36,16 @@ class ManageLoanController extends GetxController {
   final Rx<LoanType?> _selectedLoanType = Rxn();
   LoanType? get selectedLoanType => _selectedLoanType.value;
 
+  final Rx<ActionType?> _action = Rxn();
+  Rx<ActionType?> get actionRx => _action;
+  ActionType? get action => _action.value;
+
+  final Rx<LoanModel?> _loan = Rxn();
+  Rx<LoanModel?> get loanRx => _loan;
+  LoanModel? get loan => _loan.value;
+
   final Rx<UserModel?> _user = Rxn();
+  Rx<UserModel?> get userRx => _user;
   UserModel? get user => _user.value;
 
   final List<LoanType> loanTypes = [
@@ -107,7 +109,6 @@ class ManageLoanController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil membuat pinjaman!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
@@ -129,7 +130,6 @@ class ManageLoanController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil memperbarui pinjaman!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
@@ -151,7 +151,6 @@ class ManageLoanController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil menghapus pinjaman!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
