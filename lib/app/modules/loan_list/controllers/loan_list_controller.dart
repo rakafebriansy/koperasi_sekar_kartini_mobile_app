@@ -21,11 +21,13 @@ class LoanListController extends GetxController {
   bool get isSubmitted => _isSubmitted.value;
 
   final RxList<LoanModel> _loans = RxList();
+  RxList<LoanModel> get loansRx => _loans;
   List<LoanModel> get loans => _loans;
 
   Timer? _debounce;
 
   final Rx<UserModel?> _member = Rxn();
+  Rx<UserModel?> get memberRx => _member;
   UserModel? get member => _member.value;
 
   @override

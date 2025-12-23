@@ -1,8 +1,10 @@
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/dashboard_stats/dashboard_stats_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan_distribution/loan_distribution_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/member_growth/member_growth_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings_distribution/savings_distribution_model.dart';
 
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
@@ -392,14 +394,9 @@ class DummyHelper {
     ),
   ];
 
-  /// Ambil report berdasarkan id (untuk unit test)
   static ReportModel report(int id) => reports.firstWhere((r) => r.id == id);
-
-  /// Ambil report berdasarkan group
   static List<ReportModel> reportsByGroup(int groupId) =>
       reports.where((r) => r.groupId == groupId).toList();
-
-  /// Ambil report berdasarkan tahun
   static List<ReportModel> reportsByYear(int year) =>
       reports.where((r) => r.year == year).toList();
 
@@ -446,6 +443,79 @@ class DummyHelper {
     ),
   ];
   static EventModel ev(int id) => events.firstWhere((e) => e.id == id);
+
+  // LOANS
+  static List<LoanModel> loans = [
+    LoanModel(
+      id: 1,
+      type: LoanType.pinjamanBiasa,
+      status: LoanStatus.unpaid,
+      nominal: 50000,
+      year: 2025,
+      month: 12,
+      user: user(1),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    LoanModel(
+      id: 2,
+      type: LoanType.pinjamanPengadaanBarang,
+      status: LoanStatus.paid,
+      nominal: 100000,
+      year: 2025,
+      month: 11,
+      user: user(2),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    LoanModel(
+      id: 3,
+      type: LoanType.pinjamanBbm,
+      status: LoanStatus.unpaid,
+      nominal: 75000,
+      year: 2025,
+      month: 10,
+      user: user(3),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
+  static LoanModel lo(int id) => loans.firstWhere((e) => e.id == id);
+
+  // SAVINGS
+  static List<SavingsModel> savings = [
+    SavingsModel(
+      id: 1,
+      type: SavingsType.simpananPokok,
+      nominal: 50000,
+      year: 2025,
+      month: 12,
+      user: user(1),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    SavingsModel(
+      id: 2,
+      type: SavingsType.simpananWajib,
+      nominal: 75000,
+      year: 2025,
+      month: 11,
+      user: user(2),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    SavingsModel(
+      id: 3,
+      type: SavingsType.simpananSukarela,
+      nominal: 100000,
+      year: 2025,
+      month: 10,
+      user: user(3),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
+  static SavingsModel sv(int id) => savings.firstWhere((e) => e.id == id);
 
   // MEMBER GROWTH
   static MemberGrowthModel memberGrowth(int year) =>

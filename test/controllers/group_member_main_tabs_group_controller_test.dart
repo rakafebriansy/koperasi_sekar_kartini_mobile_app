@@ -1,5 +1,3 @@
-// group_member_main_tabs_group_controller_test.dart
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/group_member/main/tabs/group/controllers/group_member_main_tabs_group_controller.dart';
