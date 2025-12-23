@@ -5,6 +5,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class ManagePasswordController extends GetxController {
+    final ApiHelper apiHelper;
+
+  ManagePasswordController({required this.apiHelper});
+
   final formKey = GlobalKey<FormState>();
 
   TextEditingController passwordCtrl = TextEditingController();
@@ -19,7 +23,7 @@ class ManagePasswordController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.changePassword(
           password: passwordCtrl.text,
           newPassword: newPasswordCtrl.text,

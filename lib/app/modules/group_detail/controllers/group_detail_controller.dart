@@ -10,6 +10,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class GroupDetailController extends GetxController {
+  final ApiHelper apiHelper;
+
+  GroupDetailController({required this.apiHelper});
   TextEditingController searchCtrl = TextEditingController();
 
   TextEditingController fundAmountCtrl = TextEditingController(
@@ -122,10 +125,9 @@ class GroupDetailController extends GetxController {
     _isFetchingEmployee.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) => api.getUsers(search: search, role: 'employee'),
-          );
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(search: search, role: 'employee'),
+      );
 
       _employees.value = data;
     } catch (e) {
@@ -138,7 +140,7 @@ class GroupDetailController extends GetxController {
   Future<void> fetchGroupById(int id, {String? search}) async {
     _isFetchingGroup.value = true;
     try {
-      final GroupModel data = await ApiHelper.instance.fetch<GroupModel>(
+      final GroupModel data = await apiHelper.fetch<GroupModel>(
         request: (api) => api.getGroup(id: id),
       );
 
@@ -154,10 +156,9 @@ class GroupDetailController extends GetxController {
     _isFetchingUnlistedMembers.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) => api.getUnlistedMembers(workAreaId: workAreaId),
-          );
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
+        request: (api) => api.getUnlistedMembers(workAreaId: workAreaId),
+      );
 
       _unlistedMembers.value = data;
     } catch (e) {
@@ -171,14 +172,13 @@ class GroupDetailController extends GetxController {
     _isFetchingGroupMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) => api.getUsers(
-              search: search,
-              role: 'group_member',
-              groupId: groupId,
-            ),
-          );
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(
+          search: search,
+          role: 'group_member',
+          groupId: groupId,
+        ),
+      );
 
       _groupMembers.value = data;
     } catch (e) {
@@ -196,7 +196,7 @@ class GroupDetailController extends GetxController {
     if (selectedFacilitator == null) throw Exception('facilitator is null');
 
     try {
-      await ApiHelper.instance.fetch<GroupModel>(
+      await apiHelper.fetch<GroupModel>(
         request: (api) => api.updateGroupFacilitator(
           id: group!.id,
           userId: selectedFacilitator!.id,
@@ -222,7 +222,7 @@ class GroupDetailController extends GetxController {
     if (selectedChairman == null) throw Exception('chairman is null');
 
     try {
-      await ApiHelper.instance.fetch<GroupModel>(
+      await apiHelper.fetch<GroupModel>(
         request: (api) => api.updateGroupChairman(
           id: group!.id,
           userId: selectedChairman!.id,
@@ -248,7 +248,7 @@ class GroupDetailController extends GetxController {
       if (group == null) throw Exception('group is null');
       if (selectedMember == null) throw Exception('member is null');
 
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) =>
             api.addGroupMember(id: selectedMember!.id, groupId: group!.id),
       );
@@ -272,7 +272,7 @@ class GroupDetailController extends GetxController {
       if (group == null) throw Exception('group is null');
       if (selectedFundType == null) throw Exception('fund type is null');
 
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.updateFundAmount(
           id: group!.id,
 

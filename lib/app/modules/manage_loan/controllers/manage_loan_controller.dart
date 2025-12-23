@@ -12,6 +12,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageLoanController extends GetxController {
+    final ApiHelper apiHelper;
+
+  ManageLoanController({required this.apiHelper});
+
   final formKey = GlobalKey<FormState>();
 
   final Rx<ActionType?> _action = Rxn();
@@ -88,7 +92,7 @@ class ManageLoanController extends GetxController {
 
       final dt = dateCtrl.text.toMonthYearDate();
 
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.createLoan(
           type: selectedLoanType!.snakeCase,
           nominal: int.parse(amountCtrl.text),
@@ -115,7 +119,7 @@ class ManageLoanController extends GetxController {
       if (loan == null) throw Exception('loan is null');
       if (selectedLoanType == null) throw Exception('loan type is null');
 
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) =>
             api.updateLoan(id: loan!.id, status: LoanStatus.paid.name),
       );
@@ -138,7 +142,7 @@ class ManageLoanController extends GetxController {
     }
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.deleteLoan(id: loan!.id),
       );
 

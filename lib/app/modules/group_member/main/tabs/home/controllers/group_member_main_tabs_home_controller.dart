@@ -5,6 +5,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class GroupMemberMainTabsHomeController extends GetxController {
+  final ApiHelper apiHelper;
+
+  GroupMemberMainTabsHomeController({required this.apiHelper});
+
   final RxBool _isFetchingEvents = false.obs;
   bool get isFetchingEvents => _isFetchingEvents.value;
 
@@ -44,10 +48,9 @@ class GroupMemberMainTabsHomeController extends GetxController {
     _isFetchingEvents.value = true;
 
     try {
-      final List<EventModel> data = await ApiHelper.instance
-          .fetchList<EventModel>(
-            request: (api) => api.getMeetings(search: search),
-          );
+      final List<EventModel> data = await apiHelper.fetchList<EventModel>(
+        request: (api) => api.getMeetings(search: search),
+      );
 
       _events.value = data;
     } catch (e) {
@@ -66,7 +69,7 @@ class GroupMemberMainTabsHomeController extends GetxController {
     final dt = DateTime.now();
 
     try {
-      final int data = await ApiHelper.instance.fetch<int>(
+      final int data = await apiHelper.fetch<int>(
         request: (api) => api.getLoanSumByMonth(month: dt.month, year: dt.year),
       );
 
@@ -87,7 +90,7 @@ class GroupMemberMainTabsHomeController extends GetxController {
     final dt = DateTime.now();
 
     try {
-      final int data = await ApiHelper.instance.fetch<int>(
+      final int data = await apiHelper.fetch<int>(
         request: (api) =>
             api.getSavingsSumByMonth(month: dt.month, year: dt.year),
       );
@@ -107,8 +110,9 @@ class GroupMemberMainTabsHomeController extends GetxController {
     _isFetchingUpcomingEvents.value = true;
 
     try {
-      final List<EventModel> data = await ApiHelper.instance
-          .fetchList<EventModel>(request: (api) => api.getUpcomingMeeting());
+      final List<EventModel> data = await apiHelper.fetchList<EventModel>(
+        request: (api) => api.getUpcomingMeeting(),
+      );
 
       _upcomingEvents.value = data;
     } catch (e) {

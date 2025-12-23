@@ -12,6 +12,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageSavingsController extends GetxController {
+    final ApiHelper apiHelper;
+
+  ManageSavingsController({required this.apiHelper});
+
   final formKey = GlobalKey<FormState>();
 
   final Rx<ActionType?> _action = Rxn();
@@ -88,7 +92,7 @@ class ManageSavingsController extends GetxController {
 
       final dt = dateCtrl.text.toMonthYearDate();
 
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.createSavings(
           type: selectedSavingsType!.snakeCase,
           nominal: int.parse(amountCtrl.text),
@@ -116,7 +120,7 @@ class ManageSavingsController extends GetxController {
     }
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.deleteSavings(id: savings!.id),
       );
 

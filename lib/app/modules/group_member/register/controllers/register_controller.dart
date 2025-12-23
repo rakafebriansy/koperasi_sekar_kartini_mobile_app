@@ -13,6 +13,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class RegisterController extends GetxController {
+    final ApiHelper apiHelper;
+
+  RegisterController({required this.apiHelper, required this.caption});
+
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();
   final thirdFormKey = GlobalKey<FormState>();
@@ -75,8 +79,6 @@ class RegisterController extends GetxController {
   String get getCurrentTitle => caption.title[selectedScreen];
   String get getCurrentSubtitle => caption.subtitle[selectedScreen];
 
-  RegisterController({required this.caption});
-
   @override
   void onInit() {
     fetchListWorkArea();
@@ -135,10 +137,9 @@ class RegisterController extends GetxController {
     _isFetchingWorkArea.value = true;
 
     try {
-      final List<WorkAreaModel> data = await ApiHelper.instance
-          .fetchList<WorkAreaModel>(
-            request: (api) => api.getWorkAreas(search: search),
-          );
+      final List<WorkAreaModel> data = await apiHelper.fetchList<WorkAreaModel>(
+        request: (api) => api.getWorkAreas(search: search),
+      );
 
       _workAreas.value = data;
     } catch (e) {
@@ -154,7 +155,7 @@ class RegisterController extends GetxController {
     if (selectedWorkArea == null) throw Exception('Work Area is null');
 
     try {
-      await ApiHelper.instance.fetch<UserModel>(
+      await apiHelper.fetch<UserModel>(
         request: (api) => api.register(
           name: nameCtrl.text,
           identityNumber: identityNumberCtrl.text,

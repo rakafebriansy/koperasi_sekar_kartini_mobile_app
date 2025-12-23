@@ -7,6 +7,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class EventListController extends GetxController {
+    final ApiHelper apiHelper;
+
+  EventListController({required this.apiHelper});
+
   TextEditingController searchCtrl = TextEditingController();
 
   Timer? _debounce;
@@ -29,10 +33,9 @@ class EventListController extends GetxController {
     _isFetchingEvents.value = true;
 
     try {
-      final List<EventModel> data = await ApiHelper.instance
-          .fetchList<EventModel>(
-            request: (api) => api.getMeetings(search: search),
-          );
+      final List<EventModel> data = await apiHelper.fetchList<EventModel>(
+        request: (api) => api.getMeetings(search: search),
+      );
 
       _events.value = data;
     } catch (e) {

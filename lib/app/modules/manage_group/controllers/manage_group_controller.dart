@@ -13,6 +13,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageGroupController extends GetxController {
+    final ApiHelper apiHelper;
+
+  ManageGroupController({required this.apiHelper});
+
   final formKey = GlobalKey<FormState>();
 
   TextEditingController descCtrl = TextEditingController(
@@ -131,10 +135,9 @@ class ManageGroupController extends GetxController {
     _isFetchingWorkArea.value = true;
 
     try {
-      final List<WorkAreaModel> data = await ApiHelper.instance
-          .fetchList<WorkAreaModel>(
-            request: (api) => api.getWorkAreas(search: search),
-          );
+      final List<WorkAreaModel> data = await apiHelper.fetchList<WorkAreaModel>(
+        request: (api) => api.getWorkAreas(search: search),
+      );
 
       _workAreas.value = data;
     } catch (e) {
@@ -148,10 +151,9 @@ class ManageGroupController extends GetxController {
     _isFetchingEmployee.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) => api.getUsers(search: search, role: 'employee'),
-          );
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(search: search, role: 'employee'),
+      );
 
       _employees.value = data;
     } catch (e) {
@@ -165,11 +167,10 @@ class ManageGroupController extends GetxController {
     _isFetchingMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) =>
-                api.getUsers(search: search, role: 'group_member', groupId: id),
-          );
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
+        request: (api) =>
+            api.getUsers(search: search, role: 'group_member', groupId: id),
+      );
 
       _members.value = data;
     } catch (e) {
@@ -183,7 +184,7 @@ class ManageGroupController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.createGroup(
           number: numberCtrl.text.isNotEmpty
               ? int.parse(numberCtrl.text)
@@ -211,7 +212,7 @@ class ManageGroupController extends GetxController {
     if (id == null) throw Exception('id is null');
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.updateGroup(
           id: id!,
           number: numberCtrl.text.isNotEmpty
@@ -242,7 +243,7 @@ class ManageGroupController extends GetxController {
     }
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.deleteGroup(id: id!),
       );
 

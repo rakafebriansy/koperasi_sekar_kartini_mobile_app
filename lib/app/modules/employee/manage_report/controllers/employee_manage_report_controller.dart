@@ -267,7 +267,7 @@ class EmployeeManageReportController extends GetxController {
     if (selectedQuarter == null) throw Exception('quarter is null');
 
     try {
-      await ApiHelper.instance.fetch<ReportModel>(
+      await apiHelper.fetch<ReportModel>(
         request: (api) => api.createReport(
           groupId: group!.id,
           quarter: selectedQuarter!.toInt(),
@@ -326,7 +326,7 @@ class EmployeeManageReportController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.instance.fetch<ReportModel>(
+      await apiHelper.fetch<ReportModel>(
         request: (api) => api.updateReport(
           id: report!.id,
           groupId: report!.groupId,
@@ -386,7 +386,7 @@ class EmployeeManageReportController extends GetxController {
     if (report == null) throw Exception('report is null');
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) =>
             api.deleteReport(groupId: report!.groupId, id: report!.id),
       );

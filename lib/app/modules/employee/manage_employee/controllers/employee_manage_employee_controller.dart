@@ -14,6 +14,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class EmployeeManageEmployeeController extends GetxController {
+  final ApiHelper apiHelper;
+
+  EmployeeManageEmployeeController({required this.apiHelper});
+
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();
 
@@ -144,7 +148,7 @@ class EmployeeManageEmployeeController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.instance.fetch<UserModel>(
+      await apiHelper.fetch<UserModel>(
         request: (api) => api.createUser(
           name: nameCtrl.text.nullIfEmpty,
           identityNumber: identityNumberCtrl.text.nullIfEmpty,
@@ -179,7 +183,7 @@ class EmployeeManageEmployeeController extends GetxController {
     if (id == null) throw Exception('id is null');
 
     try {
-      await ApiHelper.instance.fetch<UserModel>(
+      await apiHelper.fetch<UserModel>(
         request: (api) => api.updateUser(
           id: id!,
           name: nameCtrl.text.nullIfEmpty,
@@ -217,7 +221,7 @@ class EmployeeManageEmployeeController extends GetxController {
     }
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.deleteUser(id: id!),
       );
 

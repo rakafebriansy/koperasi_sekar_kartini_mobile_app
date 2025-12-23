@@ -7,6 +7,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class GroupMemberMainTabsGroupController extends GetxController {
+    final ApiHelper apiHelper;
+
+  GroupMemberMainTabsGroupController({required this.apiHelper});
+
   TextEditingController searchCtrl = TextEditingController();
 
   final Rx<GroupModel?> _group = Rxn();
@@ -36,7 +40,7 @@ class GroupMemberMainTabsGroupController extends GetxController {
   Future<void> fetchGroupById(int id, {String? search}) async {
     _isFetchingGroup.value = true;
     try {
-      final GroupModel data = await ApiHelper.instance.fetch<GroupModel>(
+      final GroupModel data = await apiHelper.fetch<GroupModel>(
         request: (api) => api.getGroup(id: id),
       );
 
@@ -52,14 +56,13 @@ class GroupMemberMainTabsGroupController extends GetxController {
     _isFetchingGroupMember.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) => api.getUsers(
-              search: search,
-              role: 'group_member',
-              groupId: groupId,
-            ),
-          );
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(
+          search: search,
+          role: 'group_member',
+          groupId: groupId,
+        ),
+      );
 
       _groupMembers.value = data;
     } catch (e) {

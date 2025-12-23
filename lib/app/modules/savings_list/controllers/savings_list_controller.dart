@@ -9,6 +9,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class SavingsListController extends GetxController {
+    final ApiHelper apiHelper;
+
+  SavingsListController({required this.apiHelper});
   TextEditingController searchCtrl = TextEditingController();
 
   final RxBool _isFetching = false.obs;
@@ -46,10 +49,9 @@ class SavingsListController extends GetxController {
     _isFetching.value = true;
 
     try {
-      final List<SavingsModel> data = await ApiHelper.instance
-          .fetchList<SavingsModel>(
-            request: (api) => api.getSavings(search: search, memberId: memberId),
-          );
+      final List<SavingsModel> data = await apiHelper.fetchList<SavingsModel>(
+        request: (api) => api.getSavings(search: search, memberId: memberId),
+      );
 
       _savingsList.value = data;
     } catch (e) {

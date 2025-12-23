@@ -9,6 +9,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class LoanListController extends GetxController {
+    final ApiHelper apiHelper;
+
+  LoanListController({required this.apiHelper});
   TextEditingController searchCtrl = TextEditingController();
 
   final RxBool _isFetching = false.obs;
@@ -46,8 +49,9 @@ class LoanListController extends GetxController {
     _isFetching.value = true;
 
     try {
-      final List<LoanModel> data = await ApiHelper.instance
-          .fetchList<LoanModel>(request: (api) => api.getLoans(search: search, memberId: memberId));
+      final List<LoanModel> data = await apiHelper.fetchList<LoanModel>(
+        request: (api) => api.getLoans(search: search, memberId: memberId),
+      );
 
       _loans.value = data;
     } catch (e) {

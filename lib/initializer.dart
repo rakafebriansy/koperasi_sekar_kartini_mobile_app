@@ -14,7 +14,7 @@ abstract class AppInitializer {
   static Future<void> initialize() async {
     //global
     Get.put(const FlutterSecureStorage());
-    Get.put(AuthController(), permanent: true);
+    Get.put(AuthController(apiHelper: Get.find<ApiHelper>()), permanent: true);
     Get.put(ApiHelper(), permanent: true);
 
     //firebase

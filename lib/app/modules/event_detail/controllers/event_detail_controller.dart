@@ -8,6 +8,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class EventDetailController extends GetxController {
+  final ApiHelper apiHelper;
+
+  EventDetailController({required this.apiHelper});
+
   final Rx<EventModel?> _event = Rxn();
   EventModel? get event => _event.value;
 
@@ -28,7 +32,7 @@ class EventDetailController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.instance.fetchNonReturnable(
+      await apiHelper.fetchNonReturnable(
         request: (api) => api.deleteMeeting(id: event!.id!),
       );
 

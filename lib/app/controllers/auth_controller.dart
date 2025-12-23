@@ -8,6 +8,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class AuthController extends GetxController {
+  final ApiHelper apiHelper;
+
+  AuthController({required this.apiHelper});
+
   final RxBool _isRefreshing = false.obs;
   bool get isRefreshing => _isRefreshing.value;
 
@@ -53,7 +57,7 @@ class AuthController extends GetxController {
 
   Future<void> refreshToken() async {
     try {
-      final user = await ApiHelper.instance.fetch<UserModel>(
+      final user = await apiHelper.fetch<UserModel>(
         request: (api) => api.refreshToken(),
       );
       _currentUser.value = user;
@@ -83,9 +87,7 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       //TODO: Apakah anda yakin?
-      await ApiHelper.instance.fetchNonReturnable(
-        request: (api) => api.logout(),
-      );
+      await apiHelper.fetchNonReturnable(request: (api) => api.logout());
       authState.value = AuthState.initial;
     } catch (e) {
       debugPrint(e.toString());

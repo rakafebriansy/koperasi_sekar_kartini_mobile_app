@@ -17,6 +17,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageEventController extends GetxController {
+    final ApiHelper apiHelper;
+
+  ManageEventController({required this.apiHelper});
+
   final formKey = GlobalKey<FormState>();
 
   final RxInt _selectedScreen = 0.obs;
@@ -116,10 +120,9 @@ class ManageEventController extends GetxController {
     _isFetching.value = true;
 
     try {
-      final List<GroupModel> data = await ApiHelper.instance
-          .fetchList<GroupModel>(
-            request: (api) => api.getGroups(search: search),
-          );
+      final List<GroupModel> data = await apiHelper.fetchList<GroupModel>(
+        request: (api) => api.getGroups(search: search),
+      );
 
       _groups.value = data;
     } catch (e) {
@@ -140,7 +143,7 @@ class ManageEventController extends GetxController {
         "HH:mm dd/MM/yyyy",
       ).parse(dateTimeCtrl.text).toIso8601String();
 
-      await ApiHelper.instance.fetch<EventModel>(
+      await apiHelper.fetch<EventModel>(
         request: (api) => api.createMeeting(
           name: nameCtrl.text.nullIfEmpty,
           type: selectedEventType!.name,
@@ -172,7 +175,7 @@ class ManageEventController extends GetxController {
 
     final user = AuthController.find.currentUser!;
     try {
-      await ApiHelper.instance.fetch<EventModel>(
+      await apiHelper.fetch<EventModel>(
         request: (api) => api.updateMeeting(
           id: id!,
           name: nameCtrl.text.nullIfEmpty,

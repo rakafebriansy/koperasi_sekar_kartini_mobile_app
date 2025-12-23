@@ -13,6 +13,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageGroupMemberProfileController extends GetxController {
+    final ApiHelper apiHelper;
+
+  ManageGroupMemberProfileController({required this.apiHelper});
+
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();
   final thirdFormKey = GlobalKey<FormState>();
@@ -146,10 +150,9 @@ class ManageGroupMemberProfileController extends GetxController {
     _isFetchingWorkArea.value = true;
 
     try {
-      final List<WorkAreaModel> data = await ApiHelper.instance
-          .fetchList<WorkAreaModel>(
-            request: (api) => api.getWorkAreas(search: search),
-          );
+      final List<WorkAreaModel> data = await apiHelper.fetchList<WorkAreaModel>(
+        request: (api) => api.getWorkAreas(search: search),
+      );
 
       _workAreas.value = data;
     } catch (e) {
@@ -178,7 +181,7 @@ class ManageGroupMemberProfileController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      await ApiHelper.instance.fetch<UserModel>(
+      await apiHelper.fetch<UserModel>(
         request: (api) =>
             api.activateMember(id: user!.id, isActive: !(user!.isActive)),
       );
