@@ -32,12 +32,6 @@ void main() {
       apiHelper: mockApi,
       authController: fakeAuth,
     );
-
-    controller.formKey.currentState?.validate();
-  });
-
-  tearDown(() {
-    Get.reset();
   });
 
   group('ManageLoanController', () {

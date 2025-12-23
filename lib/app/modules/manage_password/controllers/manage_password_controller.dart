@@ -33,7 +33,6 @@ class ManagePasswordController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil memperbarui kata sandi!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
