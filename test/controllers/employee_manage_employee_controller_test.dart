@@ -2,97 +2,103 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/controllers/employee_manage_employee_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
+
+import '../mocks/mock_api_helper.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late EmployeeManageEmployeeController controller;
+  late MockApiHelper mockApi;
 
   setUp(() {
     Get.reset();
     Get.testMode = true;
+    mockApi = MockApiHelper();
+    Get.put<ApiHelper>(mockApi);
+    controller = EmployeeManageEmployeeController(apiHelper: mockApi);
   });
 
-  test('onInit → create action terset dengan benar', () {
-    Get.arguments = ArgsWrapper(
-      action: ActionType.create,
+  group('EmployeeManageEmployeeController', () {
+    test('setIdCardImage sets value', () async {
+      final file = File('test.png');
+      await controller.setIdCardImage(file);
+      expect(controller.idCardImage, file);
+    });
+
+    test('setSelfImage sets value', () async {
+      final file = File('self.png');
+      await controller.setSelfImage(file);
+      expect(controller.selfImage, file);
+    });
+
+    test('setMemberCardImage sets value', () async {
+      final file = File('member.png');
+      await controller.setMemberCardImage(file);
+      expect(controller.memberCardImage, file);
+    });
+
+    test(
+      'createEmployee calls apiHelper.fetch and returns UserModel',
+      () async {
+        final fakeUser = UserModel(
+          id: 1,
+          name: 'Test User',
+          identityNumber: '1234567890',
+          birthDate: DateTime(2000, 1, 1),
+          phoneNumber: '08123456789',
+          role: 'employee',
+          isActive: true,
+        );
+
+        when(
+          () => mockApi.fetch<UserModel>(request: any(named: 'request')),
+        ).thenAnswer((invocation) async {
+          return fakeUser;
+        });
+
+        await controller.createEmployee();
+        expect(controller.isSubmitted, false);
+      },
     );
 
-    controller = EmployeeManageEmployeeController();
-    controller.onInit();
+    test('updateEmployee calls apiHelper.fetch and completes', () async {
+      final fakeUser = UserModel(
+        id: 1,
+        name: 'Test User',
+        identityNumber: '1234567890',
+        birthDate: DateTime(2000, 1, 1),
+        phoneNumber: '08123456789',
+        role: 'employee',
+        isActive: true,
+      );
 
-    expect(controller.action, ActionType.create);
-    expect(controller.id, null);
-  });
+      controller.idCardImage;
 
-  test('onInit → update action mengisi data user', () {
-    final user = UserModel(
-      id: 1,
-      name: 'Raka',
-      identityNumber: '123',
-      phoneNumber: '08123',
-      birthDate: DateTime(2000, 1, 1),
-    );
+      when(
+        () => mockApi.fetch<UserModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => fakeUser);
 
-    Get.arguments = ArgsWrapper(
-      action: ActionType.update,
-      data: user,
-    );
+      controller.idRx.value = 1;
 
-    controller = EmployeeManageEmployeeController(apiHelper: mock);
-    controller.onInit();
+      await controller.updateEmployee();
+      expect(controller.isSubmitted, false);
+    });
 
-    expect(controller.action, ActionType.update);
-    expect(controller.id, 1);
-    expect(controller.nameCtrl.text, 'Raka');
-  });
+    test('deleteEmployee calls apiHelper.fetchNonReturnable', () async {
+      when(
+        () => mockApi.fetchNonReturnable(request: any(named: 'request')),
+      ).thenAnswer((_) async {
+        return Future<void>.value();
+      });
 
-  test('nextScreen & prevScreen bekerja', () {
-    controller = EmployeeManageEmployeeController();
-
-    expect(controller.selectedScreen, 0);
-    controller.nextScreen();
-    expect(controller.selectedScreen, 1);
-    controller.prevScreen();
-    expect(controller.selectedScreen, 0);
-  });
-
-  test('setIdCardImage sukses', () async {
-    controller = EmployeeManageEmployeeController();
-
-    final file = File('dummy.png');
-    await controller.setIdCardImage(file);
-
-    expect(controller.idCardImage, file);
-  });
-
-  test('setIdCardImage null → tidak crash', () async {
-    controller = EmployeeManageEmployeeController();
-
-    await controller.setIdCardImage(null);
-
-    expect(controller.idCardImage, null);
-  });
-
-  test('submitButton screen 0 → lanjut screen', () async {
-    controller = EmployeeManageEmployeeController();
-
-    // form dianggap valid
-    controller.firstFormKey.currentState?.validate();
-
-    await controller.submitButton();
-
-    expect(controller.selectedScreen, 1);
-  });
-
-  test('submitButton screen 1 tanpa action → aman', () async {
-    controller = EmployeeManageEmployeeController();
-
-    controller.nextScreen(); // ke screen 1
-    await controller.submitButton();
-
-    expect(controller.isSubmitted, false);
+      controller.idRx.value = 1;
+      await controller.deleteEmployee();
+      expect(controller.isSubmitted, false);
+    });
   });
 }

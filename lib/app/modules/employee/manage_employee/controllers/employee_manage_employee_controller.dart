@@ -68,6 +68,9 @@ class EmployeeManageEmployeeController extends GetxController {
   final Rx<int?> _id = Rxn();
   int? get id => _id.value;
 
+  @visibleForTesting
+  Rx<int?> get idRx => _id;
+
   ScrollController scrollController = ScrollController();
 
   @override

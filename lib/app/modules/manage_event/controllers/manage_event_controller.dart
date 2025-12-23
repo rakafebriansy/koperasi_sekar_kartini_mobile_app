@@ -17,7 +17,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageEventController extends GetxController {
-    final ApiHelper apiHelper;
+  final ApiHelper apiHelper;
 
   ManageEventController({required this.apiHelper});
 
