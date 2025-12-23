@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
@@ -26,9 +25,6 @@ class ManageSavingsController extends GetxController {
   final Rx<ActionType?> _action = Rxn();
   ActionType? get action => _action.value;
 
-  final Rx<SavingsModel?> _savings = Rxn();
-  SavingsModel? get savings => _savings.value;
-
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
 
@@ -46,7 +42,12 @@ class ManageSavingsController extends GetxController {
   final Rx<SavingsType?> _selectedSavingsType = Rxn();
   SavingsType? get selectedSavingsType => _selectedSavingsType.value;
 
+  final Rx<SavingsModel?> _savings = Rxn();
+  Rx<SavingsModel?> get savingsRx => _savings;
+  SavingsModel? get savings => _savings.value;
+
   final Rx<UserModel?> _user = Rxn();
+  Rx<UserModel?> get userRx => _user;
   UserModel? get user => _user.value;
 
   final List<SavingsType> savingsTypes = [
@@ -110,7 +111,6 @@ class ManageSavingsController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil membuat pinjaman!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
@@ -132,7 +132,6 @@ class ManageSavingsController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil menghapus pinjaman!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
