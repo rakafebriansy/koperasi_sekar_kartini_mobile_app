@@ -122,15 +122,23 @@ class EmployeeManageReportController extends GetxController {
   ActionType? get action => _action.value;
 
   final Rx<ReportCriteria?> _selectedCriteria = Rxn();
+  @visibleForTesting
+  Rx<ReportCriteria?> get selectedCriteriaRx => _selectedCriteria;
   ReportCriteria? get selectedCriteria => _selectedCriteria.value;
 
   final Rx<Quarter?> _selectedQuarter = Rxn();
+  @visibleForTesting
+  Rx<Quarter?> get selectedQuarterRx => _selectedQuarter;
   Quarter? get selectedQuarter => _selectedQuarter.value;
 
   final Rx<ReportModel?> _report = Rxn();
+  @visibleForTesting
+  Rx<ReportModel?> get reportRx => _report;
   ReportModel? get report => _report.value;
 
   final Rx<GroupModel?> _group = Rxn();
+  @visibleForTesting
+  Rx<GroupModel?> get groupRx => _group;
   GroupModel? get group => _group.value;
 
   final List<Quarter> quarters = [

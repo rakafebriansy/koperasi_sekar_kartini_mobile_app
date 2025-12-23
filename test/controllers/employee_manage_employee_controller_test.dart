@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/controllers/employee_manage_employee_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
@@ -45,15 +46,7 @@ void main() {
     test(
       'createEmployee calls apiHelper.fetch and returns UserModel',
       () async {
-        final fakeUser = UserModel(
-          id: 1,
-          name: 'Test User',
-          identityNumber: '1234567890',
-          birthDate: DateTime(2000, 1, 1),
-          phoneNumber: '08123456789',
-          role: 'employee',
-          isActive: true,
-        );
+        final fakeUser = DummyHelper.user(1);
 
         when(
           () => mockApi.fetch<UserModel>(request: any(named: 'request')),
@@ -67,15 +60,7 @@ void main() {
     );
 
     test('updateEmployee calls apiHelper.fetch and completes', () async {
-      final fakeUser = UserModel(
-        id: 1,
-        name: 'Test User',
-        identityNumber: '1234567890',
-        birthDate: DateTime(2000, 1, 1),
-        phoneNumber: '08123456789',
-        role: 'employee',
-        isActive: true,
-      );
+      final fakeUser = DummyHelper.user(1);
 
       controller.idCardImage;
 
