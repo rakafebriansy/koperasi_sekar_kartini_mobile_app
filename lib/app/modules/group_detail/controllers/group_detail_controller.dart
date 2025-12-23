@@ -25,12 +25,15 @@ class GroupDetailController extends GetxController {
   final changeFundAmountFormKey = GlobalKey<FormState>();
 
   final Rx<UserModel?> _selectedChairman = Rxn();
+  Rx<UserModel?> get selectedChairmanRx => _selectedChairman;
   UserModel? get selectedChairman => _selectedChairman.value;
 
   final Rx<UserModel?> _selectedFacilitator = Rxn();
+  Rx<UserModel?> get selectedFacilitatorRx => _selectedFacilitator;
   UserModel? get selectedFacilitator => _selectedFacilitator.value;
 
   final Rx<FundType?> _selectedFundType = Rxn();
+  Rx<FundType?> get selectedFundTypeRx => _selectedFundType;
   FundType? get selectedFundType => _selectedFundType.value;
 
   final Rx<ActionType?> _action = Rxn();
@@ -40,6 +43,7 @@ class GroupDetailController extends GetxController {
   int? get id => _id.value;
 
   final Rx<GroupModel?> _group = Rxn();
+  Rx<GroupModel?> get groupRx => _group;
   GroupModel? get group => _group.value;
 
   final RxList<FundType> _fundTypes = RxList([
@@ -65,6 +69,7 @@ class GroupDetailController extends GetxController {
   bool get isFetchingGroupMember => _isFetchingGroupMember.value;
 
   final Rx<UserModel?> _selectedMember = Rxn();
+  Rx<UserModel?> get selectedMemberRx => _selectedMember;
   UserModel? get selectedMember => _selectedMember.value;
 
   final RxList<UserModel> _groupMembers = RxList();
