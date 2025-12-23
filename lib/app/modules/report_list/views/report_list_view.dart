@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
@@ -45,7 +44,7 @@ class ReportListView extends GetView<ReportListController> {
                     onChanged: (value) => controller.onSearchChanged(value),
                   ),
                 ),
-                if (AuthController.find.currentUser!.role != 'group_member')
+                if (controller.authController.currentUser!.role != 'group_member')
                   Material(
                     borderRadius: BorderRadius.circular(12.sp),
                     color: Colors.white,
@@ -106,7 +105,7 @@ class ReportListView extends GetView<ReportListController> {
                               report: controller.reports[index],
                               onTap: () async {
                                 final result = await Get.toNamed(
-                                  AuthController.find.currentUser!.role ==
+                                  controller.authController.currentUser!.role ==
                                           'group_member'
                                       ? Routes.REPORT_DETAIL
                                       : Routes.EMPLOYEE_MANAGE_REPORT,

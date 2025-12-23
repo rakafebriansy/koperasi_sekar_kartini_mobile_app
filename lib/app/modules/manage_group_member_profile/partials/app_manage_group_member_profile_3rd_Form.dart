@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/controllers/manage_group_member_profile_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_big_edit_image_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_upload_image_form_field.dart';
@@ -19,7 +18,7 @@ class AppManageGroupMemberProfile3rdForm extends StatelessWidget {
   final ManageGroupMemberProfileController controller;
   @override
   Widget build(BuildContext context) {
-    final role = AuthController.find.currentUser!.role;
+    final role = controller.authController.currentUser!.role;
     return Obx(
       () => Form(
         key: controller.thirdFormKey,

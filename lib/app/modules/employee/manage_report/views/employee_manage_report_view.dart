@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_1st_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_2nd_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/partials/app_report_3rd_form.dart';
@@ -32,7 +31,7 @@ class EmployeeManageReportView extends GetView<EmployeeManageReportController> {
           : 'Detail Rapot',
       actions: [
         if (controller.action == ActionType.update &&
-            AuthController.find.currentUser?.role == 'admin')
+            controller.authController.currentUser?.role == 'admin')
           Material(
             color: Colors.transparent,
             child: InkWell(

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class AppHomeWrapper extends StatelessWidget {
@@ -49,9 +47,9 @@ class AppHomeWrapper extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 14.sp,
                   ),
-                  if (AuthController.find.currentUser != null)
+                  if (AuthController.instance.currentUser != null)
                     poppins(
-                      AuthController.find.currentUser!.name,
+                      AuthController.instance.currentUser!.name,
                       color: Colors.black,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
@@ -70,11 +68,6 @@ class AppHomeWrapper extends StatelessWidget {
                 child: child,
               )
             : child,
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //     ApiHelper().fetchNonReturnable(request: (api) => api.testFcm());
-        //   },
-        // ),
       ),
     );
   }

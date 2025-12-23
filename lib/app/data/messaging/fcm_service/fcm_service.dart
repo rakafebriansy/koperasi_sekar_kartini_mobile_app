@@ -11,14 +11,11 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class FcmService {
-  static final FcmService _instance = FcmService._internal(
-    apiHelper: Get.find<ApiHelper>(),
-  );
-  factory FcmService() => _instance;
-
   final ApiHelper apiHelper;
-  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
-  FcmService._internal({required this.apiHelper});
+  final FirebaseMessaging _messaging;
+
+  FcmService({required this.apiHelper, FirebaseMessaging? messaging})
+    : _messaging = messaging ?? FirebaseMessaging.instance;
 
   bool _isHandlingNotification = false;
 

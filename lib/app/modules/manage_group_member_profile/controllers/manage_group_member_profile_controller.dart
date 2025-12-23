@@ -13,9 +13,13 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageGroupMemberProfileController extends GetxController {
-    final ApiHelper apiHelper;
+  final ApiHelper apiHelper;
+  final AuthController authController;
 
-  ManageGroupMemberProfileController({required this.apiHelper});
+  ManageGroupMemberProfileController({
+    required this.apiHelper,
+    required this.authController,
+  });
 
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();
@@ -197,7 +201,7 @@ class ManageGroupMemberProfileController extends GetxController {
   }
 
   Future<void> submitButton() async {
-    final role = AuthController.find.currentUser!.role;
+    final role = authController.currentUser!.role;
 
     final steps = role == 'group_member'
         ? {

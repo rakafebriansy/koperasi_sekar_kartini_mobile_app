@@ -22,7 +22,7 @@ class AuthController extends GetxController {
 
   bool get isAuthenticated => authState.value == AuthState.authenticated;
 
-  static AuthController find = Get.find<AuthController>();
+  static AuthController instance = Get.find<AuthController>();
 
   final TokenManager tokenManager = TokenManager();
   bool get isUnauthenticated => !isAuthenticated;

@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
@@ -66,7 +65,7 @@ class GroupDetailView extends GetView<GroupDetailController> {
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              if (AuthController.find.currentUser!.role ==
+                              if (controller.authController.currentUser!.role ==
                                   'admin')
                                 Obx(
                                   () => ElevatedButton.icon(
@@ -199,7 +198,7 @@ class _GroupInfoCard extends StatelessWidget {
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                   ),
-                  AuthController.find.currentUser!.role == 'admin'
+                  controller.authController.currentUser!.role == 'admin'
                       ? Material(
                           borderRadius: BorderRadius.circular(99),
                           child: InkWell(
@@ -275,7 +274,7 @@ class _GroupInfoCard extends StatelessWidget {
                     controller.group!.chairman != null
                         ? poppins(controller.group!.chairman!.name)
                         : poppins('-'),
-                    if (AuthController.find.currentUser?.role == 'employee')
+                    if (controller.authController.currentUser?.role == 'employee')
                       Material(
                         child: InkWell(
                           onTap: _selectChairman,
@@ -307,7 +306,7 @@ class _GroupInfoCard extends StatelessWidget {
                     controller.group!.facilitator != null
                         ? poppins(controller.group!.facilitator!.name)
                         : poppins('-'),
-                    if (AuthController.find.currentUser?.role == 'employee')
+                    if (controller.authController.currentUser?.role == 'employee')
                       Material(
                         child: InkWell(
                           onTap: _selectFacilitator,

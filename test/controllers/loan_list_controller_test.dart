@@ -5,6 +5,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper
 import 'package:mocktail/mocktail.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import '../fakes/fake_auth_controller.dart';
 import '../mocks/mock_api_helper.dart';
 
 void main() {
@@ -23,7 +24,11 @@ void main() {
     dummyUser = DummyHelper.user(1);
     dummyLoan = DummyHelper.lo(1);
 
-    controller = LoanListController(apiHelper: mockApi);
+    controller = LoanListController(
+      apiHelper: mockApi,
+            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+
+    );
   });
 
   group('LoanListController', () {

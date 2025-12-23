@@ -7,6 +7,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 
+import '../fakes/fake_auth_controller.dart';
 import '../mocks/mock_api_helper.dart';
 
 void main() {
@@ -19,7 +20,6 @@ void main() {
     Get.testMode = true;
 
     mockApi = MockApiHelper();
-
   });
 
   test('fetchListEmployee sukses → data terisi & isFetching false', () async {
@@ -28,7 +28,8 @@ void main() {
     ).thenAnswer((_) async => [DummyHelper.user(1), DummyHelper.user(2)]);
 
     final controller = EmployeeMainTabsEmployeeController(
-      apiHelper:mockApi,
+      apiHelper: mockApi,
+      authController: Get.put(FakeAuthController(apiHelper: mockApi)),
     );
 
     await controller.fetchListEmployee();
@@ -44,7 +45,8 @@ void main() {
     ).thenThrow(Exception('API Error'));
 
     final controller = EmployeeMainTabsEmployeeController(
-      apiHelper:mockApi,
+      apiHelper: mockApi,
+      authController: Get.put(FakeAuthController(apiHelper: mockApi)),
     );
 
     await controller.fetchListEmployee();
@@ -56,7 +58,8 @@ void main() {
   test('onSearchChanged membatalkan debounce sebelumnya', () {
     fakeAsync((async) {
       final controller = EmployeeMainTabsEmployeeController(
-        apiHelper:mockApi,
+        apiHelper: mockApi,
+        authController: Get.put(FakeAuthController(apiHelper: mockApi)),
       );
 
       controller.onSearchChanged('a');

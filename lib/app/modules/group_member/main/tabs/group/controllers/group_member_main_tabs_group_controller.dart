@@ -7,9 +7,13 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class GroupMemberMainTabsGroupController extends GetxController {
-    final ApiHelper apiHelper;
+  final ApiHelper apiHelper;
+  final AuthController authController;
 
-  GroupMemberMainTabsGroupController({required this.apiHelper});
+  GroupMemberMainTabsGroupController({
+    required this.apiHelper,
+    required this.authController,
+  });
 
   TextEditingController searchCtrl = TextEditingController();
 
@@ -29,7 +33,7 @@ class GroupMemberMainTabsGroupController extends GetxController {
 
   @override
   void onInit() {
-    final user = AuthController.find.currentUser!;
+    final user = authController.currentUser!;
     if (user.groupId != null) {
       fetchGroupById(user.groupId!);
       fetchListGroupMember(user.groupId!);

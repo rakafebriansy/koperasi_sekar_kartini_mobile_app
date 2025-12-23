@@ -8,6 +8,7 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 
+import '../fakes/fake_auth_controller.dart';
 import '../mocks/mock_api_helper.dart';
 
 void main() {
@@ -20,7 +21,11 @@ void main() {
     Get.reset();
     Get.testMode = true;
     mockApi = MockApiHelper();
-    controller = GroupMemberMainTabsProfileController(apiHelper: mockApi);
+    controller = GroupMemberMainTabsProfileController(
+      apiHelper: mockApi,
+            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+
+    );
   });
 
   test('fetchListMember sukses → members terisi', () async {

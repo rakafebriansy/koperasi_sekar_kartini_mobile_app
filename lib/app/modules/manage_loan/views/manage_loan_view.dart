@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
@@ -37,7 +36,7 @@ class ManageLoanView extends GetView<ManageLoanController> {
           : 'Detail Pinjaman',
       actions: [
         if (controller.action == null &&
-            AuthController.find.currentUser?.role == 'admin')
+            controller.authController.currentUser?.role == 'admin')
           Material(
             color: Colors.transparent,
             child: InkWell(

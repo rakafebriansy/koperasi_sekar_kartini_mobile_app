@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
@@ -33,7 +32,7 @@ class EmployeeMainTabsProfileView
           spacing: 14.sp,
           children: [
             Obx(() {
-              var user = AuthController.find.currentUser;
+              var user = controller.authController.currentUser;
 
               return Padding(
                 padding: EdgeInsets.only(bottom: 8.sp),
@@ -218,21 +217,25 @@ class EmployeeMainTabsProfileView
                                           maxHeight: 200.sp,
                                         ),
                                         itemBuilder:
-                                            (context, item, isSelected, onTap) =>
-                                                InkWell(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                  child: Padding(
-                                                    padding: EdgeInsets.symmetric(
-                                                      horizontal: 12.sp,
-                                                      vertical: 12.sp,
-                                                    ),
-                                                    child: poppins(
-                                                      item,
-                                                      fontSize: 14.sp,
-                                                    ),
-                                                  ),
+                                            (
+                                              context,
+                                              item,
+                                              isSelected,
+                                              onTap,
+                                            ) => InkWell(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 12.sp,
+                                                  vertical: 12.sp,
                                                 ),
+                                                child: poppins(
+                                                  item,
+                                                  fontSize: 14.sp,
+                                                ),
+                                              ),
+                                            ),
                                       ),
                                     ),
                                   ),
@@ -328,7 +331,7 @@ class EmployeeMainTabsProfileView
                 borderRadius: BorderRadius.circular(14.sp),
                 child: _AppSettingMenuItem(
                   onTap: () {
-                    AuthController.find.logout();
+                    controller.authController.logout();
                   },
                   label: 'Keluar',
                   textColor: Colors.white,

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/partials/app_employee_1st_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/partials/app_employee_2nd_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
@@ -30,7 +29,7 @@ class EmployeeManageEmployeeView
                 : 'Ubah Karyawan')
           : 'Detail Karyawan',
       actions: [
-        if (AuthController.find.currentUser?.role == 'admin')
+        if (controller.authController.currentUser?.role == 'admin')
           Material(
             color: Colors.transparent,
             child: InkWell(

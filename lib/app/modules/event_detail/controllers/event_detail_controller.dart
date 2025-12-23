@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
@@ -9,8 +10,12 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrappe
 
 class EventDetailController extends GetxController {
   final ApiHelper apiHelper;
+  final AuthController authController;
 
-  EventDetailController({required this.apiHelper});
+  EventDetailController({
+    required this.apiHelper,
+    required this.authController,
+  });
 
   final Rx<EventModel?> _event = Rxn();
   @visibleForTesting

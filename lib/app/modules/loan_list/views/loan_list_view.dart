@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
@@ -49,7 +48,7 @@ class LoanListView extends GetView<LoanListController> {
                         onChanged: (value) => controller.onSearchChanged(value),
                       ),
                     ),
-                    if (AuthController.find.currentUser!.role != 'group_member')
+                    if (controller.authController.currentUser!.role != 'group_member')
                       Material(
                         borderRadius: BorderRadius.circular(12.sp),
                         color: Colors.white,
@@ -136,7 +135,7 @@ class LoanListView extends GetView<LoanListController> {
                               borderRadius: BorderRadius.circular(12.sp),
                               child: InkWell(
                                 onTap:
-                                    AuthController.find.currentUser!.role ==
+                                    controller.authController.currentUser!.role ==
                                         'group_member'
                                     ? null
                                     : () async {

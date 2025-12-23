@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
@@ -23,8 +22,8 @@ class EventDetailView extends GetView<EventDetailController> {
   Widget build(BuildContext context) {
     return AppDefaultWrapper(
       actions: [
-        if (AuthController.find.currentUser?.role == 'admin' ||
-            AuthController.find.currentUser?.id == controller.event!.id)
+        if (controller.authController.currentUser?.role == 'admin' ||
+            controller.authController.currentUser?.id == controller.event!.id)
           Material(
             color: Colors.transparent,
             child: InkWell(

@@ -8,6 +8,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/controllers/employee_manage_employee_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 
+import '../fakes/fake_auth_controller.dart';
 import '../mocks/mock_api_helper.dart';
 
 void main() {
@@ -21,7 +22,11 @@ void main() {
     Get.testMode = true;
     mockApi = MockApiHelper();
     Get.put<ApiHelper>(mockApi);
-    controller = EmployeeManageEmployeeController(apiHelper: mockApi);
+    controller = EmployeeManageEmployeeController(
+      apiHelper: mockApi,
+            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+
+    );
   });
 
   group('EmployeeManageEmployeeController', () {

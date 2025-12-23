@@ -6,6 +6,7 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import '../fakes/fake_auth_controller.dart';
 import '../mocks/mock_api_helper.dart';
 import '../mocks/mock_auth_controller.dart';
 
@@ -24,30 +25,37 @@ void main() {
     mockApi = MockApiHelper();
 
     final mockAuth = MockAuthController();
-    when(() => mockAuth.currentUser).thenReturn(
-      DummyHelper.user(1).copyWith(groupId: dummyGroup.id),
-    );
+    when(
+      () => mockAuth.currentUser,
+    ).thenReturn(DummyHelper.user(1).copyWith(groupId: dummyGroup.id));
 
-    controller = GroupMemberMainTabsGroupController(apiHelper: mockApi);
+    controller = GroupMemberMainTabsGroupController(
+      apiHelper: mockApi,
+            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+
+    );
   });
 
   group('GroupMemberMainTabsGroupController', () {
     test('fetchGroupById updates group', () async {
-      when(() => mockApi.fetch<GroupModel>(request: any(named: 'request')))
-          .thenAnswer((_) async => dummyGroup);
+      when(
+        () => mockApi.fetch<GroupModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => dummyGroup);
 
       await controller.fetchGroupById(dummyGroup.id);
 
       expect(controller.isFetchingGroup, false);
       expect(controller.group?.id, dummyGroup.id);
 
-      verify(() => mockApi.fetch<GroupModel>(request: any(named: 'request')))
-          .called(1);
+      verify(
+        () => mockApi.fetch<GroupModel>(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('fetchListGroupMember updates group members', () async {
-      when(() => mockApi.fetchList<UserModel>(request: any(named: 'request')))
-          .thenAnswer((_) async => [dummyMember]);
+      when(
+        () => mockApi.fetchList<UserModel>(request: any(named: 'request')),
+      ).thenAnswer((_) async => [dummyMember]);
 
       await controller.fetchListGroupMember(dummyGroup.id);
 
@@ -55,14 +63,15 @@ void main() {
       expect(controller.groupMembers.length, 1);
       expect(controller.groupMembers.first.name, dummyMember.name);
 
-      verify(() =>
-              mockApi.fetchList<UserModel>(request: any(named: 'request')))
-          .called(1);
+      verify(
+        () => mockApi.fetchList<UserModel>(request: any(named: 'request')),
+      ).called(1);
     });
 
     test('fetchGroupById handles API exception gracefully', () async {
-      when(() => mockApi.fetch<GroupModel>(request: any(named: 'request')))
-          .thenThrow(Exception('API Error'));
+      when(
+        () => mockApi.fetch<GroupModel>(request: any(named: 'request')),
+      ).thenThrow(Exception('API Error'));
 
       await controller.fetchGroupById(dummyGroup.id);
 
@@ -71,8 +80,9 @@ void main() {
     });
 
     test('fetchListGroupMember handles API exception gracefully', () async {
-      when(() => mockApi.fetchList<UserModel>(request: any(named: 'request')))
-          .thenThrow(Exception('API Error'));
+      when(
+        () => mockApi.fetchList<UserModel>(request: any(named: 'request')),
+      ).thenThrow(Exception('API Error'));
 
       await controller.fetchListGroupMember(dummyGroup.id);
 

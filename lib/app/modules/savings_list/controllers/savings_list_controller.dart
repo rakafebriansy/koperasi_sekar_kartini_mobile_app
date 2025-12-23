@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/savings/savings_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
@@ -9,9 +10,13 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class SavingsListController extends GetxController {
-    final ApiHelper apiHelper;
+  final ApiHelper apiHelper;
+  final AuthController authController;
 
-  SavingsListController({required this.apiHelper});
+  SavingsListController({
+    required this.apiHelper,
+    required this.authController,
+  });
   TextEditingController searchCtrl = TextEditingController();
 
   final RxBool _isFetching = false.obs;

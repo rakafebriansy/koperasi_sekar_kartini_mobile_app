@@ -43,7 +43,7 @@ class ApiHelper {
     }
 
     if (response.token != null) {
-      AuthController.find.tokenManager.setToken(response.token);
+      AuthController.instance.tokenManager.setToken(response.token);
     }
 
     return response.data as T;
@@ -87,7 +87,7 @@ class ApiHelper {
     }
 
     if (response.token != null) {
-      AuthController.find.tokenManager.setToken(response.token);
+      AuthController.instance.tokenManager.setToken(response.token);
     }
 
     return response.data as List<T>;
@@ -114,7 +114,7 @@ class ApiHelper {
     }
 
     if (raw is Map<String, dynamic> && raw['token'] != null) {
-      AuthController.find.tokenManager.setToken(raw['token']);
+      AuthController.instance.tokenManager.setToken(raw['token']);
     }
   }
 

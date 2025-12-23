@@ -14,8 +14,15 @@ abstract class AppInitializer {
   static Future<void> initialize() async {
     //global
     Get.put(const FlutterSecureStorage());
-    Get.put(AuthController(apiHelper: Get.find<ApiHelper>()), permanent: true);
     Get.put(ApiHelper(), permanent: true);
+    Get.put(AuthController(apiHelper: Get.find<ApiHelper>()), permanent: true);
+    Get.put(
+      FcmService(
+        messaging: FirebaseMessaging.instance,
+        apiHelper: Get.find<ApiHelper>(),
+      ),
+      permanent: true,
+    );
 
     //firebase
     await Firebase.initializeApp();
@@ -23,9 +30,6 @@ abstract class AppInitializer {
 
     //local notification
     await LocalNotificationService.init();
-
-    //fcm service
-    await FcmService().init();
 
     // register models
     registerModels();

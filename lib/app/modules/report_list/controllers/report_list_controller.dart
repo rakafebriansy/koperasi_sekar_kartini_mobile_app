@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
@@ -10,8 +11,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrappe
 
 class ReportListController extends GetxController {
   ApiHelper apiHelper;
+  final AuthController authController;
 
-  ReportListController({required this.apiHelper});
+  ReportListController({required this.apiHelper, required this.authController});
 
   TextEditingController searchCtrl = TextEditingController();
 

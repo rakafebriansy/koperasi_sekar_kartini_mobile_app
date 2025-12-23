@@ -18,8 +18,9 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrappe
 
 class ManageEventController extends GetxController {
   final ApiHelper apiHelper;
+  final AuthController authController;
 
-  ManageEventController({required this.apiHelper});
+  ManageEventController({required this.apiHelper, required this.authController});
 
   final formKey = GlobalKey<FormState>();
 
@@ -138,7 +139,7 @@ class ManageEventController extends GetxController {
     if (selectedEventType == null) throw Exception('event type is null');
 
     try {
-      final user = AuthController.find.currentUser!;
+      final user = authController.currentUser!;
       final String dt = DateFormat(
         "HH:mm dd/MM/yyyy",
       ).parse(dateTimeCtrl.text).toIso8601String();
@@ -173,7 +174,7 @@ class ManageEventController extends GetxController {
     if (id == null) throw Exception('id is null');
     if (selectedEventType == null) throw Exception('event type is null');
 
-    final user = AuthController.find.currentUser!;
+    final user = authController.currentUser!;
     try {
       await apiHelper.fetch<EventModel>(
         request: (api) => api.updateMeeting(

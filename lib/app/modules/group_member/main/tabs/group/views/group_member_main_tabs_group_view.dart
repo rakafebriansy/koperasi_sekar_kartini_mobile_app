@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
@@ -31,7 +30,7 @@ class GroupMemberMainTabsGroupView
                 height: getScreenHeight(context, scale: 0.8),
                 child: Center(child: CircularProgressIndicator()),
               )
-            : AuthController.find.currentUser!.groupId == null || controller.group == null
+            : controller.authController.currentUser!.groupId == null || controller.group == null
             ? SizedBox(
                 height: getScreenHeight(context, scale: 0.8),
                 child: Center(child: poppins('Tidak tergabung kelompok.')),

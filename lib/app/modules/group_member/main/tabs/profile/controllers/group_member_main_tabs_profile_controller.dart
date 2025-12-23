@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
@@ -9,7 +10,12 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 
 class GroupMemberMainTabsProfileController extends GetxController {
   ApiHelper apiHelper;
-  GroupMemberMainTabsProfileController({required this.apiHelper});
+  final AuthController authController;
+
+  GroupMemberMainTabsProfileController({
+    required this.apiHelper,
+    required this.authController,
+  });
 
   final formKey = GlobalKey<FormState>();
 

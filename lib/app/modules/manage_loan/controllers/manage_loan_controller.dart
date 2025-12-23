@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/loan/loan_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
@@ -12,9 +13,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_build
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageLoanController extends GetxController {
-    final ApiHelper apiHelper;
+  final ApiHelper apiHelper;
+  final AuthController authController;
 
-  ManageLoanController({required this.apiHelper});
+  ManageLoanController({required this.apiHelper, required this.authController});
 
   final formKey = GlobalKey<FormState>();
 

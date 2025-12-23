@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
@@ -51,8 +50,8 @@ class EmployeeMainTabsEmployeeView
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),
-                  if (AuthController.find.currentUser != null &&
-                      AuthController.find.currentUser!.role == 'admin')
+                  if (controller.authController.currentUser != null &&
+                      controller.authController.currentUser!.role == 'admin')
                     ElevatedButton.icon(
                       style: buildInkWellButtonStyle(
                         foregroundColor: AppColor.bg.primary,

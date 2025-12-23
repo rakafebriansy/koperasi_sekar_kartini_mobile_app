@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
@@ -15,8 +16,12 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrappe
 
 class EmployeeManageEmployeeController extends GetxController {
   final ApiHelper apiHelper;
+  final AuthController authController;
 
-  EmployeeManageEmployeeController({required this.apiHelper});
+  EmployeeManageEmployeeController({
+    required this.apiHelper,
+    required this.authController,
+  });
 
   final firstFormKey = GlobalKey<FormState>();
   final secondFormKey = GlobalKey<FormState>();

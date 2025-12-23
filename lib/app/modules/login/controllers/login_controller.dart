@@ -10,10 +10,12 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 
 class LoginController extends GetxController {
   final ApiHelper apiHelper;
+  final AuthController authController;
+  final FcmService fcmService;
 
   final formKey = GlobalKey<FormState>();
 
-  LoginController({required this.apiHelper});
+  LoginController({required this.apiHelper, required this.authController, required this.fcmService});
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
@@ -50,8 +52,8 @@ class LoginController extends GetxController {
             api.login(phoneNumber: phoneCtrl.text, password: passwordCtrl.text),
       );
 
-      AuthController.find.saveUserData(user: user);
-      await FcmService().sendToken();
+      authController.saveUserData(user: user);
+      await fcmService.sendToken();
 
       if (user.role == 'group_member') {
         Get.offAllNamed(Routes.GROUP_MEMBER_MAIN);
@@ -61,7 +63,6 @@ class LoginController extends GetxController {
         throw Exception('Role tidak ditemukan');
       }
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
       _isSubmitted.value = false;

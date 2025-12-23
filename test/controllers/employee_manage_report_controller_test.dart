@@ -6,6 +6,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_m
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/controllers/employee_manage_report_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 
+import '../fakes/fake_auth_controller.dart';
+
 class MockApiHelper extends Mock implements ApiHelper {}
 
 void main() {
@@ -20,7 +22,11 @@ void main() {
     Get.reset();
     Get.testMode = true;
     mockApi = MockApiHelper();
-    controller = EmployeeManageReportController(apiHelper: mockApi);
+    controller = EmployeeManageReportController(
+      apiHelper: mockApi,
+            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+
+    );
   });
 
   group('EmployeeManageReportController', () {

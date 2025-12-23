@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/employee/controllers/employee_main_tabs_employee_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/group/controllers/employee_main_tabs_group_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/main/tabs/home/controllers/employee_main_tabs_home_controller.dart';
@@ -17,13 +18,13 @@ class EmployeeMainBinding extends Bindings {
       () => EmployeeMainTabsHomeController(apiHelper: Get.find<ApiHelper>()),
     );
     Get.lazyPut<EmployeeMainTabsProfileController>(
-      () => EmployeeMainTabsProfileController(apiHelper: Get.find<ApiHelper>()),
+      () => EmployeeMainTabsProfileController(apiHelper: Get.find<ApiHelper>(), authController: Get.find<AuthController>()),
     );
     Get.lazyPut<EmployeeMainTabsGroupController>(
       () => EmployeeMainTabsGroupController(apiHelper: Get.find<ApiHelper>()),
     );
     Get.lazyPut<EmployeeMainTabsEmployeeController>(
-      () => EmployeeMainTabsEmployeeController(apiHelper: Get.find<ApiHelper>()),
+      () => EmployeeMainTabsEmployeeController(apiHelper: Get.find<ApiHelper>(), authController: Get.find<AuthController>()),
     );
   }
 }

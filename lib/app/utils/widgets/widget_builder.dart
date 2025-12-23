@@ -119,7 +119,7 @@ Text poppins(
 }
 
 Future<void> showMemberCard() async {
-  String? filePath = AuthController.find.currentUser?.memberCardPhoto;
+  String? filePath = AuthController.instance.currentUser?.memberCardPhoto;
   Get.bottomSheet(
     Wrap(
       children: [

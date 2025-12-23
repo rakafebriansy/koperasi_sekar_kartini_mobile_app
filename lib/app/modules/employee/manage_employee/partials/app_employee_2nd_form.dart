@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_employee/controllers/employee_manage_employee_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
@@ -115,8 +114,8 @@ class AppEmployee2ndForm extends StatelessWidget {
                     label: 'Simpan',
                     onTap:
                         controller.isSubmitted ||
-                            (AuthController.find.currentUser != null &&
-                                AuthController.find.currentUser!.role !=
+                            (controller.authController.currentUser != null &&
+                                controller.authController.currentUser!.role !=
                                     'admin')
                         ? null
                         : controller.submitButton,

@@ -65,7 +65,7 @@ abstract class ErrorHelper {
       if (e.response?.statusCode == 401 &&
           canUseNavigator &&
           Get.context != null) {
-        AuthController.find.logout();
+        AuthController.instance.logout();
       }
 
       if (e.response?.data?['message'] is Map) {

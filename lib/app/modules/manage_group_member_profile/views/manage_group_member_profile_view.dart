@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_1st_form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_2nd_Form.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/manage_group_member_profile/partials/app_manage_group_member_profile_3rd_form.dart';
@@ -32,7 +31,7 @@ class ManageGroupMemberProfileView
                         AppManageGroupMemberProfile1stForm(
                           controller: controller,
                         ),
-                        if (AuthController.find.currentUser!.role ==
+                        if (controller.authController.currentUser!.role ==
                             'group_member')
                           AppManageGroupMemberProfile2ndForm(
                             controller: controller,

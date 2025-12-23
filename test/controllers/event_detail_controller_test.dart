@@ -5,6 +5,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper
 import 'package:mocktail/mocktail.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 
+import '../fakes/fake_auth_controller.dart';
+
 class MockApiHelper extends Mock implements ApiHelper {}
 
 void main() {
@@ -20,7 +22,11 @@ void main() {
     Get.testMode = true;
     mockApi = MockApiHelper();
 
-    controller = EventDetailController(apiHelper: mockApi);
+    controller = EventDetailController(
+      apiHelper: mockApi,
+            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+
+    );
 
     controller.eventRx.value = DummyHelper.ev(1);
   });

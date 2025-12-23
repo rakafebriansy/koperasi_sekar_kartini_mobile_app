@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
@@ -54,7 +53,7 @@ class ManageEventView extends GetView<ManageEventController> {
                         ? controller.selectedEventType?.displayName
                         : 'Pilih Jenis Kegiatan',
                     items: (filter, infiniteScrollProps) =>
-                        AuthController.find.currentUser!.role != 'group_member'
+                        controller.authController.currentUser!.role != 'group_member'
                         ? controller.eventTypes.names
                         : [controller.eventTypes.names.first],
                     decoratorProps: DropDownDecoratorProps(
@@ -83,7 +82,7 @@ class ManageEventView extends GetView<ManageEventController> {
                   ),
                 ),
                 SizedBox(height: 8.sp),
-                if (AuthController.find.currentUser!.role !=
+                if (controller.authController.currentUser!.role !=
                     'group_member') ...[
                   poppins(
                     'Kelompok',
