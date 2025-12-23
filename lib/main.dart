@@ -9,7 +9,7 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppInitializer.initialize();
+  await AppInitializer.initialize();
 
   runApp(
     ScreenUtilInit(

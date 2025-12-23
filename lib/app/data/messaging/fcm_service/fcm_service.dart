@@ -14,7 +14,7 @@ class FcmService {
   final ApiHelper apiHelper;
   final FirebaseMessaging _messaging;
 
-  FcmService({required this.apiHelper, FirebaseMessaging? messaging})
+  FcmService({required this.apiHelper, FirebaseMessaging? messaging}) 
     : _messaging = messaging ?? FirebaseMessaging.instance;
 
   bool _isHandlingNotification = false;

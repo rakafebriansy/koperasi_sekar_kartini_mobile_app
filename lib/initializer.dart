@@ -12,17 +12,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 
 abstract class AppInitializer {
   static Future<void> initialize() async {
-    //global
+    //app
     Get.put(const FlutterSecureStorage());
     Get.put(ApiHelper(), permanent: true);
     Get.put(AuthController(apiHelper: Get.find<ApiHelper>()), permanent: true);
-    Get.put(
-      FcmService(
-        messaging: FirebaseMessaging.instance,
-        apiHelper: Get.find<ApiHelper>(),
-      ),
-      permanent: true,
-    );
 
     //firebase
     await Firebase.initializeApp();
@@ -30,6 +23,16 @@ abstract class AppInitializer {
 
     //local notification
     await LocalNotificationService.init();
+    
+    //init fcm
+        Get.put(
+      FcmService(
+        messaging: FirebaseMessaging.instance,
+        apiHelper: Get.find<ApiHelper>(),
+      ),
+      permanent: true,
+    );
+    await Get.find<FcmService>().init();
 
     // register models
     registerModels();
