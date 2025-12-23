@@ -69,6 +69,7 @@ class ManageGroupController extends GetxController {
   int get selectedScreen => _selectedScreen.value;
 
   final Rx<int?> _id = Rxn();
+  Rx<int?> get idRx => _id;
   int? get id => _id.value;
 
   @override
