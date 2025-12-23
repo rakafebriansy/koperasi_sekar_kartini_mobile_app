@@ -23,7 +23,7 @@ class EmployeeMainBinding extends Bindings {
       () => EmployeeMainTabsGroupController(apiHelper: Get.find<ApiHelper>()),
     );
     Get.lazyPut<EmployeeMainTabsEmployeeController>(
-      () => EmployeeMainTabsEmployeeController(),
+      () => EmployeeMainTabsEmployeeController(apiHelper: Get.find<ApiHelper>()),
     );
   }
 }

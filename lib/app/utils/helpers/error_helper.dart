@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dialog_helper.dart';
@@ -33,6 +34,8 @@ abstract class ErrorHelper {
     dynamic e, {
     bool canUseNavigator = true,
   }) async {
+    if (Get.testMode) return;
+
     String? message;
 
     if (e is String) {
@@ -118,7 +121,7 @@ abstract class ErrorHelper {
       }
     }
 
-    print("ERROR: ${e.toString().tr}");
+    debugPrint("ERROR: ${e.toString().tr}");
 
     return DialogHelper.showFailedDialog(e.toString().tr);
   }

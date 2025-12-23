@@ -7,6 +7,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class EmployeeMainTabsEmployeeController extends GetxController {
+  final ApiHelper apiHelper;
+
+  EmployeeMainTabsEmployeeController({required this.apiHelper});
+
   TextEditingController searchCtrl = TextEditingController();
 
   final RxBool _isFetching = false.obs;
@@ -27,7 +31,7 @@ class EmployeeMainTabsEmployeeController extends GetxController {
     _isFetching.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
+      final List<UserModel> data = await apiHelper
           .fetchList<UserModel>(
             request: (api) => api.getUsers(search: search, role: 'employee'),
           );
