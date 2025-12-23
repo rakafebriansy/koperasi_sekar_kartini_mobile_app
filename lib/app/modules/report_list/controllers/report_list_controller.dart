@@ -21,6 +21,7 @@ class ReportListController extends GetxController {
   bool get isFetching => _isFetching.value;
 
   final Rx<GroupModel?> _group = Rxn();
+  Rx<GroupModel?> get groupRx => _group;
   GroupModel? get group => _group.value;
 
   final RxList<ReportModel> _reports = RxList();
