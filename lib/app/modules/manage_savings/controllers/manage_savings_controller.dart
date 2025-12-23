@@ -33,7 +33,6 @@ class ManageSavingsController extends GetxController {
     // text: !kReleaseMode ? '02/2024' : '',
   );
 
-
   final Rx<SavingsType?> _selectedSavingsType = Rxn();
   SavingsType? get selectedSavingsType => _selectedSavingsType.value;
 
@@ -78,36 +77,33 @@ class ManageSavingsController extends GetxController {
     );
   }
 
-
   Future<void> createSavings() async {
-    if (formKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(formKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      try {
-        if (selectedSavingsType == null)
-          throw Exception('savings type is null');
-        if (user == null) throw Exception('user is null');
+    try {
+      if (selectedSavingsType == null) throw Exception('savings type is null');
+      if (user == null) throw Exception('user is null');
 
-        final dt = dateCtrl.text.toMonthYearDate();
+      final dt = dateCtrl.text.toMonthYearDate();
 
-        await ApiHelper.instance.fetchNonReturnable(
-          request: (api) => api.createSavings(
-            type: selectedSavingsType!.snakeCase,
-            nominal: int.parse(amountCtrl.text),
-            year: dt.year,
-            month: dt.month,
-            userId: user!.id,
-          ),
-        );
+      await ApiHelper.instance.fetchNonReturnable(
+        request: (api) => api.createSavings(
+          type: selectedSavingsType!.snakeCase,
+          nominal: int.parse(amountCtrl.text),
+          year: dt.year,
+          month: dt.month,
+          userId: user!.id,
+        ),
+      );
 
-        Get.back(result: true);
-        Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
-      } catch (e) {
-        debugPrint(e.toString());
-        ErrorHelper.handleError(e);
-      } finally {
-        _isSubmitted.value = false;
-      }
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      _isSubmitted.value = false;
     }
   }
 

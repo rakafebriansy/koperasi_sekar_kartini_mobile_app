@@ -14,25 +14,24 @@ class ManagePasswordController extends GetxController {
   bool get isSubmitted => _isSubmitted.value;
 
   Future<void> updatePassword() async {
-    if (formKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(formKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      try {
-        await ApiHelper.instance.fetchNonReturnable(
-          request: (api) => api.changePassword(
-            password: passwordCtrl.text,
-            newPassword: newPasswordCtrl.text,
-          ),
-        );
+    try {
+      await ApiHelper.instance.fetchNonReturnable(
+        request: (api) => api.changePassword(
+          password: passwordCtrl.text,
+          newPassword: newPasswordCtrl.text,
+        ),
+      );
 
-        Get.back(result: true);
-        Get.snackbar('INFO', 'Berhasil memperbarui kata sandi!');
-      } catch (e) {
-        debugPrint(e.toString());
-        ErrorHelper.handleError(e);
-      } finally {
-        _isSubmitted.value = false;
-      }
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil memperbarui kata sandi!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      _isSubmitted.value = false;
     }
   }
 }

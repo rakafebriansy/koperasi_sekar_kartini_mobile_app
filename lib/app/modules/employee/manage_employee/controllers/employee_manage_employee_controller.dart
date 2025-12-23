@@ -233,22 +233,20 @@ class EmployeeManageEmployeeController extends GetxController {
   Future<void> submitButton() async {
     switch (selectedScreen) {
       case 0:
-        if (firstFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(firstFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 1:
-        if (secondFormKey.currentState!.validate()) {
-          try {
-            if (action != null) {
-              if (action!.isCreateAction) createEmployee();
-              if (action!.isUpdateAction) updateEmployee();
-            }
-          } catch (e) {
-            ErrorHelper.handleError(e);
+        if (!(secondFormKey.currentState?.validate() ?? true)) return;
+        try {
+          if (action != null) {
+            if (action!.isCreateAction) createEmployee();
+            if (action!.isUpdateAction) updateEmployee();
           }
+        } catch (e) {
+          ErrorHelper.handleError(e);
         }
-        return;
     }
+    return;
   }
 }

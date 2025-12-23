@@ -43,7 +43,7 @@ class LoginController extends GetxController {
     _isSubmitted.value = true;
 
     try {
-      if (!formKey.currentState!.validate()) return;
+      if (!(formKey.currentState?.validate() ?? true)) return;
 
       final user = await apiHelper.fetch<UserModel>(
         request: (api) =>

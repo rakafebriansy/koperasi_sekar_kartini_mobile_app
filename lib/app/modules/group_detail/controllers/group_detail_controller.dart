@@ -188,110 +188,106 @@ class GroupDetailController extends GetxController {
   }
 
   Future<void> updateFacilitator() async {
-    if (facilitatorFormKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(facilitatorFormKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      if (group == null) throw Exception('group is null');
-      if (selectedFacilitator == null) throw Exception('facilitator is null');
+    if (group == null) throw Exception('group is null');
+    if (selectedFacilitator == null) throw Exception('facilitator is null');
 
-      try {
-        await ApiHelper.instance.fetch<GroupModel>(
-          request: (api) => api.updateGroupFacilitator(
-            id: group!.id,
-            userId: selectedFacilitator!.id,
-          ),
-        );
+    try {
+      await ApiHelper.instance.fetch<GroupModel>(
+        request: (api) => api.updateGroupFacilitator(
+          id: group!.id,
+          userId: selectedFacilitator!.id,
+        ),
+      );
 
-        Get.back();
-        Get.snackbar('INFO', 'Berhasil memperbarui informasi PPK!');
-      } catch (e) {
-        debugPrint(e.toString());
-        ErrorHelper.handleError(e);
-      } finally {
-        fetchGroupById(group!.id);
-        _isSubmitted.value = false;
-      }
+      Get.back();
+      Get.snackbar('INFO', 'Berhasil memperbarui informasi PPK!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      fetchGroupById(group!.id);
+      _isSubmitted.value = false;
     }
   }
 
   Future<void> updateChairman() async {
-    if (chairmanFormKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(chairmanFormKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      if (group == null) throw Exception('group is null');
-      if (selectedChairman == null) throw Exception('chairman is null');
+    if (group == null) throw Exception('group is null');
+    if (selectedChairman == null) throw Exception('chairman is null');
 
-      try {
-        await ApiHelper.instance.fetch<GroupModel>(
-          request: (api) => api.updateGroupChairman(
-            id: group!.id,
-            userId: selectedChairman!.id,
-          ),
-        );
+    try {
+      await ApiHelper.instance.fetch<GroupModel>(
+        request: (api) => api.updateGroupChairman(
+          id: group!.id,
+          userId: selectedChairman!.id,
+        ),
+      );
 
-        Get.back();
-        Get.snackbar('INFO', 'Berhasil memperbarui informasi PJK!');
-      } catch (e) {
-        debugPrint(e.toString());
-        ErrorHelper.handleError(e);
-      } finally {
-        fetchGroupById(group!.id);
-        _isSubmitted.value = false;
-      }
+      Get.back();
+      Get.snackbar('INFO', 'Berhasil memperbarui informasi PJK!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      fetchGroupById(group!.id);
+      _isSubmitted.value = false;
     }
   }
 
   Future<void> addMember() async {
-    if (addMemberFormKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(addMemberFormKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      try {
-        if (group == null) throw Exception('group is null');
-        if (selectedMember == null) throw Exception('member is null');
+    try {
+      if (group == null) throw Exception('group is null');
+      if (selectedMember == null) throw Exception('member is null');
 
-        await ApiHelper.instance.fetchNonReturnable(
-          request: (api) =>
-              api.addGroupMember(id: selectedMember!.id, groupId: group!.id),
-        );
+      await ApiHelper.instance.fetchNonReturnable(
+        request: (api) =>
+            api.addGroupMember(id: selectedMember!.id, groupId: group!.id),
+      );
 
-        Get.back();
-        Get.snackbar('INFO', 'Berhasil mengubah informasi kas!');
-      } catch (e) {
-        debugPrint(e.toString());
-        ErrorHelper.handleError(e);
-      } finally {
-        fetchListGroupMember(group!.id);
-        _isSubmitted.value = false;
-      }
+      Get.back();
+      Get.snackbar('INFO', 'Berhasil mengubah informasi kas!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      fetchListGroupMember(group!.id);
+      _isSubmitted.value = false;
     }
   }
 
   Future<void> changeFundAmount() async {
-    if (changeFundAmountFormKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(changeFundAmountFormKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      try {
-        if (group == null) throw Exception('group is null');
-        if (selectedFundType == null) throw Exception('fund type is null');
+    try {
+      if (group == null) throw Exception('group is null');
+      if (selectedFundType == null) throw Exception('fund type is null');
 
-        await ApiHelper.instance.fetchNonReturnable(
-          request: (api) => api.updateFundAmount(
-            id: group!.id,
+      await ApiHelper.instance.fetchNonReturnable(
+        request: (api) => api.updateFundAmount(
+          id: group!.id,
 
-            fundAmount: int.parse(fundAmountCtrl.text),
-            fundType: selectedFundType?.name,
-          ),
-        );
+          fundAmount: int.parse(fundAmountCtrl.text),
+          fundType: selectedFundType?.name,
+        ),
+      );
 
-        Get.back();
-        Get.snackbar('INFO', 'Berhasil menambah anggota!');
-      } catch (e) {
-        debugPrint(e.toString());
-        ErrorHelper.handleError(e);
-      } finally {
-        fetchGroupById(group!.id);
-        _isSubmitted.value = false;
-      }
+      Get.back();
+      Get.snackbar('INFO', 'Berhasil menambah anggota!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      fetchGroupById(group!.id);
+      _isSubmitted.value = false;
     }
   }
 }

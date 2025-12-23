@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
@@ -11,7 +10,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/file_input_validator.dart';
 
 class RegisterController extends GetxController {
   final firstFormKey = GlobalKey<FormState>();
@@ -183,27 +181,24 @@ class RegisterController extends GetxController {
   Future<void> submitButton() async {
     switch (selectedScreen) {
       case 0:
-        if (firstFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(firstFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 1:
-        if (secondFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(secondFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 2:
-        if (thirdFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(thirdFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 3:
-        if (fourthFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(fourthFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 4:
-        if (fifthFormKey.currentState!.validate()) register();
+        if (!(fifthFormKey.currentState?.validate() ?? true)) return;
+        register();
         return;
     }
   }

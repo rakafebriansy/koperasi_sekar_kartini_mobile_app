@@ -7,7 +7,6 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controlle
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_area_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
@@ -80,10 +79,10 @@ class ManageGroupMemberProfileController extends GetxController {
     final user = args.data as UserModel;
 
     _user.value = user;
-    identityNumberCtrl.text = user.identityNumber ?? '';
+    identityNumberCtrl.text = user.identityNumber;
     nameCtrl.text = user.name;
     addressCtrl.text = user.address ?? '';
-    birthDateCtrl.text = DateFormat('dd/MM/yyyy').format(user.birthDate!);
+    birthDateCtrl.text = DateFormat('dd/MM/yyyy').format(user.birthDate);
     occupationCtrl.text = user.occupation ?? '';
     phoneCtrl.text = user.phoneNumber;
     passwordCtrl.text = '';
@@ -198,16 +197,24 @@ class ManageGroupMemberProfileController extends GetxController {
 
     final steps = role == 'group_member'
         ? {
-            0: () =>
-                firstFormKey.currentState!.validate() ? nextScreen() : null,
-            1: () =>
-                secondFormKey.currentState!.validate() ? nextScreen() : null,
-            2: () =>
-                thirdFormKey.currentState!.validate() ? nextScreen() : null,
-            3: () =>
-                thirdFormKey.currentState!.validate() ? updateProfile() : null,
+            0: () => !(firstFormKey.currentState?.validate() ?? true)
+                ? null
+                : nextScreen(),
+            1: () => !(secondFormKey.currentState?.validate() ?? true)
+                ? null
+                : nextScreen(),
+            2: () => !(thirdFormKey.currentState?.validate() ?? true)
+                ? null
+                : nextScreen(),
+            3: () => !(fourthFormKey.currentState?.validate() ?? true)
+                ? null
+                : updateProfile(),
           }
-        : {0: () => nextScreen(), 1: () => nextScreen(), 2: () => activateMember()};
+        : {
+            0: () => nextScreen(),
+            1: () => nextScreen(),
+            2: () => activateMember(),
+          };
 
     steps[selectedScreen]?.call();
   }

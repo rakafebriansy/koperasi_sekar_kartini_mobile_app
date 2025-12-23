@@ -108,9 +108,7 @@ class ManageEventController extends GetxController {
 
     final number = int.parse(match.group(0)!);
 
-    _selectedGroup.value = groups.firstWhere(
-      (item) => item.number == number,
-    );
+    _selectedGroup.value = groups.firstWhere((item) => item.number == number);
   }
 
   Future<void> fetchListGroup({String? search}) async {
@@ -148,7 +146,9 @@ class ManageEventController extends GetxController {
           datetime: dt,
           location: locationCtrl.text.nullIfEmpty,
           description: descCtrl.text.nullIfEmpty,
-          groupId: user.role == 'group_member' ? user.groupId : selectedGroup?.id,
+          groupId: user.role == 'group_member'
+              ? user.groupId
+              : selectedGroup?.id,
           photo: hintPhoto,
         ),
       );
@@ -181,7 +181,9 @@ class ManageEventController extends GetxController {
               : dateTimeCtrl.text.toIsoDateString(),
           location: locationCtrl.text.nullIfEmpty,
           description: descCtrl.text.nullIfEmpty,
-          groupId: user.role == 'group_member' ? user.groupId : selectedGroup?.id,
+          groupId: user.role == 'group_member'
+              ? user.groupId
+              : selectedGroup?.id,
           userId: user.id,
         ),
       );
@@ -197,11 +199,10 @@ class ManageEventController extends GetxController {
   }
 
   Future<void> submitButton() async {
-    if (formKey.currentState!.validate()) {
-      if (action != null) {
-        if (action!.isCreateAction) createMeeting();
-        if (action!.isUpdateAction) updateMeeting();
-      }
+    if (!(formKey.currentState?.validate() ?? true)) return;
+    if (action != null) {
+      if (action!.isCreateAction) createMeeting();
+      if (action!.isUpdateAction) updateMeeting();
     }
   }
 }

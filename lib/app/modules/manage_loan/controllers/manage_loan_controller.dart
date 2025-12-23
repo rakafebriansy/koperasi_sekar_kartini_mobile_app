@@ -78,33 +78,32 @@ class ManageLoanController extends GetxController {
   }
 
   Future<void> createLoan() async {
-    if (formKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(formKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      try {
-        if (selectedLoanType == null) throw Exception('loan type is null');
-        if (user == null) throw Exception('user is null');
+    try {
+      if (selectedLoanType == null) throw Exception('loan type is null');
+      if (user == null) throw Exception('user is null');
 
-        final dt = dateCtrl.text.toMonthYearDate();
+      final dt = dateCtrl.text.toMonthYearDate();
 
-        await ApiHelper.instance.fetchNonReturnable(
-          request: (api) => api.createLoan(
-            type: selectedLoanType!.snakeCase,
-            nominal: int.parse(amountCtrl.text),
-            year: dt.year,
-            month: dt.month,
-            userId: user!.id,
-          ),
-        );
+      await ApiHelper.instance.fetchNonReturnable(
+        request: (api) => api.createLoan(
+          type: selectedLoanType!.snakeCase,
+          nominal: int.parse(amountCtrl.text),
+          year: dt.year,
+          month: dt.month,
+          userId: user!.id,
+        ),
+      );
 
-        Get.back(result: true);
-        Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
-      } catch (e) {
-        debugPrint(e.toString());
-        ErrorHelper.handleError(e);
-      } finally {
-        _isSubmitted.value = false;
-      }
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      _isSubmitted.value = false;
     }
   }
 
@@ -153,13 +152,12 @@ class ManageLoanController extends GetxController {
   }
 
   Future<void> submitButton() async {
-    if (formKey.currentState!.validate()) {
-      if (action != null) {
-        if (action!.isCreateAction) {
-          createLoan();
-        }
-        if (action!.isUpdateAction) updateStatus();
+    if (!(formKey.currentState?.validate() ?? true)) return;
+    if (action != null) {
+      if (action!.isCreateAction) {
+        createLoan();
       }
+      if (action!.isUpdateAction) updateStatus();
     }
   }
 }

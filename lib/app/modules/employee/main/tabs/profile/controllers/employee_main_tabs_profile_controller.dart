@@ -54,11 +54,9 @@ class EmployeeMainTabsProfileController extends GetxController {
     _isFetchingMembers.value = true;
 
     try {
-      final List<UserModel> data = await ApiHelper.instance
-          .fetchList<UserModel>(
-            request: (api) =>
-                api.getUsers(search: search, role: 'group_member'),
-          );
+      final List<UserModel> data = await apiHelper.fetchList<UserModel>(
+        request: (api) => api.getUsers(search: search, role: 'group_member'),
+      );
 
       _members.value = data;
     } catch (e) {
@@ -69,26 +67,25 @@ class EmployeeMainTabsProfileController extends GetxController {
   }
 
   Future<void> updateMemberCardImage() async {
-    if (formKey.currentState!.validate()) {
-      _isSubmitted.value = true;
+    if (!(formKey.currentState?.validate() ?? true)) return;
+    _isSubmitted.value = true;
 
-      try {
-        await apiHelper.fetch<UserModel>(
-          request: (api) => api.updateUser(
-            id: selectedMember!.id,
-            memberCardPhoto: memberCardImage,
-          ),
-        );
+    try {
+      await apiHelper.fetch<UserModel>(
+        request: (api) => api.updateUser(
+          id: selectedMember!.id,
+          memberCardPhoto: memberCardImage,
+        ),
+      );
 
-        Get.back(result: true);
-        Get.snackbar('INFO', 'Berhasil memperbarui KTA!');
-      } catch (e) {
-        ErrorHelper.handleError(e);
-      } finally {
-        _selectedMember.value = null;
-        _memberCardImage.value = null;
-        _isSubmitted.value = false;
-      }
+      Get.back(result: true);
+      Get.snackbar('INFO', 'Berhasil memperbarui KTA!');
+    } catch (e) {
+      ErrorHelper.handleError(e);
+    } finally {
+      _selectedMember.value = null;
+      _memberCardImage.value = null;
+      _isSubmitted.value = false;
     }
   }
 }

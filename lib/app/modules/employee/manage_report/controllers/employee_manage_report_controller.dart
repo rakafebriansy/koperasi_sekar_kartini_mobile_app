@@ -403,30 +403,26 @@ class EmployeeManageReportController extends GetxController {
   Future<void> submitButton() async {
     switch (selectedScreen) {
       case 0:
-        if (firstFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(firstFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 1:
-        if (secondFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(secondFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 2:
-        if (secondFormKey.currentState!.validate()) {
-          nextScreen();
-        }
+        if (!(thirdFormKey.currentState?.validate() ?? true)) return;
+        nextScreen();
         return;
       case 3:
-        if (fourthFormKey.currentState!.validate()) {
-          try {
-            if (action != null) {
-              if (action!.isCreateAction) createReport();
-              if (action!.isUpdateAction) updateReport();
-            }
-          } catch (e) {
-            ErrorHelper.handleError(e);
+        if (!(fourthFormKey.currentState?.validate() ?? true)) return;
+        try {
+          if (action != null) {
+            if (action!.isCreateAction) createReport();
+            if (action!.isUpdateAction) updateReport();
           }
+        } catch (e) {
+          ErrorHelper.handleError(e);
         }
         return;
     }

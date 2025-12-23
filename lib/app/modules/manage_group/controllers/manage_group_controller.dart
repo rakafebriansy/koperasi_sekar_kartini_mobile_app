@@ -256,17 +256,16 @@ class ManageGroupController extends GetxController {
   }
 
   Future<void> submitButton() async {
-    if (formKey.currentState!.validate()) {
-      try {
-        if (action != null) {
-          if (action!.isCreateAction) {
-            createGroup();
-          }
-          if (action!.isUpdateAction) updateGroup();
+    if (!(formKey.currentState?.validate() ?? true)) return;
+    try {
+      if (action != null) {
+        if (action!.isCreateAction) {
+          createGroup();
         }
-      } catch (e) {
-        ErrorHelper.handleError(e);
+        if (action!.isUpdateAction) updateGroup();
       }
+    } catch (e) {
+      ErrorHelper.handleError(e);
     }
   }
 }
