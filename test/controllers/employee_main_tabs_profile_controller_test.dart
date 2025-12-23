@@ -73,7 +73,6 @@ void main() {
     controller.selectMember(DummyHelper.user(1).name);
     controller.setMemberCardImage(File('dummy.png'));
 
-    // bypass form validation
     controller.formKey.currentState?.reset();
 
     when(

@@ -20,7 +20,6 @@ void main() {
     mockApi = MockApiHelper();
     controller = EmployeeManageReportController(apiHelper: mockApi);
 
-    // inject Get.arguments jika perlu
     Get.testMode = true;
   });
 

@@ -13,6 +13,8 @@ class EventDetailController extends GetxController {
   EventDetailController({required this.apiHelper});
 
   final Rx<EventModel?> _event = Rxn();
+  @visibleForTesting
+  Rx<EventModel?> get eventRx => _event;
   EventModel? get event => _event.value;
 
   final RxBool _isSubmitted = false.obs;
@@ -21,8 +23,6 @@ class EventDetailController extends GetxController {
   @override
   void onInit() {
     final args = (Get.arguments as ArgsWrapper);
-    print('args.data.toString()');
-    print(args.data.toString());
 
     _event.value = args.data as EventModel;
     super.onInit();
@@ -33,7 +33,7 @@ class EventDetailController extends GetxController {
 
     try {
       await apiHelper.fetchNonReturnable(
-        request: (api) => api.deleteMeeting(id: event!.id!),
+        request: (api) => api.deleteMeeting(id: event!.id),
       );
 
       Get.back(result: true);
