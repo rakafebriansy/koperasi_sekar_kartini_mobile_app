@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class ManagePasswordController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -26,7 +27,7 @@ class ManagePasswordController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil memperbarui kata sandi!');
+      showSnackbar('INFO', 'Berhasil memperbarui kata sandi!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

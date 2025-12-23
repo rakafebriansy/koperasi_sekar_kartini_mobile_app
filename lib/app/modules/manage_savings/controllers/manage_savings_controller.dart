@@ -8,6 +8,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_ty
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageSavingsController extends GetxController {
@@ -98,7 +99,7 @@ class ManageSavingsController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat pinjaman!');
+      showSnackbar('INFO', 'Berhasil membuat pinjaman!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -120,7 +121,7 @@ class ManageSavingsController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil menghapus pinjaman!');
+      showSnackbar('INFO', 'Berhasil menghapus pinjaman!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

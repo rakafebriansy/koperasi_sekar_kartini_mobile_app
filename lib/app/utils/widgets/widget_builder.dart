@@ -164,8 +164,10 @@ Future<void> showMemberCard() async {
                     : () async {
                         try {
                           Get.back();
-                          await Get.find<ApiHelper>().downloadFileAndroid(filePath);
-                          Get.snackbar(
+                          await Get.find<ApiHelper>().downloadFileAndroid(
+                            filePath,
+                          );
+                          showSnackbar(
                             'Unduh berhasil!',
                             'Unduhan disimpan di $LOCAL_DOWNLOAD_PATH.',
                           );
@@ -185,6 +187,57 @@ Future<void> showMemberCard() async {
 double getScreenHeight(BuildContext context, {double scale = 1}) {
   return MediaQuery.of(context).size.height * scale;
 }
-double getScreenWidth(BuildContext context,  {double scale = 1}) {
+
+double getScreenWidth(BuildContext context, {double scale = 1}) {
   return MediaQuery.of(context).size.height * scale;
+}
+
+void showSnackbar(
+  String title,
+  String message, {
+  // Color? colorText,
+  Duration? duration = const Duration(seconds: 3),
+
+  // bool instantInit = true,
+  SnackPosition? snackPosition,
+  // Widget? titleText,
+  // Widget? messageText,
+  // Widget? icon,
+  // bool? shouldIconPulse,
+  // double? maxWidth,
+  // EdgeInsets? margin,
+  // EdgeInsets? padding,
+  // double? borderRadius,
+  // Color? borderColor,
+  // double? borderWidth,
+  // Color? backgroundColor,
+  // Color? leftBarIndicatorColor,
+  // List<BoxShadow>? boxShadows,
+  // Gradient? backgroundGradient,
+  // TextButton? mainButton,
+  // OnTap? onTap,
+  // bool? isDismissible,
+  // bool? showProgressIndicator,
+  // DismissDirection? dismissDirection,
+  // AnimationController? progressIndicatorController,
+  // Color? progressIndicatorBackgroundColor,
+  // Animation<Color>? progressIndicatorValueColor,
+  // SnackStyle? snackStyle,
+  // Curve? forwardAnimationCurve,
+  // Curve? reverseAnimationCurve,
+  // Duration? animationDuration,
+  // double? barBlur,
+  // double? overlayBlur,
+  // SnackbarStatusCallback? snackbarStatus,
+  // Color? overlayColor,
+  // Form? userInputForm,
+}) {
+  if (!Get.testMode) {
+    Get.snackbar(
+      title,
+      message,
+      snackPosition: snackPosition,
+      duration: duration,
+    );
+  }
 }

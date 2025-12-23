@@ -7,6 +7,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/action_type/action_type_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class EmployeeManageReportController extends GetxController {
@@ -312,7 +313,7 @@ class EmployeeManageReportController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat rapot!');
+      showSnackbar('INFO', 'Berhasil membuat rapot!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -370,7 +371,7 @@ class EmployeeManageReportController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat rapot!');
+      showSnackbar('INFO', 'Berhasil membuat rapot!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -391,7 +392,7 @@ class EmployeeManageReportController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil menghapus rapot!');
+      showSnackbar('INFO', 'Berhasil menghapus rapot!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

@@ -7,6 +7,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_mod
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/exceptions/notification_exception.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class FcmService {
@@ -165,7 +166,7 @@ class FcmService {
 
     Get.offAllNamed(route);
 
-    Get.snackbar(
+    showSnackbar(
       'Notifikasi gagal dibuka',
       _mapErrorToMessage(error),
       snackPosition: SnackPosition.BOTTOM,

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class EmployeeMainTabsProfileController extends GetxController {
   ApiHelper apiHelper;
@@ -79,7 +80,7 @@ class EmployeeMainTabsProfileController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil memperbarui KTA!');
+      showSnackbar('INFO', 'Berhasil memperbarui KTA!');
     } catch (e) {
       ErrorHelper.handleError(e);
     } finally {

@@ -13,6 +13,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/date_time
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageEventController extends GetxController {
@@ -154,7 +155,7 @@ class ManageEventController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil menambahkan kegiatan!');
+      showSnackbar('INFO', 'Berhasil menambahkan kegiatan!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -189,7 +190,7 @@ class ManageEventController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil memperbarui kegiatan!');
+      showSnackbar('INFO', 'Berhasil memperbarui kegiatan!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

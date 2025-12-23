@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
@@ -32,7 +33,7 @@ class EventDetailController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil menghapus kegiatan!');
+      showSnackbar('INFO', 'Berhasil menghapus kegiatan!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

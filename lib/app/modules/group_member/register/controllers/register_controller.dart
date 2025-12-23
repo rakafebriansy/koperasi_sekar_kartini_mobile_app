@@ -10,6 +10,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class RegisterController extends GetxController {
   final firstFormKey = GlobalKey<FormState>();
@@ -169,7 +170,7 @@ class RegisterController extends GetxController {
       );
 
       Get.offAllNamed(Routes.LOGIN);
-      Get.snackbar('INFO', 'Berhasil membuat akun!');
+      showSnackbar('INFO', 'Berhasil membuat akun!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e, canUseNavigator: false);

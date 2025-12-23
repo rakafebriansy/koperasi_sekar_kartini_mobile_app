@@ -9,6 +9,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/work_area/work_
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class ManageGroupMemberProfileController extends GetxController {
@@ -163,7 +164,7 @@ class ManageGroupMemberProfileController extends GetxController {
 
     try {
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil membuat akun!');
+      showSnackbar('INFO', 'Berhasil membuat akun!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -183,7 +184,7 @@ class ManageGroupMemberProfileController extends GetxController {
       );
 
       Get.back(result: true);
-      Get.snackbar('INFO', 'Berhasil mengubah aktivasi akun!');
+      showSnackbar('INFO', 'Berhasil mengubah aktivasi akun!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

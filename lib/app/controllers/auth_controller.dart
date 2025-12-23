@@ -5,6 +5,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class AuthController extends GetxController {
   final RxBool _isRefreshing = false.obs;
@@ -82,11 +83,13 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       //TODO: Apakah anda yakin?
-      await ApiHelper.instance.fetchNonReturnable(request: (api) => api.logout());
+      await ApiHelper.instance.fetchNonReturnable(
+        request: (api) => api.logout(),
+      );
       authState.value = AuthState.initial;
     } catch (e) {
       debugPrint(e.toString());
-      Get.snackbar('Error', 'Gagal logout');
+      showSnackbar('Error', 'Gagal logout');
     } finally {
       _currentUser.value = null;
     }

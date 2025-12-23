@@ -6,6 +6,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 class GroupDetailController extends GetxController {
@@ -203,7 +204,7 @@ class GroupDetailController extends GetxController {
       );
 
       Get.back();
-      Get.snackbar('INFO', 'Berhasil memperbarui informasi PPK!');
+      showSnackbar('INFO', 'Berhasil memperbarui informasi PPK!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -229,7 +230,7 @@ class GroupDetailController extends GetxController {
       );
 
       Get.back();
-      Get.snackbar('INFO', 'Berhasil memperbarui informasi PJK!');
+      showSnackbar('INFO', 'Berhasil memperbarui informasi PJK!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -253,7 +254,7 @@ class GroupDetailController extends GetxController {
       );
 
       Get.back();
-      Get.snackbar('INFO', 'Berhasil mengubah informasi kas!');
+      showSnackbar('INFO', 'Berhasil mengubah informasi kas!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
@@ -281,7 +282,7 @@ class GroupDetailController extends GetxController {
       );
 
       Get.back();
-      Get.snackbar('INFO', 'Berhasil menambah anggota!');
+      showSnackbar('INFO', 'Berhasil menambah anggota!');
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);
