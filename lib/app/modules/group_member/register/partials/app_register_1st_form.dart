@@ -48,9 +48,9 @@ class AppRegister1stForm extends StatelessWidget {
           Obx(
             () => DropdownSearch<String>(
               validator: (value) => value.isRequired('Wilayah Kerja'),
-              enabled: !controller.isFetchingWorkArea && controller.workAreas != null,
+              enabled: !controller.isFetchingWorkArea && controller.workAreas.isNotEmpty,
               selectedItem: controller.selectedWorkArea?.name,
-              items: (filter, infiniteScrollProps) => controller.workAreas!.names,
+              items: (filter, infiniteScrollProps) => controller.workAreas.names,
               decoratorProps: DropDownDecoratorProps(
                 baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
                 decoration: buildAppTextInputDecoration(hintText: 'Pilih wilayah kerja'),

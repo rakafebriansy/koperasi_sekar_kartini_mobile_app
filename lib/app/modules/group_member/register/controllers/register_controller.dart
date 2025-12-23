@@ -49,6 +49,7 @@ class RegisterController extends GetxController {
   );
 
   final RxInt _selectedScreen = 0.obs;
+  RxInt get selectedScreenRx => _selectedScreen;
   int get selectedScreen => _selectedScreen.value;
 
   final RxBool _isSubmitted = false.obs;
@@ -58,15 +59,18 @@ class RegisterController extends GetxController {
   bool get isFetchingWorkArea => _isFetchingWorkArea.value;
 
   final RxList<WorkAreaModel> _workAreas = RxList();
-  List<WorkAreaModel>? get workAreas => _workAreas;
+  List<WorkAreaModel> get workAreas => _workAreas;
 
   final Rx<WorkAreaModel?> _selectedWorkArea = Rxn();
+  Rx<WorkAreaModel?> get selectedWorkAreaRx => _selectedWorkArea;
   WorkAreaModel? get selectedWorkArea => _selectedWorkArea.value;
 
   final Rx<File?> _idCardImage = Rxn();
+  Rx<File?> get idCardImageRx => _idCardImage;
   File? get idCardImage => _idCardImage.value;
 
   final Rx<File?> _selfImage = Rxn();
+  Rx<File?> get selfImageRx => _selfImage;
   File? get selfImage => _selfImage.value;
 
   final int totalStep = 5;
