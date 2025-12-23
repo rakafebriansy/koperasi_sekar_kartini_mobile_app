@@ -2,6 +2,5 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/data/messaging/fcm_service
 import 'package:mocktail/mocktail.dart';
 
 class MockFcmService extends Mock implements FcmService {}
-
 final mockFcm = MockFcmService();
 

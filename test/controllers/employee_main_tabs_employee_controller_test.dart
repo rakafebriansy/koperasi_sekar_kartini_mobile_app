@@ -13,13 +13,9 @@ import '../mocks/mock_api_helper.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
-
   setUp(() {
     Get.reset();
     Get.testMode = true;
-
-    mockApi = MockApiHelper();
   });
 
   test('fetchListEmployee sukses → data terisi & isFetching false', () async {
@@ -29,7 +25,7 @@ void main() {
 
     final controller = EmployeeMainTabsEmployeeController(
       apiHelper: mockApi,
-      authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+      authController: Get.put(fakeAuth),
     );
 
     await controller.fetchListEmployee();
@@ -46,7 +42,7 @@ void main() {
 
     final controller = EmployeeMainTabsEmployeeController(
       apiHelper: mockApi,
-      authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+      authController: Get.put(fakeAuth),
     );
 
     await controller.fetchListEmployee();
@@ -59,7 +55,7 @@ void main() {
     fakeAsync((async) {
       final controller = EmployeeMainTabsEmployeeController(
         apiHelper: mockApi,
-        authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+        authController: Get.put(fakeAuth),
       );
 
       controller.onSearchChanged('a');

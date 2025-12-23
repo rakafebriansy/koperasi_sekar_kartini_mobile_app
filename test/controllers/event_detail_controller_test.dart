@@ -3,15 +3,12 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/event_detail/controllers/event_detail_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 
 import '../fakes/fake_auth_controller.dart';
-
-class MockApiHelper extends Mock implements ApiHelper {}
+import '../mocks/mock_api_helper.dart';
 
 void main() {
   late EventDetailController controller;
-  late MockApiHelper mockApi;
 
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -20,12 +17,10 @@ void main() {
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
 
     controller = EventDetailController(
       apiHelper: mockApi,
-            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
-
+      authController: Get.put(fakeAuth),
     );
 
     controller.eventRx.value = DummyHelper.ev(1);

@@ -4,15 +4,12 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper
 import 'package:mocktail/mocktail.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/report/report_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/controllers/employee_manage_report_controller.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 
 import '../fakes/fake_auth_controller.dart';
-
-class MockApiHelper extends Mock implements ApiHelper {}
+import '../mocks/mock_api_helper.dart';
 
 void main() {
   late EmployeeManageReportController controller;
-  late MockApiHelper mockApi;
 
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +18,9 @@ void main() {
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
     controller = EmployeeManageReportController(
       apiHelper: mockApi,
-            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
-
+      authController: Get.put(fakeAuth),
     );
   });
 

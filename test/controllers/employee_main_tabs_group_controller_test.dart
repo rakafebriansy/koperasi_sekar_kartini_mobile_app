@@ -12,12 +12,10 @@ import '../mocks/mock_api_helper.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
 
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
   });
 
   test("fetchListGroup mengambil daftar group dan mengisi state", () async {

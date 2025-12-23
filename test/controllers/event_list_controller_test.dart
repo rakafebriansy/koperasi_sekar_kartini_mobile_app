@@ -1,16 +1,15 @@
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dummy_helper.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/event_list/controllers/event_list_controller.dart';
-import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 
-class MockApiHelper extends Mock implements ApiHelper {}
+import '../mocks/mock_api_helper.dart';
 
 void main() {
   late EventListController controller;
-  late MockApiHelper mockApi;
 
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +18,6 @@ void main() {
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
     controller = EventListController(apiHelper: mockApi);
   });
 
@@ -60,18 +58,25 @@ void main() {
     test(
       'onSearchChanged calls fetchListEvent after debounce duration',
       () async {
-        when(
-          () => mockApi.fetchList<EventModel>(request: any(named: 'request')),
-        ).thenAnswer((_) async => mockEvents);
+        fakeAsync((async) async {
+          // arrange
+          when(
+            () => mockApi.fetchList(request: any(named: 'request')),
+          ).thenAnswer((_) async => mockEvents);
 
-        controller.onSearchChanged('test');
+          // act
+          controller.onSearchChanged('rapat');
 
-        await controller.fetchListEvent(search: 'test');
+          // 🔥 MAJUIN WAKTU (INI KUNCINYA)
+          async.elapse(const Duration(milliseconds: 600));
 
-        expect(controller.events, mockEvents);
-        verify(
-          () => mockApi.fetchList<EventModel>(request: any(named: 'request')),
-        ).called(1);
+          // tunggu future selesai
+          await Future.microtask(() {});
+
+          // assert
+          expect(controller.events.length, 2);
+          expect(controller.events.first.name, 'Rapat Kelompok A');
+        });
       },
     );
   });

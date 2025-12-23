@@ -10,22 +10,19 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 
 import '../fakes/fake_auth_controller.dart';
 import '../mocks/mock_api_client.dart';
+import '../mocks/mock_api_helper.dart';
 
-
-class MockApiHelper extends Mock implements ApiHelper {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late LoginController controller;
-  late MockApiHelper mockApi;
   late FakeAuthController fakeAuth;
 
   setUp(() {
     Get.reset();
     Get.testMode = true;
 
-    mockApi = MockApiHelper();
     Get.put<ApiHelper>(mockApi);
     Get.put<FcmService>(mockFcm);
 
@@ -58,8 +55,8 @@ void main() {
 
       await controller.login();
 
-      expect(fakeAuth.savedUser, isNotNull);
-      expect(fakeAuth.savedUser!.role, 'group_member');
+      expect(fakeAuth.currentUser, isNotNull);
+      expect(fakeAuth.currentUser!.role, 'group_member');
 
       expect(controller.isSubmitted, false);
     },

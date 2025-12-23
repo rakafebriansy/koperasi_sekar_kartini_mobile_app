@@ -17,12 +17,9 @@ import '../mocks/mock_api_helper.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
-
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
   });
 
   test("fetchListEvent mengambil event dan mengisi state", () async {

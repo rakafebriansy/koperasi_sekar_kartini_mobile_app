@@ -11,13 +11,11 @@ import '../mocks/mock_api_helper.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
   late GroupMemberMainTabsHomeController controller;
 
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
     controller = GroupMemberMainTabsHomeController(apiHelper: mockApi);
   });
 

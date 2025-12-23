@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -161,7 +160,6 @@ class ManageEventController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil menambahkan kegiatan!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;
@@ -196,7 +194,6 @@ class ManageEventController extends GetxController {
       Get.back(result: true);
       showSnackbar('INFO', 'Berhasil memperbarui kegiatan!');
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isSubmitted.value = false;

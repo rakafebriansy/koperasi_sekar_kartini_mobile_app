@@ -15,17 +15,14 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late EmployeeManageEmployeeController controller;
-  late MockApiHelper mockApi;
 
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
     Get.put<ApiHelper>(mockApi);
     controller = EmployeeManageEmployeeController(
       apiHelper: mockApi,
-            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
-
+      authController: Get.put(fakeAuth),
     );
   });
 

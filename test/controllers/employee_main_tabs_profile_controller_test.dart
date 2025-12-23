@@ -14,17 +14,14 @@ import '../mocks/mock_api_helper.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
   late EmployeeMainTabsProfileController controller;
 
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
     controller = EmployeeMainTabsProfileController(
       apiHelper: mockApi,
-            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
-
+      authController: Get.put(fakeAuth),
     );
   });
 

@@ -13,7 +13,6 @@ import '../mocks/mock_api_helper.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
   late RegisterController controller;
   final dummyWorkArea = WorkAreaModel(id: 1, name: 'Work Area 1');
   final dummyUser = DummyHelper.user(1);
@@ -22,7 +21,6 @@ void main() {
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
     controller = RegisterController(apiHelper: mockApi, caption: dummyCaption);
   });
 

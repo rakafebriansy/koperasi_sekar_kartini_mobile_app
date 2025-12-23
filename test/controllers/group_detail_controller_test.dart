@@ -8,12 +8,11 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_mod
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
 
 import '../fakes/fake_auth_controller.dart';
-import 'employee_manage_report_controller_test.dart';
+import '../mocks/mock_api_helper.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
   late GroupDetailController controller;
   final dummyGroup = DummyHelper.group(1);
   final dummyEmployee = DummyHelper.user(1);
@@ -22,10 +21,9 @@ void main() {
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
     controller = GroupDetailController(
       apiHelper: mockApi,
-      authController: Get.put(FakeAuthController(apiHelper: mockApi)),
+      authController: Get.put(fakeAuth),
     );
   });
 

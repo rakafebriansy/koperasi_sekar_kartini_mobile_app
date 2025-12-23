@@ -11,7 +11,6 @@ import '../mocks/mock_api_helper.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
   late LoanListController controller;
   late UserModel dummyUser;
   late LoanModel dummyLoan;
@@ -20,14 +19,12 @@ void main() {
     Get.reset();
     Get.testMode = true;
 
-    mockApi = MockApiHelper();
     dummyUser = DummyHelper.user(1);
     dummyLoan = DummyHelper.lo(1);
 
     controller = LoanListController(
       apiHelper: mockApi,
-            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
-
+      authController: Get.put(fakeAuth),
     );
   });
 

@@ -13,7 +13,6 @@ import '../mocks/mock_auth_controller.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockApiHelper mockApi;
   late GroupMemberMainTabsGroupController controller;
 
   final dummyGroup = DummyHelper.group(1);
@@ -22,7 +21,6 @@ void main() {
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    mockApi = MockApiHelper();
 
     final mockAuth = MockAuthController();
     when(
@@ -31,8 +29,7 @@ void main() {
 
     controller = GroupMemberMainTabsGroupController(
       apiHelper: mockApi,
-            authController: Get.put(FakeAuthController(apiHelper: mockApi)),
-
+      authController: Get.put(fakeAuth),
     );
   });
 

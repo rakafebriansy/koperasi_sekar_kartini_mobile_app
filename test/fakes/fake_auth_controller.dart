@@ -6,10 +6,12 @@ class FakeAuthController extends AuthController {
   FakeAuthController({required ApiHelper apiHelper})
     : super(apiHelper: apiHelper);
 
-  UserModel? savedUser;
+  UserModel? currentUser;
 
   @override
   Future<void> saveUserData({UserModel? user, String? token}) async {
-    savedUser = user;
+    currentUser = user;
   }
 }
+
+final fakeAuth = FakeAuthController(apiHelper: ApiHelper());

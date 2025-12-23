@@ -2,3 +2,4 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.d
 import 'package:mocktail/mocktail.dart';
 
 class MockApiHelper extends Mock implements ApiHelper {}
+final mockApi = MockApiHelper();
