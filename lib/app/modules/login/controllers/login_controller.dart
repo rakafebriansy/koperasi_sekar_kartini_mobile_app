@@ -14,7 +14,11 @@ class LoginController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
 
-  LoginController({required this.apiHelper, required this.authController, required this.fcmService});
+  LoginController({
+    required this.apiHelper,
+    required this.authController,
+    required this.fcmService,
+  });
 
   final RxBool _isSubmitted = false.obs;
   bool get isSubmitted => _isSubmitted.value;
@@ -62,6 +66,7 @@ class LoginController extends GetxController {
         throw Exception('Role tidak ditemukan');
       }
     } catch (e) {
+      debugPrint(e.toString());
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
       _isSubmitted.value = false;

@@ -4,32 +4,11 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_environment.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/dialog_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/snackbar_helper.dart';
 
 abstract class ErrorHelper {
-  static const Map<String, String> config = {
-    'backend_type' : 'laravel'
-  };
-
-  static String? extractLaravelValidation(dio.Response? res) {
-    if (res?.data is! Map) return null;
-
-    final data = res!.data;
-
-    if (data["errors"] is Map) {
-      final Map errors = data["errors"];
-      final key = errors.keys.first;
-
-      if (errors[key] is List && errors[key].isNotEmpty) {
-        return errors[key][0];
-      }
-      return errors[key].toString();
-    }
-
-    return null;
-  }
-
   static Future<void> handleError(
     dynamic e, {
     bool canUseNavigator = true,
@@ -38,92 +17,140 @@ abstract class ErrorHelper {
 
     String? message;
 
-    if (e is String) {
-      message = e;
-
-      if (message.isNotEmpty) return DialogHelper.showFailedDialog(message.tr);
-    }
-
-    if (e is dio.DioException) {
-      if (e.type == dio.DioExceptionType.cancel) return;
-
-      if (e.response?.statusCode == 422 && config['backend_type'] == 'laravel') {
-        final msg = extractLaravelValidation(e.response);
-        if (msg != null && msg.isNotEmpty) {
-          return DialogHelper.showFailedDialog(msg.tr, titleText: 'Input salah');
+    try {
+      // string error
+      if (e is String) {
+        if (e.isNotEmpty) {
+          return DialogHelper.showFailedDialog(e.tr);
         }
+        return;
       }
 
-      if (e.message == 'You are offline') {
-        try {
-          return SnackbarHelper.showSnackbar(messageText: 'Anda sedang offline');
-        } catch (e) {
-          // Ignored, really
+      // dio error
+      if (e is dio.DioException) {
+        final response = e.response;
+        final statusCode = response?.statusCode;
+        final data = response?.data;
+
+        if (e.type == dio.DioExceptionType.cancel) return; // cancelled request
+
+        if (e.error is SocketException) {
+          return DialogHelper.showFailedDialog(
+            'Failed to connect to server',
+          ); // server offline
         }
-      }
 
-      if (e.response?.statusCode == 401 &&
-          canUseNavigator &&
-          Get.context != null) {
-        AuthController.instance.logout();
-      }
-
-      if (e.response?.data?['message'] is Map) {
-        Map map = e.response?.data?['message'] as Map;
-        String key = map.keys.first;
-
-        if (map[key] is List) {
-          message = (map[key] as List).first;
-        } else {
-          message = map[key];
+        // 401 - unauthorized
+        if (statusCode == 401 && canUseNavigator && Get.context != null) {
+          AuthController.instance.logout();
+          return;
         }
-      } else {
-        message =
-            e.response?.data?['message']?.toString() ??
-            e.response?.data?.toString() ??
-            e.message;
-      }
 
-      if (message != null && message.isNotEmpty) {
-        return DialogHelper.showFailedDialog(message.tr);
-      }
+        // 405 - method not allowed
+        if (statusCode == 405) {
+          return DialogHelper.showFailedDialog(
+            'Request method is not allowed (405)',
+          );
+        }
 
-      if (e.error is HandshakeException || e.error is SocketException) {
-        return DialogHelper.showFailedDialog('Gagal terhubung ke server');
-      } else if (e.error is FormatException) {
-        return DialogHelper.showFailedDialog(
-          (e.error as FormatException).source.toString(),
-        );
-      } else {
-        switch (e.response?.statusCode) {
+        // 422 - validation error
+        if (statusCode == 422 && config['backend_type'] == 'laravel') {
+          final validationMessage = _extractLaravelValidationSafe(data);
+          if (validationMessage != null && validationMessage.isNotEmpty) {
+            return DialogHelper.showFailedDialog(
+              validationMessage.tr,
+              titleText: 'Input salah',
+            );
+          }
+        }
+
+        // safe parsing error message
+        message = _extractMessageSafe(data: data, fallback: e.message);
+
+        if (message != null && message!.isNotEmpty) {
+          return DialogHelper.showFailedDialog(message!.tr);
+        }
+
+        // status code fallback
+        switch (statusCode) {
           case 404:
             return DialogHelper.showFailedDialog('URL tidak ditemukan');
           case 500:
-            return DialogHelper.showFailedDialog(
-              'Internal Server Error',
-            );
-          default:
-            if (e.error != null) {
-              return DialogHelper.showFailedDialog(e.error.toString());
-            }
+            return DialogHelper.showFailedDialog('Internal Server Error');
+        }
+
+        if (e.error != null) {
+          return DialogHelper.showFailedDialog(e.error.toString());
         }
       }
-    }
 
-    if (e is HandshakeException || e is SocketException) {
-      return DialogHelper.showFailedDialog('Gagal terkoneksi ke server');
-    } else if (e is FormatException) {
-      return DialogHelper.showFailedDialog(e.source.toString());
-    } else if (e == 'You are offline') {
-      try {
-        // return SnackbarHelper.showSnackbar(messageText: 'Anda sedang offline');
-      } catch (e) {
-        // Ignored, really
+      // network error
+      if (e is HandshakeException || e is SocketException) {
+        return DialogHelper.showFailedDialog('Gagal terkoneksi ke server');
       }
+
+      if (e is FormatException) {
+        return DialogHelper.showFailedDialog(e.source.toString());
+      }
+
+      // fallback
+      debugPrint('ERROR: ${e.toString()}');
+      return DialogHelper.showFailedDialog(e.toString().tr);
+    } catch (err, stack) {
+      debugPrint('ERROR_HELPER_CRASH: $err');
+      debugPrint(stack.toString());
+
+      return DialogHelper.showFailedDialog('Terjadi kesalahan tak terduga');
+    }
+  }
+
+  static String? _extractMessageSafe({
+    required dynamic data,
+    String? fallback,
+  }) {
+    if (data == null) return fallback;
+
+    if (data is String) return data;
+
+    if (data is Map && data.containsKey('message')) {
+      final msg = data['message'];
+
+      if (msg is String) return msg;
+
+      if (msg is Map) {
+        final key = msg.keys.first;
+        final value = msg[key];
+
+        if (value is List && value.isNotEmpty) {
+          return value.first.toString();
+        }
+        return value.toString();
+      }
+
+      if (msg is List && msg.isNotEmpty) {
+        return msg.first.toString();
+      }
+
+      return msg.toString();
     }
 
-    debugPrint("ERROR: ${e.toString().tr}");
+    return fallback;
+  }
 
-    return DialogHelper.showFailedDialog(e.toString().tr);
+  static String? _extractLaravelValidationSafe(dynamic data) {
+    if (data is! Map) return null;
+    if (!data.containsKey('errors')) return null;
+
+    final errors = data['errors'];
+    if (errors is! Map || errors.isEmpty) return null;
+
+    final firstKey = errors.keys.first;
+    final value = errors[firstKey];
+
+    if (value is List && value.isNotEmpty) {
+      return value.first.toString();
+    }
+
+    return value.toString();
   }
 }

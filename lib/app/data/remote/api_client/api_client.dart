@@ -44,6 +44,7 @@ abstract class ApiClient {
 
   // AUTH
   @POST("/login")
+  @FormUrlEncoded()
   Future<dynamic> login({
     @Field('phone_number') required String phoneNumber,
     @Field('password') required String password,
@@ -68,6 +69,7 @@ abstract class ApiClient {
   Future<dynamic> refreshToken();
 
   @POST("/change-password")
+  @FormUrlEncoded()
   Future<dynamic> changePassword({
     @Field("_method") String method = "PATCH",
 
@@ -84,9 +86,11 @@ abstract class ApiClient {
   Future<dynamic> getWorkAreas({@Query('search') String? search});
 
   @POST("/work-areas")
+  @FormUrlEncoded()
   Future<dynamic> createWorkArea({@Field("name") String? name});
 
   @POST("/work-areas/{id}")
+  @FormUrlEncoded()
   Future<dynamic> updateWorkArea({
     @Path('id') required int id,
 
@@ -96,6 +100,7 @@ abstract class ApiClient {
   });
 
   @POST("/work-areas/{id}")
+  @FormUrlEncoded()
   Future<dynamic> deleteWorkArea({
     @Path('id') required int id,
 
@@ -159,6 +164,7 @@ abstract class ApiClient {
   });
 
   @POST("/users/{id}/activate")
+  @FormUrlEncoded()
   Future<dynamic> activateMember({
     @Path('id') required int id,
 
@@ -168,6 +174,7 @@ abstract class ApiClient {
   });
 
   @POST("/users/{id}")
+  @FormUrlEncoded()
   Future<dynamic> deleteUser({
     @Field("_method") String method = "DELETE",
 
@@ -175,6 +182,7 @@ abstract class ApiClient {
   });
 
   @POST("/users/{id}/groups/{group_id}")
+  @FormUrlEncoded()
   Future<dynamic> addGroupMember({
     @Path('id') required int id,
     @Path('group_id') required int groupId,
@@ -193,6 +201,7 @@ abstract class ApiClient {
   Future<dynamic> getGroup({@Path('id') required int id});
 
   @POST("/groups")
+  @FormUrlEncoded()
   Future<dynamic> createGroup({
     @Field("number") int? number,
     @Field("description") String? description,
@@ -202,6 +211,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{id}")
+  @FormUrlEncoded()
   Future<dynamic> updateGroup({
     @Path('id') required int id,
 
@@ -215,6 +225,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{id}")
+  @FormUrlEncoded()
   Future<dynamic> deleteGroup({
     @Field("_method") String method = "DELETE",
 
@@ -222,6 +233,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{id}/chairman/{user_id}")
+  @FormUrlEncoded()
   Future<dynamic> updateGroupChairman({
     @Path('id') required int id,
     @Path('user_id') required int userId,
@@ -230,6 +242,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{id}/facilitator/{user_id}")
+  @FormUrlEncoded()
   Future<dynamic> updateGroupFacilitator({
     @Path('id') required int id,
     @Path('user_id') required int userId,
@@ -238,6 +251,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{id}/update-fund-amount")
+  @FormUrlEncoded()
   Future<dynamic> updateFundAmount({
     @Path('id') required int id,
 
@@ -292,6 +306,7 @@ abstract class ApiClient {
   });
 
   @POST("/meetings/{id}")
+  @FormUrlEncoded()
   Future<dynamic> deleteMeeting({
     @Field("_method") String method = "DELETE",
 
@@ -309,12 +324,14 @@ abstract class ApiClient {
   Future<dynamic> getLoan({@Path('id') required int id});
 
   @GET("/loans/sum-by-month")
+  @FormUrlEncoded()
   Future<dynamic> getLoanSumByMonth({
     @Field('month') required int month,
     @Field('year') required int year,
   });
 
   @POST("/loans")
+  @FormUrlEncoded()
   Future<dynamic> createLoan({
     @Field("type") String? type,
     @Field("nominal") int? nominal,
@@ -324,6 +341,7 @@ abstract class ApiClient {
   });
 
   @POST("/loans/{id}")
+  @FormUrlEncoded()
   Future<dynamic> updateLoan({
     @Path('id') required int id,
 
@@ -338,6 +356,7 @@ abstract class ApiClient {
   });
 
   @POST("/loans/{id}")
+  @FormUrlEncoded()
   Future<dynamic> deleteLoan({
     @Field("_method") String method = "DELETE",
 
@@ -355,12 +374,14 @@ abstract class ApiClient {
   Future<dynamic> getSingleSavings({@Path('id') required int id});
 
   @GET("/savings/sum-by-month")
+  @FormUrlEncoded()
   Future<dynamic> getSavingsSumByMonth({
     @Field('month') required int month,
     @Field('year') required int year,
   });
 
   @POST("/savings")
+  @FormUrlEncoded()
   Future<dynamic> createSavings({
     @Field("type") String? type,
     @Field("nominal") int? nominal,
@@ -370,6 +391,7 @@ abstract class ApiClient {
   });
 
   @POST("/savings/{id}")
+  @FormUrlEncoded()
   Future<dynamic> updateSavings({
     @Path('id') required int id,
 
@@ -383,6 +405,7 @@ abstract class ApiClient {
   });
 
   @POST("/savings/{id}")
+  @FormUrlEncoded()
   Future<dynamic> deleteSavings({
     @Field("_method") String method = "DELETE",
 
@@ -398,6 +421,7 @@ abstract class ApiClient {
   });
 
   @POST('/groups/{group_id}/reports')
+  @FormUrlEncoded()
   Future<dynamic> createReport({
     @Path('group_id') required int groupId,
 
@@ -439,6 +463,7 @@ abstract class ApiClient {
   });
 
   @POST('/groups/{group_id}/reports/{id}')
+  @FormUrlEncoded()
   Future<dynamic> updateReport({
     @Path('id') required int id,
     @Path('group_id') required int groupId,
@@ -477,6 +502,7 @@ abstract class ApiClient {
   });
 
   @POST("/groups/{group_id}/reports/{id}")
+  @FormUrlEncoded()
   Future<dynamic> deleteReport({
     @Path('id') required int id,
     @Path('group_id') required int groupId,
@@ -498,6 +524,7 @@ abstract class ApiClient {
   Future<dynamic> getLoanDistribution();
 
   @POST('/refresh-fcm-token')
+  @FormUrlEncoded()
   Future<void> sendFcmTokenToApi({
     @Field('fcm_token') required String fcmToken
   });

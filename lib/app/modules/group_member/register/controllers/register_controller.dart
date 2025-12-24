@@ -13,7 +13,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 
 class RegisterController extends GetxController {
-    final ApiHelper apiHelper;
+  final ApiHelper apiHelper;
 
   RegisterController({required this.apiHelper, required this.caption});
 
@@ -147,6 +147,7 @@ class RegisterController extends GetxController {
 
       _workAreas.value = data;
     } catch (e) {
+      debugPrint(e.toString());
       ErrorHelper.handleError(e);
     } finally {
       _isFetchingWorkArea.value = false;
