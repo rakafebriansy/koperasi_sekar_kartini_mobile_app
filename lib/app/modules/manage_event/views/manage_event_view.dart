@@ -53,7 +53,8 @@ class ManageEventView extends GetView<ManageEventController> {
                         ? controller.selectedEventType?.displayName
                         : 'Pilih Jenis Kegiatan',
                     items: (filter, infiniteScrollProps) =>
-                        controller.authController.currentUser!.role != 'group_member'
+                        controller.authController.currentUser!.role !=
+                            'group_member'
                         ? controller.eventTypes.names
                         : [controller.eventTypes.names.first],
                     decoratorProps: DropDownDecoratorProps(
@@ -106,10 +107,12 @@ class ManageEventView extends GetView<ManageEventController> {
                         baseStyle: GoogleFonts.poppins(fontSize: 14.sp),
                         decoration: buildAppTextInputDecoration(hintText: ''),
                       ),
-                      validator: (value) => value.isDropdownRequired(
-                        'Kelompok',
-                        controller.selectedGroup?.number.toString(),
-                      ),
+                      validator: controller.selectedEventType == EventType.coop
+                          ? null
+                          : (value) => value.isDropdownRequired(
+                              'Kelompok',
+                              controller.selectedGroup?.number.toString(),
+                            ),
                       popupProps: PopupProps.menu(
                         fit: FlexFit.loose,
                         constraints: BoxConstraints(maxHeight: 200.sp),

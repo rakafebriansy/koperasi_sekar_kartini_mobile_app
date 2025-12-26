@@ -121,6 +121,7 @@ class AppReport1stForm extends StatelessWidget {
             controller: controller.memberGrowthInCtrl,
             label: 'Anggota Masuk',
             maxLines: 1,
+            validator: (val) => val.isRequired('Anggota Masuk'),
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly
@@ -131,6 +132,7 @@ class AppReport1stForm extends StatelessWidget {
             controller: controller.memberGrowthOutCtrl,
             label: 'Anggota Keluar',
             maxLines: 1,
+            validator: (val) => val.isRequired('Anggota Keluar'),
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly
@@ -143,6 +145,7 @@ class AppReport1stForm extends StatelessWidget {
             controller: controller.administrativeCompliancePercentageCtrl,
             label: 'Tertib Administrasi (%)',
             maxLines: 1,
+            validator: (val) => val.isRequired('Tertib Administrasi (%)'),
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly
@@ -153,6 +156,7 @@ class AppReport1stForm extends StatelessWidget {
             controller: controller.depositCompliancePercentageCtrl,
             label: 'Tertib Setor (%)',
             maxLines: 1,
+            validator: (val) => val.isRequired('Tertib Setor (%)'),
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly

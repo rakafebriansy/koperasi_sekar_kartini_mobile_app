@@ -23,7 +23,7 @@ class EventDetailView extends GetView<EventDetailController> {
     return AppDefaultWrapper(
       actions: [
         if (controller.authController.currentUser?.role == 'admin' ||
-            controller.authController.currentUser?.id == controller.event!.id)
+            controller.authController.currentUser?.id == controller.event!.user.id)
           Material(
             color: Colors.transparent,
             child: InkWell(

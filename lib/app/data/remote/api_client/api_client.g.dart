@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://api.sekarkartiniapp.my.id';
+    baseUrl ??= 'https://192.8.16.1:8000';
   }
 
   final Dio _dio;
@@ -756,7 +756,7 @@ class _ApiClient implements ApiClient {
   Future<dynamic> activateMember({
     required int id,
     String method = "PATCH",
-    bool? isActive,
+    int? isActive,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

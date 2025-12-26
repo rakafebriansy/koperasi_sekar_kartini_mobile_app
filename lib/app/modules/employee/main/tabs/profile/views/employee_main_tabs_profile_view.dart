@@ -18,6 +18,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/a
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_upload_image_form_field.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/wrapper/app_home_wrapper.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/wrappers/args_wrapper.dart';
 
 import '../controllers/employee_main_tabs_profile_controller.dart';
 
@@ -53,7 +54,7 @@ class EmployeeMainTabsProfileView
                           CircleAvatar(
                             radius: 44.sp,
                             child: poppins(
-                              user == null ? '-' : user.name[0],
+                              user == null ? '' : user.name[0],
                               fontSize: 40.sp,
                               fontWeight: FontWeight.bold,
                             ),
@@ -144,7 +145,12 @@ class EmployeeMainTabsProfileView
                             color: AppColor.border.gray,
                           ),
                           onTap: () {
-                            Get.toNamed(Routes.USER_SAVINGS_LIST);
+                            Get.toNamed(
+                              Routes.SAVINGS_LIST,
+                              arguments: ArgsWrapper(
+                                data: controller.authController.currentUser!,
+                              ),
+                            );
                           },
                         ),
                         Divider(
@@ -159,7 +165,12 @@ class EmployeeMainTabsProfileView
                             color: AppColor.border.gray,
                           ),
                           onTap: () {
-                            Get.toNamed(Routes.USER_LOAN_LIST);
+                            Get.toNamed(
+                              Routes.LOAN_LIST,
+                              arguments: ArgsWrapper(
+                                data: controller.authController.currentUser!,
+                              ),
+                            );
                           },
                         ),
                         Divider(

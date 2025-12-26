@@ -170,7 +170,7 @@ abstract class ApiClient {
 
     @Field("_method") String method = "PATCH",
 
-    @Field("is_active") bool? isActive,
+    @Field("is_active") int? isActive,
   });
 
   @POST("/users/{id}")

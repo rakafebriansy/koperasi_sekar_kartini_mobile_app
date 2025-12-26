@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/controllers/employee_manage_report_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -23,6 +24,7 @@ class AppReport2ndForm extends StatelessWidget {
             controller: controller.attendancePercentageCtrl,
             label: 'Kehadiran Pertemuan Rutin (%)',
             maxLines: 1,
+            validator: (val) => val.isRequired('Kehadiran Pertemuan Rutin (%)'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -31,6 +33,7 @@ class AppReport2ndForm extends StatelessWidget {
             controller: controller.organizationFinalScorePercentageCtrl,
             label: 'Nilai Akhir Organisasi (%)',
             maxLines: 1,
+            validator: (val) => val.isRequired('Nilai Akhir Organisasi (%)'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -50,14 +53,16 @@ class AppReport2ndForm extends StatelessWidget {
             controller: controller.savingsParticipationCtrl,
             label: 'Partisipasi Simpanan',
             maxLines: 1,
+            validator: (val) => val.isRequired('Partisipasi Simpanan'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
             controller: controller.savingsParticipationPercentageCtrl,
-            label: 'Partisipasi Simpanan %',
+            label: 'Partisipasi Simpanan (%)',
             maxLines: 1,
+            validator: (val) => val.isRequired('Partisipasi Simpanan %'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -77,14 +82,16 @@ class AppReport2ndForm extends StatelessWidget {
             controller: controller.cashParticipationCtrl,
             label: 'Partisipasi Tunai',
             maxLines: 1,
+            validator: (val) => val.isRequired('Partisipasi Tunai'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
           SizedBox(height: 4.sp),
           AppTextFormGroup(
             controller: controller.cashParticipationPercentageCtrl,
-            label: 'Partisipasi Tunai %',
+            label: 'Partisipasi Tunai (%)',
             maxLines: 1,
+            validator: (val) => val.isRequired('Partisipasi Tunai %'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),

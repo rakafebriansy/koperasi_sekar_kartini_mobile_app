@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/modules/employee/manage_report/controllers/employee_manage_report_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -32,6 +33,7 @@ class AppReport3rdForm extends StatelessWidget {
             controller: controller.loanParticipationPbCtrl,
             label: 'PB',
             maxLines: 1,
+            validator: (val) => val.isRequired('Partisipasi Pinjaman PB'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -40,6 +42,7 @@ class AppReport3rdForm extends StatelessWidget {
             controller: controller.loanParticipationBbmCtrl,
             label: 'BBM',
             maxLines: 1,
+            validator: (val) => val.isRequired('Partisipasi Pinjaman BBM'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -48,6 +51,7 @@ class AppReport3rdForm extends StatelessWidget {
             controller: controller.loanParticipationStoreCtrl,
             label: 'Toko',
             maxLines: 1,
+            validator: (val) => val.isRequired('Partisipasi Pinjaman Toko'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -67,6 +71,7 @@ class AppReport3rdForm extends StatelessWidget {
             controller: controller.loanBalancePbCtrl,
             label: 'PB',
             maxLines: 1,
+            validator: (val) => val.isRequired('Saldo Pinjaman PB'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -75,6 +80,7 @@ class AppReport3rdForm extends StatelessWidget {
             controller: controller.loanBalanceBbmCtrl,
             label: 'BBM',
             maxLines: 1,
+            validator: (val) => val.isRequired('Saldo Pinjaman BBM'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -83,6 +89,7 @@ class AppReport3rdForm extends StatelessWidget {
             controller: controller.loanBalanceStoreCtrl,
             label: 'Toko',
             maxLines: 1,
+            validator: (val) => val.isRequired('Saldo Pinjaman Toko'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),

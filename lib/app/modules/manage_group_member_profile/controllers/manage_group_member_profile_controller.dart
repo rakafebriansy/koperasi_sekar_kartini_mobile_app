@@ -181,13 +181,12 @@ class ManageGroupMemberProfileController extends GetxController {
   }
 
   Future<void> activateMember() async {
-    //TODO: Apakah anda yakin?
     _isSubmitted.value = true;
 
     try {
       await apiHelper.fetch<UserModel>(
         request: (api) =>
-            api.activateMember(id: user!.id, isActive: !(user!.isActive)),
+            api.activateMember(id: user!.id, isActive: user!.isActive ? 0 : 1),
       );
 
       Get.back(result: true);
