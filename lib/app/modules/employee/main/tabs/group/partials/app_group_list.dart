@@ -137,6 +137,8 @@ class _GroupedGroupListView extends StatelessWidget {
 
                                 if (result == true) {
                                   controller.fetchListGroup();
+                                  controller.fetchListVerifiedMember();
+                                  controller.fetchListInactiveMember();
                                 }
                               },
                               child: ListTile(

@@ -12,7 +12,7 @@ class GroupMemberMainBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<GroupMemberMainController>(() => GroupMemberMainController());
     Get.lazyPut<GroupMemberMainTabsHomeController>(
-      () => GroupMemberMainTabsHomeController(apiHelper: Get.find<ApiHelper>()),
+      () => GroupMemberMainTabsHomeController(apiHelper: Get.find<ApiHelper>(), authController: Get.find<AuthController>()),
     );
     Get.lazyPut<GroupMemberMainTabsGroupController>(
       () => GroupMemberMainTabsGroupController(

@@ -37,14 +37,28 @@ class GroupMemberMainTabsHomeView
                     child: _InfoCard(
                       title: 'Simpanan',
                       amount: controller.countSavings,
-                      route: Routes.SAVINGS_LIST,
+                      onTap: () async {
+                        await Get.toNamed(
+                          Routes.SAVINGS_LIST,
+                          arguments: ArgsWrapper(
+                            data: controller.authController.currentUser,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Expanded(
                     child: _InfoCard(
                       title: 'Pinjaman',
                       amount: controller.countLoan,
-                      route: Routes.LOAN_LIST,
+                      onTap: () async {
+                        await Get.toNamed(
+                          Routes.LOAN_LIST,
+                          arguments: ArgsWrapper(
+                            data: controller.authController.currentUser,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -199,12 +213,12 @@ class _InfoCard extends StatelessWidget {
   const _InfoCard({
     required this.title,
     required this.amount,
-    required this.route,
+    required this.onTap,
   });
 
   final String title;
   final int amount;
-  final String route;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -241,9 +255,7 @@ class _InfoCard extends StatelessWidget {
           ),
           AppFilledButton(
             label: 'Lihat Detail',
-            onTap: () async {
-              await Get.toNamed(route);
-            },
+            onTap: onTap,
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,
             height: 32.sp,

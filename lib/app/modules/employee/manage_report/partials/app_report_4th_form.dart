@@ -28,6 +28,10 @@ class AppReport4thForm extends StatelessWidget {
             label: 'Setor di Pertemuan (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Setor di Pertemuan (%)'),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
@@ -35,8 +39,10 @@ class AppReport4thForm extends StatelessWidget {
             label: 'Nilai Piutang (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Nilai Piutang (%)'),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
@@ -44,8 +50,10 @@ class AppReport4thForm extends StatelessWidget {
             label: 'Nilai Akhir Keuangan (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Nilai Akhir Keuangan (%)'),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
@@ -53,8 +61,10 @@ class AppReport4thForm extends StatelessWidget {
             label: 'Nilai Gabungan (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Nilai Gabungan (%)'),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 8.sp),
           poppins('Kriteria', fontSize: 14.sp, fontWeight: FontWeight.w600),

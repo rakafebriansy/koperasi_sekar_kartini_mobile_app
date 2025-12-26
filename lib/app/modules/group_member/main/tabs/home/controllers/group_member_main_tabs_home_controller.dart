@@ -1,13 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
 
 class GroupMemberMainTabsHomeController extends GetxController {
   final ApiHelper apiHelper;
+  final AuthController authController;
 
-  GroupMemberMainTabsHomeController({required this.apiHelper});
+  GroupMemberMainTabsHomeController({required this.apiHelper, required this.authController});
 
   final RxBool _isFetchingEvents = false.obs;
   bool get isFetchingEvents => _isFetchingEvents.value;

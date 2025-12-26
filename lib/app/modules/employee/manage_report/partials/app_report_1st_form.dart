@@ -34,7 +34,8 @@ class AppReport1stForm extends StatelessWidget {
             ),
           ),
           SizedBox(height: 4.sp),
-          Row(crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 8.sp,
             children: [
               Expanded(
@@ -60,8 +61,10 @@ class AppReport1stForm extends StatelessWidget {
                         decoration: buildAppTextInputDecoration(hintText: ''),
                       ),
                       onChanged: (value) => controller.selectQuarter(value),
-                      validator: (value) =>
-                          value.isDropdownRequired('Triwulan', controller.selectedQuarter?.displayName),
+                      validator: (value) => value.isDropdownRequired(
+                        'Triwulan',
+                        controller.selectedQuarter?.displayName,
+                      ),
                       popupProps: PopupProps.menu(
                         fit: FlexFit.loose,
                         constraints: BoxConstraints(maxHeight: 200.sp),
@@ -123,9 +126,7 @@ class AppReport1stForm extends StatelessWidget {
             maxLines: 1,
             validator: (val) => val.isRequired('Anggota Masuk'),
             keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly
-            ],
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
@@ -134,9 +135,7 @@ class AppReport1stForm extends StatelessWidget {
             maxLines: 1,
             validator: (val) => val.isRequired('Anggota Keluar'),
             keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly
-            ],
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
           SizedBox(height: 12.sp),
           Divider(height: 1.sp, color: AppColor.border.lightGray),
@@ -146,9 +145,9 @@ class AppReport1stForm extends StatelessWidget {
             label: 'Tertib Administrasi (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Tertib Administrasi (%)'),
-            keyboardType: TextInputType.number,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
             ],
           ),
           SizedBox(height: 8.sp),
@@ -157,9 +156,9 @@ class AppReport1stForm extends StatelessWidget {
             label: 'Tertib Setor (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Tertib Setor (%)'),
-            keyboardType: TextInputType.number,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
             ],
           ),
           SizedBox(height: 18.sp),

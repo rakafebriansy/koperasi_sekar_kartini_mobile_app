@@ -25,8 +25,10 @@ class AppReport2ndForm extends StatelessWidget {
             label: 'Kehadiran Pertemuan Rutin (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Kehadiran Pertemuan Rutin (%)'),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 8.sp),
           AppTextFormGroup(
@@ -34,8 +36,10 @@ class AppReport2ndForm extends StatelessWidget {
             label: 'Nilai Akhir Organisasi (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Nilai Akhir Organisasi (%)'),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 12.sp),
           Divider(height: 1.sp, color: AppColor.border.lightGray),
@@ -63,8 +67,10 @@ class AppReport2ndForm extends StatelessWidget {
             label: 'Partisipasi Simpanan (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Partisipasi Simpanan %'),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 12.sp),
           Divider(height: 1.sp, color: AppColor.border.lightGray),
@@ -92,8 +98,10 @@ class AppReport2ndForm extends StatelessWidget {
             label: 'Partisipasi Tunai (%)',
             maxLines: 1,
             validator: (val) => val.isRequired('Partisipasi Tunai %'),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            ],
           ),
           SizedBox(height: 18.sp),
           Row(
