@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/group/group_model.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/string/string_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/api_helper.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/helpers/error_helper.dart';
@@ -23,6 +24,14 @@ class GroupMemberMainTabsGroupController extends GetxController {
 
   TextEditingController descCtrl = TextEditingController(
     // text: !kReleaseMode ? 'Lorem ipsum dolor sit amet' : '',
+  );
+
+  TextEditingController groupFundCtrl = TextEditingController(
+    // text: !kReleaseMode ? '20000' : '',
+  );
+
+  TextEditingController socialFundCtrl = TextEditingController(
+    // text: !kReleaseMode ? '20000' : '',
   );
 
   final Rx<GroupModel?> _group = Rxn();
@@ -107,6 +116,38 @@ class GroupMemberMainTabsGroupController extends GetxController {
       Get.back();
       await fetchGroupById(group!.id);
       showSnackbar('INFO', 'Berhasil memperbarui grup!');
+    } catch (e) {
+      debugPrint(e.toString());
+      ErrorHelper.handleError(e);
+    } finally {
+      _isSubmitted.value = false;
+    }
+  }
+
+  Future<void> updateFund(FundType fundType) async {
+    if (!(formKey.currentState?.validate() ?? true)) return;
+
+    _isSubmitted.value = true;
+
+    if (group?.id == null) throw Exception('id is null');
+
+    try {
+      await apiHelper.fetchNonReturnable(
+        request: (api) => api.updateFundAmount(
+          id: group!.id,
+          fundType: fundType.name,
+          fundAmount: fundType == FundType.groupFund
+              ? int.parse(groupFundCtrl.text)
+              : int.parse(socialFundCtrl.text),
+        ),
+      );
+
+      Get.back();
+      await fetchGroupById(group!.id);
+      showSnackbar(
+        'INFO',
+        'Berhasil memperbarui ${fundType == FundType.groupFund ? 'kas kelompok' : 'dana sosial'}!',
+      );
     } catch (e) {
       debugPrint(e.toString());
       ErrorHelper.handleError(e);

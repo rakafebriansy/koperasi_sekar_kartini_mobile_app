@@ -1,5 +1,5 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,8 +8,10 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/user/user_model
 import 'package:koperasi_sekar_kartini_mobile_app/app/routes/app_pages.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_types.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/num/num_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/validators/text_input_validator.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_bottom_sheet.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
@@ -108,12 +110,16 @@ class GroupMemberMainTabsGroupView
                             child: _InfoCard(
                               title: 'Kas Kelompok',
                               amount: controller.group!.groupFundAmount,
+                              onTap: () =>
+                                  callBottomSheet(controller, 'group_fund'),
                             ),
                           ),
                           Expanded(
                             child: _InfoCard(
                               title: 'Dana Sosial',
                               amount: controller.group!.socialFundAmount,
+                              onTap: () =>
+                                  callBottomSheet(controller, 'social_fund'),
                             ),
                           ),
                         ],
@@ -122,6 +128,7 @@ class GroupMemberMainTabsGroupView
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      spacing: 8.sp,
                       children: [
                         poppins(
                           controller.group!.description ?? '',
@@ -132,45 +139,20 @@ class GroupMemberMainTabsGroupView
                           Material(
                             borderRadius: BorderRadius.circular(99),
                             child: InkWell(
-                              onTap: () {
-                                Get.bottomSheet(
-                                  AppBottomSheet(
-                                    formKey: controller.formKey,
-                                    titleText: poppins(
-                                      'Ubah Ketetapan Kelompok',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.sp,
-                                    ),
-                                    spacing: 0,
-                                    children: [
-                                      AppTextFormGroup(
-                                        controller: controller.descCtrl,
-                                        label: 'Ketetapan',
-                                      ),
-                                      SizedBox(height: 18.sp,),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        child: AppFilledButton(
-                                          label: 'Simpan',
-                                          onTap: controller.isSubmitted
-                                              ? null
-                                              : controller.updateGroup,
-                                          width: double.infinity,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
+                              onTap: () => callBottomSheet(controller, 'group'),
                               borderRadius: BorderRadius.circular(99),
                               child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(99),
+                                  color: AppColor.bg.primary,
+                                ),
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 4.sp,
                                   vertical: 4.sp,
                                 ),
                                 child: Icon(
                                   Icons.edit,
-                                  color: AppColor.bg.primary,
+                                  color: Colors.white,
                                   size: 14.sp,
                                 ),
                               ),
@@ -230,6 +212,106 @@ class GroupMemberMainTabsGroupView
       ),
     );
   }
+
+  void callBottomSheet(
+    GroupMemberMainTabsGroupController controller,
+    String type,
+  ) {
+    switch (type) {
+      case 'group':
+        Get.bottomSheet(
+          AppBottomSheet(
+            formKey: controller.formKey,
+            titleText: poppins(
+              'Ubah Ketetapan Kelompok',
+              fontWeight: FontWeight.bold,
+              fontSize: 20.sp,
+            ),
+            spacing: 0,
+            children: [
+              AppTextFormGroup(
+                controller: controller.descCtrl,
+                validator: (value) => value.isRequired('Ketetapan'),
+                label: 'Ketetapan',
+              ),
+              SizedBox(height: 18.sp),
+              SizedBox(
+                width: double.infinity,
+                child: AppFilledButton(
+                  label: 'Simpan',
+                  onTap: controller.isSubmitted ? null : controller.updateGroup,
+                  width: double.infinity,
+                ),
+              ),
+            ],
+          ),
+        );
+      case 'group_fund':
+        Get.bottomSheet(
+          AppBottomSheet(
+            formKey: controller.formKey,
+            titleText: poppins(
+              'Ubah Kas Kelompok',
+              fontWeight: FontWeight.bold,
+              fontSize: 20.sp,
+            ),
+            spacing: 0,
+            children: [
+              AppTextFormGroup(
+                controller: controller.groupFundCtrl,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                validator: (value) => value.isRequired('Kas Kelompok'),
+                label: 'Kas Kelompok',
+              ),
+              SizedBox(height: 18.sp),
+              SizedBox(
+                width: double.infinity,
+                child: AppFilledButton(
+                  label: 'Simpan',
+                  onTap: controller.isSubmitted
+                      ? null
+                      : () => controller.updateFund(FundType.groupFund),
+                  width: double.infinity,
+                ),
+              ),
+            ],
+          ),
+        );
+      case 'social_fund':
+        Get.bottomSheet(
+          AppBottomSheet(
+            formKey: controller.formKey,
+            titleText: poppins(
+              'Ubah Dana Sosial',
+              fontWeight: FontWeight.bold,
+              fontSize: 20.sp,
+            ),
+            spacing: 0,
+            children: [
+              AppTextFormGroup(
+                controller: controller.socialFundCtrl,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                label: 'Dana Sosial',
+                validator: (value) => value.isRequired('Dana Sosial'),
+              ),
+              SizedBox(height: 18.sp),
+              SizedBox(
+                width: double.infinity,
+                child: AppFilledButton(
+                  label: 'Simpan',
+                  onTap: controller.isSubmitted
+                      ? null
+                      : () => controller.updateFund(FundType.socialFund),
+                  width: double.infinity,
+                ),
+              ),
+            ],
+          ),
+        );
+    }
+  }
 }
 
 class _RoundIconButton extends StatelessWidget {
@@ -254,10 +336,11 @@ class _RoundIconButton extends StatelessWidget {
 }
 
 class _InfoCard extends StatelessWidget {
-  const _InfoCard({required this.title, required this.amount});
+  const _InfoCard({required this.title, required this.amount, this.onTap});
 
   final String title;
   final int amount;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -281,11 +364,36 @@ class _InfoCard extends StatelessWidget {
             child: SvgPicture.asset(AppAsset.svgs.moneyWhite),
           ),
           poppins(title, fontSize: 10.sp),
-          poppins(
-            amount.toIdr(),
-            fontWeight: FontWeight.bold,
-            color: AppColor.bg.primary,
-            fontSize: 14.sp,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              poppins(
+                'Rp${amount.toIdAbbreviation()}',
+                fontWeight: FontWeight.bold,
+                color: AppColor.bg.primary,
+                fontSize: 12.sp,
+              ),
+              if (onTap != null)
+                Material(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(99),
+                  child: InkWell(
+                    onTap: onTap,
+                    borderRadius: BorderRadius.circular(99),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 4.sp,
+                        vertical: 4.sp,
+                      ),
+                      child: Icon(
+                        Icons.edit,
+                        color: AppColor.bg.primary,
+                        size: 14.sp,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
         ],
       ),
