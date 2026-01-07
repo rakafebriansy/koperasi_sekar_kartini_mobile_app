@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +10,8 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_asset.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/app_color.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/list/list_extension.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/extensions/num/num_extension.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_bottom_sheet.dart';
+import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/fragments/app_text_form_group.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/widget_builder.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_filled_button.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/utils/widgets/components/app_text_form_field.dart';
@@ -30,7 +33,8 @@ class GroupMemberMainTabsGroupView
                 height: getScreenHeight(context, scale: 0.8),
                 child: Center(child: CircularProgressIndicator()),
               )
-            : controller.authController.currentUser!.groupId == null || controller.group == null
+            : controller.authController.currentUser!.groupId == null ||
+                  controller.group == null
             ? SizedBox(
                 height: getScreenHeight(context, scale: 0.8),
                 child: Center(child: poppins('Tidak tergabung kelompok.')),
@@ -115,13 +119,64 @@ class GroupMemberMainTabsGroupView
                         ],
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8.sp),
-                      width: getScreenWidth(context, scale: 0.88),
-                      child: poppins(
-                        controller.group!.description ?? '',
-                        textAlign: TextAlign.center,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        poppins(
+                          controller.group!.description ?? '',
+                          textAlign: TextAlign.center,
+                        ),
+                        if (controller.group?.chairman?.id ==
+                            controller.authController.currentUser?.id)
+                          Material(
+                            borderRadius: BorderRadius.circular(99),
+                            child: InkWell(
+                              onTap: () {
+                                Get.bottomSheet(
+                                  AppBottomSheet(
+                                    formKey: controller.formKey,
+                                    titleText: poppins(
+                                      'Ubah Ketetapan Kelompok',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.sp,
+                                    ),
+                                    spacing: 0,
+                                    children: [
+                                      AppTextFormGroup(
+                                        controller: controller.descCtrl,
+                                        label: 'Ketetapan',
+                                      ),
+                                      SizedBox(height: 18.sp,),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: AppFilledButton(
+                                          label: 'Simpan',
+                                          onTap: controller.isSubmitted
+                                              ? null
+                                              : controller.updateGroup,
+                                          width: double.infinity,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(99),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 4.sp,
+                                  vertical: 4.sp,
+                                ),
+                                child: Icon(
+                                  Icons.edit,
+                                  color: AppColor.bg.primary,
+                                  size: 14.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.sp),

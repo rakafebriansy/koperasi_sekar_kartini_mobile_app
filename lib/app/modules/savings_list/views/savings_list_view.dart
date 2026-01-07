@@ -183,7 +183,7 @@ class _SavingsCard extends StatelessWidget {
               ),
               _ProfileCell(
                 icon: SvgPicture.asset(AppAsset.svgs.morePrimary),
-                field: 'Total Pinjaman',
+                field: 'Total Simpanan',
                 value: poppins(
                   savings.nominal.toIdr(decimalDigits: 2),
                   fontWeight: FontWeight.bold,

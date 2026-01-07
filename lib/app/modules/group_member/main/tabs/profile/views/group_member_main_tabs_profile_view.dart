@@ -44,20 +44,20 @@ class GroupMemberMainTabsProfileView
                           CircleAvatar(
                             radius: 44.sp,
                             child: poppins(
-                              user == null ? '-' : user.name[0],
+                              user == null ? '' : user.name[0],
                               fontSize: 40.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(height: 6.sp),
                           poppins(
-                            user == null ? '-' : user.name,
+                            user == null ? '' : user.name,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                           ),
                           SizedBox(height: 2.sp),
                           poppins(
-                            user == null ? '-' : user.role,
+                            user == null ? '' : user.role,
                             color: AppColor.text.gray,
                           ),
                         ],

@@ -85,7 +85,7 @@ class AppManageGroupMemberProfile4thForm extends StatelessWidget {
                         )
                       : AppFilledButton(
                           width: double.infinity,
-                          label: controller.user!.isActive
+                          label: controller.user!.isActive && controller.authController.currentUser!.role == 'admin'
                               ? 'Nonaktifkan'
                               : 'Aktifkan',
                           onTap: controller.isSubmitted

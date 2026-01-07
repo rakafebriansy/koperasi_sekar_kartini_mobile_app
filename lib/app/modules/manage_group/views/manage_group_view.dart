@@ -233,8 +233,8 @@ class ManageGroupView extends GetView<ManageGroupController> {
                         controller.isLoading ||
                             controller.isSubmitted ||
                             (controller.authController.currentUser != null &&
-                                controller.authController.currentUser!.role !=
-                                    'admin')
+                                controller.authController.currentUser!.role ==
+                                    'group_member')
                         ? null
                         : controller.submitButton,
                     width: double.infinity,
