@@ -66,7 +66,6 @@ class LoginController extends GetxController {
         throw Exception('Role tidak ditemukan');
       }
     } catch (e) {
-      debugPrint(e.toString());
       ErrorHelper.handleError(e, canUseNavigator: false);
     } finally {
       _isSubmitted.value = false;
