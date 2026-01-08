@@ -7,6 +7,7 @@ import 'package:dio/dio.dart' as dio;
 
 import 'package:koperasi_sekar_kartini_mobile_app/app/models/api/event/event_model.dart';
 import '../mocks/mock_api_helper.dart';
+import '../fakes/fake_auth_controller.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,7 @@ void main() {
   setUp(() {
     Get.reset();
     Get.testMode = true;
-    controller = GroupMemberMainTabsHomeController(apiHelper: mockApi);
+    controller = GroupMemberMainTabsHomeController(apiHelper: mockApi, authController: Get.put(fakeAuth));
   });
 
   group('GroupMemberMainTabsHomeController', () {
