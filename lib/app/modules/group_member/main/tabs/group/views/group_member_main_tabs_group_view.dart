@@ -125,40 +125,46 @@ class GroupMemberMainTabsGroupView
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 8.sp,
-                      children: [
-                        poppins(
-                          controller.group!.description ?? '',
-                          textAlign: TextAlign.center,
-                        ),
-                        if (controller.group?.chairman?.id ==
-                            controller.authController.currentUser?.id)
-                          Material(
-                            borderRadius: BorderRadius.circular(99),
-                            child: InkWell(
-                              onTap: () => callBottomSheet(controller, 'group'),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 8.sp,
+                        children: [
+                          Expanded(
+                            child: poppins(
+                              controller.group!.description ?? '',
+                              textAlign: TextAlign.start,
+                              softWrap: true,
+                            ),
+                          ),
+                          if (controller.group?.chairman?.id ==
+                              controller.authController.currentUser?.id)
+                            Material(
                               borderRadius: BorderRadius.circular(99),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(99),
-                                  color: AppColor.bg.primary,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 4.sp,
-                                  vertical: 4.sp,
-                                ),
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 14.sp,
+                              child: InkWell(
+                                onTap: () => callBottomSheet(controller, 'group'),
+                                borderRadius: BorderRadius.circular(99),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(99),
+                                    color: AppColor.bg.primary,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 4.sp,
+                                    vertical: 4.sp,
+                                  ),
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                    size: 14.sp,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.sp),
@@ -388,7 +394,7 @@ class _InfoCard extends StatelessWidget {
                       child: Icon(
                         Icons.edit,
                         color: AppColor.bg.primary,
-                        size: 14.sp,
+                        size: 12.sp,
                       ),
                     ),
                   ),

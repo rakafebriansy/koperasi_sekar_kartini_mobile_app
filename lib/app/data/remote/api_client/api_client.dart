@@ -27,6 +27,10 @@ abstract class ApiClient {
     newHeaders.addAll(headers);
 
     String? token = await TokenManager().getToken();
+    newHeaders.addAll({
+      'User-Agent':
+        'SekarKartiniApp/1.0 (Flutter; Android)'
+    });
 
     if (token?.isNotEmpty ?? false) {
       newHeaders.addAll({'Authorization': 'Bearer $token'});
@@ -497,7 +501,8 @@ abstract class ApiClient {
     @Field('receivable_score') double? receivableScore,
     @Field('financial_final_score_percentage')
     double? financialFinalScorePercentage,
-    @Field('combined_final_score_percentage') double? combinedFinalScorePercentage,
+    @Field('combined_final_score_percentage')
+    double? combinedFinalScorePercentage,
     @Field('criteria') String? criteria,
   });
 
@@ -526,7 +531,7 @@ abstract class ApiClient {
   @POST('/refresh-fcm-token')
   @FormUrlEncoded()
   Future<void> sendFcmTokenToApi({
-    @Field('fcm_token') required String fcmToken
+    @Field('fcm_token') required String fcmToken,
   });
 
   //TODO: remove while production

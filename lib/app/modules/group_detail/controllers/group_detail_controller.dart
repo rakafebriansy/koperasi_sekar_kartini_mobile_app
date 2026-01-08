@@ -52,8 +52,8 @@ class GroupDetailController extends GetxController {
 
   final RxList<FundType> _fundTypes = RxList([
     FundType.sharedLiabilityFund,
-    // FundType.groupFund,
-    // FundType.socialFund,
+    FundType.groupFund,
+    FundType.socialFund,
   ]);
   List<FundType> get fundTypes => _fundTypes;
 

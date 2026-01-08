@@ -44,7 +44,7 @@ class ReportListView extends GetView<ReportListController> {
                     onChanged: (value) => controller.onSearchChanged(value),
                   ),
                 ),
-                if (controller.authController.currentUser!.role != 'group_member')
+                if (controller.authController.currentUser?.role == 'admin')
                   Material(
                     borderRadius: BorderRadius.circular(12.sp),
                     color: Colors.white,
