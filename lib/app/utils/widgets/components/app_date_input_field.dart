@@ -37,8 +37,8 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2025),
     );
 
     if (picked != null && picked != selectedDate) {
