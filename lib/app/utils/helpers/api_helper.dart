@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/controllers/auth_controller.dart';
@@ -5,6 +7,7 @@ import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/download_clien
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/model_registry.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/api_client/api_client.dart';
 import 'package:koperasi_sekar_kartini_mobile_app/app/data/remote/serialization/response_parser.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 
@@ -65,18 +68,15 @@ class ApiHelper {
 
     final raw = await request(apiClient);
 
-    final response = ResponseParser.parse<List<T>>(
-      raw,
-       (dataObj) {
-        if (T == int || T == double || T == String || T == bool) {
-          return (dataObj as List).cast<T>();
-        }
-        return dataObj
-            .map((e) => ModelRegistry.fromJson<T>(e))
-            .toList()
-            .cast<T>();
-      },
-    );
+    final response = ResponseParser.parse<List<T>>(raw, (dataObj) {
+      if (T == int || T == double || T == String || T == bool) {
+        return (dataObj as List).cast<T>();
+      }
+      return dataObj
+          .map((e) => ModelRegistry.fromJson<T>(e))
+          .toList()
+          .cast<T>();
+    });
 
     if (response.success == false) {
       throw Exception("API returned false");
@@ -119,15 +119,23 @@ class ApiHelper {
   }
 
   Future<void> downloadFileAndroid(String filePath) async {
-    final downloader = await DownloadClient.create();
-
-    final savedPath = await downloader?.downloadFile(filePath);
-
-    if (savedPath != null) {
-      debugPrint("Downloaded to $savedPath");
-      return;
+    if (Platform.isAndroid) {
+      final status = await Permission.storage.request();
+      if (!status.isGranted) {
+        throw Exception('Storage permission ditolak');
+      }
     }
 
-    throw Exception('Saved path is null');
+    final downloader = await DownloadClient.create();
+    if (downloader == null) {
+      throw Exception('Downloader null');
+    }
+
+    final savedPath = await downloader.downloadFile(filePath);
+    if (savedPath == null) {
+      throw Exception('Download gagal');
+    }
+
+    debugPrint('Downloaded to $savedPath');
   }
 }
