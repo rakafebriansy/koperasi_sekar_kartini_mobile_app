@@ -135,7 +135,11 @@ class GroupMemberMainTabsGroupView
                           Expanded(
                             child: poppins(
                               controller.group!.description ?? '',
-                              textAlign: TextAlign.start,
+                              textAlign:
+                                  controller.group?.chairman?.id ==
+                                      controller.authController.currentUser?.id
+                                  ? TextAlign.start
+                                  : TextAlign.center,
                               softWrap: true,
                             ),
                           ),
@@ -144,7 +148,8 @@ class GroupMemberMainTabsGroupView
                             Material(
                               borderRadius: BorderRadius.circular(99),
                               child: InkWell(
-                                onTap: () => callBottomSheet(controller, 'group'),
+                                onTap: () =>
+                                    callBottomSheet(controller, 'group'),
                                 borderRadius: BorderRadius.circular(99),
                                 child: Container(
                                   decoration: BoxDecoration(
