@@ -38,7 +38,7 @@ class _AppDateInputFieldState extends State<AppDateInputField> {
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(1900),
-      lastDate: DateTime(2025),
+      lastDate: DateTime(2100),
     );
 
     if (picked != null && picked != selectedDate) {
